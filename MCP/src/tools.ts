@@ -194,11 +194,13 @@ async function findStateFile(dir: string, name: string, timeoutMs: number): Prom
   const deadline = Date.now() + timeoutMs;
   while (Date.now() <= deadline) {
     try {
-      const names = await readdir(dir);
-      const match = names.find((entry) => entry === name || entry.startsWith(`${name}.`));
-      if (match) return path.join(dir, match);
+      // MAME's default -statename %g stores relative saves under the driver name.
+      // MAME command-line documentation, Core State/Playback Options: -statename.
+      const file = path.join(dir, "coco3", `${name}.sta`);
+      const info = await stat(file);
+      if (info.isFile() && info.size > 0) return file;
     } catch {
-      // The state directory may not exist yet.
+      // MAME may not have written the scheduled state yet.
     }
     if (Date.now() > deadline) break;
     await sleep(50);

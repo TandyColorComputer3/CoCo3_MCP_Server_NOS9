@@ -43,6 +43,7 @@ function parsePort(raw: string | undefined): number {
 function resolveToolPath(raw: string, root: string): string {
   const text = raw.trim();
   if (!text) return "";
+  if (path.win32.isAbsolute(text)) return text;
   if (path.isAbsolute(text)) return path.normalize(text);
   if (!/[\\/]/.test(text) && !text.startsWith(".")) return text;
   return path.resolve(root, text);

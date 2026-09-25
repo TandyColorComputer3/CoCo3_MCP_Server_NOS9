@@ -489,7 +489,8 @@ test("save and load state report scheduled work", { timeout: 20_000 }, async () 
     const missing = JSON.parse(textOf(await box.handlers.coco_save_state({ name: "checkpoint" })));
     assert.equal(missing.scheduled, true);
     assert.equal(missing.fileFound, false);
-    await writeFile(path.join(box.config.stateDir, "checkpoint.sta"), "sta");
+    await mkdir(path.join(box.config.stateDir, "coco3"), { recursive: true });
+    await writeFile(path.join(box.config.stateDir, "coco3", "checkpoint.sta"), "sta");
     const present = JSON.parse(textOf(await box.handlers.coco_save_state({ name: "checkpoint" })));
     assert.equal(present.scheduled, true);
     assert.equal(present.fileFound, true);
@@ -520,6 +521,21 @@ test("coco_load_state fails fast on a valid name with no matching file, without 
     assert.match(textOf(result), /never-saved/);
     assert.equal(box.requests.some((req) => req.cmd === "load_state"), false);
     assert.equal(box.requests.length, before);
+  } finally {
+    await box.cleanup();
+  }
+});
+
+test("coco_load_state ignores states outside the coco3 directory", async () => {
+  const box = await harness();
+  try {
+    await writeFile(path.join(box.config.stateDir, "checkpoint.sta"), "sta");
+    await mkdir(path.join(box.config.stateDir, "coco2"), { recursive: true });
+    await writeFile(path.join(box.config.stateDir, "coco2", "checkpoint.sta"), "sta");
+    const result = await box.handlers.coco_load_state({ name: "checkpoint" });
+    assert.equal(result.isError, true);
+    assert.equal(textOf(result), 'no saved state named "checkpoint"');
+    assert.equal(box.requests.some((req) => req.cmd === "load_state"), false);
   } finally {
     await box.cleanup();
   }
