@@ -8,6 +8,8 @@
 #define AUDIO_FRAME 8
 #define AUDIO_MAGIC 0xda
 #define AUDIO_SQUEAK 0
+#define AUDIO_PHASER 13 /* SOUNDS.ASM A$RING, ring attack/incantation */
+#define AUDIO_WHOOP 14 /* SOUNDS.ASM A$SCRO, scroll */
 #define AUDIO_PLAY 1
 #define AUDIO_STOP 2
 #define AUDIO_DRAIN 3

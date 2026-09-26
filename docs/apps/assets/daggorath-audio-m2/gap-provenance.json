@@ -1,0 +1,51 @@
+{
+  "mame": "installed Ample MAME 0.289",
+  "referenceTag": "mame0289",
+  "sourceFiles": {
+    "mame-sound.cpp": {
+      "url": "https://github.com/mamedev/mame/blob/mame0289/src/emu/sound.cpp",
+      "sha256": "486e30f66cc305d4c0231f449c847b93ab11ed726a609bcfe57d14f2ddb2c66a"
+    },
+    "disound.cpp": {
+      "url": "https://github.com/mamedev/mame/blob/mame0289/src/emu/disound.cpp",
+      "sha256": "f26b861da6255b13a2ffd83da00551fe53480eed22ce45164da965a46f44a6c2"
+    },
+    "coco.cpp": {
+      "url": "https://github.com/mamedev/mame/blob/mame0289/src/mame/trs/coco.cpp",
+      "sha256": "51d8c43549eecc0c8af142368cdccb36cb6e945f77bb153828ab633890a23a88"
+    },
+    "coco_multi.cpp": {
+      "url": "https://github.com/mamedev/mame/blob/mame0289/src/devices/bus/coco/coco_multi.cpp",
+      "sha256": "9d420ac9f0c6d07772825443f79c5fbf0576d55f291aeee5aa2c0aaf29a3a8ea"
+    },
+    "coco_ssc.cpp": {
+      "url": "https://github.com/mamedev/mame/blob/mame0289/src/devices/bus/coco/coco_ssc.cpp",
+      "sha256": "70fa24a66cc0c5ffcf046badfc9a74279beb820e39f5eb657ea4ba20dea78a8c"
+    },
+    "luaengine.cpp": {
+      "url": "https://github.com/mamedev/mame/blob/mame0289/src/frontend/mame/luaengine.cpp",
+      "sha256": "d21a553f2d3cf42a3294dcab404ae7a5befee7b14b21006953ca52aa11ccd398"
+    }
+  },
+  "diagnostics": {
+    "MCP/work/audio-m2-gap/probe.lua": {
+      "sha256": "57682fa7796415fc2ef757d113852949b87da6c6c88a9cee1e85acb5816ea39b"
+    },
+    "MCP/work/audio-m2-gap/gaptest.c": {
+      "sha256": "1d29b28728fbb2a44d736aa0b2990659d912043bc8bcedd1afd7f64eab432ee1"
+    },
+    "MCP/work/audio-m2-gap/module.asm": {
+      "sha256": "19562776f52313c1e0cb0bc197356a526023d50293a15e2551e1ee48d49cc302"
+    },
+    "MCP/work/audio-m2-gap/controls.py": {
+      "sha256": "509e0fbd3b7b6d1bab37c5fb2e0196709b7298f7f7a2f49862d662cb5b764945"
+    },
+    "MCP/work/audio-m2-gap/analyze.py": {
+      "sha256": "4f8d58170af4f6e3bfb51fbea50a96fb0e41b36ce28a66ea1a07bd270ea2d61e"
+    },
+    "MCP/work/audio-m2-gap/correlate.py": {
+      "sha256": "4c64b5b958fd765517294c44e976febd5a42890be8bd5b658dad528ca95e751d"
+    }
+  },
+  "productionChanged": false
+}

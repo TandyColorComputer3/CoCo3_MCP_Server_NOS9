@@ -1,0 +1,344 @@
+[
+  {
+    "control": "A1",
+    "command": "dodsnd phaser",
+    "start": 176.258810528,
+    "end": 193.547737383,
+    "response": {
+      "command": "dodsnd phaser",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 17163,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE5fc8c22356f0f7cb745840c8667d15f0",
+      "commandPromptMs": 11572
+    },
+    "gaps": []
+  },
+  {
+    "control": "A2",
+    "command": "dodsnd phaser",
+    "start": 193.664554456,
+    "end": 211.153739151,
+    "response": {
+      "command": "dodsnd phaser",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 17403,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE8862f5c115196dee3d56b9fc2dbb4c64",
+      "commandPromptMs": 11795
+    },
+    "gaps": []
+  },
+  {
+    "control": "A3",
+    "command": "dodsnd phaser",
+    "start": 699.732804325,
+    "end": 717.305429786,
+    "response": {
+      "command": "dodsnd phaser",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 17415,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEf66c03b16d886baf774a0ac3c9e881e0",
+      "commandPromptMs": 11810
+    },
+    "gaps": []
+  },
+  {
+    "control": "B",
+    "command": "gaptest po",
+    "start": 280.092500575,
+    "end": 317.090136518,
+    "response": {
+      "command": "gaptest po",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 36846,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEc2b6eba7ef4c5be9f85a9d019b3d6fa4",
+      "commandPromptMs": 31243
+    },
+    "gaps": [
+      {
+        "start_sample": 14239681,
+        "end_sample": 14240641,
+        "start": 293.6400208333334,
+        "end": 293.66002083333336,
+        "duration_ms": 20.0,
+        "sac_std": 0.09020509570837021
+      },
+      {
+        "start_sample": 14984641,
+        "end_sample": 14985601,
+        "start": 309.16002083333336,
+        "end": 309.18002083333334,
+        "duration_ms": 20.0,
+        "sac_std": 0.08192837238311768
+      }
+    ]
+  },
+  {
+    "control": "C1",
+    "command": "gaptest pw",
+    "start": 340.06972366,
+    "end": 379.904345669,
+    "response": {
+      "command": "gaptest pw",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 39697,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE1b708c2846bde6a634b955b5c700212d",
+      "commandPromptMs": 34108
+    },
+    "gaps": [
+      {
+        "start_sample": 17471041,
+        "end_sample": 17472001,
+        "start": 360.9600208333334,
+        "end": 360.98002083333336,
+        "duration_ms": 20.0,
+        "sac_std": 0.0875725969672203
+      },
+      {
+        "start_sample": 17475841,
+        "end_sample": 17476801,
+        "start": 361.06002083333334,
+        "end": 361.0800208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.08696120977401733
+      },
+      {
+        "start_sample": 17848321,
+        "end_sample": 17849281,
+        "start": 368.82002083333333,
+        "end": 368.8400208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.08982885628938675
+      }
+    ]
+  },
+  {
+    "control": "C2",
+    "command": "gaptest pw",
+    "start": 579.978615997,
+    "end": 619.879990619,
+    "response": {
+      "command": "gaptest pw",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 39767,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEef43e694879fe040a8533a8c1a459634",
+      "commandPromptMs": 34163
+    },
+    "gaps": []
+  },
+  {
+    "control": "D",
+    "command": "gaptest p",
+    "start": 399.396108764,
+    "end": 435.8597238,
+    "response": {
+      "command": "gaptest p",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 36364,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEc974de613b59b04156af547a878bebe8",
+      "commandPromptMs": 30775
+    },
+    "gaps": [
+      {
+        "start_sample": 19952641,
+        "end_sample": 19953601,
+        "start": 412.66002083333336,
+        "end": 412.68002083333334,
+        "duration_ms": 20.0,
+        "sac_std": 0.08945762366056442
+      },
+      {
+        "start_sample": 19957441,
+        "end_sample": 19958401,
+        "start": 412.76002083333333,
+        "end": 412.7800208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.08896340429782867
+      },
+      {
+        "start_sample": 19962241,
+        "end_sample": 19963201,
+        "start": 412.86002083333335,
+        "end": 412.88002083333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.08807378262281418
+      }
+    ]
+  },
+  {
+    "control": "E1",
+    "command": "gaptest ww",
+    "start": 459.940729061,
+    "end": 499.441588004,
+    "response": {
+      "command": "gaptest ww",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 39365,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEd46974ede2d8317a1a6ef4b7e730f8ca",
+      "commandPromptMs": 33775
+    },
+    "gaps": []
+  },
+  {
+    "control": "E2",
+    "command": "gaptest wo",
+    "start": 519.417307546,
+    "end": 555.847546275,
+    "response": {
+      "command": "gaptest wo",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 36312,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE35d20a0fccf9b8fa009654e9ddefad40",
+      "commandPromptMs": 30722
+    },
+    "gaps": [
+      {
+        "start_sample": 25917121,
+        "end_sample": 25918081,
+        "start": 536.9200208333334,
+        "end": 536.9400208333334,
+        "duration_ms": 20.0,
+        "sac_std": 0.09147196263074875
+      },
+      {
+        "start_sample": 25921921,
+        "end_sample": 25922881,
+        "start": 537.0200208333333,
+        "end": 537.0400208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.09135313332080841
+      },
+      {
+        "start_sample": 25926721,
+        "end_sample": 25927681,
+        "start": 537.1200208333333,
+        "end": 537.1400208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.09065526723861694
+      },
+      {
+        "start_sample": 26294401,
+        "end_sample": 26295361,
+        "start": 544.7800208333333,
+        "end": 544.8000208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.09167148917913437
+      },
+      {
+        "start_sample": 26299201,
+        "end_sample": 26300161,
+        "start": 544.8800208333333,
+        "end": 544.9000208333333,
+        "duration_ms": 20.0,
+        "sac_std": 0.09163982421159744
+      }
+    ]
+  }
+]
