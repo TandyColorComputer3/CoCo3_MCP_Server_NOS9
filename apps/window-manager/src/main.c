@@ -1,5 +1,6 @@
 #include <cmoc.h>
 #include "ui.h"
+#include "m2.h"
 
 static Byte cancelled;
 
@@ -11,6 +12,7 @@ int main(int argc, char **argv)
     Word tick;
     Registers unused;
     unused.x=0;
+    if (argc>1 && m2_command(argv[1])) return m2_main(argc,argv);
     /* Inspect by default; all mutation modes require explicit selection. */
     if (argc > 2) return ERR_ARGUMENT;
     if (argc == 2) {

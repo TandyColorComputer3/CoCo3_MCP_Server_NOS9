@@ -1,0 +1,431 @@
+[
+  {
+    "id": 1,
+    "request": {
+      "name": "coco_start",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true,\"alreadyRunning\":false,\"pid\":13879,\"bridge\":true}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "request": {
+      "name": "coco_mount_flop",
+      "arguments": {
+        "drive": "flop2",
+        "path": "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"briefname\":\"flop2\",\"filename\":\"/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "ready": true,
+      "state": "wm_m1_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6263,
+      "file": "/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta",
+      "postLoadEpoch": 1,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 02:07:20\n\n{Term|02}/DD:p=MCP6f9d95bbac91e666:\n\nMCP6f9d95bbac91e666:echo READY6f9d95bbac91e666\nREADY6f9d95bbac91e666\n\nMCP6f9d95bbac91e666:"
+      },
+      "handshake": {
+        "prompt": "MCP6f9d95bbac91e666:",
+        "marker": "READY6f9d95bbac91e666",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "id": 4,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "display 1b 3a c8 02",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "command": "display 1b 3a c8 02",
+      "completed": false,
+      "commandCompleted": false,
+      "status": null,
+      "statusText": null,
+      "timedOut": false,
+      "shellReady": false,
+      "outcome": "invalid_input",
+      "phase": "preflight",
+      "elapsedMs": 0,
+      "outputComplete": false,
+      "error": "Error: shell/console control commands are unsupported"
+    }
+  },
+  {
+    "id": 7,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "ready": true,
+      "state": "wm_m1_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6222,
+      "file": "/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta",
+      "postLoadEpoch": 2,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 02:07:20\n\n{Term|02}/DD:p=MCPc13b5a69d4ff25a5:\n\nMCPc13b5a69d4ff25a5:echo READYc13b5a69d4ff25a5\nREADYc13b5a69d4ff25a5\n\nMCPc13b5a69d4ff25a5:"
+      },
+      "handshake": {
+        "prompt": "MCPc13b5a69d4ff25a5:",
+        "marker": "READYc13b5a69d4ff25a5",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "id": 8,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "display 1b 3a c8 02"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"display 1b 3a c8 02{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "echo FONT2STATUS %*"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"echo FONT2STATUS %*{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "echo ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"echo ABCDEFGHIJKLMNOPQRSTUVWXYZ{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "ready": true,
+      "state": "wm_m1_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6185,
+      "file": "/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta",
+      "postLoadEpoch": 3,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 02:07:20\n\n{Term|02}/DD:p=MCPe63dec08a5048a86:\n\nMCPe63dec08a5048a86:echo READYe63dec08a5048a86\nREADYe63dec08a5048a86\n\nMCPe63dec08a5048a86:"
+      },
+      "handshake": {
+        "prompt": "MCPe63dec08a5048a86:",
+        "marker": "READYe63dec08a5048a86",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "id": 14,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "display 1b 24 1b 20 05 00 00 50 19 00 01 01 1b 21"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"display 1b 24 1b 20 05 00 00 50 19 00 01 01 1b 21{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "display 1b 3a c8 01"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"display 1b 3a c8 01{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "echo FONT8 ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"echo FONT8 ABCDEFGHIJKLMNOPQRSTUVWXYZ{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "display 1b 3a c8 02"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"display 1b 3a c8 02{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "echo FONT6 %* ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"echo FONT6 %* ABCDEFGHIJKLMNOPQRSTUVWXYZ{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "load /d1/wmview"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"load /d1/wmview{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "wmview"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"wmview{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "display 1b 3a c8 01"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"display 1b 3a c8 01{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "echo FONT8RESTORED %* ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"echo FONT8RESTORED %* ABCDEFGHIJKLMNOPQRSTUVWXYZ{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "ready": true,
+      "state": "wm_m1_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6191,
+      "file": "/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta",
+      "postLoadEpoch": 4,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 02:07:20\n\n{Term|02}/DD:p=MCP7d1d17c9bb99541e:\n\nMCP7d1d17c9bb99541e:echo READY7d1d17c9bb99541e\nREADY7d1d17c9bb99541e\n\nMCP7d1d17c9bb99541e:"
+      },
+      "handshake": {
+        "prompt": "MCP7d1d17c9bb99541e:",
+        "marker": "READY7d1d17c9bb99541e",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "id": 27,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "date",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "command": "date",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 6455,
+      "outputComplete": false,
+      "marker": "MCPDONEa8c453b9e24c0d68dc0c1a760de7035b",
+      "commandPromptMs": 856
+    }
+  },
+  {
+    "id": 28,
+    "request": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    }
+  }
+]

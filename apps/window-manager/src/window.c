@@ -84,3 +84,22 @@ Byte window_restore(Byte path, const WindowColors *original)
     if (error) return error;
     return window_same_colors(original, &readback) ? 0 : ERR_WRITE;
 }
+
+/* Profile operations intentionally never send the screen-scoped border code. */
+Byte window_set_pair(Byte path, Byte foreground, Byte background)
+{
+    Byte packet[6];
+    packet[0]=27; packet[1]=0x32; packet[2]=foreground;
+    packet[3]=27; packet[4]=0x33; packet[5]=background;
+    return os_write(path,packet,6);
+}
+Byte window_restore_pair(Byte path, const WindowColors *original)
+{
+    WindowColors actual;
+    Byte error=window_set_pair(path,original->foreground,original->background);
+    if (error) return error;
+    error=window_colors(path,&actual);
+    if (error) return error;
+    return actual.foreground==original->foreground && actual.background==original->background
+        ? 0 : ERR_WRITE;
+}

@@ -3,6 +3,6 @@
         section __os9
         fcc /wmview/
         fcb 0
-edition equ 1
+edition equ 2
 rev     equ 1
         endsection

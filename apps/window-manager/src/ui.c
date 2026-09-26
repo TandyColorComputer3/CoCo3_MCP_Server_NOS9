@@ -27,7 +27,7 @@ Byte ui_info(const WindowInfo *info)
     const char *kind = info->type == 1 || info->type == 2 ? "hardware text" :
         info->type >= 5 && info->type <= 8 ? "graphics" : "unclassified";
     if (!info->identityKnown) device="unknown";
-    sprintf(line, "Window M1 - stdout path 1, device %s", device);
+    sprintf(line, "Window Manager - stdout path 1, device %s", device);
     error = ui_line(line);
     if (error) return error;
     sprintf(line, "type=%u (%s), area=%u columns x %u rows",

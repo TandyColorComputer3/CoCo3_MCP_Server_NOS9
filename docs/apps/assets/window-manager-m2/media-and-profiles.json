@@ -1,0 +1,37 @@
+{
+  "canonicalBefore": {
+    "media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "canonicalAfter": {
+    "media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "disposableBootVhdAfter": {
+    "media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "profilesFloppyAfter": "be88caaa7f7ed204d8bc3493f5bcff50bdaa6607ccbb43b336ade459cbe9acc1",
+  "profiles": {
+    "entry": {
+      "text": "WindowProfile 1\rname=entry\rforeground=0\rbackground=1\rend\r",
+      "sha256": "ab9e9e9d9e8965038870ffc663aaba9b198a1c13bf7c7965bc6b3b61d6f76691"
+    },
+    "night": {
+      "text": "WindowProfile 1\rname=night\rforeground=1\rbackground=0\rend\r",
+      "sha256": "d5891690c508e7255983ffd70bfa95a77df03078fecaa1a8c4ff6b86e2511d51"
+    },
+    "undo": {
+      "text": "WindowProfile 1\rname=undo\rforeground=0\rbackground=1\rend\r",
+      "sha256": "4866b77ee3b3cb4608882da67d453a72556ae8c62ef218af941fae8349b32be7"
+    },
+    "undo2": {
+      "text": "WindowProfile 1\rname=undo\rforeground=0\rbackground=1\rend\r",
+      "sha256": "4866b77ee3b3cb4608882da67d453a72556ae8c62ef218af941fae8349b32be7"
+    }
+  },
+  "moduleUnchanged": true,
+  "dcheck": "Volume - 'CoCo Disk' in file: /private/tmp/wm-m2/profiles.dsk\n$00B4 bytes in allocation map\n1 sector per cluster\n$0005A0 total sectors on media\nSector $000002 is start of root directory file descriptor\nBuilding secondary allocation map...\nComparing primary and secondary allocation maps...\n\n0 previously allocated cluster found\n0 clusters in file structure but not in allocation map\n0 clusters in allocation map but not in file structure\n0 bad file decriptor sector\n\n'CoCo Disk' file structure is intact\n1 directory\n8 files\n"
+}

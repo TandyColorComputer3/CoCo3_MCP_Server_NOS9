@@ -1,0 +1,462 @@
+[
+  {
+    "file": "/dd/SYS/stdfonts",
+    "bytes": 38410,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 1,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 2,
+        "style": 5,
+        "width": 6,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 3,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 104
+      },
+      {
+        "group": 200,
+        "buffer": 4,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 5,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 6,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 7,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 8,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 9,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 10,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 11,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 12,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 13,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 14,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 15,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 16,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 17,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 18,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 19,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 20,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 21,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 23,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 22,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 24,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 25,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 27,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 28,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 29,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 30,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 31,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 32,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 33,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 34,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 35,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 36,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 37,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 38,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 41,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/isolatin1font",
+    "bytes": 1803,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 63,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1792
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/ibmedcfont",
+    "bytes": 1803,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 64,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1792
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/smallfont.27",
+    "bytes": 1035,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 39,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/macfonts",
+    "bytes": 3105,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 49,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 50,
+        "style": 5,
+        "width": 6,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 51,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/ansifonts_65.fnt",
+    "bytes": 1035,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 65,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/ia.fnt",
+    "bytes": 1035,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 173,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/roguefonts",
+    "bytes": 2070,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 42,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      },
+      {
+        "group": 200,
+        "buffer": 43,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/ibmpoker.fnt",
+    "bytes": 1035,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 52,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1024
+      }
+    ]
+  },
+  {
+    "file": "/dd/SYS/ibmcga.fnt",
+    "bytes": 1803,
+    "fonts": [
+      {
+        "group": 200,
+        "buffer": 66,
+        "style": 5,
+        "width": 8,
+        "height": 8,
+        "bytes": 1792
+      }
+    ]
+  }
+]

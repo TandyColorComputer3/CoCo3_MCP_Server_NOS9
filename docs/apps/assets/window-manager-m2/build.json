@@ -1,0 +1,174 @@
+{
+  "sources": [
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/main.c",
+      "sha256": "657a11bbcb5e0e19c383a4a3b354f84bb89b10e976badcf1e36b70343f9b33a4",
+      "size": 2624
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/window.c",
+      "sha256": "3f5006a93ffd0b0bfc655de24ef2e3ae96cc25d22286408e9a46a6ff509204fe",
+      "size": 3520
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/ui.c",
+      "sha256": "3b9bd80212e6ee66a0535b4f76907389cb2ecfe4be0504b221fe8374d2674bd3",
+      "size": 1533
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/os9.c",
+      "sha256": "e5c304827a31f224ea10b0ae1f17b1d5cd50fc5bc5860b989916682849633289",
+      "size": 2622
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/profile.c",
+      "sha256": "c22440689f6d9ff6510638641d76d633a26447ca96c86e1cb7251344219463a3",
+      "size": 2841
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/persistence.c",
+      "sha256": "023fb9a73f304cfc152325a19381169839d106f5d867535ab6fec44c9d566c75",
+      "size": 2027
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/fileio.c",
+      "sha256": "40cd7f1bd570ca0c3569fbaaa07d1be9c910322d45d4a765a164483828d157e9",
+      "size": 1154
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/m2.c",
+      "sha256": "e8ac8c412feae16b92a05001ab760654ae928d78d0b707e0cbb0ee55c48ba31a",
+      "size": 6447
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/font-catalog.c",
+      "sha256": "a70b37bc9b0ee3b18e204c730fb81ab14193a98468adf558ca71febd491b9881",
+      "size": 932
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/module.asm",
+      "sha256": "ef7aececbbd61308e774149264aa4ed9a23d494e8c1ca19207e5c7cf0c4cee86",
+      "size": 257
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/profile.h",
+      "sha256": "beb0e989e91be7254a3576b646faf2a26dc04a5aa501f2591e6c024b1655aaf2",
+      "size": 948
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/ui.h",
+      "sha256": "99965003d94ff69563b25310a94be88c9e891b832c1f4389494faf9e7c6a3a4c",
+      "size": 238
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/window.h",
+      "sha256": "34a3ec9a50e7cc21086830fe3abd559993d283b4b6f5baf1fbaac547f56419af",
+      "size": 795
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/fileio.h",
+      "sha256": "0e04cef140267ccc12cf0e3cf19d4969fe7317b5e9a0d57a1540bf92323e41ee",
+      "size": 307
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/m2.h",
+      "sha256": "a46b7891584785da89d4a499c15e324715632d92b583ee394dfa648be26b2e41",
+      "size": 156
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/font-data.h",
+      "sha256": "9daf5be4a89748517b63ada014af159abb5f1b3008071a24a46cd3b990024693",
+      "size": 2132
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/platform.h",
+      "sha256": "b9075b8b287b71e09c20f74641c8abd9f98f6dd74526ad99248b94d66ca139f6",
+      "size": 733
+    },
+    {
+      "path": "/usr/local/share/cmoc/include/cmoc.h",
+      "sha256": "dcf1857741e31190fcfd0d830b5f866d6394d0dd692603192037c09100f45963",
+      "size": 13329
+    },
+    {
+      "path": "/usr/local/share/cmoc/include/stdarg.h",
+      "sha256": "45ddde55b4facaf89d65564470a8218bfc9949308645a6bab1a424de82e2efc9",
+      "size": 498
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/build.py",
+      "sha256": "8134f25256bb6120e5a107bfa1285ef0626d878854f644d7fbc2e56564a9c584",
+      "size": 2969
+    }
+  ],
+  "tools": {
+    "cmoc": {
+      "path": "/usr/local/bin/cmoc",
+      "sha256": "76cf6c59de150c3ced93fe39a349223ef600fc3e3d74d0e7fa76aa9d637c35d4",
+      "size": 2526424,
+      "version": "cmoc (cmoc 0.1.90)\n"
+    },
+    "lwasm": {
+      "path": "/usr/local/bin/lwasm",
+      "sha256": "174d0ef03732647cdb7f5c2b3d75762ed1190902601879961ab3be14635c865c",
+      "size": 202584,
+      "version": "lwasm from lwtools 4.22\n"
+    },
+    "lwlink": {
+      "path": "/usr/local/bin/lwlink",
+      "sha256": "0f834f21dc237b3fd8b9426b0aa23f5a6cfb4d090fb00b45396d2945835c1253",
+      "size": 89224,
+      "version": "lwlink from lwtools 4.22\n"
+    },
+    "os9": {
+      "path": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "sha256": "ee9c3e3585640dfd28f4e3def75a09d14eddeaff464241f7ad94d5b6d51bb569",
+      "size": 199424,
+      "version": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n"
+    }
+  },
+  "libraries": [
+    {
+      "path": "/usr/local/share/cmoc/lib/libcmoc-crt-os9.a",
+      "sha256": "1f2f11ef5cb7de6818f4d9310b6af362b0317776245a06555f4029441fb7f563",
+      "size": 17056
+    },
+    {
+      "path": "/usr/local/share/cmoc/lib/libcmoc-std-os9.a",
+      "sha256": "eb7eaa88fabd56f428d897098e00d317132576fb9e559155db8ce1baeeeac047",
+      "size": 25534
+    }
+  ],
+  "command": [
+    "/usr/local/bin/cmoc",
+    "--os9",
+    "-O0",
+    "--intermediate",
+    "--verbose",
+    "--add-os9-stack-space=1536",
+    "--intdir=/private/tmp/wm-m2/build",
+    "--lwasm=/usr/local/bin/lwasm",
+    "--lwlink=/usr/local/bin/lwlink",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src",
+    "-o",
+    "wmview",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/main.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/window.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/ui.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/os9.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/profile.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/persistence.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/fileio.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/m2.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/font-catalog.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/window-manager/src/module.asm"
+  ],
+  "cwd": "/private/tmp/wm-m2/build",
+  "output": {
+    "path": "/private/tmp/wm-m2/build/wmview",
+    "sha256": "0230b0a2c268af11f31d5b96e2d8b1a9b368abfdbea1b7cfacd3e4274e5e2ab9",
+    "size": 14818
+  },
+  "ident": "Header for : wmview\nModule size: $39E2  #14818\nModule CRC : $91B2AF (Good)\nHdr parity : $1F\nExec. off  : $000D  #13\nData size  : $07BA  #1978\nEdition    : $02  #2\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+  "upstreamApiReference": "nitros9-reference f470fa52eb172b59b22c1b722074998cb42de9b1"
+}

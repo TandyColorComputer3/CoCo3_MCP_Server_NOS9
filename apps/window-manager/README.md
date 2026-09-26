@@ -1,7 +1,7 @@
-# Window Manager — Milestone 1
+# Window Manager — Milestones 1–2
 
-`wmview` is a small native NitrOS-9 Level II window inspector and reversible
-color demonstration. It uses public path APIs; it does not enumerate windows or
+`wmview` is a native NitrOS-9 Level II window inspector, color-profile utility
+and reversible color demonstration. It uses public path APIs; it does not enumerate windows or
 read private driver structures.
 
 ## Build and test
@@ -50,8 +50,38 @@ self-directed signal 3 after changing colors. They return those nonzero statuses
 - `src/main.c`: lifecycle, explicit modes and single cleanup path.
 - `src/os9.c`, `platform.h`: narrow syscall/signal boundary.
 - `src/module.asm`: explicit module name, edition and revision.
-- `test/lifecycle.c`: host mock-boundary lifecycle tests.
+- `src/profile.c`, `persistence.c`, `fileio.c`: profile model and exclusive file I/O.
+- `src/m2.c`: profile commands and commit/rollback lifecycle.
+- `src/font-catalog.c`, `font-data.h`: frozen read-only font reference.
+- `test/lifecycle.c`, `test/profiles.c`: host mock-boundary lifecycle/profile tests.
 
-No saved profiles, fonts, window creation, raw hardware access or MVKit dependency
+No font selection, window creation, raw hardware access or MVKit dependency
 are included. Signal 0, emulator termination, a broken device and concurrent writers
 cannot be given an unconditional restoration guarantee.
+
+## Milestone 2 profiles
+
+See [the M2 report](../../docs/apps/WINDOW_MANAGER_M2.md) for the versioned file
+format, lifecycle and live evidence. `wmview help` lists commands. On a disposable
+writable RBF floppy, for example:
+
+```text
+wmview capture entry /d1/entry
+wmview create night 1 0 /d1/night
+wmview show /d1/night
+wmview preview /d1/night
+wmview apply /d1/night /d1/undo
+wmview revert /d1/undo
+wmview caps
+wmview fonts
+```
+
+Apply first creates a NEW undo file; it refuses existing destinations. Successful
+apply/revert keeps verified foreground/background values. Errors and handled
+cancellation roll back entry values. Preview always restores. Profiles never change
+border, palette, font, geometry or cursor options. The font catalog is a frozen
+file-based reference, not enumeration of currently loaded buffers.
+
+Do not restore an older emulator state after writing profiles to the session disk.
+Use a cold boot or a complete byte-matched media/checkpoint set. Do not direct these
+examples at a canonical development VHD.

@@ -33,7 +33,7 @@ for name in ('cmoc', 'lwasm', 'lwlink', 'os9'):
     if not resolved:
         raise RuntimeError(f'{name}: executable not found')
     tools[name] = dict(fingerprint(resolved), version=execute([resolved] + ([] if name == 'os9' else ['--version'])))
-sources = [app/'src'/n for n in ('main.c', 'window.c', 'ui.c', 'os9.c', 'module.asm')]
+sources = [app/'src'/n for n in ('main.c', 'window.c', 'ui.c', 'os9.c', 'profile.c', 'persistence.c', 'fileio.c', 'm2.c', 'font-catalog.c', 'module.asm')]
 command = [tools['cmoc']['path'], '--os9', '-O0', '--intermediate', '--verbose',
            '--add-os9-stack-space=1536', '--intdir=' + str(out),
            '--lwasm=' + tools['lwasm']['path'], '--lwlink=' + tools['lwlink']['path'],
