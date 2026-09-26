@@ -100,3 +100,13 @@ test("loadDotEnv parses comments, blanks, and one pair of quotes", async () => {
     await rm(dir, { recursive: true, force: true });
   }
 });
+
+
+test("slot configuration validates JSON and preserves explicit empty slot options", () => {
+  for (const raw of ["bad", "[]", "null", '{"-ext":"multi"}', '{"ext":3}', '{"ext":"multi -foo"}']) {
+    assert.throws(() => loadConfig({ MAME_SLOTS: raw }, "root"), /MAME_SLOTS/);
+  }
+  assert.deepEqual(loadConfig({ MAME_SLOTS: '{"ext":""}' }, "root").mameSlots, { ext: "" });
+  assert.deepEqual(loadConfig({}, "root").mameSlots, { ext: "fdc" });
+  assert.equal(loadConfig({ MAME_VHD: "C:\\media\\dev.vhd" }, "root").virtualHardDisk, "C:\\media\\dev.vhd");
+});

@@ -1,0 +1,16 @@
+SYSTEM           MEDIA NAME       (brief)    IMAGE FILE EXTENSIONS SUPPORTED
+---------------- --------------------------- -------------------------------
+coco3h           cassette         (cass)     .wav  .flac .aif  .aiff .cas  
+coco3h           printout1        (prin1)    .prn  
+coco3h           harddisk1        (hard1)    .vhd  
+coco3h           harddisk2        (hard2)    .vhd  
+coco3h           cartridge1       (cart1)    .ccc  .rom  
+coco3h           cartridge2       (cart2)    .ccc  .rom  
+coco3h           cartridge3       (cart3)    .ccc  .rom  
+coco3h           cartridge4       (cart4)    .ccc  .rom  
+coco3h           harddisk3        (hard3)    .chd  .hd   .hdv  .2mg  .hdi  
+coco3h           cartridge5       (cart5)    .ccc  .rom  
+coco3h           cartridge6       (cart6)    .ccc  .rom  
+coco3h           floppydisk1      (flop1)    .mfi  .dfi  .mfm  .td0  .imd  .86f  .d77  .d88  .1dd  .cqm  .cqi  .dsk  .dmk  .sdf  .jvc  .vdk  .os9  
+coco3h           floppydisk2      (flop2)    .mfi  .dfi  .mfm  .td0  .imd  .86f  .d77  .d88  .1dd  .cqm  .cqi  .dsk  .dmk  .sdf  .jvc  .vdk  .os9  
+coco3h           printout2        (prin2)    .prn  

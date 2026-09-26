@@ -1,0 +1,209 @@
+SYSTEM           SLOT NAME        SLOT OPTIONS     SLOT DEVICE NAME
+---------------- ---------------- ---------------- ----------------------------
+coco3h           rs232            auto3a           Auto-baud ADM-3A Terminal
+                                  dec_loopback     RS-232 Loopback (DEC 12-15336-00)
+                                  h19              Heath H19 Terminal (Serial Port)
+                                  ie15             IE15 Terminal
+                                  keyboard         Serial Keyboard
+                                  loopback         RS-232 Loopback
+                                  mockingboard     Sweet Micro Systems Mockingboard D
+                                  msystems_mouse   Mouse Systems Non-rotatable Mouse (HLE)
+                                  nss_tvi          Novag Super System TV Interface
+                                  null_modem       RS-232 Null Modem
+                                  patch            RS-232 Patch Box
+                                  printer          Serial Printer
+                                  pty              Pseudo Terminal
+                                  rs232_sync_io    RS-232 Synchronous I/O
+                                  rs_printer       Radio Shack Serial Printer
+                                  s97801           Siemens 97801 Terminal (RS-232)
+                                  scorpion         Micro-Robotics Scorpion Intelligent Controller
+                                  sunkbd           Sun Keyboard Adaptor
+                                  swtpc8212        SWTPC8212 Terminal
+                                  terminal         Serial Terminal
+                                  votraxtnt        Votrax Type 'N Talk (Serial Port)
+
+                 ext              ccpsg            CoCo PSG
+                                  cd6809_fdc       Codimex CD-6809 Disk BASIC (1986)
+                                  cp450_fdc        Prológica CP-450 BASIC Disco V. 1.0 (1984)
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  fdc              CoCo Floppy Disk Controller
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  multi            CoCo Multi-Pak Interface
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  scii             Disto Super Controller II
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot1  ccpsg            CoCo PSG
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot2  ccpsg            CoCo PSG
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot3  ccpsg            CoCo PSG
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot3:ide:ata:0 cdrom            ATAPI CD-ROM
+                                  cf               ATA CompactFlash Card
+                                  cp2024           Conner Peripherals CP-2024 hard disk
+                                  cr589            Matsushita CR589 CD-ROM Drive
+                                  hdd              IDE Hard Disk
+                                  px320a           PleXCombo PX-320A CD-RW/DVD-ROM Drive
+                                  xm3301           Toshiba XM-3301 CD-ROM Drive
+                                  zip100           Iomega Zip 100MB IDE Drive
+
+                 ext:multi:slot3:ide:ata:1 cdrom            ATAPI CD-ROM
+                                  cf               ATA CompactFlash Card
+                                  cp2024           Conner Peripherals CP-2024 hard disk
+                                  cr589            Matsushita CR589 CD-ROM Drive
+                                  hdd              IDE Hard Disk
+                                  px320a           PleXCombo PX-320A CD-RW/DVD-ROM Drive
+                                  xm3301           Toshiba XM-3301 CD-ROM Drive
+                                  zip100           Iomega Zip 100MB IDE Drive
+
+                 ext:multi:slot3:ide:slot ccpsg            CoCo PSG
+                                  cd6809_fdc       Codimex CD-6809 Disk BASIC (1986)
+                                  cp450_fdc        Prológica CP-450 BASIC Disco V. 1.0 (1984)
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  fdc              CoCo Floppy Disk Controller
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  scii             Disto Super Controller II
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot4  ccpsg            CoCo PSG
+                                  cd6809_fdc       Codimex CD-6809 Disk BASIC (1986)
+                                  cp450_fdc        Prológica CP-450 BASIC Disco V. 1.0 (1984)
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  fdc              CoCo Floppy Disk Controller
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  scii             Disto Super Controller II
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot4:scii:wd17xx:0 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:wd17xx:1 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:wd17xx:2 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:wd17xx:3 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:meb rtime            Disto Real Time Clock Card
+
+                 ext:multi:slot4:scii:meb:rtime:centronics adaptator        The Adaptator 2x DE-9 Multitap
+                                  ap2000           Epson ActionPrinter 2000
+                                  chessmec         Tasc ChessMachine EC Interface
+                                  covox            Covox Speech Thing
+                                  covox_stereo     Covox (Stereo-in-1)
+                                  digiblst         Digiblaster (DIY)
+                                  ex800            Epson EX-800
+                                  fx80             Epson FX-80
+                                  jx80             Epson JX-80
+                                  lx800            Epson LX-800
+                                  lx810l           Epson LX-810L
+                                  mz1p16           Sharp MZ-1P16 Plotter Printer
+                                  neomania         Neo Mania Adapter JAMMA board
+                                  nlq401           Schneider NLQ 401 Matrix Printer
+                                  p72              NEC PinWriter P72
+                                  pc6022           NEC PC-6022 Color Plotter Printer
+                                  pl80             COMX PL-80
+                                  printer          Centronics Printer
+                                  rx80             Epson RX-80
+                                  samdac           SAMDAC
+                                  smartboard       Tasc SmartBoard SB30 Interface
+

@@ -7,6 +7,9 @@ export interface AppConfig {
   decbPath: string;
   bridgePort: number;
   cocoRam: string;
+  mameSlots: Record<string, string>;
+  bootFloppy: string;
+  virtualHardDisk: string;
   mameMachine: string;
   cocoMonitor: "rgb" | "composite";
   mameCfgDir: string;
@@ -52,6 +55,20 @@ function resolveToolPath(raw: string, root: string): string {
   return path.resolve(root, text);
 }
 
+/** MAME slot names/options are verified with the installed build's -listslots. */
+function parseSlots(raw: string | undefined): Record<string, string> {
+  if (raw === undefined) return { ext: "fdc" };
+  let slots: unknown;
+  try { slots = JSON.parse(raw); } catch { throw new Error("invalid MAME_SLOTS JSON"); }
+  if (!slots || typeof slots !== "object" || Array.isArray(slots)) throw new Error("invalid MAME_SLOTS");
+  for (const [slot, option] of Object.entries(slots)) {
+    if (!/^[a-z0-9_]+(?::[a-z0-9_]+)*$/.test(slot) || typeof option !== "string" || !/^[a-z0-9_]*$/.test(option)) {
+      throw new Error("invalid MAME_SLOTS entry");
+    }
+  }
+  return slots as Record<string, string>;
+}
+
 export function loadConfig(env: Record<string, string | undefined>, rootDir: string): AppConfig {
   const root = path.resolve(rootDir);
   const mameMachine = (env.MAME_MACHINE ?? "coco3h").trim();
@@ -66,6 +83,9 @@ export function loadConfig(env: Record<string, string | undefined>, rootDir: str
     decbPath: resolveToolPath(env.DECB_PATH ?? "decb", root),
     bridgePort: parsePort(env.BRIDGE_PORT),
     cocoRam: env.COCO_RAM ?? "2M",
+    mameSlots: parseSlots(env.MAME_SLOTS),
+    bootFloppy: resolveToolPath(env.MAME_BOOT_FLOPPY ?? "", root),
+    virtualHardDisk: resolveToolPath(env.MAME_VHD ?? "", root),
     mameMachine,
     cocoMonitor,
     mameCfgDir: path.join(root, "work", "mame-cfg"),

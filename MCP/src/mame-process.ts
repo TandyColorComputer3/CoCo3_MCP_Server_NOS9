@@ -32,8 +32,7 @@ export function buildMameArgs(config: AppConfig): string[] {
     "-nomouse",
     "-mouse_device",
     "none",
-    "-ext",
-    "fdc",
+    ...Object.entries(config.mameSlots).flatMap(([slot, option]) => [`-${slot}`, option]),
     "-ramsize",
     config.cocoRam,
     "-rompath",
@@ -50,6 +49,8 @@ export function buildMameArgs(config: AppConfig): string[] {
     "%g",
     "-cfg_directory",
     config.mameCfgDir,
+    ...(config.bootFloppy ? ["-flop1", config.bootFloppy] : []),
+    ...(config.virtualHardDisk ? ["-hard1", config.virtualHardDisk] : []),
   ];
 }
 
