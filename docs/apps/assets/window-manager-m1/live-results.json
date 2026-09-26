@@ -1,0 +1,431 @@
+[
+  {
+    "id": 35,
+    "request": {
+      "name": "coco_start",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true,\"alreadyRunning\":false,\"pid\":13057,\"bridge\":true}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 37,
+    "request": {
+      "name": "coco_mount_flop",
+      "arguments": {
+        "drive": "flop2",
+        "path": "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"briefname\":\"flop2\",\"filename\":\"/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 38,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "DOS\n"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"DOS\\n{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 41,
+    "request": {
+      "name": "coco_save_state",
+      "arguments": {
+        "name": "wm_m1_ready"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"scheduled\":true,\"name\":\"wm_m1_ready\",\"fileFound\":true,\"file\":\"/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 42,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"wm_m1_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6225,\"file\":\"/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"\\nMemory size - 2048k.\\nCpu type - 6309 (Native Mode)\\nDriveWire - Not detected.\\nCoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 02:07:20\\n\\n{Term|02}/DD:p=MCPfe09238014a463a8:\\n\\nMCPfe09238014a463a8:echo READYfe09238014a463a8\\nREADYfe09238014a463a8\\n\\nMCPfe09238014a463a8:\"},\"handshake\":{\"prompt\":\"MCPfe09238014a463a8:\",\"marker\":\"READYfe09238014a463a8\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "wm_m1_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6225,
+        "file": "/private/tmp/wm-m1/states/coco3h/wm_m1_ready.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 02:07:20\n\n{Term|02}/DD:p=MCPfe09238014a463a8:\n\nMCPfe09238014a463a8:echo READYfe09238014a463a8\nREADYfe09238014a463a8\n\nMCPfe09238014a463a8:"
+        },
+        "handshake": {
+          "prompt": "MCPfe09238014a463a8:",
+          "marker": "READYfe09238014a463a8",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 43,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "load /d1/wmview",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"load /d1/wmview\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":10896,\"outputComplete\":false,\"marker\":\"MCPDONE826cb67e3b7defca3375db933f8e6a61\",\"commandPromptMs\":5288}"
+        }
+      ],
+      "structuredContent": {
+        "command": "load /d1/wmview",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 10896,
+        "outputComplete": false,
+        "marker": "MCPDONE826cb67e3b7defca3375db933f8e6a61",
+        "commandPromptMs": 5288
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 44,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "wmview",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"wmview\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6655,\"outputComplete\":false,\"marker\":\"MCPDONE0c3c5436f71c3bc65fd773f5a4df6973\",\"commandPromptMs\":1068}"
+        }
+      ],
+      "structuredContent": {
+        "command": "wmview",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6655,
+        "outputComplete": false,
+        "marker": "MCPDONE0c3c5436f71c3bc65fd773f5a4df6973",
+        "commandPromptMs": 1068
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 46,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "wmview demo",
+        "timeout_ms": 60000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"wmview demo\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":17217,\"outputComplete\":false,\"marker\":\"MCPDONE87994436f1a5bcefdaee0a3841809636\",\"commandPromptMs\":11612}"
+        }
+      ],
+      "structuredContent": {
+        "command": "wmview demo",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 17217,
+        "outputComplete": false,
+        "marker": "MCPDONE87994436f1a5bcefdaee0a3841809636",
+        "commandPromptMs": 11612
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 50,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "wmview demo",
+        "timeout_ms": 60000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"wmview demo\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":17195,\"outputComplete\":false,\"marker\":\"MCPDONE3452dd934677e392fbf1d9e91afc7bf9\",\"commandPromptMs\":11606}"
+        }
+      ],
+      "structuredContent": {
+        "command": "wmview demo",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 17195,
+        "outputComplete": false,
+        "marker": "MCPDONE3452dd934677e392fbf1d9e91afc7bf9",
+        "commandPromptMs": 11606
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 51,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "wmview fault",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"wmview fault\",\"completed\":true,\"commandCompleted\":true,\"status\":201,\"statusText\":\"201\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":9494,\"outputComplete\":false,\"marker\":\"MCPDONEa890d868443e16f09d8441fcce03d612\",\"commandPromptMs\":3888}"
+        }
+      ],
+      "structuredContent": {
+        "command": "wmview fault",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 201,
+        "statusText": "201",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 9494,
+        "outputComplete": false,
+        "marker": "MCPDONEa890d868443e16f09d8441fcce03d612",
+        "commandPromptMs": 3888
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 53,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "wmview cancel",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"wmview cancel\",\"completed\":true,\"commandCompleted\":true,\"status\":3,\"statusText\":\"003\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":9792,\"outputComplete\":false,\"marker\":\"MCPDONE93565ed6987a64310cb55ff9efcc61ae\",\"commandPromptMs\":4185}"
+        }
+      ],
+      "structuredContent": {
+        "command": "wmview cancel",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 3,
+        "statusText": "003",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 9792,
+        "outputComplete": false,
+        "marker": "MCPDONE93565ed6987a64310cb55ff9efcc61ae",
+        "commandPromptMs": 4185
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 54,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "wmview",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"wmview\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6674,\"outputComplete\":false,\"marker\":\"MCPDONEaa50590d77fadecc23a3998dd6fa4cf7\",\"commandPromptMs\":1068}"
+        }
+      ],
+      "structuredContent": {
+        "command": "wmview",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6674,
+        "outputComplete": false,
+        "marker": "MCPDONEaa50590d77fadecc23a3998dd6fa4cf7",
+        "commandPromptMs": 1068
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 56,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "date",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6469,\"outputComplete\":false,\"marker\":\"MCPDONE99c6846ea98700048a7b0d1ada02e0e2\",\"commandPromptMs\":864}"
+        }
+      ],
+      "structuredContent": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6469,
+        "outputComplete": false,
+        "marker": "MCPDONE99c6846ea98700048a7b0d1ada02e0e2",
+        "commandPromptMs": 864
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 57,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "unlink wmview",
+        "timeout_ms": 30000
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"unlink wmview\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7358,\"outputComplete\":false,\"marker\":\"MCPDONE0e2d59af415fa3d179975e1982343bb0\",\"commandPromptMs\":1754}"
+        }
+      ],
+      "structuredContent": {
+        "command": "unlink wmview",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7358,
+        "outputComplete": false,
+        "marker": "MCPDONE0e2d59af415fa3d179975e1982343bb0",
+        "commandPromptMs": 1754
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 58,
+    "request": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    }
+  }
+]

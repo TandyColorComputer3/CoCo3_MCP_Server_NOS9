@@ -1,0 +1,120 @@
+{
+  "staged": true,
+  "installedInCanonicalVhd": false,
+  "hostArtifact": {
+    "path": "/private/tmp/wm-m1/build3/wmview",
+    "snapshot": "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.module",
+    "sha256": "6ee9b41b05821ab86d5c8b29503c3a5daf8565f407efccf6f91b85de23994bc9"
+  },
+  "module": {
+    "name": "wmview",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 4968,
+    "crc": "B04A2F",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 13,
+    "dataSize": 1580,
+    "edition": 1
+  },
+  "guestDestination": {
+    "image": "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk",
+    "path": "/wmview",
+    "device": null
+  },
+  "replacedExisting": false,
+  "stagingMethod": "fresh-artifact-floppy",
+  "image": {
+    "path": "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk",
+    "sha256": "8b13fe4d09931719bf57283afbee1db0f7fe95273cd922e09fd138c8c37452e5",
+    "tracks": 40,
+    "sides": 2,
+    "sectorsPerTrack": 18,
+    "bytesPerSector": 256
+  },
+  "requires": "cold boot with this image attached; do not restore a state made with different media bytes",
+  "provenance": {
+    "path": "/private/tmp/wm-m1/staged/stage-mlMQ5P/build-provenance.json",
+    "sha256": "83152bccb6d2b21c403dbd190291869b921c61e456929fcc746f57b5836be916",
+    "claimsVerified": false
+  },
+  "toolshed": {
+    "executable": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+    "version": "os9 from Toolshed 2.2",
+    "hostIdent": "Header for : wmview\nModule size: $1368  #4968\nModule CRC : $B04A2F (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $062C  #1580\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "installedIdent": "Header for : wmview\nModule size: $1368  #4968\nModule CRC : $B04A2F (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $062C  #1580\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "commands": [
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [],
+      "stdout": "\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n",
+      "stderr": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n"
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.module"
+      ],
+      "stdout": "Header for : wmview\nModule size: $1368  #4968\nModule CRC : $B04A2F (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $062C  #1580\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "format",
+        "-e",
+        "-t40",
+        "-ds",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk"
+      ],
+      "stdout": "Format Summary\n--------------\nGeometry Data:\n      Cylinders: 40\n          Heads: 2\n  Sectors/track: 18\n    Sector size: 256\n\nLogical Data:\n  Total sectors: 1440\n  Size in bytes: 368640\n   Cluster size: 1\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.module",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk,wmview"
+      ],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "attr",
+        "-e",
+        "-pe",
+        "-pr",
+        "-nw",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk,wmview"
+      ],
+      "stdout": "--e-re-r\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk,wmview"
+      ],
+      "stdout": "Header for : wmview\nModule size: $1368  #4968\nModule CRC : $B04A2F (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $062C  #1580\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/artifact.dsk,wmview",
+        "/private/tmp/wm-m1/staged/stage-mlMQ5P/verified.module"
+      ],
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}
