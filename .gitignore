@@ -33,3 +33,9 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 MCP/Documents/*.pdf
+
+# Local NitrOS-9 EOU reference and development media
+media/*.VHD
+media/*.DSK
+media/*.pdf
+media/*.rtf
