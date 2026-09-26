@@ -12,6 +12,7 @@ test("buildMameArgs matches the required coco3 command", () => {
       MAME_ROMPATH: "C:\\mame\\roms",
       COCO_RAM: "512K",
       MAME_MACHINE: "coco3",
+      MAME_SLOTS: '{"ext":"fdc"}',
     },
     root,
   );
@@ -64,7 +65,7 @@ test("verified MPI slot 3 Glenside launch preserves canonical settings and EOU m
     MAME_VHD: "../media/63SDC-MCP-DEV.VHD",
   }, root);
   const args = buildMameArgs(cfg);
-  const legacy = buildMameArgs(loadConfig({}, root));
+  const legacy = buildMameArgs(loadConfig({ MAME_SLOTS: '{"ext":"fdc"}' }, root));
   assert.deepEqual(args, [
     ...legacy.slice(0, 7),
     "-ext", "multi", "-ext:multi:slot3", "ide", "-ext:multi:slot4", "fdc",
@@ -80,4 +81,17 @@ test("verified Disto RTC occupies the SCII Mini Expansion Bus while retaining Gl
   const cfg = loadConfig({ MAME_SLOTS: '{"ext":"multi","ext:multi:slot3":"ide","ext:multi:slot4":"scii","ext:multi:slot4:scii:meb":"rtime"}' }, path.resolve("MCP"));
   const args = buildMameArgs(cfg);
   assert.deepEqual(args.slice(7, 15), ["-ext", "multi", "-ext:multi:slot3", "ide", "-ext:multi:slot4", "scii", "-ext:multi:slot4:scii:meb", "rtime"]);
+});
+
+
+test("canonical public MPI layout explicitly empties slots 1 and 3", () => {
+  const args = buildMameArgs(loadConfig({}, path.resolve("MCP")));
+  assert.deepEqual(args.slice(7, 19), [
+    "-ext", "multi", "-ext:multi:slot1", "", "-ext:multi:slot2", "ssc",
+    "-ext:multi:slot3", "", "-ext:multi:slot4", "scii",
+    "-ext:multi:slot4:scii:meb", "rtime",
+  ]);
+  assert.equal(args.includes("ide"), false);
+  assert.equal(args.includes("scii"), true);
+  assert.equal(args.includes("rtime"), true);
 });

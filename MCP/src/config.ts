@@ -57,7 +57,14 @@ function resolveToolPath(raw: string, root: string): string {
 
 /** MAME slot names/options are verified with the installed build's -listslots. */
 function parseSlots(raw: string | undefined): Record<string, string> {
-  if (raw === undefined) return { ext: "fdc" };
+  if (raw === undefined) return {
+    ext: "multi",
+    "ext:multi:slot1": "",
+    "ext:multi:slot2": "ssc",
+    "ext:multi:slot3": "",
+    "ext:multi:slot4": "scii",
+    "ext:multi:slot4:scii:meb": "rtime",
+  };
   let slots: unknown;
   try { slots = JSON.parse(raw); } catch { throw new Error("invalid MAME_SLOTS JSON"); }
   if (!slots || typeof slots !== "object" || Array.isArray(slots)) throw new Error("invalid MAME_SLOTS");

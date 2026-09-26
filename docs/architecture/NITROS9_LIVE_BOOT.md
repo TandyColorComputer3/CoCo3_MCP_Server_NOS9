@@ -1,6 +1,6 @@
 # NitrOS-9 EOU live boot investigations
 
-**Current baseline:** see [MPI / Disto RTC follow-up](#mpi--disto-rtc-follow-up). The earlier `nos9_ready_test` checkpoint is historical; the final checkpoint is `nos9_ready`.
+**Current baseline:** [SCII slot 4 / option 3 / nos9_ready_v2](#final-canonical-layout-scii-slot-4-and-option-3). Earlier configurations and checkpoints below are historical.
 
 Executed September 25, 2026, America/Los_Angeles (tool log UTC crosses into September 26).
 
@@ -394,3 +394,109 @@ Complete raw requests/results, including exact image data; [exact recorded launc
 | 56 | `coco_status` | `{}` | `{"running":true,"pid":14840,"bridge":true,"driver":"coco3h","flop1":"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63EMU.DSK","posting":false,"empty":true}` |
 | 57 | `coco_stop` | `{}` | `{"ok":true}` |
 | 58 | `coco_status` | `{}` | `{"running":false,"pid":null,"bridge":false}` |
+
+## Proposed public MPI layout: investigation blocked by RTC routing
+
+The requested follow-up layout was investigated against installed Ample MAME 0.289 before changing source or canonical configuration. It was **not promoted**: `nos9_ready` remains the working baseline, and no `nos9_ready_v2` was created.
+
+The exact requested SCII topology is unsupported by this MAME build. `-ext multi -ext:multi:slot3 scii -ext:multi:slot4 fdc -listdevices` exits 3 with `Unknown slot option 'scii' in slot 'ext:multi:slot3'`. `-listslots` exposes SCII only in slot 4. Slot 2's Speech/Sound Pak option is `ssc` (CoCo S/SC PAK), and an explicit empty slot uses an empty argument.
+
+A supported candidate was investigated with a temporary launch override, without changing `.env` or MCP source:
+
+```sh
+-ext multi -ext:multi:slot1 '' -ext:multi:slot2 ssc \
+-ext:multi:slot3 ram -ext:multi:slot3:ram:meb rtime \
+-ext:multi:slot4 fdc
+```
+
+Here `ram` is specifically **Disto RAM Cartridge**, not the SCII floppy controller. Installed `-listdevices` confirms the Speech/Sound processors in slot 2, Disto Mini Expansion Bus / Disto RTC / MSM6242 in slot 3, and WD1773 standard FDC in slot 4. `-listmedia` still exposes `.vhd` media as `hard1`/`hard2`, and the device tree still has root-level `vhd0`/`vhd1`, with no Glenside IDE installed. Thus the existing `-hard1 .../media/63SDC-MCP-DEV.VHD` attachment is independent of either cartridge; it needs neither IDE nor a Disto-hosted hard disk attachment. This candidate actually loaded the EOU environment from that VHD.
+
+ROM consequences were checked against installed `coco3h -listxml` and MAME 0.289 source. Standard `fdc` defaults to RSDOS v1.1 (`disk11.rom`); SCII defaults to Disto C-DOS 3 v1.2 (`cdos 1_2 3-30-89 cc3.bin`). Disto RAM has no cartridge ROM. Speech/Sound needs `pic-7040-510.bin` and `sp0256-al2.bin` for its internal processors. The controlled candidate launch displayed the normal green **DISK EXTENDED COLOR BASIC 2.1** screen and `OK` prompt before `DOS` was entered. Speech/Sound audio functionality was not tested.
+
+The candidate boot reached the 80-column EOU shell with native 6309 and 2048K, but its shell timestamp was **00/00/00 00:00:24**. The user also observed the broken time. It therefore fails the required automatic RTC initialization, despite successful BASIC, floppy, and VHD access.
+
+The routing issue is supported by the version-matched [MAME MPI source](https://github.com/mamedev/mame/blob/mame0289/src/devices/bus/coco/coco_multi.cpp): `scs_read` and `scs_write` route through `active_scs_slot()`, while cartridge ROM access uses `active_cts_slot()`. The [Disto RAM source](https://github.com/mamedev/mame/blob/mame0289/src/devices/bus/coco/coco_ram.cpp) forwards RTC accesses through its cartridge SCS handlers. The current EMUHWCLK Clock2 module directly addresses `$FF50`; its inspected binary does not select MPI slot 3. Moving this RTC out of the selected slot is consequently not a configuration-only replacement for the working slot-4 arrangement. A clock routine that selects/restores the appropriate MPI I/O slot, or another verified RTC topology, needs separate investigation. No guest clock module was patched and no manual clock setting was used to mask the failure.
+
+The controlled MAME process (PID 18439) was stopped cleanly. Final MCP status was `{"running":false,"pid":null,"bridge":false}`. The existing source, `.env`, media and `nos9_ready` state were preserved. Glenside removal was therefore **not applied to the canonical configuration**. The intended reason for eventually removing it remains valid: the EOU VHD does not depend on IDE, and a standard FDC should provide the public BASIC ROM experience. RTC routing must be solved first.
+
+Before and after SHA-256 values were identical:
+
+| Media | Before = after |
+|---|---|
+| Stock `63SDC.VHD` (mode 444) | `db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c` |
+| Development `63SDC-MCP-DEV.VHD` (mode 644) | `b1f8613e92ba25094a3c324563a5a2d7a34e565fc81408f7368bab375b271c7c` |
+| Boot `63EMU.DSK` (mode 664) | `9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40` |
+
+No new assets were added to the curated asset directories. Temporary discovery output and candidate snapshots remain outside the repository under `/private/tmp`; this section records their conclusions. No commit was made.
+
+Requested checks after this investigation: `npm test` passed all 57 tests (0 failed/skipped); `npm run build` passed; `git diff --check` passed. The only repository diff is this investigation record; there is no source/config/test diff to promote.
+
+
+## Final canonical layout: SCII slot 4 and option 3
+
+The user superseded the software-clock plan after observing its interactive time prompt and explicitly requested returning to Disto Super Controller II in slot 4 and `swapboot` option **3**. No MPI-aware Clock2 development was pursued. Final defaults, `.env.example`, local `.env`, and README now agree:
+
+| MPI slot | Final device |
+|---|---|
+| 1 | Explicitly empty |
+| 2 | `ssc`: Speech/Sound Pak |
+| 3 | Explicitly empty; no Glenside |
+| 4 | `scii`: Disto Super Controller II, with `scii:meb=rtime` Disto RTC |
+
+The machine remains `coco3h` / HD6309, 2M RAM, RGB (`:screen_config=1`), with the original MCP Lua bridge. `hard1` remains MAME's independent CoCo VHD device. Both cartridges and media paths are configurable. Source defaults now select this MPI topology; explicitly setting `MAME_SLOTS={"ext":"fdc"}` still supports the earlier simple FDC configuration. Tests for that legacy behavior now state the override explicitly, and a new test requires every final canonical slot argument.
+
+Exact topology:
+
+```sh
+-ext multi -ext:multi:slot1 '' -ext:multi:slot2 ssc -ext:multi:slot3 '' -ext:multi:slot4 scii -ext:multi:slot4:scii:meb rtime
+```
+
+[Exact launch JSON](assets/nos9-v2/launch.json), [installed device tree](assets/nos9-v2/mame-listdevices.txt). Actual final command (cwd `/Applications/Emulators/Ample.app/Contents/MacOS`):
+
+```sh
+BRIDGE_PORT=18765 /Applications/Emulators/Ample.app/Contents/MacOS/mame64 coco3h -window -skip_gameinfo -natural -nomouse -mouse_device none -ext multi -ext:multi:slot1 '' -ext:multi:slot2 ssc -ext:multi:slot3 '' -ext:multi:slot4 scii -ext:multi:slot4:scii:meb rtime -ramsize 2M -rompath '/Users/magneto-optimus/Library/Application Support/Ample/roms' -autoboot_script /Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/scripts/bridge.lua -autoboot_delay 0 -snapshot_directory /Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots -state_directory /Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/states -statename %g -cfg_directory /Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/mame-cfg -flop1 /Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63EMU.DSK -hard1 /Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63SDC-MCP-DEV.VHD
+```
+
+### Guest configuration and cold boot
+
+Option 4 (`EMUSOFTCLOCK`) was selected and allowed to complete. Its floppy boot matched `BOOTS/OS9Boot.emusoftclock` byte-for-byte, but the subsequent boot stopped at `yyyy/mm/dd hh:mm:ss`. Host-derived `2026/09/25 22:24:28` was supplied through MCP for that investigation. This was explicit keyboard input, not automatic clock synchronization, and is not the final configuration.
+
+Following the user's correction, the live shell ran `swapboot`, answered `y`, and selected **3 / EMUHWARECLOCK**. The full copy and `Linking Bootfile` operation completed and the reboot instruction appeared before MAME was stopped. ToolShed then confirmed `/d0/OS9Boot` matches `/dd/BOOTS/OS9Boot.emuhwareclock`: 33300 bytes, zero differences. With MAME stopped, the newly replaced `/dd/startup` was exported, verified to contain no `setime` line, and given the trailing `montype r` line again. No boot-template files were edited.
+
+A fresh rebuilt MCP session loaded the final SCII configuration. MAME PID 21104 displayed **COCO 3 DOS V1.2** with a bright green screen and `OK`, reflecting the SCII C-DOS ROM. The standard Disk Extended Color BASIC ROM requirement was superseded by the user's return to SCII. `DOS` then cold-booted EOU successfully into the 80-column shell, with native 6309 and 2048K shown. **No time input was supplied during this final boot.**
+
+Verified guest results:
+
+- Shell startup timestamp: `26/09/25 22:27:59`, initialized automatically.
+- `date -t`: `September 25, 2026 22:28:16`; subsequent host observation was `2026-09-26 05:28:32 UTC` (22:28:32 Pacific). The readings were taken 16 seconds apart.
+- `mdir`: Clock, Clock2, EmuDsk, DD/H1, SCF, VTIO, Term, and window modules present.
+- `ident -m clock2`: 118 bytes, edition 1, CRC `$6CF198 (Good)`, the verified hardware-clock module.
+- `procs`: returned the process list and shell prompt normally.
+- `list /dd/startup`: returned the full VHD startup script ending in `montype r`, with no `setime` line. This also verifies VHD access; the startup completed without a command error.
+- `pwd`: `/DD`, returning to the prompt.
+
+Speech/Sound was verified present in the device tree; audio generation itself was not tested. RGB evidence is the generated `:screen_config=1` configuration, green cartridge screen, and successful `montype r` startup; no independent live port-read probe was added.
+
+### Replacement checkpoint and restore
+
+Only after the final boot and command checks, `coco_save_state` returned:
+
+```json
+{"scheduled":true,"name":"nos9_ready_v2","fileFound":true,"file":"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/states/coco3h/nos9_ready_v2.sta"}
+```
+
+The new file is 142026 bytes, mode 644. A subsequent `pwd` printed `/DD`. `coco_load_state` returned `{"scheduled":true,"name":"nos9_ready_v2"}`; the screen returned directly to the saved startup listing and idle prompt, removing the later pwd output. A new `date -t` worked immediately and reported `September 25, 2026 22:29:43`, then returned to the shell prompt. There was no cold boot, startup replay, or clock-entry prompt; PID remained 21104 and the MCP bridge stayed connected. The restored clock resumes the checkpoint's timeline and can lag host wall time by elapsed time discarded during restore; this is not a wall-clock resynchronization operation.
+
+The old `nos9_ready.sta` hash was checked before and after and remained unchanged. It is preserved as requested, but belongs to its earlier topology and media state. Use `nos9_ready_v2` with the final configuration and media hashes below. Stop returned `{"ok":true}`, then status returned `{"running":false,"pid":null,"bridge":false}`.
+
+### Media hashes and validation
+
+| Media | Before this task | After final stop |
+|---|---|---|
+| Stock `63SDC.VHD` | `db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c` | `db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c` |
+| Development VHD | `b1f8613e92ba25094a3c324563a5a2d7a34e565fc81408f7368bab375b271c7c` | `4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e` |
+| `63EMU.DSK` | `9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40` | `9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40` |
+
+Stock remained mode 444 and was never mounted. The development VHD changed through the authorized boot-selection/startup replacement operations. The floppy was written during both selections but ended byte-identical to its pre-task hardware-clock image. Backups from before the software-clock trial exist outside Git at `/private/tmp/63EMU-before-soft.DSK` and `/private/tmp/63SDC-before-soft.VHD`.
+
+Final checks: `npm test` **58 passed, 0 failed/skipped**; `npm run build` passed; `git diff --check` passed. No commit was made. Only the small final launch and device-tree evidence were added to curated assets; temporary screenshots, JSONL results, generated XML, and source copies remain outside Git.

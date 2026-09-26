@@ -107,6 +107,6 @@ test("slot configuration validates JSON and preserves explicit empty slot option
     assert.throws(() => loadConfig({ MAME_SLOTS: raw }, "root"), /MAME_SLOTS/);
   }
   assert.deepEqual(loadConfig({ MAME_SLOTS: '{"ext":""}' }, "root").mameSlots, { ext: "" });
-  assert.deepEqual(loadConfig({}, "root").mameSlots, { ext: "fdc" });
+  assert.deepEqual(loadConfig({ MAME_SLOTS: '{"ext":"fdc"}' }, "root").mameSlots, { ext: "fdc" });
   assert.equal(loadConfig({ MAME_VHD: "C:\\media\\dev.vhd" }, "root").virtualHardDisk, "C:\\media\\dev.vhd");
 });

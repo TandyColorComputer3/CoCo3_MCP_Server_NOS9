@@ -1,0 +1,56 @@
+Driver coco3h (Color Computer 3 (NTSC; HD6309)):
+   <root>                         Color Computer 3 (NTSC; HD6309) @ 894.88 kHz
+     cart_list                    Software List
+     cassette                     Cassette
+     dac                          6-Bit Binary Weighted DAC
+     dwsock                       Virtual Becker Port
+     ext                          CoCo Cartridge Slot @ 894.88 kHz
+       multi                      CoCo Multi-Pak Interface @ 894.88 kHz
+         slot1                    CoCo Cartridge Slot @ 894.88 kHz
+         slot2                    CoCo Cartridge Slot @ 894.88 kHz
+           ssc                    CoCo S/SC PAK @ 894.88 kHz
+             coco_sac_tag         CoCo SSC Sound Activity Circuit @ 1.78 MHz
+             cocossc_ay           AY-3-8913 PSG @ 1.78 MHz
+             pic7040              Texas Instruments TMS7040 @ 1.78 MHz
+             sp0256               GI SP0256 Narrator Speech Processor @ 3.12 MHz
+             ssc_audio            Speaker
+             staticram            RAM
+         slot3                    CoCo Cartridge Slot @ 894.88 kHz
+         slot4                    CoCo Cartridge Slot @ 894.88 kHz
+           scii                   Disto Super Controller II @ 894.88 kHz
+             cart_line            Input Merger (any high)
+             meb                  Disto Mini Expansion Bus @ 894.88 kHz
+               rtime              Disto Real Time Clock Card @ 894.88 kHz
+                 centronics       Centronics
+                   printer        Centronics Printer
+                     printer      Printer
+                 latch            Output Latch
+                 rtc              OKI MSM6242 RTC @ 32.76 kHz
+             wd17xx               Western Digital WD1773 FDC @ 8.00 MHz
+               0                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               1                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               2                  Floppy drive connector abstraction
+               3                  Floppy drive connector abstraction
+     firqs                        Input Merger (any high)
+     floating                     Address Map Bank
+     flop_list                    Software List
+     gime                         TCC1014 (VC2645QC) GIME (NTSC) @ 28.63 MHz
+     irqs                         Input Merger (any high)
+     maincpu                      Hitachi HD6309E @ 894.88 kHz
+     pia0                         6821 PIA
+     pia1                         6821 PIA
+     ram                          RAM
+     rs232                        RS-232 Port
+       rs_printer                 Radio Shack Serial Printer
+         printer                  Printer
+     sbs                          1-Bit DAC
+     screen                       Video Screen @ 14.31 MHz
+     speaker                      Speaker
+     vhd0                         CoCo Virtual Hard Disk
+     vhd1                         CoCo Virtual Hard Disk
