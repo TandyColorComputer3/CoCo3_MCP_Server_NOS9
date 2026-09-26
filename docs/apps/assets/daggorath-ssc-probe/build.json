@@ -1,0 +1,30 @@
+{
+  "command": [
+    "cmoc",
+    "--os9",
+    "-O0",
+    "--intermediate",
+    "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-ssc/final-build",
+    "--add-os9-stack-space=1536",
+    "-Iapps/daggorath/src",
+    "-o",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-ssc/final-build/ssprobe",
+    "probes/speech-sound/ssprobe.c",
+    "apps/daggorath/src/os9.c",
+    "probes/speech-sound/module.asm"
+  ],
+  "cwd": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9",
+  "sources": {
+    "probes/speech-sound/ssprobe.c": "f852f8aaa619305ed959faa5b651be545957b1fcfbc8b706abb3345439b9e5bc",
+    "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+    "probes/speech-sound/module.asm": "307268acbd35fc677886478028d7ea462f22243e4b393bd19ed8bf6d36f25271",
+    "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+  },
+  "artifact": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-ssc/final-build/ssprobe",
+  "sha256": "30b5bba029007d6a86ad7bf88dddc11a4e8d917515a3d59be21167b795cb1a50",
+  "versions": {
+    "cmoc": "cmoc (cmoc 0.1.90)",
+    "lwasm": "lwasm from lwtools 4.22",
+    "lwlink": "lwlink from lwtools 4.22"
+  }
+}

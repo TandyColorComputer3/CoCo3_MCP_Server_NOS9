@@ -1,0 +1,84 @@
+{
+  "sample_rate": 48000,
+  "channels": 4,
+  "samples": 19176001,
+  "channel_analyzed": 1,
+  "threshold_ac_rms": 100,
+  "block_ms": 10,
+  "segments": [
+    {
+      "start_s": 210.35,
+      "end_s": 212.39,
+      "duration_s": 2.039999999999992,
+      "peak_frequency_hz": 880.9782608695654,
+      "ac_rms": 2969.2514467202977,
+      "post_cleanup_peak": 0
+    },
+    {
+      "start_s": 250.89,
+      "end_s": 252.93,
+      "duration_s": 2.0400000000000205,
+      "peak_frequency_hz": 880.9782608695654,
+      "ac_rms": 2969.2519863306634,
+      "post_cleanup_peak": 0
+    },
+    {
+      "start_s": 269.72,
+      "end_s": 270.75,
+      "duration_s": 1.0299999999999727,
+      "peak_frequency_hz": 880.7449986194433,
+      "ac_rms": 2969.220439463699,
+      "post_cleanup_peak": 0
+    },
+    {
+      "start_s": 283.2,
+      "end_s": 284.23,
+      "duration_s": 1.0300000000000296,
+      "peak_frequency_hz": 880.7228915662652,
+      "ac_rms": 2971.141873090647,
+      "post_cleanup_peak": 0
+    },
+    {
+      "start_s": 304.59,
+      "end_s": 306.67,
+      "duration_s": 2.080000000000041,
+      "peak_frequency_hz": 880.8510638297872,
+      "ac_rms": 2969.2565640239004,
+      "post_cleanup_peak": 0
+    },
+    {
+      "start_s": 342.31,
+      "end_s": 344.39,
+      "duration_s": 2.079999999999984,
+      "peak_frequency_hz": 880.8608251421226,
+      "ac_rms": 2969.260673394798,
+      "post_cleanup_peak": 0
+    }
+  ],
+  "short_transients": [
+    {
+      "start_s": 210.08,
+      "end_s": 210.09
+    },
+    {
+      "start_s": 250.62,
+      "end_s": 250.63
+    },
+    {
+      "start_s": 269.44,
+      "end_s": 269.45
+    },
+    {
+      "start_s": 282.92,
+      "end_s": 282.93
+    },
+    {
+      "start_s": 304.02,
+      "end_s": 304.03
+    },
+    {
+      "start_s": 341.74,
+      "end_s": 341.75
+    }
+  ]
+}

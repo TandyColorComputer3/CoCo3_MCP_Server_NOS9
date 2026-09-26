@@ -1,0 +1,371 @@
+[
+  {
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "response": {
+      "ready": true,
+      "state": "ssc_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6191,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-ssc/runtime/states/coco3h/ssc_ready.sta",
+      "postLoadEpoch": 1,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "CoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 12:05:20\n\n{Term|02}/DD:load /d1/ssprobe\n\n{Term|02}/DD:load /d1/dodwiz\n\n{Term|02}/DD:p=MCPbcde22abdac1ec7c:\n\nMCPbcde22abdac1ec7c:echo READYbcde22abdac1ec7c\nREADYbcde22abdac1ec7c\n\nMCPbcde22abdac1ec7c:"
+      },
+      "handshake": {
+        "prompt": "MCPbcde22abdac1ec7c:",
+        "marker": "READYbcde22abdac1ec7c",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe baseline",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe baseline",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 12840,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEcccfd6b7018c791119cf97cd438f4b91",
+      "commandPromptMs": 7229
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe load",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe load",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 10405,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEcc4c7d75da4efa28a15b113624770493",
+      "commandPromptMs": 4821
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe sstone",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe sstone",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 12685,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE21c45e95cb3e5b9f459f2229da040b78",
+      "commandPromptMs": 7075
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe ssc",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe ssc",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 12329,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEd7474fa1964b72c82e30f016b1a68339",
+      "commandPromptMs": 6721
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe load",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe load",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 12424,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEb3333e2981f7cf3817bdac8436d52809",
+      "commandPromptMs": 6834
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe ssc",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe ssc",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 12363,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE404643acb7401c5f8c10cec48600a301",
+      "commandPromptMs": 6758
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe canceltest",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe canceltest",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 3,
+      "statusText": "003",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 13385,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE86189a0067c756d070f9f16eded85b0b",
+      "commandPromptMs": 7803
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe errortest",
+        "timeout_ms": 25000
+      }
+    },
+    "response": {
+      "command": "ssprobe errortest",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 187,
+      "statusText": "187",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 13109,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEfc331c982be0b94be3e3e30c3a4b86b5",
+      "commandPromptMs": 7509
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe graphics",
+        "timeout_ms": 45000,
+        "allow_graphics": true
+      }
+    },
+    "response": {
+      "command": "ssprobe graphics",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 24017,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEa4c153aa98472ac8e2a880199651964c",
+      "commandPromptMs": 18419
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "ssprobe graphics",
+        "timeout_ms": 45000,
+        "allow_graphics": true
+      }
+    },
+    "response": {
+      "command": "ssprobe graphics",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 24008,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEbde8cba1a5241b2423a70a18ff993023",
+      "commandPromptMs": 18403
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "date",
+        "timeout_ms": 15000
+      }
+    },
+    "response": {
+      "command": "date",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 6455,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE3d56d36efce6f1b6b4af6b91ffbf553e",
+      "commandPromptMs": 866
+    }
+  },
+  {
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "pwd",
+        "timeout_ms": 15000
+      }
+    },
+    "response": {
+      "command": "pwd",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 7327,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE3840b24f4c18cdef302379384b60f1b7",
+      "commandPromptMs": 1749
+    }
+  }
+]
