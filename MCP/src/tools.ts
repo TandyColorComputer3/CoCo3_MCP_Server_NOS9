@@ -33,7 +33,7 @@ const STATE_TIMEOUT_MS = 2_000;
 
 export const TOOL_INFO: Record<string, { description: string }> = {
   os9_run: {
-    description: "Run one noninteractive foreground program after os9_restore_ready. Wait for a fresh prompt, then query Shell+ status on a separate marker line. Returns completion/status, not stdout. Simple arguments only; no shell control/metacharacters. Nonzero guest status is a completed operation. Timeout/failure requires restore; exclusive UI access required.",
+    description: "Run one noninteractive foreground program after os9_restore_ready. Wait for a fresh prompt, then query Shell+ status on a separate marker line. Returns completion/status, not stdout. Opt in with allow_graphics to tolerate temporary graphics during the command; verified Term must return before the status handshake. Simple arguments only; no shell control/metacharacters. Nonzero guest status is a completed operation. Timeout/failure requires restore; exclusive UI access required.",
   },
   os9_restore_ready: {
     description: "Load NITROS9_READY_STATE, await MAME post-load notification, then verify the EOU Term shell with a fresh prompt and echo nonce. Requires the compatible running canonical machine and 80x25 hardware text checkpoint. Changes only the transient shell prompt; does not save or alter media. Exclusive machine/UI access required.",
@@ -233,7 +233,7 @@ function resolveDiskPath(config: AppConfig, raw: string): string {
 
 const handlers: Record<string, Handler> = {
   async os9_run(deps, args) {
-    const result = await runOs9(deps.bridge, args.command, args.timeout_ms);
+    const result = await runOs9(deps.bridge, args.command, args.timeout_ms, undefined, args.allow_graphics);
     return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result, isError: result.outcome !== "completed" };
   },
   async os9_restore_ready(deps, args) {
@@ -504,6 +504,7 @@ export function createToolHandlers(deps: ToolDeps): Record<string, (args: Args) 
 
 const inputSchemas: Record<string, Record<string, z.ZodTypeAny>> = {
   os9_run: {
+    allow_graphics: z.boolean().optional().describe("Allow temporary unsupported display during command execution only; default false. Requires fresh Term prompt and status handshake afterward."),
     command: z.string().describe("One noninteractive foreground program, simple arguments, at most 58 ASCII characters; no shell metacharacters"),
     timeout_ms: z.number().int().min(1000).max(120000).optional().describe("Host deadline for command plus status query, default 30000 ms"),
   },

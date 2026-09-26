@@ -206,3 +206,92 @@ test("raw keyboard input invalidates the cached ready session", async () => {
   const r = await h.os9_run!({ command: "pwd" });
   assert.equal((r.structuredContent as { outcome: string }).outcome, "shell_not_ready");
 });
+
+// New policy tests wrap the existing fixture without altering strict tests.
+function graphicsFixture(mode = "return") {
+  const f = fixture(), original = f.bridge.request.bind(f.bridge);
+  let graphicsReads = 0;
+  f.bridge.request = async (cmd, params, timeout) => {
+    if (cmd === "read_text_console" && f.state.phase === "command") {
+      graphicsReads++;
+      if (graphicsReads <= 2 || mode === "hang") {
+        if (graphicsReads === 2 && mode === "disconnect") throw new Error("bridge disconnected");
+        return { id: "g", ok: true, result: { supported: false, reasonCode: "unsupported_display",
+          reason: "graphics mode", epoch: mode === "epoch" && graphicsReads === 2 ? 8 : 7 } };
+      }
+    }
+    return original(cmd, params, timeout);
+  };
+  return f;
+}
+for (const enabled of [false, true]) test(`text execution with allow_graphics=${enabled}`, async () => {
+  const f = fixture();
+  assert.equal((await runOs9(f.bridge, "mdir", 5000, f.timing, enabled)).status, 0);
+});
+for (const code of ["000", "216"]) test(`graphics round trip preserves status ${code}`, async () => {
+  const f = graphicsFixture(); f.state.code = code;
+  const r = await runOs9(f.bridge, "probe", 5000, f.timing, true);
+  assert.equal(r.completed, true); assert.equal(r.statusText, code);
+  assert.equal(r.executionState, "COMPLETE"); assert.equal(r.displayDepartures, 1);
+  assert.equal(r.consoleReturned, true); assert.equal(r.shellReady, true);
+  assert.equal(f.calls.filter(c => c.cmd === "type").length, 2);
+});
+for (const [mode, outcome] of [["hang", "timeout"], ["disconnect", "bridge_failure"], ["epoch", "shell_not_ready"]]) {
+  test(`graphics ${mode} fails closed`, async () => {
+    const f = graphicsFixture(mode);
+    const r = await runOs9(f.bridge, "probe", 1000, f.timing, true);
+    assert.equal(r.outcome, outcome); assert.equal(r.completed, false); assert.equal(r.status, null);
+    assert.equal(f.calls.filter(c => c.cmd === "type").length, 1);
+    if (mode === "hang") { assert.equal(r.timedOut, true); assert.equal(r.timeoutReason, "console_not_returned"); }
+    assert.equal((await runOs9(f.bridge, "pwd", 1000, f.timing)).outcome, "shell_not_ready");
+  });
+}
+test("malformed marker after graphics is rejected", async () => {
+  const f = graphicsFixture(); f.state.malformed = true;
+  const r = await runOs9(f.bridge, "probe", 5000, f.timing, true);
+  assert.equal(r.outcome, "protocol_error"); assert.equal(r.commandCompleted, true); assert.equal(r.status, null);
+});
+test("graphics returning to unchanged stale prompt cannot complete", async () => {
+  const f = graphicsFixture(); f.state.stale = true;
+  const r = await runOs9(f.bridge, "probe", 1000, f.timing, true);
+  assert.equal(r.outcome, "timeout"); assert.equal(r.commandCompleted, false);
+  assert.equal(r.consoleReturned, true); assert.equal(f.calls.filter(c => c.cmd === "type").length, 1);
+});
+test("default policy rejects graphics after sending command", async () => {
+  const f = graphicsFixture();
+  assert.equal((await runOs9(f.bridge, "probe", 5000, f.timing)).outcome, "shell_not_ready");
+});
+test("opt-in cannot bypass unsupported preflight or malformed console data", async () => {
+  const f = fixture(); f.state.unsupported = true;
+  assert.equal((await runOs9(f.bridge, "probe", 5000, f.timing, true)).outcome, "shell_not_ready");
+  assert.equal(f.calls.some(c => c.cmd === "type"), false);
+});
+test("invalid graphics policy is rejected before input", async () => {
+  const f = fixture();
+  assert.equal((await runOs9(f.bridge, "probe", 5000, f.timing, "true")).outcome, "invalid_input");
+  assert.equal(f.calls.length, 0);
+});
+
+test("graphics policy stays strict during status marker and on corrupt text", async () => {
+  for (const phase of ["command", "marker"]) {
+    const f = graphicsFixture(), request = f.bridge.request.bind(f.bridge);
+    f.bridge.request = async (cmd, params, timeout) => {
+      const response = await request(cmd, params, timeout);
+      if (cmd === "read_text_console" && f.state.phase === phase && response.ok) {
+        return { ...response, result: phase === "marker"
+          ? { supported: false, reasonCode: "unsupported_display", epoch: 7 }
+          : { ...view([prompt]), cells: "corrupt" } };
+      }
+      return response;
+    };
+    const r = await runOs9(f.bridge, "probe", 5000, f.timing, true);
+    assert.equal(r.outcome, "shell_not_ready"); assert.equal(r.completed, false);
+  }
+});
+test("MCP handler forwards opt-in without changing default policy", async () => {
+  const f = graphicsFixture();
+  const h = createToolHandlers({ bridge: f.bridge, config: loadConfig({}, "/tmp/os9-run-tests") } as ToolDeps);
+  const r = await h.os9_run!({ command: "probe", allow_graphics: true });
+  assert.equal(r.isError, false);
+  assert.equal((r.structuredContent as { displayDepartures: number }).displayDepartures, 1);
+});

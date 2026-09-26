@@ -1,0 +1,120 @@
+{
+  "staged": true,
+  "installedInCanonicalVhd": false,
+  "hostArtifact": {
+    "path": "/private/tmp/graphics-execution/build/gfxprobe",
+    "snapshot": "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.module",
+    "sha256": "e97edd4bd895fa202f8ce3ffef456933d58623fecefcc0b6bc735626a8d141d2"
+  },
+  "module": {
+    "name": "gfxprobe",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 1839,
+    "crc": "F4B207",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 13,
+    "dataSize": 1573,
+    "edition": 1
+  },
+  "guestDestination": {
+    "image": "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk",
+    "path": "/gfxprobe",
+    "device": null
+  },
+  "replacedExisting": false,
+  "stagingMethod": "fresh-artifact-floppy",
+  "image": {
+    "path": "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk",
+    "sha256": "302be8c9712af36c7ec2aa3581496ef946115a49682fddc4477cc8c509ff826f",
+    "tracks": 40,
+    "sides": 2,
+    "sectorsPerTrack": 18,
+    "bytesPerSector": 256
+  },
+  "requires": "cold boot with this image attached; do not restore a state made with different media bytes",
+  "provenance": {
+    "path": "/private/tmp/graphics-execution/staged/stage-Jp4VNw/build-provenance.json",
+    "sha256": "299a93d1858e3f744d09b50dd25ca6d8faec1440a07c03731279c4fd820c360e",
+    "claimsVerified": false
+  },
+  "toolshed": {
+    "executable": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+    "version": "os9 from Toolshed 2.2",
+    "hostIdent": "Header for : gfxprobe\nModule size: $72F  #1839\nModule CRC : $F4B207 (Good)\nHdr parity : $29\nExec. off  : $000D  #13\nData size  : $0625  #1573\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "installedIdent": "Header for : gfxprobe\nModule size: $72F  #1839\nModule CRC : $F4B207 (Good)\nHdr parity : $29\nExec. off  : $000D  #13\nData size  : $0625  #1573\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "commands": [
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [],
+      "stdout": "\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n",
+      "stderr": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n"
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.module"
+      ],
+      "stdout": "Header for : gfxprobe\nModule size: $72F  #1839\nModule CRC : $F4B207 (Good)\nHdr parity : $29\nExec. off  : $000D  #13\nData size  : $0625  #1573\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "format",
+        "-e",
+        "-t40",
+        "-ds",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk"
+      ],
+      "stdout": "Format Summary\n--------------\nGeometry Data:\n      Cylinders: 40\n          Heads: 2\n  Sectors/track: 18\n    Sector size: 256\n\nLogical Data:\n  Total sectors: 1440\n  Size in bytes: 368640\n   Cluster size: 1\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.module",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk,gfxprobe"
+      ],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "attr",
+        "-e",
+        "-pe",
+        "-pr",
+        "-nw",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk,gfxprobe"
+      ],
+      "stdout": "--e-re-r\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk,gfxprobe"
+      ],
+      "stdout": "Header for : gfxprobe\nModule size: $72F  #1839\nModule CRC : $F4B207 (Good)\nHdr parity : $29\nExec. off  : $000D  #13\nData size  : $0625  #1573\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk,gfxprobe",
+        "/private/tmp/graphics-execution/staged/stage-Jp4VNw/verified.module"
+      ],
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

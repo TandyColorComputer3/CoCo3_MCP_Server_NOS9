@@ -608,7 +608,8 @@ local function cmd_read_text_console(params)
   -- Native 80-column attributed text, 225 scanlines / 9 = 25 rows, no scrolling.
   if (r[1] & 0x80) ~= 0 or (r[9] & 0x87) ~= 4 or (r[10] & 0x75) ~= 0x75
       or r[13] ~= 0 or r[16] ~= 0 then
-    return { supported = false, reason = "requires EOU 80x25 hardware text, no virtual/vertical scrolling" }
+    return { supported = false, reasonCode = "unsupported_display", epoch = op.epoch,
+      reason = "requires EOU 80x25 hardware text, no virtual/vertical scrolling" }
   end
   local size = emu.item(ram.items["0/m_size"]):read(0)
   -- GIME get_video_base + record_scanline_res bank selection. Read physical

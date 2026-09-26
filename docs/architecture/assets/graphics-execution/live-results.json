@@ -1,0 +1,637 @@
+[
+  {
+    "id": 1,
+    "request": {
+      "name": "coco_start",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true,\"alreadyRunning\":false,\"pid\":16445,\"bridge\":true}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "request": {
+      "name": "coco_mount_flop",
+      "arguments": {
+        "drive": "flop2",
+        "path": "/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"briefname\":\"flop2\",\"filename\":\"/private/tmp/graphics-execution/staged/stage-Jp4VNw/artifact.dsk\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "DOS"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"DOS{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-4.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-5.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-6.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "request": {
+      "name": "coco_save_state",
+      "arguments": {
+        "name": "graphics_ready"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"scheduled\":true,\"name\":\"graphics_ready\",\"fileFound\":true,\"file\":\"/private/tmp/graphics-execution/states/coco3h/graphics_ready.sta\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"graphics_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6249,\"file\":\"/private/tmp/graphics-execution/states/coco3h/graphics_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"\\nMemory size - 2048k.\\nCpu type - 6309 (Native Mode)\\nDriveWire - Not detected.\\nCoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 02:56:02\\n\\n{Term|02}/DD:p=MCPd311987c21494182:\\n\\nMCPd311987c21494182:echo READYd311987c21494182\\nREADYd311987c21494182\\n\\nMCPd311987c21494182:\"},\"handshake\":{\"prompt\":\"MCPd311987c21494182:\",\"marker\":\"READYd311987c21494182\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "graphics_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6249,
+        "file": "/private/tmp/graphics-execution/states/coco3h/graphics_ready.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 02:56:02\n\n{Term|02}/DD:p=MCPd311987c21494182:\n\nMCPd311987c21494182:echo READYd311987c21494182\nREADYd311987c21494182\n\nMCPd311987c21494182:"
+        },
+        "handshake": {
+          "prompt": "MCPd311987c21494182:",
+          "marker": "READYd311987c21494182",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 9,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "load /d1/gfxprobe"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"load /d1/gfxprobe\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":10630,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE5455bb363d80ab398181cf6c9661bc76\",\"commandPromptMs\":5040}"
+        }
+      ],
+      "structuredContent": {
+        "command": "load /d1/gfxprobe",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 10630,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE5455bb363d80ab398181cf6c9661bc76",
+        "commandPromptMs": 5040
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 11,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-11.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-12.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "gfxprobe",
+        "timeout_ms": 60000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"gfxprobe\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":17186,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE68040803c9007bf37dda27654d95c504\",\"commandPromptMs\":11597}"
+        }
+      ],
+      "structuredContent": {
+        "command": "gfxprobe",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 17186,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE68040803c9007bf37dda27654d95c504",
+        "commandPromptMs": 11597
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 13,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-13.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "date"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6455,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE54405cd4dd71f7ba2dca2f8d3ca7f301\",\"commandPromptMs\":867}"
+        }
+      ],
+      "structuredContent": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6455,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE54405cd4dd71f7ba2dca2f8d3ca7f301",
+        "commandPromptMs": 867
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 16,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-16.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-17.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "gfxprobe cancel",
+        "timeout_ms": 60000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"gfxprobe cancel\",\"completed\":true,\"commandCompleted\":true,\"status\":3,\"statusText\":\"003\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11229,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE0e7e71cbae8e8a761120faedb19ab659\",\"commandPromptMs\":5644}"
+        }
+      ],
+      "structuredContent": {
+        "command": "gfxprobe cancel",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 3,
+        "statusText": "003",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11229,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE0e7e71cbae8e8a761120faedb19ab659",
+        "commandPromptMs": 5644
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 18,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-18.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-20.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-21.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "gfxprobe error",
+        "timeout_ms": 60000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"gfxprobe error\",\"completed\":true,\"commandCompleted\":true,\"status\":187,\"statusText\":\"187\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":10925,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE8767d1e1091fb27470e4cf5d3414d802\",\"commandPromptMs\":5336}"
+        }
+      ],
+      "structuredContent": {
+        "command": "gfxprobe error",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 187,
+        "statusText": "187",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 10925,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE8767d1e1091fb27470e4cf5d3414d802",
+        "commandPromptMs": 5336
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 22,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-22.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "pwd"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7382,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEa0a6228175ea55bdbd445df7ddaddd67\",\"commandPromptMs\":1778}"
+        }
+      ],
+      "structuredContent": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7382,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEa0a6228175ea55bdbd445df7ddaddd67",
+        "commandPromptMs": 1778
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 24,
+    "request": {
+      "name": "coco_snapshot",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "image",
+          "path": "/private/tmp/graphics-execution/snapshot-24.png"
+        },
+        {
+          "type": "text",
+          "text": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots/current.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "unlink gfxprobe"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"unlink gfxprobe\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7543,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE3475fae5654b9e56f94ddc2415e157b9\",\"commandPromptMs\":1954}"
+        }
+      ],
+      "structuredContent": {
+        "command": "unlink gfxprobe",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7543,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE3475fae5654b9e56f94ddc2415e157b9",
+        "commandPromptMs": 1954
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 26,
+    "request": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    }
+  }
+]
