@@ -79,6 +79,35 @@ Full policy with examples: `TESTING_POLICY.md`.
 5. Run tests. Failures get fixed in the implementation (Rule 2).
 6. Can't verify a fact locally? Flag it explicitly rather than guessing.
 
+## NitrOS-9 source research and precedence
+
+Before implementing unfamiliar NitrOS-9 functionality, consult
+`docs/source-index/README.md` and the relevant semantic indexes. Use
+`UPSTREAM_NITROS9.md`, `EOU_UPSTREAM_CROSSWALK.md`, and `MODERNIZATION_NOTES.md`
+in that directory for the researched relationships and limitations.
+
+- For our actual EOU development environment, verified runtime behavior is the
+  primary evidence. For EOU-specific behavior and extensions, consult the indexed
+  EOU source/docs together with that runtime evidence.
+- For modern implementation patterns and maintained code, consult the official
+  upstream checkout at `/Volumes/SEDONA/Projects/nitros9-reference`, identifying
+  its commit and the applicable CoCo 3 Level II/CPU recipe.
+- Treat `/dd/SOURCECODE` as a valuable implementation/example corpus; historical
+  or unmatched source is not automatically normative. Matching module names or
+  editions do not prove identical implementations.
+- For ABI-sensitive or hardware-sensitive work, verify assumptions against
+  authoritative documentation and identified source/runtime evidence. State gaps
+  explicitly. When adapting code or patterns, record the source path and provenance.
+- When EOU and upstream differ, preserve compatibility with our verified EOU
+  target where required and consider upstream fixes and implementation improvements.
+  Record conflicts; do not silently replace known EOU behavior with upstream behavior.
+  Some EOU changes have entered upstream while other EOU fixes remain divergent;
+  neither tree universally supersedes the other.
+
+`nitros9-reference` is an external reference repository. Agents may inspect, search,
+and diff its source and Git history, but must not modify or commit to it unless
+explicitly instructed.
+
 ## Related documents
 - `DOCS_INDEX.md` — what's in `MCP/Documents/` and how to search it efficiently
 - `TESTING_POLICY.md` — full test-integrity policy, with allowed/not-allowed examples
