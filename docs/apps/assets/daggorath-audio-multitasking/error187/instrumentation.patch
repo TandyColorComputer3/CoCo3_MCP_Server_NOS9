@@ -1,0 +1,50 @@
+--- apps/daggorath/src/main.c
++++ MCP/work/audio-187/main.c
+@@ -12 +12,2 @@
+-static Word previous,elapsed;
++static Word previous,elapsed,diagNow,diagDelta;
++static Byte stage,frameIndex;
+@@ -19 +20 @@
+-    if(delta>300)return ERR_ARGUMENT;
++    if(delta>300){diagNow=now;diagDelta=delta;stage=99;return ERR_ARGUMENT;}
+@@ -40 +41 @@
+-    error=screen_open();if(error)goto done;
++    stage=1;error=screen_open();if(error)goto done;
+@@ -43 +44 @@
+-        messages=index==17;
++        frameIndex=index;messages=index==17;
+@@ -46 +47 @@
+-        error=screen_prepare(frame);if(error)goto done;
++        stage=2;error=screen_prepare(frame);if(error)goto done;
+@@ -48,2 +49,2 @@
+-        if(index){error=wait_until(deadlines[index]);if(error)goto done;}
+-        error=screen_flip();if(error)goto done;
++        if(index){stage=3;error=wait_until(deadlines[index]);if(error)goto done;}
++        stage=4;error=screen_flip();if(error)goto done;
+@@ -59,0 +61 @@
++    printf("WIZ error=%u stage=%u frame=%u prev=%u now=%u delta=%u elapsed=%u cleanup=%u\r",error,stage,frameIndex,previous,diagNow,diagDelta,elapsed,cleanup);
+--- apps/daggorath/src/os9.c
++++ MCP/work/audio-187/os9.c
+@@ -191 +191 @@
+-    if(packet[5]>59||packet[6]<1||packet[6]>60)return ERR_ARGUMENT;
++    if(packet[5]>59||packet[6]<1||packet[6]>60){printf("CLOCK BAD sec=%u tick=%u\r",packet[5],packet[6]);return ERR_ARGUMENT;}
+--- docs/apps/assets/daggorath-audio-multitasking/probe-v2.c
++++ MCP/work/audio-187/probe-correct-pid.c
+@@ -10 +10 @@
+- Byte error;char params[256];Word size;
++ Byte error,pid;char params[256];Word size;
+@@ -23,0 +24 @@
++  sta :pid
+@@ -26 +27 @@
+- return error;
++ printf("FORK %s %s pid=%u error=%u\r",name,arg,pid,error);return error;
+@@ -28 +29 @@
+-static Byte reap(void){Byte e;asm {
++static Byte reap(void){Byte e,pid,cc;asm {
+@@ -29,0 +31 @@
++ sta :pid
+@@ -31 +33,3 @@
+- }return e;}
++ tfr cc,a
++ sta :cc
++ }printf("WAIT pid=%u status=%u carry=%u\r",pid,e,cc&1);return e;}

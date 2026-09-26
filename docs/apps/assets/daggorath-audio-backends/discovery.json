@@ -1,0 +1,477 @@
+{
+  "build": "0.289 (ample-289-u2)",
+  "canonicalSlots": {
+    "ext": "multi",
+    "ext:multi:slot1": "",
+    "ext:multi:slot2": "ssc",
+    "ext:multi:slot3": "",
+    "ext:multi:slot4": "scii",
+    "ext:multi:slot4:scii:meb": "rtime"
+  },
+  "commands": [
+    {
+      "name": "canonical-slots",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot1",
+        "",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ramsize",
+        "2M",
+        "-listslots"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "canonical-devices",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot1",
+        "",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ramsize",
+        "2M",
+        "-listdevices"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "canonical-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot1",
+        "",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ramsize",
+        "2M",
+        "-listxml"
+      ],
+      "returncode": 6
+    },
+    {
+      "name": "canonical-media",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot1",
+        "",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ramsize",
+        "2M",
+        "-listmedia"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "showconfig",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot1",
+        "",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ramsize",
+        "2M",
+        "-showconfig"
+      ],
+      "returncode": 6
+    },
+    {
+      "name": "midi-devices",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "-listmidi"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "version",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "-help"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "driver-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-listxml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "driver-config",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-showconfig"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "gmc-devices",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "gmc",
+        "-listdevices"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "gmc-media",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "gmc",
+        "-listmedia"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ccpsg-devices",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "ccpsg",
+        "-listdevices"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "ccpsg-media",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "ccpsg",
+        "-listmedia"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "midi-devices",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "midi",
+        "-listdevices"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "midi-media",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "midi",
+        "-listmedia"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "orch90-devices",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "orch90",
+        "-listdevices"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "orch90-media",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3",
+        "orch90",
+        "-listmedia"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "coco_ssc-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco_ssc",
+        "-listxml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "coco_gmc-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco_gmc",
+        "-listxml"
+      ],
+      "returncode": 5
+    },
+    {
+      "name": "coco_psg-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco_psg",
+        "-listxml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "coco_midi-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco_midi",
+        "-listxml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "coco_orch90-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco_orch90",
+        "-listxml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "cocopakgmc-xml",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "cocopakgmc",
+        "-listxml"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "midi-fulltag",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "midi",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-ext:multi:slot3:midi:mdout:midiout:midioutimg",
+        "UNOPENED_RESEARCH_ENDPOINT",
+        "-listdevices"
+      ],
+      "returncode": 6
+    },
+    {
+      "name": "midi-provider",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "-midiprovider",
+        "portmidi",
+        "-listmidi",
+        "-verbose"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "midi-mout1-parse",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco3h",
+        "-ext",
+        "multi",
+        "-ext:multi:slot2",
+        "ssc",
+        "-ext:multi:slot3",
+        "midi",
+        "-ext:multi:slot4",
+        "scii",
+        "-ext:multi:slot4:scii:meb",
+        "rtime",
+        "-mout1",
+        "UNOPENED_RESEARCH_ENDPOINT",
+        "-listdevices"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "midi-pm-confirmation",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "-midiprovider",
+        "pm",
+        "-listmidi",
+        "-verbose"
+      ],
+      "returncode": 0,
+      "result": "No MIDI ports were found; pm accepted without fallback."
+    },
+    {
+      "name": "SSC-ROM-audit",
+      "command": [
+        "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+        "coco_ssc",
+        "-verifyroms",
+        "-rompath",
+        "/Users/magneto-optimus/Library/Application Support/Ample/roms"
+      ],
+      "returncode": 0,
+      "result": "romset coco_ssc is good; 1 romsets found, 1 were OK."
+    }
+  ],
+  "liveDisklessDiscovery": {
+    "script": "local out=assert(io.open('/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-backends/live-images.txt','w'))\nfor tag,img in pairs(manager.machine.images) do\n out:write(tag..' '..tostring(img.instance_name)..' '..tostring(img.brief_instance_name)..' '..tostring(img.filename)..'\\n')\nend\nout:close()\nmanager.machine:exit()\n",
+    "imageBindings": ":cassette cassette cass nil\n:rs232:rs_printer:printer printout1 prin1 nil\n:vhd0 harddisk1 hard1 nil\n:vhd1 harddisk2 hard2 nil\n:ext cartridge1 cart1 nil\n:ext:multi:slot1 cartridge2 cart2 nil\n:ext:multi:slot2 cartridge3 cart3 nil\n:ext:multi:slot3 cartridge4 cart4 nil\n:ext:multi:slot3:midi:mdin:midiin:midiinimg midiin min nil\n:ext:multi:slot3:midi:mdthru:midiout:midioutimg midiout1 mout1 nil\n:ext:multi:slot3:midi:mdout:midiout:midioutimg midiout2 mout2 nil\n:ext:multi:slot4 cartridge5 cart5 nil\n:ext:multi:slot4:scii:wd17xx:0:525dd floppydisk1 flop1 nil\n:ext:multi:slot4:scii:wd17xx:1:525dd floppydisk2 flop2 nil\n:ext:multi:slot4:scii:meb:rtime:centronics:printer:printer printout2 prin2 nil\n",
+    "command": "mame64 coco3h -noreadconfig -ext multi -ext:multi:slot1 \"\" -ext:multi:slot2 ssc -ext:multi:slot3 midi -ext:multi:slot4 scii -ext:multi:slot4:scii:meb rtime -ramsize 2M -rompath \"/Users/magneto-optimus/Library/Application Support/Ample/roms\" -cfg_directory \"$PWD/MCP/work/audio-backends/cfg\" -nvram_directory \"$PWD/MCP/work/audio-backends/nvram\" -video none -sound none -skip_gameinfo -autoboot_delay 0 -autoboot_script \"$PWD/MCP/work/audio-backends/inspect.lua\" -seconds_to_run 2",
+    "exitCode": 0,
+    "audioCommandsSent": false,
+    "mediaMounted": false
+  },
+  "upstreamCommit": "f470fa52eb172b59b22c1b722074998cb42de9b1",
+  "developmentVhdHash": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e before = after",
+  "deviceFeatures": {
+    "coco_ssc": {
+      "features": [],
+      "description": "CoCo S/SC PAK"
+    },
+    "cocopakgmc": {
+      "features": [],
+      "description": "CoCo Games Master Cartridge"
+    },
+    "coco_psg": {
+      "features": [],
+      "description": "CoCo PSG"
+    },
+    "coco_midi": {
+      "features": [],
+      "description": "CoCo MIDI PAK"
+    },
+    "coco_orch90": {
+      "features": [],
+      "description": "CoCo Orch-90 PAK"
+    }
+  }
+}

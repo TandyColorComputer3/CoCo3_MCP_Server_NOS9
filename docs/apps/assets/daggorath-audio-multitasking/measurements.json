@@ -1,0 +1,783 @@
+{
+  "purpose": "Public SS.Tone scheduling research; no faithful backend or IRQ hook implemented",
+  "tools": {
+    "cmoc": "cmoc (cmoc 0.1.90)",
+    "lwasm": "lwasm from lwtools 4.22",
+    "lwlink": "lwlink from lwtools 4.22"
+  },
+  "sourceHashes": {
+    "docs/apps/assets/daggorath-audio-multitasking/probe-v1.c": "91d00ca6d642f7ee60031a4e51da91779f457baba591fc4da4d8e7d7c685b014",
+    "docs/apps/assets/daggorath-audio-multitasking/probe-v2.c": "caccdc81c1be2afcca461c6a716cd63572c36db8a1a510b4809249116574ddae",
+    "docs/apps/assets/daggorath-audio-multitasking/module.asm": "a2d73f2b029e6aeea48fee751d5db71a24c715b6044d80a687e43e72e7c85ad7",
+    "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+    "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+  },
+  "buildV1": {
+    "cwd": "/private/tmp/dod-audio-mt/build",
+    "command": [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--add-os9-stack-space=1536",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-o",
+      "audmt",
+      "/private/tmp/dod-audio-mt/probe.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c"
+    ],
+    "module": {
+      "size": 3745,
+      "crc": "A78725",
+      "sha256": "7886fe950afadc1a793946b14148f960c3611492e7848ba2755159212594e6c3"
+    }
+  },
+  "buildV2": {
+    "cwd": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9",
+    "command": [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--add-os9-stack-space=1536",
+      "-Iapps/daggorath/src",
+      "-o",
+      "MCP/work/audio-mt/build2/audmt",
+      "MCP/work/audio-mt/probe.c",
+      "apps/daggorath/src/os9.c",
+      "MCP/work/audio-mt/build2/module.asm"
+    ],
+    "module": {
+      "size": 4471,
+      "crc": "D781A6",
+      "edition": 1,
+      "sha256": "10deb5ae228d03debf5580e9d97ee4d876df827aa94a63bc7909adaac09d245c"
+    }
+  },
+  "wizardBuild": {
+    "sources": [
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/main.c",
+        "sha256": "99bdb2d8e01ddbf79ac7961e12b4eab04290db304102a147e06263b9970076bb",
+        "size": 2751
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c",
+        "sha256": "ff93b3687a45b7e64a1f7dd9a3cbbc65538dd07baddd45347bf9ac3859ffd377",
+        "size": 3731
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/playback.c",
+        "sha256": "119ba7ee4ba0e24b6ca27a845f4945949dc2ecff69ab2a0f3444b3e8ef0ff23d",
+        "size": 576
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c",
+        "sha256": "069299be1f3d242c4212e33ed56cf0dae07c16e15b855a6312496f98a8253d05",
+        "size": 2728
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+        "sha256": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+        "size": 5412
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c",
+        "sha256": "f8e1c45289e9e47791ad8949ff8209393b3ba54423082405124d12fa4230b94b",
+        "size": 616
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/module.asm",
+        "sha256": "3023863472716674e8b4b74f75b0dd8f5599ba36a0a5f9e22a5689276b5e6d84",
+        "size": 100
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/wizard/frame-cache.h",
+        "sha256": "71efdaa0d6ced8f24d63e4e9a23093bdad13ed65b85cb0683f8115f1d02b6d8b",
+        "size": 37061
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/prepare_frames.py",
+        "sha256": "572980260435eb064f844c293fd2bafcee968d82d2cbd53cda8847e95e79f89f",
+        "size": 1435
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.h",
+        "sha256": "e287c022293e4aec597fad9d4e950a5888b5f79b66dad835f8f5aa8509556238",
+        "size": 175
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/logical.h",
+        "sha256": "463e10643b5a7acb27bc94173c8204f9ee6af6812108327a808f7bffc880ea6f",
+        "size": 246
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/platform.h",
+        "sha256": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111",
+        "size": 1004
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/data.h",
+        "sha256": "2bf2674f2343e9a3572193345c6ef6ad3c7f2a00fcad062a10f54d774df36794",
+        "size": 2905
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/provenance.json",
+        "sha256": "589b80f3a4d3af9f248096bad461c93a21dc05485b314e69b527ac3a255a5adb",
+        "size": 6599
+      },
+      {
+        "path": "/usr/local/share/cmoc/include/cmoc.h",
+        "sha256": "dcf1857741e31190fcfd0d830b5f866d6394d0dd692603192037c09100f45963",
+        "size": 13329
+      },
+      {
+        "path": "/usr/local/share/cmoc/include/stdarg.h",
+        "sha256": "45ddde55b4facaf89d65564470a8218bfc9949308645a6bab1a424de82e2efc9",
+        "size": 498
+      },
+      {
+        "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/build.py",
+        "sha256": "70bdce5d6d420a28a210d7dd842b7f29fa35804c6977c4b7c2bd24092e554028",
+        "size": 3202
+      }
+    ],
+    "tools": {
+      "cmoc": {
+        "path": "/usr/local/bin/cmoc",
+        "sha256": "76cf6c59de150c3ced93fe39a349223ef600fc3e3d74d0e7fa76aa9d637c35d4",
+        "size": 2526424,
+        "version": "cmoc (cmoc 0.1.90)\n"
+      },
+      "lwasm": {
+        "path": "/usr/local/bin/lwasm",
+        "sha256": "174d0ef03732647cdb7f5c2b3d75762ed1190902601879961ab3be14635c865c",
+        "size": 202584,
+        "version": "lwasm from lwtools 4.22\n"
+      },
+      "lwlink": {
+        "path": "/usr/local/bin/lwlink",
+        "sha256": "0f834f21dc237b3fd8b9426b0aa23f5a6cfb4d090fb00b45396d2945835c1253",
+        "size": 89224,
+        "version": "lwlink from lwtools 4.22\n"
+      },
+      "os9": {
+        "path": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "sha256": "ee9c3e3585640dfd28f4e3def75a09d14eddeaff464241f7ad94d5b6d51bb569",
+        "size": 199424,
+        "version": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n"
+      },
+      "host_cc": {
+        "path": "/usr/bin/cc",
+        "sha256": "36dab8797a308a8de401e91b9987354c52b2035495853bd2028ed50ee50b0228",
+        "size": 118864,
+        "version": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin24.6.0\nThread model: posix\nInstalledDir: /Volumes/SEDONA/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n"
+      }
+    },
+    "libraries": [
+      {
+        "path": "/usr/local/share/cmoc/lib/libcmoc-crt-os9.a",
+        "sha256": "1f2f11ef5cb7de6818f4d9310b6af362b0317776245a06555f4029441fb7f563",
+        "size": 17056
+      },
+      {
+        "path": "/usr/local/share/cmoc/lib/libcmoc-std-os9.a",
+        "sha256": "eb7eaa88fabd56f428d897098e00d317132576fb9e559155db8ce1baeeeac047",
+        "size": 25534
+      }
+    ],
+    "command": [
+      "/usr/local/bin/cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--verbose",
+      "--add-os9-stack-space=1536",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/wizard",
+      "--lwasm=/usr/local/bin/lwasm",
+      "--lwlink=/usr/local/bin/lwlink",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/wizard",
+      "-o",
+      "dodwiz",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/main.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/playback.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/module.asm"
+    ],
+    "cwd": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/wizard",
+    "output": {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/wizard/dodwiz",
+      "sha256": "dde93daf2b31b99a16d98d3b3e906758dfc5d07a9e5b9baf0890b06c2c0ea339",
+      "size": 19809
+    },
+    "ident": "Header for : dodwiz\nModule size: $4D61  #19809\nModule CRC : $FD6C50 (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $1E54  #7764\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "upstreamApiReference": "nitros9-reference f470fa52eb172b59b22c1b722074998cb42de9b1"
+  },
+  "stageV1": {
+    "staged": true,
+    "installedInCanonicalVhd": false,
+    "hostArtifact": {
+      "path": "/private/tmp/dod-audio-mt/build/audmt",
+      "snapshot": "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.module",
+      "sha256": "7886fe950afadc1a793946b14148f960c3611492e7848ba2755159212594e6c3"
+    },
+    "module": {
+      "name": "audmt",
+      "type": "Prgrm",
+      "language": "6809 Obj",
+      "typeLanguage": "11",
+      "size": 3745,
+      "crc": "A78725",
+      "revision": 0,
+      "attributes": 8,
+      "executionOffset": 13,
+      "dataSize": 1574,
+      "edition": 167
+    },
+    "guestDestination": {
+      "image": "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk",
+      "path": "/audmt",
+      "device": null
+    },
+    "replacedExisting": false,
+    "stagingMethod": "fresh-artifact-floppy",
+    "image": {
+      "path": "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk",
+      "sha256": "539faf2d66a7f3090241adfddc8e2739b31763c3a9d9d773834fde53e20f6b5b",
+      "tracks": 40,
+      "sides": 2,
+      "sectorsPerTrack": 18,
+      "bytesPerSector": 256
+    },
+    "requires": "cold boot with this image attached; do not restore a state made with different media bytes",
+    "provenance": null,
+    "toolshed": {
+      "executable": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "version": "os9 from Toolshed 2.2",
+      "hostIdent": "Header for : audmt\nModule size: $EA1  #3745\nModule CRC : $A78725 (Good)\nHdr parity : $1C\nExec. off  : $000D  #13\nData size  : $0626  #1574\nEdition    : $A7  #167\nTy/La At/Rv: $11 $80\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "installedIdent": "Header for : audmt\nModule size: $EA1  #3745\nModule CRC : $A78725 (Good)\nHdr parity : $1C\nExec. off  : $000D  #13\nData size  : $0626  #1574\nEdition    : $A7  #167\nTy/La At/Rv: $11 $80\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+    },
+    "commands": [
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [],
+        "stdout": "\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n",
+        "stderr": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n"
+      },
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [
+          "ident",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.module"
+        ],
+        "stdout": "Header for : audmt\nModule size: $EA1  #3745\nModule CRC : $A78725 (Good)\nHdr parity : $1C\nExec. off  : $000D  #13\nData size  : $0626  #1574\nEdition    : $A7  #167\nTy/La At/Rv: $11 $80\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+        "stderr": ""
+      },
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [
+          "format",
+          "-e",
+          "-t40",
+          "-ds",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk"
+        ],
+        "stdout": "Format Summary\n--------------\nGeometry Data:\n      Cylinders: 40\n          Heads: 2\n  Sectors/track: 18\n    Sector size: 256\n\nLogical Data:\n  Total sectors: 1440\n  Size in bytes: 368640\n   Cluster size: 1\n",
+        "stderr": ""
+      },
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [
+          "copy",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.module",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk,audmt"
+        ],
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [
+          "attr",
+          "-e",
+          "-pe",
+          "-pr",
+          "-nw",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk,audmt"
+        ],
+        "stdout": "--e-re-r\n\n",
+        "stderr": ""
+      },
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [
+          "ident",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk,audmt"
+        ],
+        "stdout": "Header for : audmt\nModule size: $EA1  #3745\nModule CRC : $A78725 (Good)\nHdr parity : $1C\nExec. off  : $000D  #13\nData size  : $0626  #1574\nEdition    : $A7  #167\nTy/La At/Rv: $11 $80\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+        "stderr": ""
+      },
+      {
+        "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+        "args": [
+          "copy",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/artifact.dsk,audmt",
+          "/private/tmp/dod-audio-mt/staged/stage-Vn39Xk/verified.module"
+        ],
+        "stdout": "",
+        "stderr": ""
+      }
+    ]
+  },
+  "stageV2": {
+    "image": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/staged2/stage-RBAsj3/artifact.dsk",
+    "sha256": "e0421b1a1aa51af76fb989eed2621807fa07afb6fe59521739587852125c83f1",
+    "added": "dodwiz",
+    "sourceSha256": "dde93daf2b31b99a16d98d3b3e906758dfc5d07a9e5b9baf0890b06c2c0ea339"
+  },
+  "restoreResultsWithoutConsoleText": [
+    {
+      "ready": false,
+      "state": "audio_mt_ready",
+      "loadScheduled": false,
+      "loadCompleted": false,
+      "shellVerified": false,
+      "timedOut": false,
+      "status": "state_missing",
+      "phase": "preflight",
+      "elapsedMs": 0,
+      "file": "/private/tmp/dod-audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "error": "state file does not exist"
+    },
+    {
+      "ready": false,
+      "state": "audio_mt_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": false,
+      "timedOut": false,
+      "status": "shell_handshake_failed",
+      "phase": "shell_candidate",
+      "elapsedMs": 43,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "postLoadEpoch": 1,
+      "error": "checkpoint does not show the expected idle Term shell"
+    },
+    {
+      "ready": true,
+      "state": "audio_mt_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6209,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "postLoadEpoch": 2
+    },
+    {
+      "ready": true,
+      "state": "audio_mt_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6179,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "postLoadEpoch": 3
+    },
+    {
+      "ready": true,
+      "state": "audio_mt_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6233,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "postLoadEpoch": 4
+    },
+    {
+      "ready": true,
+      "state": "audio_mt_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6181,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "postLoadEpoch": 1
+    },
+    {
+      "ready": true,
+      "state": "audio_mt_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6179,
+      "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+      "postLoadEpoch": 2
+    }
+  ],
+  "exactRunResults": [
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt idle",
+          "timeout_ms": 20000
+        }
+      },
+      "response": {
+        "command": "audmt idle",
+        "completed": false,
+        "commandCompleted": false,
+        "status": null,
+        "statusText": null,
+        "timedOut": false,
+        "shellReady": false,
+        "outcome": "shell_not_ready",
+        "phase": "preflight",
+        "elapsedMs": 0,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "READY_TERM",
+        "error": "call os9_restore_ready first"
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt idle",
+          "timeout_ms": 25000
+        }
+      },
+      "response": {
+        "command": "audmt idle",
+        "completed": false,
+        "commandCompleted": false,
+        "status": null,
+        "statusText": null,
+        "timedOut": false,
+        "shellReady": false,
+        "outcome": "shell_not_ready",
+        "phase": "preflight",
+        "elapsedMs": 0,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "READY_TERM",
+        "error": "call os9_restore_ready first"
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt idle",
+          "timeout_ms": 25000
+        }
+      },
+      "response": {
+        "command": "audmt idle",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 12091,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEaf22ccf9069e92849a876eeb140a7621",
+        "commandPromptMs": 6508
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt tone",
+          "timeout_ms": 30000
+        }
+      },
+      "response": {
+        "command": "audmt tone",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 12085,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE7d2d15662870db9daa45fb0911ccaa99",
+        "commandPromptMs": 6501
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt busy",
+          "timeout_ms": 30000
+        }
+      },
+      "response": {
+        "command": "audmt busy",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 12086,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEe3fc42f90954990adc410e9ff0cc924a",
+        "commandPromptMs": 6500
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "date",
+          "timeout_ms": 20000
+        }
+      },
+      "response": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6452,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE6e0f00a12a86c75bde4e58f9ed6af4a5",
+        "commandPromptMs": 861
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt gfxidle",
+          "allow_graphics": true,
+          "timeout_ms": 45000
+        }
+      },
+      "response": {
+        "command": "audmt gfxidle",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 20642,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE39c29ad860bf633e705af7be7f7dbfcd",
+        "commandPromptMs": 15051
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt gfxtone",
+          "allow_graphics": true,
+          "timeout_ms": 45000
+        }
+      },
+      "response": {
+        "command": "audmt gfxtone",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 187,
+        "statusText": "187",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 13992,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE9956e8e2dfe3d56180cb7fbd5d2b35a6",
+        "commandPromptMs": 8386
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "date",
+          "timeout_ms": 20000
+        }
+      },
+      "response": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6432,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE15115dd422e231e15d8bf5bd75f1e12c",
+        "commandPromptMs": 842
+      }
+    },
+    {
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "procs",
+          "timeout_ms": 20000
+        }
+      },
+      "response": {
+        "command": "procs",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7739,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEfd29da855b105a58cdf90e0f97bd2823",
+        "commandPromptMs": 2143
+      }
+    }
+  ],
+  "observations": {
+    "idle": {
+      "observerTicks": 300,
+      "wakes": 285,
+      "maxGap": 4,
+      "operationTicks": 120
+    },
+    "tone": {
+      "observerTicks": 300,
+      "wakes": 176,
+      "maxGap": 122,
+      "operationTicks": 120
+    },
+    "busy": {
+      "observerTicks": 300,
+      "wakes": 207,
+      "maxGap": 8,
+      "operationTicks": 120,
+      "loops": 807
+    },
+    "gfxidle": {
+      "observerTicks": 300,
+      "wakes": 120,
+      "maxGap": 19,
+      "workerTicks": 121,
+      "reportedCoordinatorTicks": 977,
+      "status": 0
+    },
+    "gfxtone": {
+      "observerTicks": 301,
+      "wakes": 70,
+      "maxGap": 123,
+      "workerTicks": 120,
+      "reportedCoordinatorTicks": 1467,
+      "status": 187,
+      "timingValidAsCompleteWizardSequence": false
+    }
+  },
+  "integrity": {
+    "media/63SDC.VHD": {
+      "sha256": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+      "unchanged": true
+    },
+    "media/63SDC-MCP-DEV.VHD": {
+      "sha256": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+      "unchanged": true
+    },
+    "media/63EMU.DSK": {
+      "sha256": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+      "unchanged": true
+    }
+  },
+  "checks": {
+    "mcpTests": {
+      "passed": 115,
+      "failed": 0
+    },
+    "noInterruptsInstalled": true,
+    "noSchedulingMasksInProbe": true
+  },
+  "measurementLimits": [
+    "No audio waveform capture",
+    "No exact CPU occupancy profiling",
+    "No per-frame graphics trace",
+    "187 graphics error origin unresolved",
+    "Single observations, not latency distributions"
+  ]
+}

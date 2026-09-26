@@ -1,0 +1,504 @@
+Installed MAME read-only discovery; no audio probe
+
+## canonical-slots
+SYSTEM           SLOT NAME        SLOT OPTIONS     SLOT DEVICE NAME
+---------------- ---------------- ---------------- ----------------------------
+coco3h           rs232            auto3a           Auto-baud ADM-3A Terminal
+                                  dec_loopback     RS-232 Loopback (DEC 12-15336-00)
+                                  h19              Heath H19 Terminal (Serial Port)
+                                  ie15             IE15 Terminal
+                                  keyboard         Serial Keyboard
+                                  loopback         RS-232 Loopback
+                                  mockingboard     Sweet Micro Systems Mockingboard D
+                                  msystems_mouse   Mouse Systems Non-rotatable Mouse (HLE)
+                                  nss_tvi          Novag Super System TV Interface
+                                  null_modem       RS-232 Null Modem
+                                  patch            RS-232 Patch Box
+                                  printer          Serial Printer
+                                  pty              Pseudo Terminal
+                                  rs232_sync_io    RS-232 Synchronous I/O
+                                  rs_printer       Radio Shack Serial Printer
+                                  s97801           Siemens 97801 Terminal (RS-232)
+                                  scorpion         Micro-Robotics Scorpion Intelligent Controller
+                                  sunkbd           Sun Keyboard Adaptor
+                                  swtpc8212        SWTPC8212 Terminal
+                                  terminal         Serial Terminal
+                                  votraxtnt        Votrax Type 'N Talk (Serial Port)
+
+                 ext              ccpsg            CoCo PSG
+                                  cd6809_fdc       Codimex CD-6809 Disk BASIC (1986)
+                                  cp450_fdc        Prológica CP-450 BASIC Disco V. 1.0 (1984)
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  fdc              CoCo Floppy Disk Controller
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  multi            CoCo Multi-Pak Interface
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  scii             Disto Super Controller II
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot1  ccpsg            CoCo PSG
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot2  ccpsg            CoCo PSG
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot3  ccpsg            CoCo PSG
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot4  ccpsg            CoCo PSG
+                                  cd6809_fdc       Codimex CD-6809 Disk BASIC (1986)
+                                  cp450_fdc        Prológica CP-450 BASIC Disco V. 1.0 (1984)
+                                  dcmodem          CoCo Direct Connect Modem PAK
+                                  fdc              CoCo Floppy Disk Controller
+                                  gmc              CoCo Games Master Cartridge
+                                  ide              Glenside IDE Adapter
+                                  max              CoCo Max HI-RES input module
+                                  midi             CoCo MIDI PAK
+                                  orch90           CoCo Orch-90 PAK
+                                  ram              Disto RAM Cartridge
+                                  rs232            CoCo Deluxe RS-232 PAK
+                                  scii             Disto Super Controller II
+                                  ssc              CoCo S/SC PAK
+                                  ssfm             6x09 SuperSprite FM+
+                                  stecomp          Speech Systems Stereo Composer
+                                  sym12            Speech Systems Symphony Twelve
+                                  wpk              CoCo WordPak
+                                  wpk2             CoCo WordPak II
+                                  wpk2p            CoCo WordPak 2+
+                                  wpkrs            CoCo WordPak RS
+                                  xsid             CoCo X-SID
+
+                 ext:multi:slot4:scii:wd17xx:0 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:wd17xx:1 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:wd17xx:2 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:wd17xx:3 35dd             3.5" double density floppy drive
+                                  525dd            5.25" double density floppy drive
+                                  525qd            5.25" quad density floppy drive
+
+                 ext:multi:slot4:scii:meb rtime            Disto Real Time Clock Card
+
+                 ext:multi:slot4:scii:meb:rtime:centronics adaptator        The Adaptator 2x DE-9 Multitap
+                                  ap2000           Epson ActionPrinter 2000
+                                  chessmec         Tasc ChessMachine EC Interface
+                                  covox            Covox Speech Thing
+                                  covox_stereo     Covox (Stereo-in-1)
+                                  digiblst         Digiblaster (DIY)
+                                  ex800            Epson EX-800
+                                  fx80             Epson FX-80
+                                  jx80             Epson JX-80
+                                  lx800            Epson LX-800
+                                  lx810l           Epson LX-810L
+                                  mz1p16           Sharp MZ-1P16 Plotter Printer
+                                  neomania         Neo Mania Adapter JAMMA board
+                                  nlq401           Schneider NLQ 401 Matrix Printer
+                                  p72              NEC PinWriter P72
+                                  pc6022           NEC PC-6022 Color Plotter Printer
+                                  pl80             COMX PL-80
+                                  printer          Centronics Printer
+                                  rx80             Epson RX-80
+                                  samdac           SAMDAC
+                                  smartboard       Tasc SmartBoard SB30 Interface
+
+
+## canonical-devices
+Driver coco3h (Color Computer 3 (NTSC; HD6309)):
+   <root>                         Color Computer 3 (NTSC; HD6309) @ 894.88 kHz
+     cart_list                    Software List
+     cassette                     Cassette
+     dac                          6-Bit Binary Weighted DAC
+     dwsock                       Virtual Becker Port
+     ext                          CoCo Cartridge Slot @ 894.88 kHz
+       multi                      CoCo Multi-Pak Interface @ 894.88 kHz
+         slot1                    CoCo Cartridge Slot @ 894.88 kHz
+         slot2                    CoCo Cartridge Slot @ 894.88 kHz
+           ssc                    CoCo S/SC PAK @ 894.88 kHz
+             coco_sac_tag         CoCo SSC Sound Activity Circuit @ 1.78 MHz
+             cocossc_ay           AY-3-8913 PSG @ 1.78 MHz
+             pic7040              Texas Instruments TMS7040 @ 1.78 MHz
+             sp0256               GI SP0256 Narrator Speech Processor @ 3.12 MHz
+             ssc_audio            Speaker
+             staticram            RAM
+         slot3                    CoCo Cartridge Slot @ 894.88 kHz
+         slot4                    CoCo Cartridge Slot @ 894.88 kHz
+           scii                   Disto Super Controller II @ 894.88 kHz
+             cart_line            Input Merger (any high)
+             meb                  Disto Mini Expansion Bus @ 894.88 kHz
+               rtime              Disto Real Time Clock Card @ 894.88 kHz
+                 centronics       Centronics
+                   printer        Centronics Printer
+                     printer      Printer
+                 latch            Output Latch
+                 rtc              OKI MSM6242 RTC @ 32.76 kHz
+             wd17xx               Western Digital WD1773 FDC @ 8.00 MHz
+               0                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               1                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               2                  Floppy drive connector abstraction
+               3                  Floppy drive connector abstraction
+     firqs                        Input Merger (any high)
+     floating                     Address Map Bank
+     flop_list                    Software List
+     gime                         TCC1014 (VC2645QC) GIME (NTSC) @ 28.63 MHz
+     irqs                         Input Merger (any high)
+     maincpu                      Hitachi HD6309E @ 894.88 kHz
+     pia0                         6821 PIA
+     pia1                         6821 PIA
+     ram                          RAM
+     rs232                        RS-232 Port
+       rs_printer                 Radio Shack Serial Printer
+         printer                  Printer
+     sbs                          1-Bit DAC
+     screen                       Video Screen @ 14.31 MHz
+     speaker                      Speaker
+     vhd0                         CoCo Virtual Hard Disk
+     vhd1                         CoCo Virtual Hard Disk
+
+## gmc-devices
+Driver coco3h (Color Computer 3 (NTSC; HD6309)):
+   <root>                         Color Computer 3 (NTSC; HD6309) @ 894.88 kHz
+     cart_list                    Software List
+     cassette                     Cassette
+     dac                          6-Bit Binary Weighted DAC
+     dwsock                       Virtual Becker Port
+     ext                          CoCo Cartridge Slot @ 894.88 kHz
+       multi                      CoCo Multi-Pak Interface @ 894.88 kHz
+         slot1                    CoCo Cartridge Slot @ 894.88 kHz
+         slot2                    CoCo Cartridge Slot @ 894.88 kHz
+           ssc                    CoCo S/SC PAK @ 894.88 kHz
+             coco_sac_tag         CoCo SSC Sound Activity Circuit @ 1.78 MHz
+             cocossc_ay           AY-3-8913 PSG @ 1.78 MHz
+             pic7040              Texas Instruments TMS7040 @ 1.78 MHz
+             sp0256               GI SP0256 Narrator Speech Processor @ 3.12 MHz
+             ssc_audio            Speaker
+             staticram            RAM
+         slot3                    CoCo Cartridge Slot @ 894.88 kHz
+           gmc                    CoCo Games Master Cartridge @ 894.88 kHz
+             gmc_psg              SN76489A @ 4.00 MHz
+             gmc_speaker          Speaker
+         slot4                    CoCo Cartridge Slot @ 894.88 kHz
+           scii                   Disto Super Controller II @ 894.88 kHz
+             cart_line            Input Merger (any high)
+             meb                  Disto Mini Expansion Bus @ 894.88 kHz
+               rtime              Disto Real Time Clock Card @ 894.88 kHz
+                 centronics       Centronics
+                   printer        Centronics Printer
+                     printer      Printer
+                 latch            Output Latch
+                 rtc              OKI MSM6242 RTC @ 32.76 kHz
+             wd17xx               Western Digital WD1773 FDC @ 8.00 MHz
+               0                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               1                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               2                  Floppy drive connector abstraction
+               3                  Floppy drive connector abstraction
+     firqs                        Input Merger (any high)
+     floating                     Address Map Bank
+     flop_list                    Software List
+     gime                         TCC1014 (VC2645QC) GIME (NTSC) @ 28.63 MHz
+     irqs                         Input Merger (any high)
+     maincpu                      Hitachi HD6309E @ 894.88 kHz
+     pia0                         6821 PIA
+     pia1                         6821 PIA
+     ram                          RAM
+     rs232                        RS-232 Port
+       rs_printer                 Radio Shack Serial Printer
+         printer                  Printer
+     sbs                          1-Bit DAC
+     screen                       Video Screen @ 14.31 MHz
+     speaker                      Speaker
+     vhd0                         CoCo Virtual Hard Disk
+     vhd1                         CoCo Virtual Hard Disk
+
+## ccpsg-devices
+Driver coco3h (Color Computer 3 (NTSC; HD6309)):
+   <root>                         Color Computer 3 (NTSC; HD6309) @ 894.88 kHz
+     cart_list                    Software List
+     cassette                     Cassette
+     dac                          6-Bit Binary Weighted DAC
+     dwsock                       Virtual Becker Port
+     ext                          CoCo Cartridge Slot @ 894.88 kHz
+       multi                      CoCo Multi-Pak Interface @ 894.88 kHz
+         slot1                    CoCo Cartridge Slot @ 894.88 kHz
+         slot2                    CoCo Cartridge Slot @ 894.88 kHz
+           ssc                    CoCo S/SC PAK @ 894.88 kHz
+             coco_sac_tag         CoCo SSC Sound Activity Circuit @ 1.78 MHz
+             cocossc_ay           AY-3-8913 PSG @ 1.78 MHz
+             pic7040              Texas Instruments TMS7040 @ 1.78 MHz
+             sp0256               GI SP0256 Narrator Speech Processor @ 3.12 MHz
+             ssc_audio            Speaker
+             staticram            RAM
+         slot3                    CoCo Cartridge Slot @ 894.88 kHz
+           ccpsg                  CoCo PSG @ 894.88 kHz
+             flash                SST 39SF040 Flash
+             psg                  YM2149 SSG @ 1.00 MHz
+             speaker              Speaker
+         slot4                    CoCo Cartridge Slot @ 894.88 kHz
+           scii                   Disto Super Controller II @ 894.88 kHz
+             cart_line            Input Merger (any high)
+             meb                  Disto Mini Expansion Bus @ 894.88 kHz
+               rtime              Disto Real Time Clock Card @ 894.88 kHz
+                 centronics       Centronics
+                   printer        Centronics Printer
+                     printer      Printer
+                 latch            Output Latch
+                 rtc              OKI MSM6242 RTC @ 32.76 kHz
+             wd17xx               Western Digital WD1773 FDC @ 8.00 MHz
+               0                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               1                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               2                  Floppy drive connector abstraction
+               3                  Floppy drive connector abstraction
+     firqs                        Input Merger (any high)
+     floating                     Address Map Bank
+     flop_list                    Software List
+     gime                         TCC1014 (VC2645QC) GIME (NTSC) @ 28.63 MHz
+     irqs                         Input Merger (any high)
+     maincpu                      Hitachi HD6309E @ 894.88 kHz
+     pia0                         6821 PIA
+     pia1                         6821 PIA
+     ram                          RAM
+     rs232                        RS-232 Port
+       rs_printer                 Radio Shack Serial Printer
+         printer                  Printer
+     sbs                          1-Bit DAC
+     screen                       Video Screen @ 14.31 MHz
+     speaker                      Speaker
+     vhd0                         CoCo Virtual Hard Disk
+     vhd1                         CoCo Virtual Hard Disk
+
+## midi-devices
+Driver coco3h (Color Computer 3 (NTSC; HD6309)):
+   <root>                         Color Computer 3 (NTSC; HD6309) @ 894.88 kHz
+     cart_list                    Software List
+     cassette                     Cassette
+     dac                          6-Bit Binary Weighted DAC
+     dwsock                       Virtual Becker Port
+     ext                          CoCo Cartridge Slot @ 894.88 kHz
+       multi                      CoCo Multi-Pak Interface @ 894.88 kHz
+         slot1                    CoCo Cartridge Slot @ 894.88 kHz
+         slot2                    CoCo Cartridge Slot @ 894.88 kHz
+           ssc                    CoCo S/SC PAK @ 894.88 kHz
+             coco_sac_tag         CoCo SSC Sound Activity Circuit @ 1.78 MHz
+             cocossc_ay           AY-3-8913 PSG @ 1.78 MHz
+             pic7040              Texas Instruments TMS7040 @ 1.78 MHz
+             sp0256               GI SP0256 Narrator Speech Processor @ 3.12 MHz
+             ssc_audio            Speaker
+             staticram            RAM
+         slot3                    CoCo Cartridge Slot @ 894.88 kHz
+           midi                   CoCo MIDI PAK @ 894.88 kHz
+             acia_clock           Clock @ 500.00 kHz
+             mc6850               MC6850 ACIA
+             mdin                 MIDI port
+               midiin             MIDI In port
+                 midiinimg        MIDI In image device
+             mdout                MIDI port
+               midiout            MIDI Out port
+                 midioutimg       MIDI Out image device
+             mdthru               MIDI port
+               midiout            MIDI Out port
+                 midioutimg       MIDI Out image device
+         slot4                    CoCo Cartridge Slot @ 894.88 kHz
+           scii                   Disto Super Controller II @ 894.88 kHz
+             cart_line            Input Merger (any high)
+             meb                  Disto Mini Expansion Bus @ 894.88 kHz
+               rtime              Disto Real Time Clock Card @ 894.88 kHz
+                 centronics       Centronics
+                   printer        Centronics Printer
+                     printer      Printer
+                 latch            Output Latch
+                 rtc              OKI MSM6242 RTC @ 32.76 kHz
+             wd17xx               Western Digital WD1773 FDC @ 8.00 MHz
+               0                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               1                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               2                  Floppy drive connector abstraction
+               3                  Floppy drive connector abstraction
+     firqs                        Input Merger (any high)
+     floating                     Address Map Bank
+     flop_list                    Software List
+     gime                         TCC1014 (VC2645QC) GIME (NTSC) @ 28.63 MHz
+     irqs                         Input Merger (any high)
+     maincpu                      Hitachi HD6309E @ 894.88 kHz
+     pia0                         6821 PIA
+     pia1                         6821 PIA
+     ram                          RAM
+     rs232                        RS-232 Port
+       rs_printer                 Radio Shack Serial Printer
+         printer                  Printer
+     sbs                          1-Bit DAC
+     screen                       Video Screen @ 14.31 MHz
+     speaker                      Speaker
+     vhd0                         CoCo Virtual Hard Disk
+     vhd1                         CoCo Virtual Hard Disk
+
+## orch90-devices
+Driver coco3h (Color Computer 3 (NTSC; HD6309)):
+   <root>                         Color Computer 3 (NTSC; HD6309) @ 894.88 kHz
+     cart_list                    Software List
+     cassette                     Cassette
+     dac                          6-Bit Binary Weighted DAC
+     dwsock                       Virtual Becker Port
+     ext                          CoCo Cartridge Slot @ 894.88 kHz
+       multi                      CoCo Multi-Pak Interface @ 894.88 kHz
+         slot1                    CoCo Cartridge Slot @ 894.88 kHz
+         slot2                    CoCo Cartridge Slot @ 894.88 kHz
+           ssc                    CoCo S/SC PAK @ 894.88 kHz
+             coco_sac_tag         CoCo SSC Sound Activity Circuit @ 1.78 MHz
+             cocossc_ay           AY-3-8913 PSG @ 1.78 MHz
+             pic7040              Texas Instruments TMS7040 @ 1.78 MHz
+             sp0256               GI SP0256 Narrator Speech Processor @ 3.12 MHz
+             ssc_audio            Speaker
+             staticram            RAM
+         slot3                    CoCo Cartridge Slot @ 894.88 kHz
+           orch90                 CoCo Orch-90 PAK @ 894.88 kHz
+             ldac                 8-Bit R-2R DAC
+             rdac                 8-Bit R-2R DAC
+             speaker              Speaker
+         slot4                    CoCo Cartridge Slot @ 894.88 kHz
+           scii                   Disto Super Controller II @ 894.88 kHz
+             cart_line            Input Merger (any high)
+             meb                  Disto Mini Expansion Bus @ 894.88 kHz
+               rtime              Disto Real Time Clock Card @ 894.88 kHz
+                 centronics       Centronics
+                   printer        Centronics Printer
+                     printer      Printer
+                 latch            Output Latch
+                 rtc              OKI MSM6242 RTC @ 32.76 kHz
+             wd17xx               Western Digital WD1773 FDC @ 8.00 MHz
+               0                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               1                  Floppy drive connector abstraction
+                 525dd            5.25" double density floppy drive
+                   flopsnd        Floppy sound @ 44.10 kHz
+                   flopsndout     Speaker
+               2                  Floppy drive connector abstraction
+               3                  Floppy drive connector abstraction
+     firqs                        Input Merger (any high)
+     floating                     Address Map Bank
+     flop_list                    Software List
+     gime                         TCC1014 (VC2645QC) GIME (NTSC) @ 28.63 MHz
+     irqs                         Input Merger (any high)
+     maincpu                      Hitachi HD6309E @ 894.88 kHz
+     pia0                         6821 PIA
+     pia1                         6821 PIA
+     ram                          RAM
+     rs232                        RS-232 Port
+       rs_printer                 Radio Shack Serial Printer
+         printer                  Printer
+     sbs                          1-Bit DAC
+     screen                       Video Screen @ 14.31 MHz
+     speaker                      Speaker
+     vhd0                         CoCo Virtual Hard Disk
+     vhd1                         CoCo Virtual Hard Disk
+
+## midi-media
+SYSTEM           MEDIA NAME       (brief)    IMAGE FILE EXTENSIONS SUPPORTED
+---------------- --------------------------- -------------------------------
+coco3h           cassette         (cass)     .wav  .flac .aif  .aiff .cas
+coco3h           printout1        (prin1)    .prn
+coco3h           harddisk1        (hard1)    .vhd
+coco3h           harddisk2        (hard2)    .vhd
+coco3h           cartridge1       (cart1)    .ccc  .rom
+coco3h           cartridge2       (cart2)    .ccc  .rom
+coco3h           cartridge3       (cart3)    .ccc  .rom
+coco3h           cartridge4       (cart4)    .ccc  .rom
+coco3h           midiin           (min)      .mid  .syx
+coco3h           midiout1         (mout1)    .mid
+coco3h           midiout2         (mout2)    .mid
+coco3h           cartridge5       (cart5)    .ccc  .rom
+coco3h           floppydisk1      (flop1)    .mfi  .dfi  .mfm  .td0  .imd  .86f  .d77  .d88  .1dd  .cqm  .cqi  .dsk  .dmk  .sdf  .jvc  .vdk  .os9
+coco3h           floppydisk2      (flop2)    .mfi  .dfi  .mfm  .td0  .imd  .86f  .d77  .d88  .1dd  .cqm  .cqi  .dsk  .dmk  .sdf  .jvc  .vdk  .os9
+coco3h           printout2        (prin2)    .prn
+

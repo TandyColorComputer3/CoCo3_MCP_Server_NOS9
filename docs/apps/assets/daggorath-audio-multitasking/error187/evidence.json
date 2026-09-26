@@ -1,0 +1,485 @@
+{
+  "purpose": "Status 187 diagnosis; no production source changes",
+  "upstreamCommit": "f470fa52eb172b59b22c1b722074998cb42de9b1",
+  "mame": "0.289 Ample",
+  "inputs": [
+    {
+      "path": "MCP/work/audio-187/main.c",
+      "sha256": "00778c8c0abdfa3e61847a87b7d2ca8da846998adebaf8931682ecd89fdf9ceb",
+      "size": 3047
+    },
+    {
+      "path": "MCP/work/audio-187/os9.c",
+      "sha256": "723e480867916d74fdff5144f602bcdc735a11b09cd058db730b3dc6d6785497",
+      "size": 5471
+    },
+    {
+      "path": "MCP/work/audio-187/probe-correct-pid.c",
+      "sha256": "12a909d0ed0819ca024e11249ec15fbc859428e75fdc306bcd276506ea6406f1",
+      "size": 2857
+    },
+    {
+      "path": "MCP/work/audio-187/eou-os9.d",
+      "sha256": "18b33925d4a82bed3b4cb2d77ed62b183f7e5f7d834d2a19dd3e62bb38c4910e",
+      "size": 55117
+    },
+    {
+      "path": "MCP/work/audio-187/clock.asm",
+      "sha256": "5daecffe3dce0484978d600cac26e94750c804c4d349389c54d1c01315d33337",
+      "size": 14428
+    },
+    {
+      "path": "MCP/work/audio-187/clock2_messemu.asm",
+      "sha256": "83ea5448774d428fe72b49a43a8bb72181d824408e11c6bb0a40d2d0846c925a",
+      "size": 2254
+    }
+  ],
+  "outputs": [
+    {
+      "path": "MCP/work/audio-187/dodwiz",
+      "sha256": "631db97f7d26bb229e64e87502503a369289847a2230f29d40b0e6774e6e3948",
+      "size": 21300
+    },
+    {
+      "path": "MCP/work/audio-187/final/audmt",
+      "sha256": "80cd98d655ee3a2ac7225fd1ea104d44afe3a983b9418dca569787c3546ccaeb",
+      "size": 4602
+    },
+    {
+      "path": "MCP/work/audio-187/final/staged/stage-kWcHSB/artifact.dsk",
+      "sha256": "2c06d5b8b553e240770d51707ae27f6baaa013255a33c14f5d08b757164f3923",
+      "size": 368640
+    }
+  ],
+  "buildCommands": [
+    [
+      "/usr/local/bin/cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--verbose",
+      "--add-os9-stack-space=1536",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-187",
+      "--lwasm=/usr/local/bin/lwasm",
+      "--lwlink=/usr/local/bin/lwlink",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/wizard",
+      "-o",
+      "dodwiz",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-187/main.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/playback.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-187/os9.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/module.asm"
+    ],
+    [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--add-os9-stack-space=1536",
+      "-Iapps/daggorath/src",
+      "-o",
+      "MCP/work/audio-187/final/audmt",
+      "MCP/work/audio-187/probe-correct-pid.c",
+      "apps/daggorath/src/os9.c",
+      "MCP/work/audio-mt/build2/module.asm"
+    ]
+  ],
+  "coordinatorModule": {
+    "name": "audmt",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 4602,
+    "crc": "668D43",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 13,
+    "dataSize": 1574,
+    "edition": 1
+  },
+  "wizardIdent": "Header for : dodwiz\nModule size: $5334  #21300\nModule CRC : $2BCD70 (Good)\nHdr parity : $3B\nExec. off  : $000D  #13\nData size  : $1E5A  #7770\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+  "clockColumns": [
+    "frame",
+    "emulated_time",
+    "year",
+    "month",
+    "day",
+    "hour",
+    "minute",
+    "second",
+    "tick"
+  ],
+  "clockEvents": [
+    {
+      "before": [
+        "842",
+        "0014.049960117",
+        "114",
+        "4",
+        "13",
+        "21",
+        "40",
+        "59",
+        "1"
+      ],
+      "after": [
+        "844",
+        "0014.083336423",
+        "126",
+        "9",
+        "26",
+        "11",
+        "29",
+        "26",
+        "59"
+      ],
+      "tickDelta": 1562,
+      "emulatorRewind": false
+    },
+    {
+      "before": [
+        "10432",
+        "0174.089350595",
+        "126",
+        "9",
+        "26",
+        "11",
+        "32",
+        "5",
+        "47"
+      ],
+      "after": [
+        "10433",
+        "0148.973679826",
+        "126",
+        "9",
+        "26",
+        "11",
+        "31",
+        "40",
+        "52"
+      ],
+      "tickDelta": 2095,
+      "emulatorRewind": true
+    },
+    {
+      "before": [
+        "11624",
+        "0168.849270448",
+        "126",
+        "9",
+        "26",
+        "11",
+        "31",
+        "59",
+        "1"
+      ],
+      "after": [
+        "11625",
+        "0168.865958601",
+        "126",
+        "9",
+        "26",
+        "11",
+        "32",
+        "26",
+        "60"
+      ],
+      "tickDelta": 1561,
+      "emulatorRewind": false
+    },
+    {
+      "before": [
+        "12015",
+        "0175.374338401",
+        "126",
+        "9",
+        "26",
+        "11",
+        "32",
+        "32",
+        "30"
+      ],
+      "after": [
+        "12016",
+        "0148.973679826",
+        "126",
+        "9",
+        "26",
+        "11",
+        "31",
+        "40",
+        "52"
+      ],
+      "tickDelta": 458,
+      "emulatorRewind": true
+    },
+    {
+      "before": [
+        "13207",
+        "0168.849270448",
+        "126",
+        "9",
+        "26",
+        "11",
+        "31",
+        "59",
+        "1"
+      ],
+      "after": [
+        "13208",
+        "0168.865958601",
+        "126",
+        "9",
+        "26",
+        "11",
+        "32",
+        "46",
+        "60"
+      ],
+      "tickDelta": 2761,
+      "emulatorRewind": false
+    }
+  ],
+  "checkpointPhase": "8923,0148.906927213,126,9,26,11,31,40,56",
+  "mediaBefore": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c  media/63SDC.VHD\n4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e  media/63SDC-MCP-DEV.VHD\n9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40  media/63EMU.DSK\n",
+  "mediaAfter": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c  media/63SDC.VHD\n4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e  media/63SDC-MCP-DEV.VHD\n9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40  media/63EMU.DSK\n",
+  "mcpResults": [
+    {
+      "q": {
+        "name": "coco_save_state",
+        "arguments": {
+          "name": "audio_mt_ready"
+        }
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"scheduled\":true,\"name\":\"audio_mt_ready\",\"fileFound\":true,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta\"}"
+          }
+        ]
+      }
+    },
+    {
+      "q": {
+        "name": "coco_save_state",
+        "arguments": {
+          "name": "audio187_rtc_advanced"
+        }
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"scheduled\":true,\"name\":\"audio187_rtc_advanced\",\"fileFound\":true,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio187_rtc_advanced.sta\"}"
+          }
+        ]
+      }
+    },
+    {
+      "q": {
+        "name": "os9_restore_ready",
+        "arguments": {}
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ready\":true,\"state\":\"audio_mt_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6201,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"CoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 11:29:50\\n\\n{Term|02}/DD:load /d1/audmt\\n\\n{Term|02}/DD:load /d1/dodwiz\\n\\n{Term|02}/DD:p=MCP78db0806ac94fe81:\\n\\nMCP78db0806ac94fe81:echo READY78db0806ac94fe81\\nREADY78db0806ac94fe81\\n\\nMCP78db0806ac94fe81:\"},\"handshake\":{\"prompt\":\"MCP78db0806ac94fe81:\",\"marker\":\"READY78db0806ac94fe81\",\"markerObserved\":true,\"promptReturned\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "ready": true,
+          "state": "audio_mt_ready",
+          "loadScheduled": true,
+          "loadCompleted": true,
+          "shellVerified": true,
+          "timedOut": false,
+          "status": "ready",
+          "phase": "ready",
+          "elapsedMs": 6201,
+          "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+          "postLoadEpoch": 1,
+          "console": {
+            "columns": 80,
+            "rows": 25,
+            "source": "physical_ram",
+            "text": "CoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 11:29:50\n\n{Term|02}/DD:load /d1/audmt\n\n{Term|02}/DD:load /d1/dodwiz\n\n{Term|02}/DD:p=MCP78db0806ac94fe81:\n\nMCP78db0806ac94fe81:echo READY78db0806ac94fe81\nREADY78db0806ac94fe81\n\nMCP78db0806ac94fe81:"
+          },
+          "handshake": {
+            "prompt": "MCP78db0806ac94fe81:",
+            "marker": "READY78db0806ac94fe81",
+            "markerObserved": true,
+            "promptReturned": true
+          }
+        },
+        "isError": false
+      }
+    },
+    {
+      "q": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt gfxtone",
+          "allow_graphics": true,
+          "timeout_ms": 45000
+        }
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"command\":\"audmt gfxtone\",\"completed\":true,\"commandCompleted\":true,\"status\":187,\"statusText\":\"187\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":20170,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE47b6de5785d47b0eb5950d1b300aef42\",\"commandPromptMs\":14566}"
+          }
+        ],
+        "structuredContent": {
+          "command": "audmt gfxtone",
+          "completed": true,
+          "commandCompleted": true,
+          "status": 187,
+          "statusText": "187",
+          "timedOut": false,
+          "shellReady": true,
+          "outcome": "completed",
+          "phase": "complete",
+          "elapsedMs": 20170,
+          "outputComplete": false,
+          "allowGraphics": true,
+          "displayDepartures": 1,
+          "consoleReturned": true,
+          "executionState": "COMPLETE",
+          "marker": "MCPDONE47b6de5785d47b0eb5950d1b300aef42",
+          "commandPromptMs": 14566
+        },
+        "isError": false
+      }
+    },
+    {
+      "q": {
+        "name": "os9_restore_ready",
+        "arguments": {}
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ready\":true,\"state\":\"audio_mt_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6168,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta\",\"postLoadEpoch\":2,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"CoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 11:29:50\\n\\n{Term|02}/DD:load /d1/audmt\\n\\n{Term|02}/DD:load /d1/dodwiz\\n\\n{Term|02}/DD:p=MCP8f5cf0473f3f9ebb:\\n\\nMCP8f5cf0473f3f9ebb:echo READY8f5cf0473f3f9ebb\\nREADY8f5cf0473f3f9ebb\\n\\nMCP8f5cf0473f3f9ebb:\"},\"handshake\":{\"prompt\":\"MCP8f5cf0473f3f9ebb:\",\"marker\":\"READY8f5cf0473f3f9ebb\",\"markerObserved\":true,\"promptReturned\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "ready": true,
+          "state": "audio_mt_ready",
+          "loadScheduled": true,
+          "loadCompleted": true,
+          "shellVerified": true,
+          "timedOut": false,
+          "status": "ready",
+          "phase": "ready",
+          "elapsedMs": 6168,
+          "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-mt/runtime/states/coco3h/audio_mt_ready.sta",
+          "postLoadEpoch": 2,
+          "console": {
+            "columns": 80,
+            "rows": 25,
+            "source": "physical_ram",
+            "text": "CoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 11:29:50\n\n{Term|02}/DD:load /d1/audmt\n\n{Term|02}/DD:load /d1/dodwiz\n\n{Term|02}/DD:p=MCP8f5cf0473f3f9ebb:\n\nMCP8f5cf0473f3f9ebb:echo READY8f5cf0473f3f9ebb\nREADY8f5cf0473f3f9ebb\n\nMCP8f5cf0473f3f9ebb:"
+          },
+          "handshake": {
+            "prompt": "MCP8f5cf0473f3f9ebb:",
+            "marker": "READY8f5cf0473f3f9ebb",
+            "markerObserved": true,
+            "promptReturned": true
+          }
+        },
+        "isError": false
+      }
+    },
+    {
+      "q": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "audmt gfxidle",
+          "allow_graphics": true,
+          "timeout_ms": 45000
+        }
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"command\":\"audmt gfxidle\",\"completed\":true,\"commandCompleted\":true,\"status\":187,\"statusText\":\"187\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":20152,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE0095e9b07e8a555a244ff12d48558524\",\"commandPromptMs\":14560}"
+          }
+        ],
+        "structuredContent": {
+          "command": "audmt gfxidle",
+          "completed": true,
+          "commandCompleted": true,
+          "status": 187,
+          "statusText": "187",
+          "timedOut": false,
+          "shellReady": true,
+          "outcome": "completed",
+          "phase": "complete",
+          "elapsedMs": 20152,
+          "outputComplete": false,
+          "allowGraphics": true,
+          "displayDepartures": 1,
+          "consoleReturned": true,
+          "executionState": "COMPLETE",
+          "marker": "MCPDONE0095e9b07e8a555a244ff12d48558524",
+          "commandPromptMs": 14560
+        },
+        "isError": false
+      }
+    },
+    {
+      "q": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "date",
+          "timeout_ms": 20000
+        }
+      },
+      "r": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6471,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE4f0e5f4420007494683f225eda575786\",\"commandPromptMs\":865}"
+          }
+        ],
+        "structuredContent": {
+          "command": "date",
+          "completed": true,
+          "commandCompleted": true,
+          "status": 0,
+          "statusText": "000",
+          "timedOut": false,
+          "shellReady": true,
+          "outcome": "completed",
+          "phase": "complete",
+          "elapsedMs": 6471,
+          "outputComplete": false,
+          "allowGraphics": false,
+          "displayDepartures": 0,
+          "consoleReturned": false,
+          "executionState": "COMPLETE",
+          "marker": "MCPDONE4f0e5f4420007494683f225eda575786",
+          "commandPromptMs": 865
+        },
+        "isError": false
+      }
+    }
+  ],
+  "tests": {
+    "passed": 115,
+    "failed": 0
+  },
+  "limitations": [
+    "The historical failing run had no instruction/clock trace; exact historical operands cannot be recovered.",
+    "Early research FORK PID prints of 255 were invalid instrumentation and are not used. Corrected fixture restores U before storing the PID; final screenshots use this build."
+  ]
+}
