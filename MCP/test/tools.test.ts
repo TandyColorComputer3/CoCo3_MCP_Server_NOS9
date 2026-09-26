@@ -23,6 +23,7 @@ const TOOL_NAMES = [
   "coco_unmount_flop",
   "coco_write_memory",
   "os9_restore_ready",
+  "os9_run",
 ];
 
 interface ToolResult {

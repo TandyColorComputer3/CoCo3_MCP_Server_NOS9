@@ -518,6 +518,7 @@ if post_load_available then
 end
 if emu.add_machine_reset_notifier then
   restore_reset_notifier = emu.add_machine_reset_notifier(function()
+    load_epoch = load_epoch + 1
     if restore_operation then restore_operation.invalidated = true end
     untracked_load_pending = false
   end)
@@ -566,6 +567,26 @@ local function cmd_finish_restore(params)
     restore_operation.abandoned = true
   end
   return { released = restore_operation == nil }
+end
+
+-- Reuse the exclusive console lease and physical reader after restore ends.
+-- No state is loaded here: completed means this observer may read the console.
+local function cmd_begin_run(params)
+  if restore_operation or untracked_load_pending then error("console operation busy") end
+  if params.epoch ~= load_epoch then error("console epoch mismatch") end
+  if type(params.token) ~= "string" or #params.token ~= 32 or not string.match(params.token, "^%x+$") then
+    error("invalid run token")
+  end
+  restore_operation = { token = params.token, completed = true, epoch = load_epoch, invalidated = false }
+  return { token = params.token, epoch = load_epoch }
+end
+
+local function cmd_finish_run(params)
+  if not restore_operation or params.token ~= restore_operation.token then error("console operation not owned") end
+  local invalidated = restore_operation.invalidated
+  local result = cmd_finish_restore(params)
+  result.invalidated = invalidated
+  return result
 end
 
 local function cmd_read_text_console(params)
@@ -622,6 +643,8 @@ local commands = {
   load_state_status = cmd_load_state_status,
   read_text_console = cmd_read_text_console,
   finish_restore = cmd_finish_restore,
+  begin_run = cmd_begin_run,
+  finish_run = cmd_finish_run,
 }
 
 local sock = nil
@@ -675,7 +698,7 @@ local function handle_line(line)
   if restore_operation then
     local mutation = message.cmd == "type" or message.cmd == "write_mem" or message.cmd == "mount"
       or message.cmd == "unmount" or message.cmd == "soft_reset" or message.cmd == "save_state"
-      or message.cmd == "load_state" or message.cmd == "load_state_tracked"
+      or message.cmd == "load_state" or message.cmd == "load_state_tracked" or message.cmd == "begin_run"
     if mutation then
       local allowed = message.cmd == "type" and restore_operation.completed and not restore_operation.invalidated
         and params.token == restore_operation.token and params.epoch == restore_operation.epoch

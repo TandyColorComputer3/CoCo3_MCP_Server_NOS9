@@ -8,6 +8,7 @@ import type { Logger } from "./logger.js";
 import type { MameController } from "./mame-process.js";
 import type { BuildDiskRequest, Toolchain } from "./toolchain.js";
 import { restoreReady } from "./os9-ready.js";
+import { runOs9, runResult, rememberShell, forgetShell } from "./os9-run.js";
 
 export interface ToolDeps {
   config: AppConfig;
@@ -31,6 +32,9 @@ const SNAPSHOT_TIMEOUT_MS = 5_000;
 const STATE_TIMEOUT_MS = 2_000;
 
 export const TOOL_INFO: Record<string, { description: string }> = {
+  os9_run: {
+    description: "Run one noninteractive foreground program after os9_restore_ready. Wait for a fresh prompt, then query Shell+ status on a separate marker line. Returns completion/status, not stdout. Simple arguments only; no shell control/metacharacters. Nonzero guest status is a completed operation. Timeout/failure requires restore; exclusive UI access required.",
+  },
   os9_restore_ready: {
     description: "Load NITROS9_READY_STATE, await MAME post-load notification, then verify the EOU Term shell with a fresh prompt and echo nonce. Requires the compatible running canonical machine and 80x25 hardware text checkpoint. Changes only the transient shell prompt; does not save or alter media. Exclusive machine/UI access required.",
   },
@@ -228,8 +232,13 @@ function resolveDiskPath(config: AppConfig, raw: string): string {
 }
 
 const handlers: Record<string, Handler> = {
+  async os9_run(deps, args) {
+    const result = await runOs9(deps.bridge, args.command, args.timeout_ms);
+    return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result, isError: result.outcome !== "completed" };
+  },
   async os9_restore_ready(deps, args) {
     const result = await restoreReady(deps.config, deps.bridge, args.timeout_ms === undefined ? undefined : Number(args.timeout_ms));
+    rememberShell(deps.bridge, result);
     return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result, isError: !result.ready };
   },
   async coco_start(deps) {
@@ -469,7 +478,7 @@ const handlers: Record<string, Handler> = {
 export function createToolHandlers(deps: ToolDeps): Record<string, (args: Args) => Promise<ToolResult>> {
   const bound: Record<string, (args: Args) => Promise<ToolResult>> = {};
   let mutation: string | null = null;
-  const mutating = new Set(["os9_restore_ready", "coco_start", "coco_stop", "coco_type", "coco_soft_reset",
+  const mutating = new Set(["os9_run", "os9_restore_ready", "coco_start", "coco_stop", "coco_type", "coco_soft_reset",
     "coco_save_state", "coco_load_state", "coco_mount_flop", "coco_unmount_flop", "coco_write_memory", "coco_build_disk"]);
   for (const name of Object.keys(TOOL_INFO)) {
     const handler = handlers[name];
@@ -477,11 +486,16 @@ export function createToolHandlers(deps: ToolDeps): Record<string, (args: Args) 
     bound[name] = async (args) => {
       if (!mutating.has(name)) return handler(deps, args ?? {});
       if (mutation) {
+        if (name === "os9_run") {
+          const body = { ...runResult(String(args?.command ?? ""), "busy"), error: `${mutation} in progress` };
+          return { ...textResult(JSON.stringify(body), true), structuredContent: body };
+        }
         const body = { ready: false, state: deps.config.nitros9ReadyState, loadScheduled: false,
           loadCompleted: false, shellVerified: false, timedOut: false, status: "busy", error: `${mutation} in progress` };
         return { ...textResult(JSON.stringify(body), true), structuredContent: body };
       }
       mutation = name;
+      if (name !== "os9_run" && name !== "coco_save_state") forgetShell(deps.bridge);
       try { return await handler(deps, args ?? {}); } finally { mutation = null; }
     };
   }
@@ -489,6 +503,10 @@ export function createToolHandlers(deps: ToolDeps): Record<string, (args: Args) 
 }
 
 const inputSchemas: Record<string, Record<string, z.ZodTypeAny>> = {
+  os9_run: {
+    command: z.string().describe("One noninteractive foreground program, simple arguments, at most 58 ASCII characters; no shell metacharacters"),
+    timeout_ms: z.number().int().min(1000).max(120000).optional().describe("Host deadline for command plus status query, default 30000 ms"),
+  },
   os9_restore_ready: {
     timeout_ms: z.number().int().min(1000).max(120000).optional().describe("Host monotonic deadline for load and handshake; default 30000 ms"),
   },
