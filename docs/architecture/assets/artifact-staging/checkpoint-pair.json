@@ -1,0 +1,73 @@
+{
+  "state": {
+    "path": "/private/tmp/os9-stage-live/states/coco3h/staging_ready.sta",
+    "sha256": "d6746d6c3dfc1a59605af65547013567356ebbf6b5c4fb7ec426971ceb4b8917",
+    "size": 143017
+  },
+  "media": [
+    {
+      "device": "flop1",
+      "path": "/private/tmp/os9-stage-live/63EMU.DSK",
+      "sha256": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+      "size": 184320
+    },
+    {
+      "device": "hard1",
+      "path": "/private/tmp/os9-stage-live/63SDC-MCP-DEV.VHD",
+      "sha256": "5e9362718476ae36c68210871e35b801a6a4eaf1c69daaa176b02357a86e6147",
+      "size": 134212608
+    },
+    {
+      "device": "flop2",
+      "path": "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk",
+      "sha256": "ba306138574d54e25b1568b02b4100af71c88cc0975e2b127d667c3a637f8370",
+      "size": 368640
+    }
+  ],
+  "launch": {
+    "command": "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+    "args": [
+      "coco3h",
+      "-window",
+      "-skip_gameinfo",
+      "-natural",
+      "-nomouse",
+      "-mouse_device",
+      "none",
+      "-ext",
+      "multi",
+      "-ext:multi:slot1",
+      "",
+      "-ext:multi:slot2",
+      "ssc",
+      "-ext:multi:slot3",
+      "",
+      "-ext:multi:slot4",
+      "scii",
+      "-ext:multi:slot4:scii:meb",
+      "rtime",
+      "-ramsize",
+      "2M",
+      "-rompath",
+      "/Users/magneto-optimus/Library/Application Support/Ample/roms",
+      "-autoboot_script",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/scripts/bridge.lua",
+      "-autoboot_delay",
+      "0",
+      "-snapshot_directory",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/snapshots",
+      "-state_directory",
+      "/private/tmp/os9-stage-live/states",
+      "-statename",
+      "%g",
+      "-cfg_directory",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/mame-cfg",
+      "-flop1",
+      "/private/tmp/os9-stage-live/63EMU.DSK",
+      "-hard1",
+      "/private/tmp/os9-stage-live/63SDC-MCP-DEV.VHD"
+    ],
+    "cwd": "/Applications/Emulators/Ample.app/Contents/MacOS"
+  },
+  "policy": "Only restore with the recorded media bytes and topology; cold boot after any filesystem change. This record is evidence, not an automatic guard in existing MCP restore tools."
+}

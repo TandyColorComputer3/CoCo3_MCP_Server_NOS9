@@ -1,0 +1,37 @@
+{
+  "sources": [
+    {
+      "path": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/examples/staging/stgprobe.asm",
+      "sha256": "7216164053b39e04f9cad59092596a68435f22390453fb516cfbb820273f1685"
+    },
+    {
+      "path": "/Volumes/SEDONA/Projects/nitros9-reference/defs/os9.d",
+      "sha256": "7928ae45c697dc06619ea484f72f6d668ba5d3016d00c15928aace4a15dd70f6"
+    }
+  ],
+  "referenceCommit": "f470fa52eb172b59b22c1b722074998cb42de9b1",
+  "assembler": {
+    "path": "/usr/local/bin/lwasm",
+    "version": "lwasm from lwtools 4.22"
+  },
+  "compiler": null,
+  "linker": null,
+  "command": {
+    "executable": "/usr/local/bin/lwasm",
+    "args": [
+      "--6809",
+      "--format=os9",
+      "--includedir=/Volumes/SEDONA/Projects/nitros9-reference/defs",
+      "--define=OS9.D=0",
+      "--define=Level=2",
+      "--define=H6309=0",
+      "--output=/private/tmp/os9-stage-live/stgprobe",
+      "MCP/examples/staging/stgprobe.asm"
+    ],
+    "cwd": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9"
+  },
+  "output": {
+    "path": "/private/tmp/os9-stage-live/stgprobe",
+    "sha256": "003beb078a8dfe2bd8d0946307b533372300266a592ff205423766fcc18c77cb"
+  }
+}

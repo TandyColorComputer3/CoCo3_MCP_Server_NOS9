@@ -1,0 +1,222 @@
+[
+  {
+    "sequence": 21,
+    "result": {
+      "ok": true,
+      "alreadyRunning": false,
+      "pid": 11569,
+      "bridge": true
+    }
+  },
+  {
+    "sequence": 22,
+    "result": {
+      "briefname": "flop2",
+      "filename": "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk"
+    }
+  },
+  {
+    "sequence": 23,
+    "result": {
+      "queued": true,
+      "text": "DOS{ENTER}"
+    }
+  },
+  {
+    "sequence": 26,
+    "result": {
+      "scheduled": true,
+      "name": "staging_ready",
+      "fileFound": true,
+      "file": "/private/tmp/os9-stage-live/states/coco3h/staging_ready.sta"
+    }
+  },
+  {
+    "sequence": 27,
+    "result": {
+      "ready": true,
+      "state": "staging_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6204,
+      "file": "/private/tmp/os9-stage-live/states/coco3h/staging_ready.sta",
+      "postLoadEpoch": 1,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 01:38:50\n\n{Term|02}/DD:p=MCP1cbccff3216161ff:\n\nMCP1cbccff3216161ff:echo READY1cbccff3216161ff\nREADY1cbccff3216161ff\n\nMCP1cbccff3216161ff:"
+      },
+      "handshake": {
+        "prompt": "MCP1cbccff3216161ff:",
+        "marker": "READY1cbccff3216161ff",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "sequence": 28,
+    "result": {
+      "command": "list /dd/stage-note",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 8030,
+      "outputComplete": false,
+      "marker": "MCPDONEee7a803c006eed9dd015166b09640bc9",
+      "commandPromptMs": 2436
+    }
+  },
+  {
+    "sequence": 29,
+    "result": {
+      "command": "load /d1/stgprobe",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 10425,
+      "outputComplete": false,
+      "marker": "MCPDONE13477124ec595ad1a0f57b2653ef5b14",
+      "commandPromptMs": 4848
+    }
+  },
+  {
+    "sequence": 30,
+    "result": {
+      "command": "stgprobe",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 6855,
+      "outputComplete": false,
+      "marker": "MCPDONE8bf3121f2551061e315f44ed08022737",
+      "commandPromptMs": 1268
+    }
+  },
+  {
+    "sequence": 32,
+    "result": {
+      "command": "unlink stgprobe",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 7572,
+      "outputComplete": false,
+      "marker": "MCPDONE4ee70cb3cbe5fdddd631bf7fda07b281",
+      "commandPromptMs": 1966
+    }
+  },
+  {
+    "sequence": 33,
+    "result": {
+      "ready": true,
+      "state": "staging_ready",
+      "loadScheduled": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "timedOut": false,
+      "status": "ready",
+      "phase": "ready",
+      "elapsedMs": 6206,
+      "file": "/private/tmp/os9-stage-live/states/coco3h/staging_ready.sta",
+      "postLoadEpoch": 2,
+      "console": {
+        "columns": 80,
+        "rows": 25,
+        "source": "physical_ram",
+        "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 01:38:50\n\n{Term|02}/DD:p=MCP5df9ac508bcd501c:\n\nMCP5df9ac508bcd501c:echo READY5df9ac508bcd501c\nREADY5df9ac508bcd501c\n\nMCP5df9ac508bcd501c:"
+      },
+      "handshake": {
+        "prompt": "MCP5df9ac508bcd501c:",
+        "marker": "READY5df9ac508bcd501c",
+        "markerObserved": true,
+        "promptReturned": true
+      }
+    }
+  },
+  {
+    "sequence": 34,
+    "result": {
+      "command": "load /d1/stgprobe",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 10427,
+      "outputComplete": false,
+      "marker": "MCPDONE898ce563347fd7a9d8bf9c90ecf4c545",
+      "commandPromptMs": 4839
+    }
+  },
+  {
+    "sequence": 35,
+    "result": {
+      "command": "stgprobe",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 6856,
+      "outputComplete": false,
+      "marker": "MCPDONE40b771560a83226edfd8382c57e7a45a",
+      "commandPromptMs": 1269
+    }
+  },
+  {
+    "sequence": 37,
+    "result": {
+      "command": "unlink stgprobe",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 7552,
+      "outputComplete": false,
+      "marker": "MCPDONEb078ee43ce2d42948724a4d55204a55a",
+      "commandPromptMs": 1964
+    }
+  },
+  {
+    "sequence": 38,
+    "result": {
+      "ok": true
+    }
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "staged": true,
+  "installedInCanonicalVhd": false,
+  "hostArtifact": {
+    "path": "/private/tmp/os9-stage-live/stgprobe",
+    "snapshot": "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.module",
+    "sha256": "003beb078a8dfe2bd8d0946307b533372300266a592ff205423766fcc18c77cb"
+  },
+  "module": {
+    "name": "stgprobe",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 59,
+    "crc": "E0136B",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 22,
+    "dataSize": 256,
+    "edition": 1
+  },
+  "guestDestination": {
+    "image": "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk",
+    "path": "/stgprobe",
+    "device": null
+  },
+  "replacedExisting": false,
+  "stagingMethod": "fresh-artifact-floppy",
+  "image": {
+    "path": "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk",
+    "sha256": "ba306138574d54e25b1568b02b4100af71c88cc0975e2b127d667c3a637f8370",
+    "tracks": 40,
+    "sides": 2,
+    "sectorsPerTrack": 18,
+    "bytesPerSector": 256
+  },
+  "requires": "cold boot with this image attached; do not restore a state made with different media bytes",
+  "provenance": {
+    "path": "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/build-provenance.json",
+    "sha256": "5140399785fe022edc66319dfe4fe0fe7f612dd5626877a68b749ee0226281dd",
+    "claimsVerified": false
+  },
+  "toolshed": {
+    "executable": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+    "version": "os9 from Toolshed 2.2",
+    "hostIdent": "Header for : stgprobe\nModule size: $3B  #59\nModule CRC : $E0136B (Good)\nHdr parity : $13\nExec. off  : $0016  #22\nData size  : $0100  #256\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "installedIdent": "Header for : stgprobe\nModule size: $3B  #59\nModule CRC : $E0136B (Good)\nHdr parity : $13\nExec. off  : $0016  #22\nData size  : $0100  #256\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "commands": [
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [],
+      "stdout": "\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n",
+      "stderr": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n"
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.module"
+      ],
+      "stdout": "Header for : stgprobe\nModule size: $3B  #59\nModule CRC : $E0136B (Good)\nHdr parity : $13\nExec. off  : $0016  #22\nData size  : $0100  #256\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "format",
+        "-e",
+        "-t40",
+        "-ds",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk"
+      ],
+      "stdout": "Format Summary\n--------------\nGeometry Data:\n      Cylinders: 40\n          Heads: 2\n  Sectors/track: 18\n    Sector size: 256\n\nLogical Data:\n  Total sectors: 1440\n  Size in bytes: 368640\n   Cluster size: 1\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.module",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk,stgprobe"
+      ],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "attr",
+        "-e",
+        "-pe",
+        "-pr",
+        "-nw",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk,stgprobe"
+      ],
+      "stdout": "--e-re-r\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk,stgprobe"
+      ],
+      "stdout": "Header for : stgprobe\nModule size: $3B  #59\nModule CRC : $E0136B (Good)\nHdr parity : $13\nExec. off  : $0016  #22\nData size  : $0100  #256\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/artifact.dsk,stgprobe",
+        "/private/tmp/os9-stage-live/staged/stage-j5XgJ9/verified.module"
+      ],
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}
