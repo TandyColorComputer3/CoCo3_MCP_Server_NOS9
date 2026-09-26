@@ -1,0 +1,417 @@
+{
+  "sample_rate": 48000,
+  "channels": 4,
+  "ssc_channel_zero_based": 1,
+  "duration_s": 366.82002083333333,
+  "measurement_resolution_ms": 1,
+  "events": [
+    {
+      "start_s": 195.421,
+      "duration_ms": 32.0,
+      "ac_rms": 2850.1926904329803,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1542.4483887135525,
+        1980.5199555316917,
+        2762.0303360442867,
+        4565.429741454249
+      ],
+      "first_to_last_ac_ms": 31.291666666666668
+    },
+    {
+      "start_s": 207.872,
+      "duration_ms": 32.0,
+      "ac_rms": 2854.7746227028897,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1543.1126625402947,
+        1979.1146166669453,
+        2761.2476073454327,
+        4562.931398982912
+      ],
+      "first_to_last_ac_ms": 31.479166666666668
+    },
+    {
+      "start_s": 208.674,
+      "duration_ms": 32.0,
+      "ac_rms": 2847.1544425635843,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1542.0233578365876,
+        1979.3270532297229,
+        2761.7056071000525,
+        4562.56380067143
+      ],
+      "first_to_last_ac_ms": 31.458333333333332
+    },
+    {
+      "start_s": 209.476,
+      "duration_ms": 32.0,
+      "ac_rms": 2847.598039170972,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1544.0876198338726,
+        1978.979085377895,
+        2761.7838797678733,
+        4569.837142404702
+      ],
+      "first_to_last_ac_ms": 31.520833333333332
+    },
+    {
+      "start_s": 210.275,
+      "duration_ms": 33.0,
+      "ac_rms": 2849.490319962731,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1543.9551590410963,
+        1978.86795117555,
+        2761.669892068683,
+        4566.053077102354
+      ],
+      "first_to_last_ac_ms": 31.25
+    },
+    {
+      "start_s": 211.078,
+      "duration_ms": 32.0,
+      "ac_rms": 2850.378456783044,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1541.8956422668577,
+        1979.377042663356,
+        2761.541587907871,
+        4565.516408098125
+      ],
+      "first_to_last_ac_ms": 31.291666666666668
+    },
+    {
+      "start_s": 246.254,
+      "duration_ms": 32.0,
+      "ac_rms": 2858.4694124276807,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1541.849876173686,
+        1979.387503556532,
+        2761.6133063196,
+        4566.346470560095
+      ],
+      "first_to_last_ac_ms": 31.520833333333332
+    },
+    {
+      "start_s": 273.129,
+      "duration_ms": 32.0,
+      "ac_rms": 2847.5689993393908,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1543.7679163548157,
+        1979.640446341927,
+        2762.033902768335,
+        4566.75895267697
+      ],
+      "first_to_last_ac_ms": 31.333333333333332
+    },
+    {
+      "start_s": 273.946,
+      "duration_ms": 32.0,
+      "ac_rms": 2847.454974520041,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1543.792157150714,
+        1981.2410761062854,
+        2761.838249244237,
+        4567.433829315088
+      ],
+      "first_to_last_ac_ms": 31.333333333333332
+    },
+    {
+      "start_s": 274.803,
+      "duration_ms": 33.0,
+      "ac_rms": 2849.255865448633,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1542.0881274489038,
+        1981.563948818533,
+        2761.180215470046,
+        4566.224054127054
+      ],
+      "first_to_last_ac_ms": 31.5
+    },
+    {
+      "start_s": 275.66,
+      "duration_ms": 33.0,
+      "ac_rms": 2852.547518769707,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1543.9406420915086,
+        1979.6875874452926,
+        2761.3709962839525,
+        4565.079793509915
+      ],
+      "first_to_last_ac_ms": 31.520833333333332
+    },
+    {
+      "start_s": 276.462,
+      "duration_ms": 33.0,
+      "ac_rms": 2850.1953219521356,
+      "before": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "after": {
+        "mean": 10371.0,
+        "ac_rms": 0.0,
+        "peak": 10371.0
+      },
+      "step_hz_measured": [
+        1534.9424139564546,
+        1979.6831356250186,
+        2761.786143023664,
+        4564.973960409752
+      ],
+      "first_to_last_ac_ms": 31.520833333333332
+    }
+  ],
+  "large_raw_steps": [
+    {
+      "time_s": 194.9,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 195.34,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 195.36,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 195.54,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 195.56,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 196.18,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 207.36,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 211.84,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 222.6,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 223.12,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 234.06,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 234.54,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 245.74,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 246.3,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 257.58,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 257.62,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 257.64,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 261.72,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    },
+    {
+      "time_s": 272.62,
+      "delta": 10371.0,
+      "before": 0.0,
+      "after": 10371.0
+    },
+    {
+      "time_s": 277.22,
+      "delta": -10371.0,
+      "before": 10371.0,
+      "after": 0.0
+    }
+  ],
+  "last_second_peak": 0.0,
+  "duration_definition": "1ms AC-RMS detection windows; first_to_last_ac_ms uses >100 sample-unit departure from the measured DC baseline and excludes final low half-cycle",
+  "observer": {
+    "concurrent": {
+      "ticks": 300,
+      "wakes": 255,
+      "maxgap": 22,
+      "clockDiscontinuity": false
+    },
+    "idle_invalid": {
+      "ticks": 315,
+      "wakes": 135,
+      "maxgap": 181,
+      "excluded": "RTC discontinuity"
+    },
+    "idle_valid": {
+      "ticks": 300,
+      "wakes": 300,
+      "maxgap": 1,
+      "clockDiscontinuity": false
+    }
+  }
+}

@@ -1,0 +1,593 @@
+[
+  {
+    "q": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"audio_m1_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6182,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/runtime/states/coco3h/audio_m1_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"Coco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 13:01:57\\n\\n{Term|02}/DD:load /d1/dodsnd\\n\\n{Term|02}/DD:load /d1/dodwiz\\n\\n{Term|02}/DD:\\n{Term|02}/DD:p=MCP0757f93552595318:\\n\\nMCP0757f93552595318:echo READY0757f93552595318\\nREADY0757f93552595318\\n\\nMCP0757f93552595318:\"},\"handshake\":{\"prompt\":\"MCP0757f93552595318:\",\"marker\":\"READY0757f93552595318\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "audio_m1_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6182,
+        "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/runtime/states/coco3h/audio_m1_ready.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "Coco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 13:01:57\n\n{Term|02}/DD:load /d1/dodsnd\n\n{Term|02}/DD:load /d1/dodwiz\n\n{Term|02}/DD:\n{Term|02}/DD:p=MCP0757f93552595318:\n\nMCP0757f93552595318:echo READY0757f93552595318\nREADY0757f93552595318\n\nMCP0757f93552595318:"
+        },
+        "handshake": {
+          "prompt": "MCP0757f93552595318:",
+          "marker": "READY0757f93552595318",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd normal",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd normal\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":12047,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE723692e3fae5882952acda265b53ac58\",\"commandPromptMs\":6461}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd normal",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 12047,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE723692e3fae5882952acda265b53ac58",
+        "commandPromptMs": 6461
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd repeat",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd repeat\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":15428,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE6c963decb4a8ed7ce93fd0209ca24916\",\"commandPromptMs\":9838}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd repeat",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 15428,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE6c963decb4a8ed7ce93fd0209ca24916",
+        "commandPromptMs": 9838
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd stop",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd stop\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11057,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEbafca0f50bb84eb3190dec1bb7a96a75\",\"commandPromptMs\":5470}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd stop",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11057,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEbafca0f50bb84eb3190dec1bb7a96a75",
+        "commandPromptMs": 5470
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd cancel",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd cancel\",\"completed\":true,\"commandCompleted\":true,\"status\":3,\"statusText\":\"003\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11558,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE49ac8223f5f34b1666c1fc6a1257ce13\",\"commandPromptMs\":5973}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd cancel",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 3,
+        "statusText": "003",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11558,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE49ac8223f5f34b1666c1fc6a1257ce13",
+        "commandPromptMs": 5973
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd error",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd error\",\"completed\":true,\"commandCompleted\":true,\"status\":187,\"statusText\":\"187\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11421,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE63e3d3a0b39974d2a9b318c1d6f374dc\",\"commandPromptMs\":5831}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd error",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 187,
+        "statusText": "187",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11421,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE63e3d3a0b39974d2a9b318c1d6f374dc",
+        "commandPromptMs": 5831
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd owner",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd owner\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":14997,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE6033dcf29b96d7a05490237970656790\",\"commandPromptMs\":9392}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd owner",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 14997,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE6033dcf29b96d7a05490237970656790",
+        "commandPromptMs": 9392
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd multi",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd multi\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":15366,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE9eb6dc082d8b218ba3e2ed1743a85d0c\",\"commandPromptMs\":9783}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd multi",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 15366,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE9eb6dc082d8b218ba3e2ed1743a85d0c",
+        "commandPromptMs": 9783
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd observer",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd observer\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":9821,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE9a0b71a7a5e9b80039da76d39b1f30e0\",\"commandPromptMs\":4218}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd observer",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 9821,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE9a0b71a7a5e9b80039da76d39b1f30e0",
+        "commandPromptMs": 4218
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodwiz",
+        "timeout_ms": 45000,
+        "allow_graphics": true
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodwiz\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":22800,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE47bd97bac5d5dd95b0674f4ae20dfc14\",\"commandPromptMs\":17213}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodwiz",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 22800,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE47bd97bac5d5dd95b0674f4ae20dfc14",
+        "commandPromptMs": 17213
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodwiz cancel",
+        "timeout_ms": 30000,
+        "allow_graphics": true
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodwiz cancel\",\"completed\":true,\"commandCompleted\":true,\"status\":3,\"statusText\":\"003\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":10781,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE2b9472c8f92f299c3aad0a15f53b41ea\",\"commandPromptMs\":5192}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodwiz cancel",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 3,
+        "statusText": "003",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 10781,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE2b9472c8f92f299c3aad0a15f53b41ea",
+        "commandPromptMs": 5192
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "date",
+        "timeout_ms": 15000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6452,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEaceae4c2225977bae6a3b6fbf5b782af\",\"commandPromptMs\":845}"
+        }
+      ],
+      "structuredContent": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6452,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEaceae4c2225977bae6a3b6fbf5b782af",
+        "commandPromptMs": 845
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "pwd",
+        "timeout_ms": 15000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7364,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEe93ca0d0d1e6b6df5c21de97f4422ed4\",\"commandPromptMs\":1760}"
+        }
+      ],
+      "structuredContent": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7364,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEe93ca0d0d1e6b6df5c21de97f4422ed4",
+        "commandPromptMs": 1760
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    }
+  },
+  {
+    "q": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"audio_m1_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6189,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/runtime/states/coco3h/audio_m1_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"Coco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 13:01:57\\n\\n{Term|02}/DD:load /d1/dodsnd\\n\\n{Term|02}/DD:load /d1/dodwiz\\n\\n{Term|02}/DD:\\n{Term|02}/DD:p=MCP0edc62d2ee0c080e:\\n\\nMCP0edc62d2ee0c080e:echo READY0edc62d2ee0c080e\\nREADY0edc62d2ee0c080e\\n\\nMCP0edc62d2ee0c080e:\"},\"handshake\":{\"prompt\":\"MCP0edc62d2ee0c080e:\",\"marker\":\"READY0edc62d2ee0c080e\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "audio_m1_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6189,
+        "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/runtime/states/coco3h/audio_m1_ready.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "Coco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 13:01:57\n\n{Term|02}/DD:load /d1/dodsnd\n\n{Term|02}/DD:load /d1/dodwiz\n\n{Term|02}/DD:\n{Term|02}/DD:p=MCP0edc62d2ee0c080e:\n\nMCP0edc62d2ee0c080e:echo READY0edc62d2ee0c080e\nREADY0edc62d2ee0c080e\n\nMCP0edc62d2ee0c080e:"
+        },
+        "handshake": {
+          "prompt": "MCP0edc62d2ee0c080e:",
+          "marker": "READY0edc62d2ee0c080e",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodsnd observer",
+        "timeout_ms": 30000
+      }
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodsnd observer\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":12557,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEd9df2d54a339f793dad0568f110623cb\",\"commandPromptMs\":6957}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodsnd observer",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 12557,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEd9df2d54a339f793dad0568f110623cb",
+        "commandPromptMs": 6957
+      },
+      "isError": false
+    }
+  },
+  {
+    "q": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "r": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    }
+  }
+]

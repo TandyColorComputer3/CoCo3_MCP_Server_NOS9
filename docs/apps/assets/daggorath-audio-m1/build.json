@@ -1,0 +1,74 @@
+{
+  "dodaudio": {
+    "command": [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/build",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/build/dodaudio",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/service.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ssc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ssc_io.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/service-module.asm",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c"
+    ],
+    "sources": {
+      "apps/daggorath/src/audio/service.c": "a858d2bba699f9d143dc2b5befa3fa6e714262b543eaae02118ed11769b45d81",
+      "apps/daggorath/src/audio/event.c": "0805ee0e6bc1f37d2d425e164bddcf24e1cb90315498745ba31f12cfdf50d5c7",
+      "apps/daggorath/src/audio/ipc.c": "5d39c2f9ee5da4d99333984d5f34fd62c0e352807d9ba259642f95f53637042d",
+      "apps/daggorath/src/audio/ssc.c": "eddf7454b17f8565bf9f9086a18a5dbafaccb69fafab3020c7495e72a9f7634e",
+      "apps/daggorath/src/audio/ssc_io.c": "82fe82cbd4a9d505a68434c0034bda8e74c09ed3f15e0441c3fea07c905b0f35",
+      "apps/daggorath/src/audio/service-module.asm": "2ecd04594df2a11e45a15d855945a49920690112bbf3cde555f023d6ccbeab5f",
+      "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+      "apps/daggorath/src/audio/ssc_io.h": "99d69c1fd2935bb54cf64a876552491069b8cb61b4a520c1d1d79b510930ad43",
+      "apps/daggorath/src/audio/backend.h": "716ddd73bc34e7054b3b5050111f0f38eea7b7fa083051cad5fee043e11fbc12",
+      "apps/daggorath/src/audio/ipc.h": "cf7b84532227466284c608f833a9a6c73d7d5ae1fb20509a27d810e2d13a5b18",
+      "apps/daggorath/src/audio/audio.h": "9f9ce3dc5cc6c13d4870ad8f467322e266003d615d5019fd79c537bd246c8101",
+      "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+    },
+    "sha256": "4d5c239e26d1095b95ffedebd94528fac6681d5f82288b3ffcba3f261d0c0197",
+    "ident": "Header for : dodaudio\nModule size: $1029  #4137\nModule CRC : $D6911A (Good)\nHdr parity : $91\nExec. off  : $000D  #13\nData size  : $082C  #2092\nEdition    : $01  #1\nTy/La At/Rv: $11 $01\nProg mod, 6809 Obj, non-share, R/O\n\n"
+  },
+  "dodsnd": {
+    "command": [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/build",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m1-four/build/dodsnd",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/harness.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/client.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/harness-module.asm",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c"
+    ],
+    "sources": {
+      "apps/daggorath/src/audio/harness.c": "38f97194bc17550a0214cfa2b200bdaa961dc92d106b6c03b7d0aa4802e9b6d5",
+      "apps/daggorath/src/audio/event.c": "0805ee0e6bc1f37d2d425e164bddcf24e1cb90315498745ba31f12cfdf50d5c7",
+      "apps/daggorath/src/audio/ipc.c": "5d39c2f9ee5da4d99333984d5f34fd62c0e352807d9ba259642f95f53637042d",
+      "apps/daggorath/src/audio/client.c": "6b8f578a7836ce9829b81dc7f8569a008cadfac09c955adb6d6d3a792f922a5e",
+      "apps/daggorath/src/audio/harness-module.asm": "a3f2c1e5808338dc4f8e493fdb8165d1e639622a37a7f7ff75bd8714dc3fcc1e",
+      "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+      "apps/daggorath/src/audio/ssc_io.h": "99d69c1fd2935bb54cf64a876552491069b8cb61b4a520c1d1d79b510930ad43",
+      "apps/daggorath/src/audio/backend.h": "716ddd73bc34e7054b3b5050111f0f38eea7b7fa083051cad5fee043e11fbc12",
+      "apps/daggorath/src/audio/ipc.h": "cf7b84532227466284c608f833a9a6c73d7d5ae1fb20509a27d810e2d13a5b18",
+      "apps/daggorath/src/audio/audio.h": "9f9ce3dc5cc6c13d4870ad8f467322e266003d615d5019fd79c537bd246c8101",
+      "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+    },
+    "sha256": "efc6804be3ad9d7902dc0b67172d540113cbf726c40d5c1eb4b1d3d38662f96b",
+    "ident": "Header for : dodsnd\nModule size: $1C13  #7187\nModule CRC : $CB2146 (Good)\nHdr parity : $3F\nExec. off  : $000D  #13\nData size  : $0826  #2086\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  }
+}
