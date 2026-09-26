@@ -1,0 +1,338 @@
+[
+  {
+    "id": 1,
+    "startedAt": 1790419219385,
+    "completedAt": 1790419221610,
+    "request": {
+      "name": "coco_start",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true,\"alreadyRunning\":false,\"pid\":19743,\"bridge\":true}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "startedAt": 1790419233530,
+    "completedAt": 1790419233555,
+    "request": {
+      "name": "coco_mount_flop",
+      "arguments": {
+        "drive": "flop2",
+        "path": "/private/tmp/daggorath-scale/staged/stage-9c3VAj/artifact.dsk"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"briefname\":\"flop2\",\"filename\":\"/private/tmp/daggorath-scale/staged/stage-9c3VAj/artifact.dsk\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "startedAt": 1790419280414,
+    "completedAt": 1790419281318,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "DOS"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"DOS{ENTER}\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "startedAt": 1790419361400,
+    "completedAt": 1790419361467,
+    "request": {
+      "name": "coco_save_state",
+      "arguments": {
+        "name": "scale_ready"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"scheduled\":true,\"name\":\"scale_ready\",\"fileFound\":true,\"file\":\"/private/tmp/daggorath-scale/live/states/coco3h/scale_ready.sta\"}"
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "startedAt": 1790419370055,
+    "completedAt": 1790419376217,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"scale_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6161,\"file\":\"/private/tmp/daggorath-scale/live/states/coco3h/scale_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"\\nMemory size - 2048k.\\nCpu type - 6309 (Native Mode)\\nDriveWire - Not detected.\\nCoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 03:41:54\\n\\n{Term|02}/DD:p=MCP1e468a451879a390:\\n\\nMCP1e468a451879a390:echo READY1e468a451879a390\\nREADY1e468a451879a390\\n\\nMCP1e468a451879a390:\"},\"handshake\":{\"prompt\":\"MCP1e468a451879a390:\",\"marker\":\"READY1e468a451879a390\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "scale_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6161,
+        "file": "/private/tmp/daggorath-scale/live/states/coco3h/scale_ready.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 03:41:54\n\n{Term|02}/DD:p=MCP1e468a451879a390:\n\nMCP1e468a451879a390:echo READY1e468a451879a390\nREADY1e468a451879a390\n\nMCP1e468a451879a390:"
+        },
+        "handshake": {
+          "prompt": "MCP1e468a451879a390:",
+          "marker": "READY1e468a451879a390",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 9,
+    "startedAt": 1790419376218,
+    "completedAt": 1790419387999,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "load /d1/dodscale"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"load /d1/dodscale\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11779,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE8081a87209a939131a2b93326f07f991\",\"commandPromptMs\":6212}"
+        }
+      ],
+      "structuredContent": {
+        "command": "load /d1/dodscale",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11779,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE8081a87209a939131a2b93326f07f991",
+        "commandPromptMs": 6212
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 10,
+    "startedAt": 1790419387999,
+    "completedAt": 1790419467864,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodscale a",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodscale a\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":79865,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":3,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE72785b7c201382836de758bb7cb4272f\",\"commandPromptMs\":74264}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodscale a",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 79865,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 3,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE72785b7c201382836de758bb7cb4272f",
+        "commandPromptMs": 74264
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 90,
+    "startedAt": 1790419468726,
+    "completedAt": 1790419538504,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodscale b",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodscale b\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":69778,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE49cb1f56217ebcd2115a4f71243f5373\",\"commandPromptMs\":64191}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodscale b",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 69778,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE49cb1f56217ebcd2115a4f71243f5373",
+        "commandPromptMs": 64191
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 160,
+    "startedAt": 1790419539260,
+    "completedAt": 1790419604739,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodscale c",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodscale c\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":65479,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE66024ba62956aadb798dfa2aea43fd6c\",\"commandPromptMs\":59892}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodscale c",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 65479,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE66024ba62956aadb798dfa2aea43fd6c",
+        "commandPromptMs": 59892
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 225,
+    "startedAt": 1790419604795,
+    "completedAt": 1790419612180,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "pwd"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7385,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEeca0baa1e670027ebcd3da81b5aee5ea\",\"commandPromptMs\":1780}"
+        }
+      ],
+      "structuredContent": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7385,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEeca0baa1e670027ebcd3da81b5aee5ea",
+        "commandPromptMs": 1780
+      },
+      "isError": false
+    }
+  },
+  {
+    "id": 226,
+    "startedAt": 1790419612181,
+    "completedAt": 1790419612184,
+    "request": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    }
+  }
+]

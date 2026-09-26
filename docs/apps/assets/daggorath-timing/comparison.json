@@ -1,0 +1,289 @@
+{
+  "videoPeriodSeconds": 0.016688153333333334,
+  "referenceDuration": 15.219595841,
+  "portDuration": 15.486606295,
+  "differenceSeconds": 0.267010454,
+  "relativeDifferencePercent": 1.7543859649122806,
+  "transitions": [
+    {
+      "index": 0,
+      "fade": 32,
+      "messages": 0,
+      "referenceTick": 0,
+      "portTick": 0,
+      "latenessTicks": 0
+    },
+    {
+      "index": 1,
+      "fade": 30,
+      "messages": 0,
+      "referenceTick": 18,
+      "portTick": 19,
+      "latenessTicks": 1
+    },
+    {
+      "index": 2,
+      "fade": 28,
+      "messages": 0,
+      "referenceTick": 36,
+      "portTick": 37,
+      "latenessTicks": 1
+    },
+    {
+      "index": 3,
+      "fade": 26,
+      "messages": 0,
+      "referenceTick": 54,
+      "portTick": 55,
+      "latenessTicks": 1
+    },
+    {
+      "index": 4,
+      "fade": 24,
+      "messages": 0,
+      "referenceTick": 72,
+      "portTick": 73,
+      "latenessTicks": 1
+    },
+    {
+      "index": 5,
+      "fade": 22,
+      "messages": 0,
+      "referenceTick": 90,
+      "portTick": 91,
+      "latenessTicks": 1
+    },
+    {
+      "index": 6,
+      "fade": 20,
+      "messages": 0,
+      "referenceTick": 108,
+      "portTick": 109,
+      "latenessTicks": 1
+    },
+    {
+      "index": 7,
+      "fade": 18,
+      "messages": 0,
+      "referenceTick": 126,
+      "portTick": 127,
+      "latenessTicks": 1
+    },
+    {
+      "index": 8,
+      "fade": 16,
+      "messages": 0,
+      "referenceTick": 144,
+      "portTick": 145,
+      "latenessTicks": 1
+    },
+    {
+      "index": 9,
+      "fade": 14,
+      "messages": 0,
+      "referenceTick": 162,
+      "portTick": 164,
+      "latenessTicks": 2
+    },
+    {
+      "index": 10,
+      "fade": 12,
+      "messages": 0,
+      "referenceTick": 180,
+      "portTick": 182,
+      "latenessTicks": 2
+    },
+    {
+      "index": 11,
+      "fade": 10,
+      "messages": 0,
+      "referenceTick": 198,
+      "portTick": 200,
+      "latenessTicks": 2
+    },
+    {
+      "index": 12,
+      "fade": 8,
+      "messages": 0,
+      "referenceTick": 216,
+      "portTick": 218,
+      "latenessTicks": 2
+    },
+    {
+      "index": 13,
+      "fade": 6,
+      "messages": 0,
+      "referenceTick": 234,
+      "portTick": 237,
+      "latenessTicks": 3
+    },
+    {
+      "index": 14,
+      "fade": 4,
+      "messages": 0,
+      "referenceTick": 252,
+      "portTick": 256,
+      "latenessTicks": 4
+    },
+    {
+      "index": 15,
+      "fade": 2,
+      "messages": 0,
+      "referenceTick": 271,
+      "portTick": 277,
+      "latenessTicks": 6
+    },
+    {
+      "index": 16,
+      "fade": 0,
+      "messages": 0,
+      "referenceTick": 293,
+      "portTick": 301,
+      "latenessTicks": 8
+    },
+    {
+      "index": 17,
+      "fade": 0,
+      "messages": 1,
+      "referenceTick": 377,
+      "portTick": 378,
+      "latenessTicks": 1
+    },
+    {
+      "index": 18,
+      "fade": 0,
+      "messages": 0,
+      "referenceTick": 539,
+      "portTick": 540,
+      "latenessTicks": 1
+    },
+    {
+      "index": 19,
+      "fade": 2,
+      "messages": 0,
+      "referenceTick": 658,
+      "portTick": 659,
+      "latenessTicks": 1
+    },
+    {
+      "index": 20,
+      "fade": 4,
+      "messages": 0,
+      "referenceTick": 676,
+      "portTick": 678,
+      "latenessTicks": 2
+    },
+    {
+      "index": 21,
+      "fade": 6,
+      "messages": 0,
+      "referenceTick": 694,
+      "portTick": 697,
+      "latenessTicks": 3
+    },
+    {
+      "index": 22,
+      "fade": 8,
+      "messages": 0,
+      "referenceTick": 712,
+      "portTick": 715,
+      "latenessTicks": 3
+    },
+    {
+      "index": 23,
+      "fade": 10,
+      "messages": 0,
+      "referenceTick": 730,
+      "portTick": 733,
+      "latenessTicks": 3
+    },
+    {
+      "index": 24,
+      "fade": 12,
+      "messages": 0,
+      "referenceTick": 748,
+      "portTick": 751,
+      "latenessTicks": 3
+    },
+    {
+      "index": 25,
+      "fade": 14,
+      "messages": 0,
+      "referenceTick": 766,
+      "portTick": 769,
+      "latenessTicks": 3
+    },
+    {
+      "index": 26,
+      "fade": 16,
+      "messages": 0,
+      "referenceTick": 784,
+      "portTick": 787,
+      "latenessTicks": 3
+    },
+    {
+      "index": 27,
+      "fade": 18,
+      "messages": 0,
+      "referenceTick": 802,
+      "portTick": 804,
+      "latenessTicks": 2
+    },
+    {
+      "index": 28,
+      "fade": 20,
+      "messages": 0,
+      "referenceTick": 820,
+      "portTick": 822,
+      "latenessTicks": 2
+    },
+    {
+      "index": 29,
+      "fade": 22,
+      "messages": 0,
+      "referenceTick": 838,
+      "portTick": 840,
+      "latenessTicks": 2
+    },
+    {
+      "index": 30,
+      "fade": 24,
+      "messages": 0,
+      "referenceTick": 856,
+      "portTick": 857,
+      "latenessTicks": 1
+    },
+    {
+      "index": 31,
+      "fade": 26,
+      "messages": 0,
+      "referenceTick": 874,
+      "portTick": 875,
+      "latenessTicks": 1
+    },
+    {
+      "index": 32,
+      "fade": 28,
+      "messages": 0,
+      "referenceTick": 892,
+      "portTick": 893,
+      "latenessTicks": 1
+    },
+    {
+      "index": 33,
+      "fade": 30,
+      "messages": 0,
+      "referenceTick": 910,
+      "portTick": 911,
+      "latenessTicks": 1
+    },
+    {
+      "index": 34,
+      "fade": 255,
+      "messages": 0,
+      "referenceTick": 912,
+      "portTick": 928,
+      "latenessTicks": 16
+    }
+  ]
+}

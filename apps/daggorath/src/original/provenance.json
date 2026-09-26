@@ -1,0 +1,447 @@
+{
+  "commit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "repository": "/Volumes/SEDONA/Projects/daggorath-reference",
+  "files": {
+    "D4.ASM": "832cebb6aee497e7f76b9898429c24938e8e666d477bbf580a3f4cdec8394321",
+    "missing-macros.asm": "951cb2b6dccabc914304fbb2aca49ea31823cb92ebf1235b3bea9d12549e5b15",
+    "VECTOR.ASM": "92617f1cd5860d03e5f5863f480bb8aef9c3398ec553de16d64c81e6ce531f95",
+    "VCTLST.ASM": "79f48d385be66991277475fa5eac73c4749531c07c6f2b77608cfa419117a448",
+    "MISC.ASM": "4940b3cd058d8640424fb35a8fac2202ca6c5b3ff7640342d4a7c3309ef838cd",
+    "ONCE.ASM": "d4420634a38b087965b409b511d8b4ebd8b122340aa2189f9defb1444fd6c19e",
+    "COMDAT.ASM": "90efe81bbfc084e2792c949625c33b628b6721ae5c2cbc16163d629ee0f82bed",
+    "COMTXT.ASM": "8c91ef6018fd27995f76d185079c0647673792293c48063a0b20029986c35a12",
+    "TXTSER.ASM": "245b178091be902af59c488ad7100727cbad6518b99ffdf46f95694664c34c75",
+    "EXPAND.ASM": "92a5fa9665b8903aca31999a2088823df0fed565ce7a8d409f24d4e7be9249a4",
+    "SWCHAR.ASM": "74dd2609442a438c696b3c87a34ff72b7ea9431ff6be1f86d20d3e260831325f",
+    "CD.ASM": "c991fe0ba18b9ab42ac29304bd9b8f643ecad874743f9cf9ee64ff64cb88e20a"
+  },
+  "segments": [
+    {
+      "label": "WIZ1",
+      "line": 157
+    },
+    {
+      "label": "WIZ1",
+      "line": 158
+    },
+    {
+      "label": "WIZ1",
+      "line": 159
+    },
+    {
+      "label": "WIZ1",
+      "line": 160
+    },
+    {
+      "label": "WIZ1",
+      "line": 161
+    },
+    {
+      "label": "WIZ1",
+      "line": 162
+    },
+    {
+      "label": "WIZ1",
+      "line": 163
+    },
+    {
+      "label": "WIZ1",
+      "line": 164
+    },
+    {
+      "label": "WIZ1",
+      "line": 165
+    },
+    {
+      "label": "WIZ1",
+      "line": 166
+    },
+    {
+      "label": "WIZ1",
+      "line": 167
+    },
+    {
+      "label": "WIZ1",
+      "line": 168
+    },
+    {
+      "label": "WIZ1",
+      "line": 169
+    },
+    {
+      "label": "WIZ1",
+      "line": 170
+    },
+    {
+      "label": "WIZ1",
+      "line": 171
+    },
+    {
+      "label": "WIZ1",
+      "line": 177
+    },
+    {
+      "label": "WIZ1",
+      "line": 178
+    },
+    {
+      "label": "WIZ1",
+      "line": 179
+    },
+    {
+      "label": "WIZ1",
+      "line": 180
+    },
+    {
+      "label": "WIZ1",
+      "line": 181
+    },
+    {
+      "label": "WIZ1",
+      "line": 182
+    },
+    {
+      "label": "WIZ1",
+      "line": 183
+    },
+    {
+      "label": "WIZ1",
+      "line": 184
+    },
+    {
+      "label": "WIZ1",
+      "line": 185
+    },
+    {
+      "label": "WIZ1",
+      "line": 186
+    },
+    {
+      "label": "WIZ1",
+      "line": 187
+    },
+    {
+      "label": "WIZ1",
+      "line": 188
+    },
+    {
+      "label": "WIZ1",
+      "line": 189
+    },
+    {
+      "label": "WIZ1",
+      "line": 190
+    },
+    {
+      "label": "WIZ1",
+      "line": 191
+    },
+    {
+      "label": "WIZ0",
+      "line": 255
+    },
+    {
+      "label": "WIZ0",
+      "line": 256
+    },
+    {
+      "label": "WIZ0",
+      "line": 257
+    },
+    {
+      "label": "WIZ0",
+      "line": 258
+    },
+    {
+      "label": "WIZ0",
+      "line": 259
+    },
+    {
+      "label": "WIZ0",
+      "line": 260
+    },
+    {
+      "label": "WIZ0",
+      "line": 261
+    },
+    {
+      "label": "WIZ0",
+      "line": 262
+    },
+    {
+      "label": "WIZ0",
+      "line": 263
+    },
+    {
+      "label": "WIZ0",
+      "line": 264
+    },
+    {
+      "label": "WIZ0",
+      "line": 265
+    },
+    {
+      "label": "WIZ0",
+      "line": 266
+    },
+    {
+      "label": "WIZ0",
+      "line": 270
+    },
+    {
+      "label": "WIZ0",
+      "line": 271
+    },
+    {
+      "label": "WIZ0",
+      "line": 272
+    },
+    {
+      "label": "WIZ0",
+      "line": 273
+    },
+    {
+      "label": "WIZ0",
+      "line": 274
+    },
+    {
+      "label": "WIZ0",
+      "line": 275
+    },
+    {
+      "label": "WIZ0",
+      "line": 276
+    },
+    {
+      "label": "WIZ0",
+      "line": 280
+    },
+    {
+      "label": "WIZ0",
+      "line": 281
+    },
+    {
+      "label": "WIZ0",
+      "line": 282
+    },
+    {
+      "label": "WIZ0",
+      "line": 283
+    },
+    {
+      "label": "WIZ0",
+      "line": 284
+    },
+    {
+      "label": "WIZ0",
+      "line": 285
+    },
+    {
+      "label": "WIZ0",
+      "line": 286
+    },
+    {
+      "label": "WIZ0",
+      "line": 287
+    },
+    {
+      "label": "WIZ0",
+      "line": 291
+    },
+    {
+      "label": "WIZ0",
+      "line": 292
+    },
+    {
+      "label": "WIZ0",
+      "line": 293
+    },
+    {
+      "label": "WIZ0",
+      "line": 294
+    },
+    {
+      "label": "WIZ0",
+      "line": 298
+    },
+    {
+      "label": "WIZ0",
+      "line": 299
+    },
+    {
+      "label": "WIZ0",
+      "line": 300
+    },
+    {
+      "label": "WIZ0",
+      "line": 301
+    },
+    {
+      "label": "WIZ0",
+      "line": 308
+    },
+    {
+      "label": "WIZ0",
+      "line": 314
+    },
+    {
+      "label": "WIZ0",
+      "line": 315
+    },
+    {
+      "label": "WIZ0",
+      "line": 316
+    },
+    {
+      "label": "WIZ0",
+      "line": 317
+    },
+    {
+      "label": "WIZ0",
+      "line": 318
+    },
+    {
+      "label": "WIZ0",
+      "line": 319
+    },
+    {
+      "label": "WIZ0",
+      "line": 320
+    },
+    {
+      "label": "WIZ0",
+      "line": 321
+    },
+    {
+      "label": "WIZ0",
+      "line": 327
+    },
+    {
+      "label": "WIZ0",
+      "line": 328
+    },
+    {
+      "label": "WIZ0",
+      "line": 329
+    },
+    {
+      "label": "WIZ0",
+      "line": 330
+    },
+    {
+      "label": "WIZ0",
+      "line": 331
+    },
+    {
+      "label": "WIZ0",
+      "line": 332
+    },
+    {
+      "label": "WIZ0",
+      "line": 333
+    },
+    {
+      "label": "WIZ0",
+      "line": 334
+    },
+    {
+      "label": "WIZ0",
+      "line": 335
+    },
+    {
+      "label": "WIZ0",
+      "line": 336
+    }
+  ],
+  "messages": {
+    "status": [
+      3,
+      15,
+      16,
+      25,
+      18,
+      9,
+      7,
+      8,
+      20,
+      0,
+      0,
+      4,
+      25,
+      14,
+      1,
+      0,
+      13,
+      9,
+      3,
+      18,
+      15,
+      0,
+      0,
+      13,
+      3,
+      13,
+      12,
+      24,
+      24,
+      24,
+      9,
+      9
+    ],
+    "intro1": [
+      31,
+      9,
+      0,
+      4,
+      1,
+      18,
+      5,
+      0,
+      25,
+      5,
+      0,
+      5,
+      14,
+      20,
+      5,
+      18,
+      30,
+      30,
+      30,
+      31
+    ],
+    "intro2": [
+      30,
+      30,
+      30,
+      20,
+      8,
+      5,
+      0,
+      4,
+      21,
+      14,
+      7,
+      5,
+      15,
+      14,
+      19,
+      0,
+      15,
+      6,
+      0,
+      4,
+      1,
+      7,
+      7,
+      15,
+      18,
+      1,
+      20,
+      8,
+      27,
+      27,
+      27
+    ]
+  }
+}

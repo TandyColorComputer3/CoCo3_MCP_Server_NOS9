@@ -1,0 +1,10 @@
+22 logical rendering checks passed
+2 presentation ownership/packet cases passed
+5 lifecycle cases passed, including all 35 deadlines and minute rollover
+19 cache frames byte-for-byte equal
+115 MCP tests passed; 0 failed/skipped
+npm run build: passed
+reproducible application build: byte-identical, CRC FD6C50
+git diff --check: passed
+Untracked application/report/evidence whitespace: passed
+Local links in application README and live report: passed

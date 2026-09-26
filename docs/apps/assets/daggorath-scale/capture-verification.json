@@ -1,0 +1,50 @@
+[
+  {
+    "capture": "a-wizard.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "a-message.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "a-thin.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "a-fine.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "b-wizard.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "b-message.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "b-thin.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "b-fine.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "c-wizard.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "c-message.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "c-thin.png",
+    "pixelDifferences": 0
+  },
+  {
+    "capture": "c-fine.png",
+    "pixelDifferences": 0
+  }
+]

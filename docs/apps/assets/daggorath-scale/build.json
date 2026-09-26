@@ -1,0 +1,145 @@
+{
+  "sources": [
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/main.c",
+      "sha256": "8f5517f4c08df6696665e9262d26a8b7c1ac8e862d38f7d8ddb45a278aa7b2cb",
+      "size": 610
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/presentation.c",
+      "sha256": "8f9bc4090314fe48da22b34d2b243cb6907423e5072c3cc4d66b59dbc159b445",
+      "size": 2880
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/original/logical.c",
+      "sha256": "069299be1f3d242c4212e33ed56cf0dae07c16e15b855a6312496f98a8253d05",
+      "size": 2728
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/os9.c",
+      "sha256": "3316f6f175c20f45833d142278d97b3445a9659037f03e094fb30b553da54c12",
+      "size": 2700
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/window-path.c",
+      "sha256": "f8e1c45289e9e47791ad8949ff8209393b3ba54423082405124d12fa4230b94b",
+      "size": 616
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/module.asm",
+      "sha256": "a48880db856b8a1e2063df313d8a6f2337afe6bbeae97ab42366b013d469dc44",
+      "size": 102
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/presentation.h",
+      "sha256": "7d66ab122a1fa1308fe26eb7df82ff2351a030f348eb2b24a46112fc6768dea4",
+      "size": 111
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/logical.h",
+      "sha256": "463e10643b5a7acb27bc94173c8204f9ee6af6812108327a808f7bffc880ea6f",
+      "size": 246
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/maps.h",
+      "sha256": "2cd3aae69eefa849e59cc1ba70ebef2b0daaa195e5a82068c0ac7e77ef3b56ca",
+      "size": 9747
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/platform.h",
+      "sha256": "cb39003c6da3cbe8f6f6bb57c89d42234281619f5300263960ff80419dc1a7b5",
+      "size": 816
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/original/data.h",
+      "sha256": "2bf2674f2343e9a3572193345c6ef6ad3c7f2a00fcad062a10f54d774df36794",
+      "size": 2905
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/src/original/provenance.json",
+      "sha256": "589b80f3a4d3af9f248096bad461c93a21dc05485b314e69b527ac3a255a5adb",
+      "size": 6599
+    },
+    {
+      "path": "/usr/local/share/cmoc/include/cmoc.h",
+      "sha256": "dcf1857741e31190fcfd0d830b5f866d6394d0dd692603192037c09100f45963",
+      "size": 13329
+    },
+    {
+      "path": "/usr/local/share/cmoc/include/stdarg.h",
+      "sha256": "45ddde55b4facaf89d65564470a8218bfc9949308645a6bab1a424de82e2efc9",
+      "size": 498
+    },
+    {
+      "path": "/private/tmp/daggorath-scale/probe/build.py",
+      "sha256": "f693e7d2de219935d5cc5f7cb66e5d11fae5456924ca6f716a1027602887c4c2",
+      "size": 2978
+    }
+  ],
+  "tools": {
+    "cmoc": {
+      "path": "/usr/local/bin/cmoc",
+      "sha256": "76cf6c59de150c3ced93fe39a349223ef600fc3e3d74d0e7fa76aa9d637c35d4",
+      "size": 2526424,
+      "version": "cmoc (cmoc 0.1.90)\n"
+    },
+    "lwasm": {
+      "path": "/usr/local/bin/lwasm",
+      "sha256": "174d0ef03732647cdb7f5c2b3d75762ed1190902601879961ab3be14635c865c",
+      "size": 202584,
+      "version": "lwasm from lwtools 4.22\n"
+    },
+    "lwlink": {
+      "path": "/usr/local/bin/lwlink",
+      "sha256": "0f834f21dc237b3fd8b9426b0aa23f5a6cfb4d090fb00b45396d2945835c1253",
+      "size": 89224,
+      "version": "lwlink from lwtools 4.22\n"
+    },
+    "os9": {
+      "path": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "sha256": "ee9c3e3585640dfd28f4e3def75a09d14eddeaff464241f7ad94d5b6d51bb569",
+      "size": 199424,
+      "version": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n"
+    }
+  },
+  "libraries": [
+    {
+      "path": "/usr/local/share/cmoc/lib/libcmoc-crt-os9.a",
+      "sha256": "1f2f11ef5cb7de6818f4d9310b6af362b0317776245a06555f4029441fb7f563",
+      "size": 17056
+    },
+    {
+      "path": "/usr/local/share/cmoc/lib/libcmoc-std-os9.a",
+      "sha256": "eb7eaa88fabd56f428d897098e00d317132576fb9e559155db8ce1baeeeac047",
+      "size": 25534
+    }
+  ],
+  "command": [
+    "/usr/local/bin/cmoc",
+    "--os9",
+    "-O0",
+    "--intermediate",
+    "--verbose",
+    "--add-os9-stack-space=1536",
+    "--intdir=/private/tmp/daggorath-scale/build",
+    "--lwasm=/usr/local/bin/lwasm",
+    "--lwlink=/usr/local/bin/lwlink",
+    "-I/private/tmp/daggorath-scale/probe/src",
+    "-o",
+    "dodwiz",
+    "/private/tmp/daggorath-scale/probe/src/main.c",
+    "/private/tmp/daggorath-scale/probe/src/presentation.c",
+    "/private/tmp/daggorath-scale/probe/src/original/logical.c",
+    "/private/tmp/daggorath-scale/probe/src/os9.c",
+    "/private/tmp/daggorath-scale/probe/src/window-path.c",
+    "/private/tmp/daggorath-scale/probe/src/module.asm"
+  ],
+  "cwd": "/private/tmp/daggorath-scale/build",
+  "output": {
+    "path": "/private/tmp/daggorath-scale/build/dodwiz",
+    "sha256": "a9d421f1bb7b3a250efe0309b93d63b72a2e8519d09bcfc6e14e16fcd76871bd",
+    "size": 9147
+  },
+  "ident": "Header for : dodscale\nModule size: $23BB  #9147\nModule CRC : $5F88F2 (Good)\nHdr parity : $31\nExec. off  : $000D  #13\nData size  : $5CB4  #23732\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+  "upstreamApiReference": "nitros9-reference f470fa52eb172b59b22c1b722074998cb42de9b1"
+}

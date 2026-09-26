@@ -1,0 +1,36 @@
+{
+  "request": {
+    "name": "os9_run",
+    "arguments": {
+      "command": "date"
+    }
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6457,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE13bdb7a04e9a3a97375e3d16b7d76547\",\"commandPromptMs\":869}"
+      }
+    ],
+    "structuredContent": {
+      "command": "date",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 6457,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE13bdb7a04e9a3a97375e3d16b7d76547",
+      "commandPromptMs": 869
+    },
+    "isError": false
+  }
+}

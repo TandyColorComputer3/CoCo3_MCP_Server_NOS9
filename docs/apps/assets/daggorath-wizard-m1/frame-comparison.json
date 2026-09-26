@@ -1,0 +1,43 @@
+{
+  "method": "compare_frames.py; exact thresholded 256x192 bitmap at snapshot origin (192,26)",
+  "totalMatchedSnapshots": 72,
+  "allMatchedSideBandsBlack": true,
+  "retainedFrames": [
+    {
+      "snapshot": "snapshot-27.png",
+      "matches": [
+        {
+          "fade": 14,
+          "messages": 0
+        }
+      ],
+      "sideBandsBlack": true,
+      "pixelDifferences": 0,
+      "asset": "fade-in.png"
+    },
+    {
+      "snapshot": "snapshot-43.png",
+      "matches": [
+        {
+          "fade": 0,
+          "messages": 1
+        }
+      ],
+      "sideBandsBlack": true,
+      "pixelDifferences": 0,
+      "asset": "wizard-text.png"
+    },
+    {
+      "snapshot": "snapshot-68.png",
+      "matches": [
+        {
+          "fade": 24,
+          "messages": 0
+        }
+      ],
+      "sideBandsBlack": true,
+      "pixelDifferences": 0,
+      "asset": "fade-out.png"
+    }
+  ]
+}

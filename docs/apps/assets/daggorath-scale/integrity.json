@@ -1,0 +1,35 @@
+{
+  "before": {
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c": "3316f6f175c20f45833d142278d97b3445a9659037f03e094fb30b553da54c12",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c": "6c148d51d2d18a02baf85eceb508dcaef46b932df280952ae19a7fee1c7614a9",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c": "f8e1c45289e9e47791ad8949ff8209393b3ba54423082405124d12fa4230b94b",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/main.c": "05c519672085b53612f7d3d010ec360ca79116189a456dcda7a5bb2c1c8bdb80",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.h": "7d66ab122a1fa1308fe26eb7df82ff2351a030f348eb2b24a46112fc6768dea4",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/module.asm": "3023863472716674e8b4b74f75b0dd8f5599ba36a0a5f9e22a5689276b5e6d84",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/logical.h": "463e10643b5a7acb27bc94173c8204f9ee6af6812108327a808f7bffc880ea6f",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/platform.h": "cb39003c6da3cbe8f6f6bb57c89d42234281619f5300263960ff80419dc1a7b5",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/provenance.json": "589b80f3a4d3af9f248096bad461c93a21dc05485b314e69b527ac3a255a5adb",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/data.h": "2bf2674f2343e9a3572193345c6ef6ad3c7f2a00fcad062a10f54d774df36794",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c": "069299be1f3d242c4212e33ed56cf0dae07c16e15b855a6312496f98a8253d05",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "after": {
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c": "3316f6f175c20f45833d142278d97b3445a9659037f03e094fb30b553da54c12",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c": "6c148d51d2d18a02baf85eceb508dcaef46b932df280952ae19a7fee1c7614a9",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c": "f8e1c45289e9e47791ad8949ff8209393b3ba54423082405124d12fa4230b94b",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/main.c": "05c519672085b53612f7d3d010ec360ca79116189a456dcda7a5bb2c1c8bdb80",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.h": "7d66ab122a1fa1308fe26eb7df82ff2351a030f348eb2b24a46112fc6768dea4",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/module.asm": "3023863472716674e8b4b74f75b0dd8f5599ba36a0a5f9e22a5689276b5e6d84",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/logical.h": "463e10643b5a7acb27bc94173c8204f9ee6af6812108327a808f7bffc880ea6f",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/platform.h": "cb39003c6da3cbe8f6f6bb57c89d42234281619f5300263960ff80419dc1a7b5",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/provenance.json": "589b80f3a4d3af9f248096bad461c93a21dc05485b314e69b527ac3a255a5adb",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/data.h": "2bf2674f2343e9a3572193345c6ef6ad3c7f2a00fcad062a10f54d774df36794",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c": "069299be1f3d242c4212e33ed56cf0dae07c16e15b855a6312496f98a8253d05",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "allEqual": true
+}

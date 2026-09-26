@@ -1,0 +1,19 @@
+{
+  "before": {
+    "apps/daggorath/src/original/provenance.json": "589b80f3a4d3af9f248096bad461c93a21dc05485b314e69b527ac3a255a5adb",
+    "apps/daggorath/src/original/data.h": "2bf2674f2343e9a3572193345c6ef6ad3c7f2a00fcad062a10f54d774df36794",
+    "apps/daggorath/src/original/logical.c": "069299be1f3d242c4212e33ed56cf0dae07c16e15b855a6312496f98a8253d05",
+    "media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "after": {
+    "apps/daggorath/src/original/provenance.json": "589b80f3a4d3af9f248096bad461c93a21dc05485b314e69b527ac3a255a5adb",
+    "apps/daggorath/src/original/data.h": "2bf2674f2343e9a3572193345c6ef6ad3c7f2a00fcad062a10f54d774df36794",
+    "apps/daggorath/src/original/logical.c": "069299be1f3d242c4212e33ed56cf0dae07c16e15b855a6312496f98a8253d05",
+    "media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40"
+  },
+  "unchanged": true
+}

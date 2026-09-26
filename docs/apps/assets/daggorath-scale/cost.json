@@ -1,0 +1,56 @@
+[
+  {
+    "candidate": "a",
+    "commandPromptMs": 74264,
+    "elapsedMs": 79865,
+    "successStatus": "000",
+    "firstObservedFrameTimes": [
+      1790419405345,
+      1790419423761,
+      1790419441082,
+      1790419458479
+    ],
+    "frameIntervalsMs": [
+      18416,
+      17321,
+      17397
+    ],
+    "includesFour240TickHolds": true
+  },
+  {
+    "candidate": "b",
+    "commandPromptMs": 64191,
+    "elapsedMs": 69778,
+    "successStatus": "000",
+    "firstObservedFrameTimes": [
+      1790419483059,
+      1790419499446,
+      1790419514750,
+      1790419529081
+    ],
+    "frameIntervalsMs": [
+      16387,
+      15304,
+      14331
+    ],
+    "includesFour240TickHolds": true
+  },
+  {
+    "candidate": "c",
+    "commandPromptMs": 59892,
+    "elapsedMs": 65479,
+    "successStatus": "000",
+    "firstObservedFrameTimes": [
+      1790419552511,
+      1790419567897,
+      1790419582279,
+      1790419595597
+    ],
+    "frameIntervalsMs": [
+      15386,
+      14382,
+      13318
+    ],
+    "includesFour240TickHolds": true
+  }
+]

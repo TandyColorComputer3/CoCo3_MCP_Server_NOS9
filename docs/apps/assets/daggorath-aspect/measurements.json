@@ -1,0 +1,59 @@
+{
+  "logicalSha256": "e9d1cd67c58cfab97b6cf2c7e0080fd356c69e4833509326349cc5a4b1a009fc",
+  "candidates": [
+    {
+      "capture": "one.png",
+      "viewportWidth": 256,
+      "wizardBoundsExclusive": [
+        274,
+        20,
+        357,
+        133
+      ],
+      "wizardSize": [
+        83,
+        113
+      ],
+      "sideSpaceEach": 192,
+      "pixelDifferences": 0,
+      "rawAspect": 0.7345132743362832,
+      "apparentAspect4by3": 0.36572640117994104
+    },
+    {
+      "capture": "two.png",
+      "viewportWidth": 512,
+      "wizardBoundsExclusive": [
+        228,
+        20,
+        394,
+        133
+      ],
+      "wizardSize": [
+        166,
+        113
+      ],
+      "sideSpaceEach": 64,
+      "pixelDifferences": 0,
+      "rawAspect": 1.4690265486725664,
+      "apparentAspect4by3": 0.7314528023598821
+    },
+    {
+      "capture": "two-and-half.png",
+      "viewportWidth": 640,
+      "wizardBoundsExclusive": [
+        205,
+        20,
+        413,
+        133
+      ],
+      "wizardSize": [
+        208,
+        113
+      ],
+      "sideSpaceEach": 0,
+      "pixelDifferences": 0,
+      "rawAspect": 1.8407079646017699,
+      "apparentAspect4by3": 0.9165191740412979
+    }
+  ]
+}

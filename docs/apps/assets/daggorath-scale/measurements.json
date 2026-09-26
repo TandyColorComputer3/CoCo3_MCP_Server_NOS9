@@ -1,0 +1,898 @@
+{
+  "a": {
+    "width": 512,
+    "height": 192,
+    "origin": [
+      64,
+      4
+    ],
+    "mapsBytes": 1408,
+    "viewportBytes": 12288,
+    "sourceRowsSkipped": 0,
+    "frames": {
+      "wizard": {
+        "matches": [
+          {
+            "id": 27,
+            "time": 1790419405345
+          },
+          {
+            "id": 28,
+            "time": 1790419406374
+          },
+          {
+            "id": 29,
+            "time": 1790419407392
+          },
+          {
+            "id": 30,
+            "time": 1790419408413
+          },
+          {
+            "id": 31,
+            "time": 1790419409447
+          },
+          {
+            "id": 32,
+            "time": 1790419410484
+          },
+          {
+            "id": 33,
+            "time": 1790419411512
+          },
+          {
+            "id": 34,
+            "time": 1790419412531
+          },
+          {
+            "id": 35,
+            "time": 1790419413554
+          },
+          {
+            "id": 36,
+            "time": 1790419414581
+          },
+          {
+            "id": 37,
+            "time": 1790419415599
+          },
+          {
+            "id": 38,
+            "time": 1790419416623
+          },
+          {
+            "id": 39,
+            "time": 1790419417654
+          },
+          {
+            "id": 40,
+            "time": 1790419418675
+          },
+          {
+            "id": 41,
+            "time": 1790419419690
+          },
+          {
+            "id": 42,
+            "time": 1790419420710
+          },
+          {
+            "id": 43,
+            "time": 1790419421727
+          },
+          {
+            "id": 44,
+            "time": 1790419422743
+          }
+        ],
+        "logicalSetPixels": 844,
+        "unsampledLogicalSetPixels": 0,
+        "lossPercent": 0.0,
+        "segmentsWithPixels": 84,
+        "segmentsEntirelyUnsampled": 0,
+        "scaledWizardBboxExclusive": [
+          164,
+          20,
+          330,
+          133
+        ]
+      },
+      "message": {
+        "matches": [
+          {
+            "id": 45,
+            "time": 1790419423761
+          },
+          {
+            "id": 46,
+            "time": 1790419424779
+          },
+          {
+            "id": 47,
+            "time": 1790419425800
+          },
+          {
+            "id": 48,
+            "time": 1790419426817
+          },
+          {
+            "id": 50,
+            "time": 1790419428854
+          },
+          {
+            "id": 52,
+            "time": 1790419430889
+          },
+          {
+            "id": 53,
+            "time": 1790419431911
+          },
+          {
+            "id": 54,
+            "time": 1790419432942
+          },
+          {
+            "id": 55,
+            "time": 1790419433959
+          },
+          {
+            "id": 56,
+            "time": 1790419434977
+          },
+          {
+            "id": 57,
+            "time": 1790419435992
+          },
+          {
+            "id": 58,
+            "time": 1790419437012
+          },
+          {
+            "id": 59,
+            "time": 1790419438027
+          },
+          {
+            "id": 60,
+            "time": 1790419439049
+          },
+          {
+            "id": 61,
+            "time": 1790419440064
+          }
+        ],
+        "logicalSetPixels": 844,
+        "unsampledLogicalSetPixels": 0,
+        "lossPercent": 0.0,
+        "segmentsWithPixels": 84,
+        "segmentsEntirelyUnsampled": 0,
+        "messageInkPixels": 576,
+        "messageInkUnsampled": 0
+      },
+      "thin": {
+        "matches": [
+          {
+            "id": 62,
+            "time": 1790419441082
+          },
+          {
+            "id": 63,
+            "time": 1790419442102
+          },
+          {
+            "id": 64,
+            "time": 1790419443126
+          },
+          {
+            "id": 65,
+            "time": 1790419444155
+          },
+          {
+            "id": 66,
+            "time": 1790419445174
+          },
+          {
+            "id": 67,
+            "time": 1790419446198
+          },
+          {
+            "id": 68,
+            "time": 1790419447227
+          },
+          {
+            "id": 69,
+            "time": 1790419448266
+          },
+          {
+            "id": 70,
+            "time": 1790419449294
+          },
+          {
+            "id": 71,
+            "time": 1790419450313
+          },
+          {
+            "id": 72,
+            "time": 1790419451334
+          },
+          {
+            "id": 73,
+            "time": 1790419452346
+          },
+          {
+            "id": 74,
+            "time": 1790419453367
+          },
+          {
+            "id": 75,
+            "time": 1790419454384
+          },
+          {
+            "id": 76,
+            "time": 1790419455407
+          },
+          {
+            "id": 77,
+            "time": 1790419456439
+          },
+          {
+            "id": 78,
+            "time": 1790419457455
+          }
+        ],
+        "logicalSetPixels": 25,
+        "unsampledLogicalSetPixels": 0,
+        "lossPercent": 0.0,
+        "segmentsWithPixels": 11,
+        "segmentsEntirelyUnsampled": 0
+      },
+      "fine": {
+        "matches": [
+          {
+            "id": 79,
+            "time": 1790419458479
+          },
+          {
+            "id": 80,
+            "time": 1790419459507
+          },
+          {
+            "id": 81,
+            "time": 1790419460526
+          },
+          {
+            "id": 82,
+            "time": 1790419461548
+          }
+        ],
+        "logicalSetPixels": 6,
+        "unsampledLogicalSetPixels": 0,
+        "lossPercent": 0.0,
+        "segmentsWithPixels": 6,
+        "segmentsEntirelyUnsampled": 0
+      }
+    },
+    "fontVerticalSampling": {
+      "152": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": []
+      },
+      "168": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": []
+      },
+      "176": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": []
+      }
+    }
+  },
+  "b": {
+    "width": 426,
+    "height": 160,
+    "origin": [
+      107,
+      20
+    ],
+    "mapsBytes": 1172,
+    "viewportBytes": 8640,
+    "sourceRowsSkipped": 32,
+    "frames": {
+      "wizard": {
+        "matches": [
+          {
+            "id": 104,
+            "time": 1790419483059
+          },
+          {
+            "id": 105,
+            "time": 1790419484087
+          },
+          {
+            "id": 106,
+            "time": 1790419485107
+          },
+          {
+            "id": 107,
+            "time": 1790419486130
+          },
+          {
+            "id": 108,
+            "time": 1790419487162
+          },
+          {
+            "id": 109,
+            "time": 1790419488197
+          },
+          {
+            "id": 110,
+            "time": 1790419489228
+          },
+          {
+            "id": 111,
+            "time": 1790419490248
+          },
+          {
+            "id": 112,
+            "time": 1790419491267
+          },
+          {
+            "id": 113,
+            "time": 1790419492283
+          },
+          {
+            "id": 114,
+            "time": 1790419493299
+          },
+          {
+            "id": 115,
+            "time": 1790419494319
+          },
+          {
+            "id": 116,
+            "time": 1790419495341
+          },
+          {
+            "id": 117,
+            "time": 1790419496373
+          },
+          {
+            "id": 118,
+            "time": 1790419497410
+          },
+          {
+            "id": 119,
+            "time": 1790419498424
+          }
+        ],
+        "logicalSetPixels": 844,
+        "unsampledLogicalSetPixels": 146,
+        "lossPercent": 17.298578199052134,
+        "segmentsWithPixels": 84,
+        "segmentsEntirelyUnsampled": 0,
+        "scaledWizardBboxExclusive": [
+          137,
+          17,
+          275,
+          111
+        ]
+      },
+      "message": {
+        "matches": [
+          {
+            "id": 120,
+            "time": 1790419499446
+          },
+          {
+            "id": 121,
+            "time": 1790419500475
+          },
+          {
+            "id": 122,
+            "time": 1790419501493
+          },
+          {
+            "id": 123,
+            "time": 1790419502518
+          },
+          {
+            "id": 124,
+            "time": 1790419503546
+          },
+          {
+            "id": 125,
+            "time": 1790419504564
+          },
+          {
+            "id": 126,
+            "time": 1790419505584
+          },
+          {
+            "id": 127,
+            "time": 1790419506601
+          },
+          {
+            "id": 128,
+            "time": 1790419507616
+          },
+          {
+            "id": 129,
+            "time": 1790419508634
+          },
+          {
+            "id": 130,
+            "time": 1790419509658
+          },
+          {
+            "id": 131,
+            "time": 1790419510689
+          },
+          {
+            "id": 132,
+            "time": 1790419511706
+          },
+          {
+            "id": 133,
+            "time": 1790419512729
+          },
+          {
+            "id": 134,
+            "time": 1790419513741
+          }
+        ],
+        "logicalSetPixels": 844,
+        "unsampledLogicalSetPixels": 146,
+        "lossPercent": 17.298578199052134,
+        "segmentsWithPixels": 84,
+        "segmentsEntirelyUnsampled": 0,
+        "messageInkPixels": 576,
+        "messageInkUnsampled": 76
+      },
+      "thin": {
+        "matches": [
+          {
+            "id": 135,
+            "time": 1790419514750
+          },
+          {
+            "id": 136,
+            "time": 1790419515763
+          },
+          {
+            "id": 137,
+            "time": 1790419516780
+          },
+          {
+            "id": 138,
+            "time": 1790419517797
+          },
+          {
+            "id": 139,
+            "time": 1790419518817
+          },
+          {
+            "id": 140,
+            "time": 1790419519835
+          },
+          {
+            "id": 141,
+            "time": 1790419520853
+          },
+          {
+            "id": 142,
+            "time": 1790419521890
+          },
+          {
+            "id": 143,
+            "time": 1790419522924
+          },
+          {
+            "id": 144,
+            "time": 1790419523958
+          },
+          {
+            "id": 145,
+            "time": 1790419524992
+          },
+          {
+            "id": 146,
+            "time": 1790419526011
+          },
+          {
+            "id": 147,
+            "time": 1790419527043
+          },
+          {
+            "id": 148,
+            "time": 1790419528060
+          }
+        ],
+        "logicalSetPixels": 25,
+        "unsampledLogicalSetPixels": 5,
+        "lossPercent": 20.0,
+        "segmentsWithPixels": 11,
+        "segmentsEntirelyUnsampled": 0
+      },
+      "fine": {
+        "matches": [
+          {
+            "id": 149,
+            "time": 1790419529081
+          },
+          {
+            "id": 150,
+            "time": 1790419530098
+          },
+          {
+            "id": 151,
+            "time": 1790419531115
+          },
+          {
+            "id": 152,
+            "time": 1790419532133
+          }
+        ],
+        "logicalSetPixels": 6,
+        "unsampledLogicalSetPixels": 0,
+        "lossPercent": 0.0,
+        "segmentsWithPixels": 6,
+        "segmentsEntirelyUnsampled": 0
+      }
+    },
+    "fontVerticalSampling": {
+      "152": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": [
+          [
+            "B",
+            "D"
+          ]
+        ]
+      },
+      "168": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "letterCollisions": []
+      },
+      "176": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": [
+          [
+            "B",
+            "D"
+          ]
+        ]
+      }
+    }
+  },
+  "c": {
+    "width": 384,
+    "height": 144,
+    "origin": [
+      128,
+      28
+    ],
+    "mapsBytes": 1056,
+    "viewportBytes": 6912,
+    "sourceRowsSkipped": 48,
+    "frames": {
+      "wizard": {
+        "matches": [
+          {
+            "id": 173,
+            "time": 1790419552511
+          },
+          {
+            "id": 174,
+            "time": 1790419553547
+          },
+          {
+            "id": 175,
+            "time": 1790419554574
+          },
+          {
+            "id": 176,
+            "time": 1790419555596
+          },
+          {
+            "id": 177,
+            "time": 1790419556621
+          },
+          {
+            "id": 178,
+            "time": 1790419557650
+          },
+          {
+            "id": 179,
+            "time": 1790419558668
+          },
+          {
+            "id": 180,
+            "time": 1790419559702
+          },
+          {
+            "id": 181,
+            "time": 1790419560721
+          },
+          {
+            "id": 182,
+            "time": 1790419561757
+          },
+          {
+            "id": 183,
+            "time": 1790419562785
+          },
+          {
+            "id": 184,
+            "time": 1790419563807
+          },
+          {
+            "id": 185,
+            "time": 1790419564822
+          },
+          {
+            "id": 186,
+            "time": 1790419565841
+          },
+          {
+            "id": 187,
+            "time": 1790419566863
+          }
+        ],
+        "logicalSetPixels": 844,
+        "unsampledLogicalSetPixels": 207,
+        "lossPercent": 24.526066350710902,
+        "segmentsWithPixels": 84,
+        "segmentsEntirelyUnsampled": 0,
+        "scaledWizardBboxExclusive": [
+          123,
+          15,
+          248,
+          100
+        ]
+      },
+      "message": {
+        "matches": [
+          {
+            "id": 188,
+            "time": 1790419567897
+          },
+          {
+            "id": 189,
+            "time": 1790419568928
+          },
+          {
+            "id": 190,
+            "time": 1790419569952
+          },
+          {
+            "id": 191,
+            "time": 1790419570984
+          },
+          {
+            "id": 192,
+            "time": 1790419572018
+          },
+          {
+            "id": 193,
+            "time": 1790419573037
+          },
+          {
+            "id": 194,
+            "time": 1790419574071
+          },
+          {
+            "id": 195,
+            "time": 1790419575106
+          },
+          {
+            "id": 196,
+            "time": 1790419576140
+          },
+          {
+            "id": 197,
+            "time": 1790419577157
+          },
+          {
+            "id": 198,
+            "time": 1790419578177
+          },
+          {
+            "id": 199,
+            "time": 1790419579211
+          },
+          {
+            "id": 200,
+            "time": 1790419580229
+          }
+        ],
+        "logicalSetPixels": 844,
+        "unsampledLogicalSetPixels": 207,
+        "lossPercent": 24.526066350710902,
+        "segmentsWithPixels": 84,
+        "segmentsEntirelyUnsampled": 0,
+        "messageInkPixels": 576,
+        "messageInkUnsampled": 93
+      },
+      "thin": {
+        "matches": [
+          {
+            "id": 202,
+            "time": 1790419582279
+          },
+          {
+            "id": 203,
+            "time": 1790419583300
+          },
+          {
+            "id": 204,
+            "time": 1790419584316
+          },
+          {
+            "id": 205,
+            "time": 1790419585337
+          },
+          {
+            "id": 206,
+            "time": 1790419586370
+          },
+          {
+            "id": 207,
+            "time": 1790419587406
+          },
+          {
+            "id": 208,
+            "time": 1790419588436
+          },
+          {
+            "id": 209,
+            "time": 1790419589456
+          },
+          {
+            "id": 210,
+            "time": 1790419590492
+          },
+          {
+            "id": 211,
+            "time": 1790419591509
+          },
+          {
+            "id": 212,
+            "time": 1790419592545
+          },
+          {
+            "id": 213,
+            "time": 1790419593560
+          },
+          {
+            "id": 214,
+            "time": 1790419594580
+          }
+        ],
+        "logicalSetPixels": 25,
+        "unsampledLogicalSetPixels": 6,
+        "lossPercent": 24.0,
+        "segmentsWithPixels": 11,
+        "segmentsEntirelyUnsampled": 1
+      },
+      "fine": {
+        "matches": [
+          {
+            "id": 215,
+            "time": 1790419595597
+          },
+          {
+            "id": 216,
+            "time": 1790419596615
+          },
+          {
+            "id": 217,
+            "time": 1790419597647
+          },
+          {
+            "id": 218,
+            "time": 1790419598669
+          }
+        ],
+        "logicalSetPixels": 6,
+        "unsampledLogicalSetPixels": 0,
+        "lossPercent": 0.0,
+        "segmentsWithPixels": 6,
+        "segmentsEntirelyUnsampled": 0
+      }
+    },
+    "fontVerticalSampling": {
+      "152": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": [
+          [
+            "B",
+            "D"
+          ]
+        ]
+      },
+      "168": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": [
+          [
+            "B",
+            "D"
+          ]
+        ]
+      },
+      "176": {
+        "rowsRetained": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "letterCollisions": [
+          [
+            "B",
+            "D"
+          ]
+        ]
+      }
+    }
+  }
+}

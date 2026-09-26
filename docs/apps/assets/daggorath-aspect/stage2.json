@@ -1,0 +1,120 @@
+{
+  "staged": true,
+  "installedInCanonicalVhd": false,
+  "hostArtifact": {
+    "path": "/private/tmp/daggorath-aspect/build2/dodwiz",
+    "snapshot": "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.module",
+    "sha256": "6a257283489c2123555cc6e267cabd3bc1327a73cf51ee8c831dae734781661a"
+  },
+  "module": {
+    "name": "dodaspect",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 5263,
+    "crc": "46E812",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 13,
+    "dataSize": 23078,
+    "edition": 1
+  },
+  "guestDestination": {
+    "image": "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk",
+    "path": "/dodaspect",
+    "device": null
+  },
+  "replacedExisting": false,
+  "stagingMethod": "fresh-artifact-floppy",
+  "image": {
+    "path": "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk",
+    "sha256": "7ef88d8076e069e78c9b26113953221f1f32d60eab05fd13bb8aa8a6133a682c",
+    "tracks": 40,
+    "sides": 2,
+    "sectorsPerTrack": 18,
+    "bytesPerSector": 256
+  },
+  "requires": "cold boot with this image attached; do not restore a state made with different media bytes",
+  "provenance": {
+    "path": "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/build-provenance.json",
+    "sha256": "15b8946ae9f0efd69b4871c0efa6625fd7052bc4e77bcb4b2ecfcdf84c630652",
+    "claimsVerified": false
+  },
+  "toolshed": {
+    "executable": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+    "version": "os9 from Toolshed 2.2",
+    "hostIdent": "Header for : dodaspect\nModule size: $148F  #5263\nModule CRC : $46E812 (Good)\nHdr parity : $28\nExec. off  : $000D  #13\nData size  : $5A26  #23078\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "installedIdent": "Header for : dodaspect\nModule size: $148F  #5263\nModule CRC : $46E812 (Good)\nHdr parity : $28\nExec. off  : $000D  #13\nData size  : $5A26  #23078\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "commands": [
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [],
+      "stdout": "\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n",
+      "stderr": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n"
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.module"
+      ],
+      "stdout": "Header for : dodaspect\nModule size: $148F  #5263\nModule CRC : $46E812 (Good)\nHdr parity : $28\nExec. off  : $000D  #13\nData size  : $5A26  #23078\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "format",
+        "-e",
+        "-t40",
+        "-ds",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk"
+      ],
+      "stdout": "Format Summary\n--------------\nGeometry Data:\n      Cylinders: 40\n          Heads: 2\n  Sectors/track: 18\n    Sector size: 256\n\nLogical Data:\n  Total sectors: 1440\n  Size in bytes: 368640\n   Cluster size: 1\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.module",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk,dodaspect"
+      ],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "attr",
+        "-e",
+        "-pe",
+        "-pr",
+        "-nw",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk,dodaspect"
+      ],
+      "stdout": "--e-re-r\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk,dodaspect"
+      ],
+      "stdout": "Header for : dodaspect\nModule size: $148F  #5263\nModule CRC : $46E812 (Good)\nHdr parity : $28\nExec. off  : $000D  #13\nData size  : $5A26  #23078\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk,dodaspect",
+        "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/verified.module"
+      ],
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "initialBuildTimeout": {
+    "command": "dodwiz",
+    "completed": false,
+    "commandCompleted": false,
+    "status": null,
+    "statusText": null,
+    "timedOut": true,
+    "shellReady": false,
+    "outcome": "timeout",
+    "phase": "command",
+    "elapsedMs": 120021,
+    "outputComplete": false,
+    "allowGraphics": true,
+    "displayDepartures": 1,
+    "consoleReturned": false,
+    "executionState": "AWAITING_TERM",
+    "marker": "MCPDONE1669ba9721c83b8135e67f2e9f060e46",
+    "error": "deadline exceeded during command",
+    "timeoutReason": "console_not_returned"
+  },
+  "finalSession": [
+    {
+      "id": 1,
+      "request": {
+        "name": "coco_start",
+        "arguments": {}
+      },
+      "result": {
+        "ok": true,
+        "alreadyRunning": false,
+        "pid": 17965,
+        "bridge": true
+      },
+      "isError": false
+    },
+    {
+      "id": 3,
+      "request": {
+        "name": "coco_mount_flop",
+        "arguments": {
+          "drive": "flop2",
+          "path": "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk"
+        }
+      },
+      "result": {
+        "filename": "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk",
+        "briefname": "flop2"
+      },
+      "isError": false
+    },
+    {
+      "id": 4,
+      "request": {
+        "name": "coco_type",
+        "arguments": {
+          "text": "DOS"
+        }
+      },
+      "result": {
+        "queued": true,
+        "text": "DOS{ENTER}"
+      },
+      "isError": false
+    },
+    {
+      "id": 6,
+      "request": {
+        "name": "coco_save_state",
+        "arguments": {
+          "name": "wizard_ready2"
+        }
+      },
+      "result": {
+        "scheduled": true,
+        "name": "wizard_ready2",
+        "fileFound": true,
+        "file": "/private/tmp/daggorath-m1/live2/states/coco3h/wizard_ready2.sta"
+      },
+      "isError": false
+    },
+    {
+      "id": 7,
+      "request": {
+        "name": "os9_restore_ready",
+        "arguments": {}
+      },
+      "result": {
+        "ready": true,
+        "state": "wizard_ready2",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6168,
+        "file": "/private/tmp/daggorath-m1/live2/states/coco3h/wizard_ready2.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 03:12:59\n\n{Term|02}/DD:p=MCPd1321ff258bc0517:\n\nMCPd1321ff258bc0517:echo READYd1321ff258bc0517\nREADYd1321ff258bc0517\n\nMCPd1321ff258bc0517:"
+        },
+        "handshake": {
+          "prompt": "MCPd1321ff258bc0517:",
+          "marker": "READYd1321ff258bc0517",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    },
+    {
+      "id": 8,
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "load /d1/dodwiz"
+        }
+      },
+      "result": {
+        "command": "load /d1/dodwiz",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11108,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEfbac6d18b453c77433dbf45a58c3796c",
+        "commandPromptMs": 5505
+      },
+      "isError": false
+    },
+    {
+      "id": 9,
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "dodwiz",
+          "timeout_ms": 120000,
+          "allow_graphics": true
+        }
+      },
+      "result": {
+        "command": "dodwiz",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 104116,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEe2ec26baf16d52c3b55ee79508b2d94c",
+        "commandPromptMs": 98528
+      },
+      "isError": false
+    },
+    {
+      "id": 71,
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "date"
+        }
+      },
+      "result": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6470,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE8ff2074f7a7c4385c3eff5b259957509",
+        "commandPromptMs": 865
+      },
+      "isError": false
+    },
+    {
+      "id": 72,
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "dodwiz cancel",
+          "timeout_ms": 120000,
+          "allow_graphics": true
+        }
+      },
+      "result": {
+        "command": "dodwiz cancel",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 3,
+        "statusText": "003",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 31254,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEdc8a470785c48646408379a717f92ec1",
+        "commandPromptMs": 25666
+      },
+      "isError": false
+    },
+    {
+      "id": 94,
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "pwd"
+        }
+      },
+      "result": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7371,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEc1c896ec3ab0b017e0b2106e0af2d37c",
+        "commandPromptMs": 1783
+      },
+      "isError": false
+    },
+    {
+      "id": 96,
+      "request": {
+        "name": "os9_run",
+        "arguments": {
+          "command": "unlink dodwiz"
+        }
+      },
+      "result": {
+        "command": "unlink dodwiz",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7371,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE4dba4b339ae82836a6a7a5911f9b01a2",
+        "commandPromptMs": 1766
+      },
+      "isError": false
+    },
+    {
+      "id": 97,
+      "request": {
+        "name": "coco_stop",
+        "arguments": {}
+      },
+      "result": {
+        "ok": true
+      },
+      "isError": false
+    }
+  ]
+}

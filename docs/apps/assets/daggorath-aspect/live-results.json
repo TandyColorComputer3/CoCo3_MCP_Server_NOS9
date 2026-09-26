@@ -1,0 +1,657 @@
+[
+  {
+    "id": 1,
+    "request": {
+      "name": "coco_start",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true,\"alreadyRunning\":false,\"pid\":18799,\"bridge\":true}"
+        }
+      ]
+    },
+    "session": "live"
+  },
+  {
+    "id": 2,
+    "request": {
+      "name": "coco_mount_flop",
+      "arguments": {
+        "drive": "flop2",
+        "path": "/private/tmp/daggorath-aspect/staged/stage-U0Uvl8/artifact.dsk"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"briefname\":\"flop2\",\"filename\":\"/private/tmp/daggorath-aspect/staged/stage-U0Uvl8/artifact.dsk\"}"
+        }
+      ]
+    },
+    "session": "live"
+  },
+  {
+    "id": 4,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "DOS"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"DOS{ENTER}\"}"
+        }
+      ]
+    },
+    "session": "live"
+  },
+  {
+    "id": 7,
+    "request": {
+      "name": "coco_save_state",
+      "arguments": {
+        "name": "aspect_ready"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"scheduled\":true,\"name\":\"aspect_ready\",\"fileFound\":false,\"file\":null}"
+        }
+      ]
+    },
+    "session": "live"
+  },
+  {
+    "id": 8,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":false,\"state\":\"aspect_ready\",\"loadScheduled\":false,\"loadCompleted\":false,\"shellVerified\":false,\"timedOut\":false,\"status\":\"state_missing\",\"phase\":\"preflight\",\"elapsedMs\":0,\"file\":\"/private/tmp/daggorath-aspect/live/states/coco3h/aspect_ready.sta\",\"error\":\"state file does not exist\"}"
+        }
+      ],
+      "structuredContent": {
+        "ready": false,
+        "state": "aspect_ready",
+        "loadScheduled": false,
+        "loadCompleted": false,
+        "shellVerified": false,
+        "timedOut": false,
+        "status": "state_missing",
+        "phase": "preflight",
+        "elapsedMs": 0,
+        "file": "/private/tmp/daggorath-aspect/live/states/coco3h/aspect_ready.sta",
+        "error": "state file does not exist"
+      },
+      "isError": true
+    },
+    "session": "live"
+  },
+  {
+    "id": 9,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "load /d1/dodaspect"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"load /d1/dodaspect\",\"completed\":false,\"commandCompleted\":false,\"status\":null,\"statusText\":null,\"timedOut\":false,\"shellReady\":false,\"outcome\":\"shell_not_ready\",\"phase\":\"preflight\",\"elapsedMs\":0,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"READY_TERM\",\"error\":\"call os9_restore_ready first\"}"
+        }
+      ],
+      "structuredContent": {
+        "command": "load /d1/dodaspect",
+        "completed": false,
+        "commandCompleted": false,
+        "status": null,
+        "statusText": null,
+        "timedOut": false,
+        "shellReady": false,
+        "outcome": "shell_not_ready",
+        "phase": "preflight",
+        "elapsedMs": 0,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "READY_TERM",
+        "error": "call os9_restore_ready first"
+      },
+      "isError": true
+    },
+    "session": "live"
+  },
+  {
+    "id": 10,
+    "request": {
+      "name": "coco_save_state",
+      "arguments": {
+        "name": "aspect_ready"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"scheduled\":true,\"name\":\"aspect_ready\",\"fileFound\":true,\"file\":\"/private/tmp/daggorath-aspect/live/states/coco3h/aspect_ready.sta\"}"
+        }
+      ]
+    },
+    "session": "live"
+  },
+  {
+    "id": 11,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"aspect_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6177,\"file\":\"/private/tmp/daggorath-aspect/live/states/coco3h/aspect_ready.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"\\nMemory size - 2048k.\\nCpu type - 6309 (Native Mode)\\nDriveWire - Not detected.\\nCoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 03:26:58\\n\\n{Term|02}/DD:p=MCPd15b0656161de7e7:\\n\\nMCPd15b0656161de7e7:echo READYd15b0656161de7e7\\nREADYd15b0656161de7e7\\n\\nMCPd15b0656161de7e7:\"},\"handshake\":{\"prompt\":\"MCPd15b0656161de7e7:\",\"marker\":\"READYd15b0656161de7e7\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "aspect_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6177,
+        "file": "/private/tmp/daggorath-aspect/live/states/coco3h/aspect_ready.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 03:26:58\n\n{Term|02}/DD:p=MCPd15b0656161de7e7:\n\nMCPd15b0656161de7e7:echo READYd15b0656161de7e7\nREADYd15b0656161de7e7\n\nMCPd15b0656161de7e7:"
+        },
+        "handshake": {
+          "prompt": "MCPd15b0656161de7e7:",
+          "marker": "READYd15b0656161de7e7",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    },
+    "session": "live"
+  },
+  {
+    "id": 12,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "load /d1/dodaspect"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"load /d1/dodaspect\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11229,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEc5b1a6e8f0235001bc14078ec2b9dd27\",\"commandPromptMs\":5627}"
+        }
+      ],
+      "structuredContent": {
+        "command": "load /d1/dodaspect",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11229,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEc5b1a6e8f0235001bc14078ec2b9dd27",
+        "commandPromptMs": 5627
+      },
+      "isError": false
+    },
+    "session": "live"
+  },
+  {
+    "id": 13,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodaspect 1",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodaspect 1\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":37149,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE9f2d24cbdf79a05fef89749d71d01e63\",\"commandPromptMs\":31559}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodaspect 1",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 37149,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE9f2d24cbdf79a05fef89749d71d01e63",
+        "commandPromptMs": 31559
+      },
+      "isError": false
+    },
+    "session": "live"
+  },
+  {
+    "id": 40,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodaspect 2",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodaspect 2\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":50118,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE726188069a889dc6c9b527e49ce39271\",\"commandPromptMs\":44527}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodaspect 2",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 50118,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE726188069a889dc6c9b527e49ce39271",
+        "commandPromptMs": 44527
+      },
+      "isError": false
+    },
+    "session": "live"
+  },
+  {
+    "id": 74,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodaspect 5",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodaspect 5\",\"completed\":false,\"commandCompleted\":true,\"status\":null,\"statusText\":null,\"timedOut\":true,\"shellReady\":false,\"outcome\":\"timeout\",\"phase\":\"status_marker\",\"elapsedMs\":120016,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"AWAITING_FINAL_PROMPT\",\"marker\":\"MCPDONE8bb35116a57e6f146d970413d9aeb379\",\"commandPromptMs\":119817,\"error\":\"deadline exceeded during status_marker\"}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodaspect 5",
+        "completed": false,
+        "commandCompleted": true,
+        "status": null,
+        "statusText": null,
+        "timedOut": true,
+        "shellReady": false,
+        "outcome": "timeout",
+        "phase": "status_marker",
+        "elapsedMs": 120016,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "AWAITING_FINAL_PROMPT",
+        "marker": "MCPDONE8bb35116a57e6f146d970413d9aeb379",
+        "commandPromptMs": 119817,
+        "error": "deadline exceeded during status_marker"
+      },
+      "isError": true
+    },
+    "session": "live"
+  },
+  {
+    "id": 136,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "pwd"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"pwd\",\"completed\":false,\"commandCompleted\":false,\"status\":null,\"statusText\":null,\"timedOut\":false,\"shellReady\":false,\"outcome\":\"shell_not_ready\",\"phase\":\"preflight\",\"elapsedMs\":0,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"READY_TERM\",\"error\":\"call os9_restore_ready first\"}"
+        }
+      ],
+      "structuredContent": {
+        "command": "pwd",
+        "completed": false,
+        "commandCompleted": false,
+        "status": null,
+        "statusText": null,
+        "timedOut": false,
+        "shellReady": false,
+        "outcome": "shell_not_ready",
+        "phase": "preflight",
+        "elapsedMs": 0,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "READY_TERM",
+        "error": "call os9_restore_ready first"
+      },
+      "isError": true
+    },
+    "session": "live"
+  },
+  {
+    "id": 137,
+    "request": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    },
+    "session": "live"
+  },
+  {
+    "id": 1,
+    "request": {
+      "name": "coco_start",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true,\"alreadyRunning\":false,\"pid\":19121,\"bridge\":true}"
+        }
+      ]
+    },
+    "session": "live2"
+  },
+  {
+    "id": 2,
+    "request": {
+      "name": "coco_mount_flop",
+      "arguments": {
+        "drive": "flop2",
+        "path": "/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"briefname\":\"flop2\",\"filename\":\"/private/tmp/daggorath-aspect/staged/stage-EyTOIi/artifact.dsk\"}"
+        }
+      ]
+    },
+    "session": "live2"
+  },
+  {
+    "id": 4,
+    "request": {
+      "name": "coco_type",
+      "arguments": {
+        "text": "DOS"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"queued\":true,\"text\":\"DOS{ENTER}\"}"
+        }
+      ]
+    },
+    "session": "live2"
+  },
+  {
+    "id": 6,
+    "request": {
+      "name": "coco_save_state",
+      "arguments": {
+        "name": "aspect_ready2"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"scheduled\":true,\"name\":\"aspect_ready2\",\"fileFound\":true,\"file\":\"/private/tmp/daggorath-aspect/live2/states/coco3h/aspect_ready2.sta\"}"
+        }
+      ]
+    },
+    "session": "live2"
+  },
+  {
+    "id": 7,
+    "request": {
+      "name": "os9_restore_ready",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"aspect_ready2\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6225,\"file\":\"/private/tmp/daggorath-aspect/live2/states/coco3h/aspect_ready2.sta\",\"postLoadEpoch\":1,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"\\nMemory size - 2048k.\\nCpu type - 6309 (Native Mode)\\nDriveWire - Not detected.\\nCoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 03:33:13\\n\\n{Term|02}/DD:p=MCPb3d7ec11a8e94c9e:\\n\\nMCPb3d7ec11a8e94c9e:echo READYb3d7ec11a8e94c9e\\nREADYb3d7ec11a8e94c9e\\n\\nMCPb3d7ec11a8e94c9e:\"},\"handshake\":{\"prompt\":\"MCPb3d7ec11a8e94c9e:\",\"marker\":\"READYb3d7ec11a8e94c9e\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "aspect_ready2",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6225,
+        "file": "/private/tmp/daggorath-aspect/live2/states/coco3h/aspect_ready2.sta",
+        "postLoadEpoch": 1,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 03:33:13\n\n{Term|02}/DD:p=MCPb3d7ec11a8e94c9e:\n\nMCPb3d7ec11a8e94c9e:echo READYb3d7ec11a8e94c9e\nREADYb3d7ec11a8e94c9e\n\nMCPb3d7ec11a8e94c9e:"
+        },
+        "handshake": {
+          "prompt": "MCPb3d7ec11a8e94c9e:",
+          "marker": "READYb3d7ec11a8e94c9e",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    },
+    "session": "live2"
+  },
+  {
+    "id": 8,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "load /d1/dodaspect"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"load /d1/dodaspect\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":11212,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE8784956ee1242154a66ba8462e9d7630\",\"commandPromptMs\":5625}"
+        }
+      ],
+      "structuredContent": {
+        "command": "load /d1/dodaspect",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 11212,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE8784956ee1242154a66ba8462e9d7630",
+        "commandPromptMs": 5625
+      },
+      "isError": false
+    },
+    "session": "live2"
+  },
+  {
+    "id": 9,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "dodaspect 5",
+        "timeout_ms": 120000,
+        "allow_graphics": true
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"dodaspect 5\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":56134,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEe7006b2ed85889bf84c4dbe26124f657\",\"commandPromptMs\":50548}"
+        }
+      ],
+      "structuredContent": {
+        "command": "dodaspect 5",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 56134,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEe7006b2ed85889bf84c4dbe26124f657",
+        "commandPromptMs": 50548
+      },
+      "isError": false
+    },
+    "session": "live2"
+  },
+  {
+    "id": 47,
+    "request": {
+      "name": "os9_run",
+      "arguments": {
+        "command": "pwd"
+      }
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7402,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE8c67a4f085336c4d2d574cb4b1487754\",\"commandPromptMs\":1797}"
+        }
+      ],
+      "structuredContent": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7402,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE8c67a4f085336c4d2d574cb4b1487754",
+        "commandPromptMs": 1797
+      },
+      "isError": false
+    },
+    "session": "live2"
+  },
+  {
+    "id": 48,
+    "request": {
+      "name": "coco_stop",
+      "arguments": {}
+    },
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ok\":true}"
+        }
+      ]
+    },
+    "session": "live2"
+  }
+]

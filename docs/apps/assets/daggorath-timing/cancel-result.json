@@ -1,0 +1,38 @@
+{
+  "request": {
+    "name": "os9_run",
+    "arguments": {
+      "command": "dodwiz cancel",
+      "timeout_ms": 120000,
+      "allow_graphics": true
+    }
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"command\":\"dodwiz cancel\",\"completed\":true,\"commandCompleted\":true,\"status\":3,\"statusText\":\"003\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":10778,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEa3ebd31e228698fbcd03463178f0982e\",\"commandPromptMs\":5169}"
+      }
+    ],
+    "structuredContent": {
+      "command": "dodwiz cancel",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 3,
+      "statusText": "003",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 10778,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEa3ebd31e228698fbcd03463178f0982e",
+      "commandPromptMs": 5169
+    },
+    "isError": false
+  }
+}

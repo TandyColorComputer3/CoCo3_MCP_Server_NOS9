@@ -1,0 +1,120 @@
+{
+  "staged": true,
+  "installedInCanonicalVhd": false,
+  "hostArtifact": {
+    "path": "/private/tmp/daggorath-m1/build2/dodwiz",
+    "snapshot": "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.module",
+    "sha256": "00f95126c0bf6336ed911070b95bb81220f6a794ceaaf35866b384863790b775"
+  },
+  "module": {
+    "name": "dodwiz",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 5160,
+    "crc": "30A321",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 13,
+    "dataSize": 7718,
+    "edition": 1
+  },
+  "guestDestination": {
+    "image": "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk",
+    "path": "/dodwiz",
+    "device": null
+  },
+  "replacedExisting": false,
+  "stagingMethod": "fresh-artifact-floppy",
+  "image": {
+    "path": "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk",
+    "sha256": "4753f9def7fe9fdcf7ccb5f519588c688f6d85c3834e3316b59905db5818a314",
+    "tracks": 40,
+    "sides": 2,
+    "sectorsPerTrack": 18,
+    "bytesPerSector": 256
+  },
+  "requires": "cold boot with this image attached; do not restore a state made with different media bytes",
+  "provenance": {
+    "path": "/private/tmp/daggorath-m1/staged/stage-KbmIsp/build-provenance.json",
+    "sha256": "e5794aa8cb3e68852766eaa469896f2edbe89a4c22a405d8ec82bf0b369854b0",
+    "claimsVerified": false
+  },
+  "toolshed": {
+    "executable": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+    "version": "os9 from Toolshed 2.2",
+    "hostIdent": "Header for : dodwiz\nModule size: $1428  #5160\nModule CRC : $30A321 (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $1E26  #7718\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "installedIdent": "Header for : dodwiz\nModule size: $1428  #5160\nModule CRC : $30A321 (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $1E26  #7718\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "commands": [
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [],
+      "stdout": "\nCommands:\n     attr\n     cmp\n     copy\n     dcheck\n     del\n     deldir\n     dir\n     dsave\n     dump\n     format\n     free\n     fstat\n     gen\n     id\n     ident\n     list\n     makdir\n     modbust\n     padrom\n     rename\n",
+      "stderr": "os9 from Toolshed 2.2\nSyntax: os9 {[<opts>]} <command> {[<opts>]}\nUsage:  OS-9 File Tools Executive\nOptions:\n"
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.module"
+      ],
+      "stdout": "Header for : dodwiz\nModule size: $1428  #5160\nModule CRC : $30A321 (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $1E26  #7718\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "format",
+        "-e",
+        "-t40",
+        "-ds",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk"
+      ],
+      "stdout": "Format Summary\n--------------\nGeometry Data:\n      Cylinders: 40\n          Heads: 2\n  Sectors/track: 18\n    Sector size: 256\n\nLogical Data:\n  Total sectors: 1440\n  Size in bytes: 368640\n   Cluster size: 1\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.module",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk,dodwiz"
+      ],
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "attr",
+        "-e",
+        "-pe",
+        "-pr",
+        "-nw",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk,dodwiz"
+      ],
+      "stdout": "--e-re-r\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "ident",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk,dodwiz"
+      ],
+      "stdout": "Header for : dodwiz\nModule size: $1428  #5160\nModule CRC : $30A321 (Good)\nHdr parity : $13\nExec. off  : $000D  #13\nData size  : $1E26  #7718\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "args": [
+        "copy",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/artifact.dsk,dodwiz",
+        "/private/tmp/daggorath-m1/staged/stage-KbmIsp/verified.module"
+      ],
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

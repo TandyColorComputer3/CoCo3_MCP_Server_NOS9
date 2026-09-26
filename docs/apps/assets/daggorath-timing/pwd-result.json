@@ -1,0 +1,36 @@
+{
+  "request": {
+    "name": "os9_run",
+    "arguments": {
+      "command": "pwd"
+    }
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7386,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE938e03b4a404c7677d0e330491e8b00d\",\"commandPromptMs\":1796}"
+      }
+    ],
+    "structuredContent": {
+      "command": "pwd",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 7386,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE938e03b4a404c7677d0e330491e8b00d",
+      "commandPromptMs": 1796
+    },
+    "isError": false
+  }
+}

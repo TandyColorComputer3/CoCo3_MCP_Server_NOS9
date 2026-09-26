@@ -1,0 +1,107 @@
+--- a/src/main.c
++++ b/src/main.c
+@@ -1,41 +1,13 @@
+ #include <cmoc.h>
+ #include "presentation.h"
+ #include "logical.h"
++void aspect_mode(Byte n);
+ static Byte frame[FRAME_BYTES],signalFlag;
+-/* Original MISC WIZI20 explosion and COMMON CLK20 buzz event boundaries.
+- * Silent backend for M1: never call original busy-loop PIA/DAC routines. */
+-static void sound_event(Byte event){(void)event;}
+-static Byte pause_ticks(Word ticks)
+-{
+-    Byte e;
+-    while(ticks--){e=os_signal_value(&signalFlag);if(e)return e;e=os_sleep(1);if(e)return e;}
+-    return os_signal_value(&signalFlag);
+-}
+-int main(int argc,char **argv)
+-{
+-    Byte error=0,cleanup;int fade,cancel=0;
+-    if(argc>2)return ERR_ARGUMENT;
+-    if(argc==2){cancel=!strcmp(argv[1],"cancel");if(!cancel)return ERR_ARGUMENT;}
+-    signalFlag=0;error=os_intercept(&signalFlag);if(error)return error;
+-    error=screen_open();if(error)goto done;
+-    sound_event(1); /* buzz starts, MISC WIZIX0 */
+-    for(fade=32;fade>=0;fade-=2){
+-        wizard_frame(frame,(Byte)fade,0);error=screen_present(frame);if(error)goto done;
+-        if(cancel&&fade==16){error=os_cancel_self();if(error)goto done;}
+-        error=pause_ticks(1);if(error)goto done;
+-    }
+-    sound_event(2); /* buzz stops, explosion at WIZI20 */
+-    wizard_frame(frame,0,1);error=screen_present(frame);if(error)goto done;
+-    error=pause_ticks(162);if(error)goto done; /* WAITX: 81 IRQs twice */
+-    sound_event(3); /* WIZOX explosion, then fade-out buzz */
+-    for(fade=0;fade<32;fade+=2){
+-        wizard_frame(frame,(Byte)fade,0);error=screen_present(frame);if(error)goto done;
+-        error=pause_ticks(1);if(error)goto done;
+-    }
+-    sound_event(0);
+-    wizard_frame(frame,255,0);error=screen_present(frame);
+-done:
+-    sound_event(0);cleanup=screen_close();if(cleanup)return cleanup;
+-    {const char *s="DODWIZ TERM RESTORED\r";Byte e=os_write(1,s,strlen(s));if(e)return e;}
+-    return error;
+-}
++int main(int argc,char **argv){Byte e=0,c;Word t;
++ if(argc!=2)return 187;
++ if(strcmp(argv[1],"1")&&strcmp(argv[1],"2")&&strcmp(argv[1],"5"))return 187;
++ aspect_mode(argv[1][0]-'0');e=os_intercept(&signalFlag);if(e)return e;
++ e=screen_open();if(e)goto done;
++ wizard_frame(frame,0,1);e=screen_present(frame);if(e)goto done;
++ for(t=0;t<900;t++){e=os_signal_value(&signalFlag);if(e)break;e=os_sleep(1);if(e)break;}
++ done:c=screen_close();return c?c:e;}
+--- a/src/presentation.c
++++ b/src/presentation.c
+@@ -9,11 +9,19 @@
+  * Namespace 196/1 is a requested reservation, not presumed private by convention. */
+ static const Byte setup[]={27,0x20,5,0,0,80,25,1,0,0,27,0x35,0,
+     27,0x31,0,0,27,0x31,1,63,5,32}; /* cursor off, owned window only */
+-static const Byte define[]={27,0x29,196,1,24,0};
+-static const Byte upload[]={27,0x2b,196,1,5,1,0,0,192,24,0};
++static Byte define[]={27,0x29,196,1,24,0};
++static Byte upload[]={27,0x2b,196,1,5,1,0,0,192,24,0};
+ /* ONLY presentation knows the physical (+192,+4) translation. */
+-static const Byte put[]={27,0x2d,196,1,0,192,0,4};
++static Byte put[]={27,0x2d,196,1,0,192,0,4};
+ static const Byte selectWindow[]={27,0x21},kill[]={27,0x2a,196,1};
++static Byte expanded[15360];
++static Word width=256,size=6144;
++void aspect_mode(Byte n){Word origin;
++ width=n==1?256:n==2?512:640;size=(width/8)*192;origin=(640-width)/2;
++ define[4]=size>>8;define[5]=size;
++ upload[5]=width>>8;upload[6]=width;upload[9]=size>>8;upload[10]=size;
++ put[4]=origin>>8;put[5]=origin;
++}
+ Byte screen_open(void)
+ {
+     Byte e;Registers r;owned=0;fd=255;
+@@ -28,8 +36,17 @@
+ }
+ Byte screen_present(const Byte *frame)
+ {
+-    Byte e=os_write(fd,upload,sizeof(upload));if(e)return e;
+-    e=os_write(fd,frame,FRAME_BYTES);if(e)return e;
++    Word x,y,dx,base;Byte e,repeat,k;memset(expanded,0,size);
++    for(y=0;y<192;y++){
++      dx=0;base=y*(width/8);
++      for(x=0;x<256;x++){
++        repeat=width==256?1:width==512?2:(x%2?2:3);
++        for(k=0;k<repeat;k++,dx++)
++          if(frame[y*32+x/8]&(128>>(x%8)))expanded[base+dx/8]|=128>>(dx%8);
++      }
++    }
++    e=os_write(fd,upload,sizeof(upload));if(e)return e;
++    e=os_write(fd,expanded,size);if(e)return e;
+     return os_write(fd,put,sizeof(put));
+ }
+ Byte screen_close(void)
+--- a/src/module.asm
++++ b/src/module.asm
+@@ -1,5 +1,5 @@
+         section __os9
+-        fcc /dodwiz/
++        fcc /dodaspect/
+         fcb 0
+ edition equ 1
+ rev equ 1

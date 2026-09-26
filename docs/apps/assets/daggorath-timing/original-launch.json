@@ -1,0 +1,27 @@
+{
+  "command": "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+  "args": [
+    "coco3h",
+    "-window",
+    "-skip_gameinfo",
+    "-ramsize",
+    "2M",
+    "-rompath",
+    "/Users/magneto-optimus/Library/Application Support/Ample/roms",
+    "-cfg_directory",
+    "/private/tmp/daggorath-timing/cfg",
+    "-cart",
+    "/private/tmp/daggorath-timing/original.rom",
+    "-autoboot_delay",
+    "0",
+    "-autoboot_script",
+    "/private/tmp/daggorath-timing/capture.lua"
+  ],
+  "sourceCommit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "romSHA256": "35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571",
+  "verifiedConfig": {
+    "monitorPort": ":screen_config",
+    "value": 1,
+    "view": "Screen 0 Standard (4:3)"
+  }
+}
