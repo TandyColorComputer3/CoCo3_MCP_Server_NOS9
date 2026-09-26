@@ -1,7 +1,7 @@
 import { spawn as nodeSpawn } from "node:child_process";
 import { closeSync, mkdirSync, openSync } from "node:fs";
 import path from "node:path";
-import { writeBridgePortFile, type AppConfig } from "./config.js";
+import { writeBridgePortFile, writeMonitorConfig, type AppConfig } from "./config.js";
 
 export interface SpawnOptions {
   cwd?: string;
@@ -24,7 +24,7 @@ export interface Spawner {
 
 export function buildMameArgs(config: AppConfig): string[] {
   return [
-    "coco3",
+    config.mameMachine,
     "-window",
     "-skip_gameinfo",
     "-natural",
@@ -46,6 +46,10 @@ export function buildMameArgs(config: AppConfig): string[] {
     config.snapshotDir,
     "-state_directory",
     config.stateDir,
+    "-statename",
+    "%g",
+    "-cfg_directory",
+    config.mameCfgDir,
   ];
 }
 
@@ -136,6 +140,7 @@ export function createMameController(
       if (child) return { started: false, alreadyRunning: true, pid: child.pid ?? null };
       intentional = false;
       writeBridgePortFile(config);
+      writeMonitorConfig(config);
       mkdirSync(config.logDir, { recursive: true });
       const fd = openSync(path.join(config.logDir, "mame.log"), "a");
       logFd = fd;

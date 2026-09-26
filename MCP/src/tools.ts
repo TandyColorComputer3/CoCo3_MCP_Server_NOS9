@@ -32,7 +32,7 @@ const STATE_TIMEOUT_MS = 2_000;
 export const TOOL_INFO: Record<string, { description: string }> = {
   coco_start: {
     description:
-      "Spawn local official MAME coco3 with the disk controller and wait until the Lua bridge answers ping.",
+      "Spawn the configured MAME CoCo machine with the disk controller and wait until the Lua bridge answers ping.",
   },
   coco_stop: {
     description: "Stop the MAME process tree and close the bridge listener.",
@@ -190,13 +190,13 @@ async function waitForNewestPng(dir: string, started: number, timeoutMs: number)
   return null;
 }
 
-async function findStateFile(dir: string, name: string, timeoutMs: number): Promise<string | null> {
+async function findStateFile(dir: string, machine: string, name: string, timeoutMs: number): Promise<string | null> {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() <= deadline) {
     try {
       // MAME's default -statename %g stores relative saves under the driver name.
       // MAME command-line documentation, Core State/Playback Options: -statename.
-      const file = path.join(dir, "coco3", `${name}.sta`);
+      const file = path.join(dir, machine, `${name}.sta`);
       const info = await stat(file);
       if (info.isFile() && info.size > 0) return file;
     } catch {
@@ -431,7 +431,7 @@ const handlers: Record<string, Handler> = {
       const response = await deps.bridge.request("save_state", { name: args.name });
       if (!response.ok) return textResult(response.error, true);
       await mkdir(deps.config.stateDir, { recursive: true });
-      const file = await findStateFile(deps.config.stateDir, args.name, STATE_TIMEOUT_MS);
+      const file = await findStateFile(deps.config.stateDir, deps.config.mameMachine, args.name, STATE_TIMEOUT_MS);
       return textResult(JSON.stringify({ scheduled: true, name: args.name, fileFound: file !== null, file }));
     } catch (error) {
       return textResult(messageOf(error), true);
@@ -447,7 +447,7 @@ const handlers: Record<string, Handler> = {
       // https://docs.mamedev.org/luascript/ref-core.html). Check the state directory
       // ourselves first so a missing state fails fast and honestly instead of asking
       // MAME to load a file that was never there.
-      const found = await findStateFile(deps.config.stateDir, args.name, 0);
+      const found = await findStateFile(deps.config.stateDir, deps.config.mameMachine, args.name, 0);
       if (!found) return textResult(`no saved state named "${args.name}"`, true);
       const response = await deps.bridge.request("load_state", { name: args.name });
       if (!response.ok) return textResult(response.error, true);

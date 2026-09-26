@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -75,6 +75,7 @@ test("windows controller spawns once, logs to a file, and taskkills the tree", a
     assert.equal(typeof calls[0].options.stdio?.[1], "number");
     assert.equal(typeof calls[0].options.stdio?.[2], "number");
     assert.equal(existsSync(path.join(root, "logs", "mame.log")), true);
+    assert.match(readFileSync(path.join(cfg.mameCfgDir, "coco3h.cfg"), "utf8"), /value="1"/);
 
     assert.deepEqual(mame.start(), { started: false, alreadyRunning: true, pid: 4242 });
     assert.equal(calls.filter((call) => call.command === mamePath).length, 1);

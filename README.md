@@ -30,6 +30,17 @@ copy .env.example .env
 
 Edit `.env` so `MAME_PATH`, `MAME_ROMPATH`, and `DECB_PATH` match your machine.
 
+The canonical defaults are `MAME_MACHINE=coco3h` (HD6309), `COCO_RAM=2M`, and
+`COCO_MONITOR=rgb`. These can be overridden in `.env`; monitor choices are `rgb`
+and `composite`. The monitor setting is a CoCo input configuration, not a host
+display option. Before launch, the MCP regenerates its own
+`MCP/work/mame-cfg/<machine>.cfg` with the monitor selection and passes that
+directory to MAME with `-cfg_directory`. Changes made in MAME's UI to that generated
+machine config are reset at the next MCP launch.
+
+Save states are discovered at `MCP/states/<configured-machine>/<name>.sta`.
+The launch explicitly sets `-statename %g` to keep MAME and the lookup aligned.
+
 ```bat
 npm install
 npm run build

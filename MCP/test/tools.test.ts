@@ -59,6 +59,7 @@ async function harness(): Promise<Harness> {
       MAME_PATH: path.join(root, "mame.exe"),
       MAME_ROMPATH: path.join(root, "roms"),
       DECB_PATH: "decb",
+      MAME_MACHINE: "coco3",
     },
     root,
   );
@@ -536,6 +537,32 @@ test("coco_load_state ignores states outside the coco3 directory", async () => {
     assert.equal(result.isError, true);
     assert.equal(textOf(result), 'no saved state named "checkpoint"');
     assert.equal(box.requests.some((req) => req.cmd === "load_state"), false);
+  } finally {
+    await box.cleanup();
+  }
+});
+
+test("save/load discovery follows the configured driver, never another machine's state", async () => {
+  const box = await harness();
+  try {
+    for (const machine of ["coco3h", "coco3", "coco2"]) {
+      box.config.mameMachine = machine;
+      const name = `state_${machine}`;
+      const wrong = machine === "coco3" ? "coco3h" : "coco3";
+      await mkdir(path.join(box.config.stateDir, wrong), { recursive: true });
+      await writeFile(path.join(box.config.stateDir, wrong, `${name}.sta`), "wrong machine");
+      const missing = await box.handlers.coco_load_state({ name });
+      assert.equal(missing.isError, true);
+      await mkdir(path.join(box.config.stateDir, machine), { recursive: true });
+      const file = path.join(box.config.stateDir, machine, `${name}.sta`);
+      await writeFile(file, "matching machine");
+      const saved = JSON.parse(textOf(await box.handlers.coco_save_state({ name })));
+      assert.equal(saved.fileFound, true);
+      assert.equal(saved.file, file);
+      const loaded = JSON.parse(textOf(await box.handlers.coco_load_state({ name })));
+      assert.equal(loaded.scheduled, true);
+      assert.equal(box.requests.at(-1)?.cmd, "load_state");
+    }
   } finally {
     await box.cleanup();
   }

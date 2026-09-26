@@ -1,15 +1,17 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { loadConfig, loadDotEnv } from "../src/config.js";
+import { loadConfig, loadDotEnv, writeMonitorConfig } from "../src/config.js";
 
 test("loadConfig applies documented defaults", () => {
   const root = path.resolve("C:/coco/MCP");
   const cfg = loadConfig({}, root);
   assert.equal(cfg.bridgePort, 18765);
-  assert.equal(cfg.cocoRam, "512K");
+  assert.equal(cfg.cocoRam, "2M");
+  assert.equal(cfg.mameMachine, "coco3h");
+  assert.equal(cfg.cocoMonitor, "rgb");
   assert.equal(cfg.mamePath, "");
   assert.equal(cfg.mameRomPath, "");
   assert.equal(cfg.decbPath, "decb");
@@ -29,6 +31,8 @@ test("loadConfig resolves a relative root and honors overrides", () => {
     {
       BRIDGE_PORT: "19000",
       COCO_RAM: "128K",
+      MAME_MACHINE: "coco3",
+      COCO_MONITOR: "composite",
       MAME_PATH: "C:\\mame\\mame.exe",
       MAME_ROMPATH: "C:\\mame\\roms",
       DECB_PATH: "C:\\toolshed\\decb.exe",
@@ -38,10 +42,35 @@ test("loadConfig resolves a relative root and honors overrides", () => {
   assert.equal(cfg.rootDir, path.resolve("relative-root"));
   assert.equal(cfg.bridgePort, 19000);
   assert.equal(cfg.cocoRam, "128K");
+  assert.equal(cfg.mameMachine, "coco3");
+  assert.equal(cfg.cocoMonitor, "composite");
   assert.equal(cfg.mamePath, "C:\\mame\\mame.exe");
   assert.equal(cfg.mameRomPath, "C:\\mame\\roms");
   assert.equal(cfg.decbPath, "C:\\toolshed\\decb.exe");
   assert.equal(cfg.bridgeLuaPath, path.join(cfg.rootDir, "scripts", "bridge.lua"));
+});
+
+test("machine names stay within a single state/config directory and monitor values are validated", () => {
+  for (const machine of ["", "../coco3", "a/b", "a\\b", 'coco3\"']) {
+    assert.throws(() => loadConfig({ MAME_MACHINE: machine }, "root"), /MAME_MACHINE/);
+  }
+  assert.throws(() => loadConfig({ COCO_MONITOR: "vga" }, "root"), /COCO_MONITOR/);
+});
+
+test("monitor config encodes the installed MAME Monitor Type field for RGB and composite", async () => {
+  const root = await mkdtemp(path.join(tmpdir(), "coco-monitor-"));
+  try {
+    for (const [monitor, value] of [["rgb", 1], ["composite", 0]] as const) {
+      const cfg = loadConfig({ MAME_MACHINE: "coco3h", COCO_MONITOR: monitor }, root);
+      writeMonitorConfig(cfg);
+      const xml = await readFile(path.join(cfg.mameCfgDir, "coco3h.cfg"), "utf8");
+      assert.match(xml, /<mameconfig version="10">/);
+      assert.match(xml, /<system name="coco3h">/);
+      assert.ok(xml.includes(`<port tag=":screen_config" type="CONFIG" mask="1" defvalue="0" value="${value}" />`));
+    }
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });
 
 test("loadConfig rejects a bad bridge port", () => {

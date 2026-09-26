@@ -7,6 +7,9 @@ export interface AppConfig {
   decbPath: string;
   bridgePort: number;
   cocoRam: string;
+  mameMachine: string;
+  cocoMonitor: "rgb" | "composite";
+  mameCfgDir: string;
   rootDir: string;
   bridgeLuaPath: string;
   bridgePortFile: string;
@@ -51,6 +54,10 @@ function resolveToolPath(raw: string, root: string): string {
 
 export function loadConfig(env: Record<string, string | undefined>, rootDir: string): AppConfig {
   const root = path.resolve(rootDir);
+  const mameMachine = (env.MAME_MACHINE ?? "coco3h").trim();
+  if (!/^[a-z0-9_]+$/.test(mameMachine)) throw new Error("invalid MAME_MACHINE");
+  const cocoMonitor = (env.COCO_MONITOR ?? "rgb").trim().toLowerCase();
+  if (cocoMonitor !== "rgb" && cocoMonitor !== "composite") throw new Error("invalid COCO_MONITOR");
   const bridgeLuaPath = path.join(root, "scripts", "bridge.lua");
   const storageDir = path.join(root, "storage");
   return {
@@ -58,7 +65,10 @@ export function loadConfig(env: Record<string, string | undefined>, rootDir: str
     mameRomPath: resolveToolPath(env.MAME_ROMPATH ?? "", root),
     decbPath: resolveToolPath(env.DECB_PATH ?? "decb", root),
     bridgePort: parsePort(env.BRIDGE_PORT),
-    cocoRam: env.COCO_RAM ?? "512K",
+    cocoRam: env.COCO_RAM ?? "2M",
+    mameMachine,
+    cocoMonitor,
+    mameCfgDir: path.join(root, "work", "mame-cfg"),
     rootDir: root,
     bridgeLuaPath,
     bridgePortFile: path.join(path.dirname(bridgeLuaPath), "bridge.port"),
@@ -72,6 +82,16 @@ export function loadConfig(env: Record<string, string | undefined>, rootDir: str
     hostBinDir: path.join(storageDir, "host", "bin"),
     hostDataDir: path.join(storageDir, "host", "data"),
   };
+}
+
+/** MCP-owned input configuration, regenerated before each launch. */
+export function writeMonitorConfig(config: AppConfig): void {
+  // Installed Ample MAME 0.289: coco3h -listxml, Monitor Type:
+  // screen_config, mask 1, default Composite=0, RGB=1.
+  // MAME 0.289 src/emu/ioport.cpp load_system_config reads these port attributes.
+  mkdirSync(config.mameCfgDir, { recursive: true });
+  writeFileSync(path.join(config.mameCfgDir, `${config.mameMachine}.cfg`),
+    `<?xml version="1.0"?>\n<mameconfig version="10">\n  <system name="${config.mameMachine}">\n    <input>\n      <port tag=":screen_config" type="CONFIG" mask="1" defvalue="0" value="${config.cocoMonitor === "rgb" ? 1 : 0}" />\n    </input>\n  </system>\n</mameconfig>\n`, "utf8");
 }
 
 /** Writes scripts/bridge.port so Lua can read BRIDGE_PORT when os.getenv is unavailable. */
