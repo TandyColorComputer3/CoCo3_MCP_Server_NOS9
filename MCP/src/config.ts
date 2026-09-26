@@ -18,6 +18,7 @@ export interface AppConfig {
   bridgePortFile: string;
   snapshotDir: string;
   stateDir: string;
+  nitros9ReadyState: string;
   workDir: string;
   logDir: string;
   /** Root for user disks and host files: storage/ */
@@ -84,6 +85,8 @@ export function loadConfig(env: Record<string, string | undefined>, rootDir: str
   if (cocoMonitor !== "rgb" && cocoMonitor !== "composite") throw new Error("invalid COCO_MONITOR");
   const bridgeLuaPath = path.join(root, "scripts", "bridge.lua");
   const storageDir = path.join(root, "storage");
+  const nitros9ReadyState = (env.NITROS9_READY_STATE ?? "nos9_ready_v2").trim();
+  if (!/^[A-Za-z0-9_-]+$/.test(nitros9ReadyState)) throw new Error("invalid NITROS9_READY_STATE");
   return {
     mamePath: resolveToolPath(env.MAME_PATH ?? "", root),
     mameRomPath: resolveToolPath(env.MAME_ROMPATH ?? "", root),
@@ -101,6 +104,7 @@ export function loadConfig(env: Record<string, string | undefined>, rootDir: str
     bridgePortFile: path.join(path.dirname(bridgeLuaPath), "bridge.port"),
     snapshotDir: path.join(root, "snapshots"),
     stateDir: path.join(root, "states"),
+    nitros9ReadyState,
     workDir: path.join(root, "work"),
     logDir: path.join(root, "logs"),
     storageDir,

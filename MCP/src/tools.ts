@@ -7,6 +7,7 @@ import type { BridgeClient } from "./bridge-server.js";
 import type { Logger } from "./logger.js";
 import type { MameController } from "./mame-process.js";
 import type { BuildDiskRequest, Toolchain } from "./toolchain.js";
+import { restoreReady } from "./os9-ready.js";
 
 export interface ToolDeps {
   config: AppConfig;
@@ -30,6 +31,9 @@ const SNAPSHOT_TIMEOUT_MS = 5_000;
 const STATE_TIMEOUT_MS = 2_000;
 
 export const TOOL_INFO: Record<string, { description: string }> = {
+  os9_restore_ready: {
+    description: "Load NITROS9_READY_STATE, await MAME post-load notification, then verify the EOU Term shell with a fresh prompt and echo nonce. Requires the compatible running canonical machine and 80x25 hardware text checkpoint. Changes only the transient shell prompt; does not save or alter media. Exclusive machine/UI access required.",
+  },
   coco_start: {
     description:
       "Spawn the configured MAME CoCo machine with the disk controller and wait until the Lua bridge answers ping.",
@@ -224,6 +228,10 @@ function resolveDiskPath(config: AppConfig, raw: string): string {
 }
 
 const handlers: Record<string, Handler> = {
+  async os9_restore_ready(deps, args) {
+    const result = await restoreReady(deps.config, deps.bridge, args.timeout_ms === undefined ? undefined : Number(args.timeout_ms));
+    return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result, isError: !result.ready };
+  },
   async coco_start(deps) {
     const running = deps.mame.status();
     if (running.running) {
@@ -460,15 +468,30 @@ const handlers: Record<string, Handler> = {
 
 export function createToolHandlers(deps: ToolDeps): Record<string, (args: Args) => Promise<ToolResult>> {
   const bound: Record<string, (args: Args) => Promise<ToolResult>> = {};
+  let mutation: string | null = null;
+  const mutating = new Set(["os9_restore_ready", "coco_start", "coco_stop", "coco_type", "coco_soft_reset",
+    "coco_save_state", "coco_load_state", "coco_mount_flop", "coco_unmount_flop", "coco_write_memory", "coco_build_disk"]);
   for (const name of Object.keys(TOOL_INFO)) {
     const handler = handlers[name];
     if (!handler) throw new Error(`missing handler ${name}`);
-    bound[name] = (args) => handler(deps, args ?? {});
+    bound[name] = async (args) => {
+      if (!mutating.has(name)) return handler(deps, args ?? {});
+      if (mutation) {
+        const body = { ready: false, state: deps.config.nitros9ReadyState, loadScheduled: false,
+          loadCompleted: false, shellVerified: false, timedOut: false, status: "busy", error: `${mutation} in progress` };
+        return { ...textResult(JSON.stringify(body), true), structuredContent: body };
+      }
+      mutation = name;
+      try { return await handler(deps, args ?? {}); } finally { mutation = null; }
+    };
   }
   return bound;
 }
 
 const inputSchemas: Record<string, Record<string, z.ZodTypeAny>> = {
+  os9_restore_ready: {
+    timeout_ms: z.number().int().min(1000).max(120000).optional().describe("Host monotonic deadline for load and handshake; default 30000 ms"),
+  },
   coco_start: {},
   coco_stop: {},
   coco_status: {},

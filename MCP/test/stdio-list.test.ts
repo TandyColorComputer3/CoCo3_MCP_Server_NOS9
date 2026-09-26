@@ -23,6 +23,7 @@ const TOOL_NAMES = [
   "coco_type",
   "coco_unmount_flop",
   "coco_write_memory",
+  "os9_restore_ready",
 ];
 
 test("stdio server lists every coco tool and describes the MMU window", { timeout: 20_000 }, async () => {

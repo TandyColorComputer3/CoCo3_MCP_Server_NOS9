@@ -494,9 +494,114 @@ local function cmd_save_state(params)
   return { scheduled = true, name = params.name }
 end
 
+-- Host-side restore operation metadata is deliberately not registered as save items.
+-- https://docs.mamedev.org/luascript/ref-common.html: post-load notification.
+local restore_operation = nil
+local load_epoch = 0
+local untracked_load_pending = false
+local post_load_available = emu.add_machine_post_load_notifier ~= nil
+if post_load_available then
+  post_load_notifier = emu.add_machine_post_load_notifier(function()
+    load_epoch = load_epoch + 1
+    untracked_load_pending = false
+    if restore_operation then
+      if restore_operation.completed then
+        restore_operation.invalidated = true
+      elseif restore_operation.abandoned then
+        restore_operation = nil
+      else
+        restore_operation.completed = true
+        restore_operation.epoch = load_epoch
+      end
+    end
+  end)
+end
+if emu.add_machine_reset_notifier then
+  restore_reset_notifier = emu.add_machine_reset_notifier(function()
+    if restore_operation then restore_operation.invalidated = true end
+    untracked_load_pending = false
+  end)
+end
+
+local function owned_restore(params)
+  if not restore_operation or params.token ~= restore_operation.token then
+    error("restore operation not owned")
+  end
+  if restore_operation.invalidated or (params.epoch and params.epoch ~= restore_operation.epoch) then
+    error("restore operation invalidated")
+  end
+  return restore_operation
+end
+
 local function cmd_load_state(params)
   manager.machine:load(params.name)
+  untracked_load_pending = post_load_available
   return { scheduled = true, name = params.name }
+end
+
+local function cmd_load_state_tracked(params)
+  if not post_load_available then error("post-load notifier unavailable") end
+  if restore_operation or untracked_load_pending then error("state load already pending; wait or restart MAME") end
+  if type(params.token) ~= "string" or not string.match(params.token, "^%x+$") then error("invalid restore token") end
+  if type(params.name) ~= "string" or not string.match(params.name, "^[%w_-]+$") then error("invalid state name") end
+  if not cmd_wait_idle({}).idle then error("keyboard queue is not empty") end
+  restore_operation = { token = params.token, completed = false, epoch = load_epoch, invalidated = false }
+  local ok, err = pcall(function() manager.machine:load(params.name) end)
+  if not ok then restore_operation = nil; error(err) end
+  return { scheduled = true, name = params.name, token = params.token }
+end
+
+local function cmd_load_state_status(params)
+  local op = owned_restore(params)
+  return { token = op.token, completed = op.completed, epoch = op.epoch, invalidated = op.invalidated }
+end
+
+local function cmd_finish_restore(params)
+  if not restore_operation or params.token ~= restore_operation.token then error("restore operation not owned") end
+  if restore_operation.completed then
+    restore_operation = nil
+  else
+    -- A timed-out scheduled load may still complete. Do not attribute its later
+    -- notification to a second request. Until then, explicit restart is recovery.
+    restore_operation.abandoned = true
+  end
+  return { released = restore_operation == nil }
+end
+
+local function cmd_read_text_console(params)
+  local op = owned_restore(params)
+  if not op.completed then error("state load not complete") end
+  local machine = manager.machine
+  local gime = machine.devices[":gime"]
+  local ram = machine.devices[":ram"]
+  if not gime or not ram or not gime.items["0/m_gime_registers"] or not ram.items["0/m_pointer"] then
+    return { supported = false, reason = "GIME/RAM saved items unavailable" }
+  end
+  -- Exact saved-item interface confirmed on Ample 0.289; MAME's mame0289
+  -- plugins/cheatfind/init.lua also uses emu.item(RAM 0/m_pointer):read_block.
+  local regs = emu.item(gime.items["0/m_gime_registers"])
+  local r = {}
+  for i = 0, 15 do r[i + 1] = regs:read(i) end
+  -- Intentionally reject other modes. Source: mame0289 src/mame/trs/gime.cpp,
+  -- get_lines_per_row / record_full_body_scanline / update_geometry.
+  -- Native 80-column attributed text, 225 scanlines / 9 = 25 rows, no scrolling.
+  if (r[1] & 0x80) ~= 0 or (r[9] & 0x87) ~= 4 or (r[10] & 0x75) ~= 0x75
+      or r[13] ~= 0 or r[16] ~= 0 then
+    return { supported = false, reason = "requires EOU 80x25 hardware text, no virtual/vertical scrolling" }
+  end
+  local size = emu.item(ram.items["0/m_size"]):read(0)
+  -- GIME get_video_base + record_scanline_res bank selection. Read physical
+  -- RAM, independent of the active OS-9 task's CPU MMU window; never write it.
+  local video_base = (r[14] << 11) | (r[15] << 3)
+  if video_base + 4000 > 0x80000 then return { supported = false, reason = "cross-bank display unsupported" } end
+  local base = (video_base | ((r[12] & 15) * 0x80000)) % size
+  if base + 4000 > size then return { supported = false, reason = "wrapped display unsupported" } end
+  local block = emu.item(ram.items["0/m_pointer"]):read_block(base, 4000)
+  if not block or #block ~= 4000 then error("physical console read failed") end
+  local hex = {}
+  for i = 1, #block do hex[i] = string.format("%02x", string.byte(block, i)) end
+  return { supported = true, registers = mark_array(r), cells = table.concat(hex),
+    physicalBase = base, idle = cmd_wait_idle({}).idle, epoch = op.epoch }
 end
 
 local commands = {
@@ -513,6 +618,10 @@ local commands = {
   soft_reset = cmd_soft_reset,
   save_state = cmd_save_state,
   load_state = cmd_load_state,
+  load_state_tracked = cmd_load_state_tracked,
+  load_state_status = cmd_load_state_status,
+  read_text_console = cmd_read_text_console,
+  finish_restore = cmd_finish_restore,
 }
 
 local sock = nil
@@ -560,6 +669,18 @@ local function handle_line(line)
   local params = message.params
   if type(params) ~= "table" then
     params = {}
+  end
+  -- Keep low-level callers from racing the multi-request handshake. Node also
+  -- excludes concurrent mutating MCP calls, including requests already running.
+  if restore_operation then
+    local mutation = message.cmd == "type" or message.cmd == "write_mem" or message.cmd == "mount"
+      or message.cmd == "unmount" or message.cmd == "soft_reset" or message.cmd == "save_state"
+      or message.cmd == "load_state" or message.cmd == "load_state_tracked"
+    if mutation then
+      local allowed = message.cmd == "type" and restore_operation.completed and not restore_operation.invalidated
+        and params.token == restore_operation.token and params.epoch == restore_operation.epoch
+      if not allowed then reply(id, false, nil, "restore operation busy"); return end
+    end
   end
   local ran, result = pcall(handler, params)
   if ran then

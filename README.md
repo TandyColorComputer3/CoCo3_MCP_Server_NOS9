@@ -80,3 +80,23 @@ Agentic AI was used in partial creation of this app.
 ## License
 
 [MIT](LICENSE)
+
+
+### Canonical NitrOS-9 EOU layout
+
+The default MPI layout is slot 1 empty, slot 2 Speech/Sound Pak (`ssc`),
+slot 3 empty, and slot 4 Disto Super Controller II (`scii`) with its Disto
+RTC (`rtime`). Glenside IDE is not required. `MAME_SLOTS` can override the map;
+`MAME_SLOTS={"ext":"fdc"}` retains a plain FDC configuration.
+
+Use EOU `swapboot` option **3 (EMUHWARECLOCK)** for automatic RTC time.
+The clock must remain accessible in slot 4 with this guest Clock2 module.
+Option 4 instead prompts for date/time; it was rejected for the canonical setup.
+Preserve the trailing `montype r` command when swapboot replaces startup.
+
+`MAME_BOOT_FLOPPY=../media/63EMU.DSK` and
+`MAME_VHD=../media/63SDC-MCP-DEV.VHD` select the EOU media. The VHD uses MAME's
+independent `hard1`/`vhd0` device, without an IDE cartridge. Never mount the
+immutable stock `63SDC.VHD`. Speech/Sound needs `pic-7040-510.bin` and
+`sp0256-al2.bin`; SCII uses Disto C-DOS 3 v1.2 ROM, not the standard FDC ROM.
+This is an intentional tradeoff to retain the verified automatic RTC path.
