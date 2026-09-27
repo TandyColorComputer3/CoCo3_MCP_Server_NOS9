@@ -1,0 +1,28 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"command\":\"dodgame seed0\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":105837,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":true,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEaa5cdb842f00ceb38f7cef405039b80c\",\"commandPromptMs\":100260}"
+    }
+  ],
+  "structuredContent": {
+    "command": "dodgame seed0",
+    "completed": true,
+    "commandCompleted": true,
+    "status": 0,
+    "statusText": "000",
+    "timedOut": false,
+    "shellReady": true,
+    "outcome": "completed",
+    "phase": "complete",
+    "elapsedMs": 105837,
+    "outputComplete": false,
+    "allowGraphics": true,
+    "displayDepartures": 1,
+    "consoleReturned": true,
+    "executionState": "COMPLETE",
+    "marker": "MCPDONEaa5cdb842f00ceb38f7cef405039b80c",
+    "commandPromptMs": 100260
+  },
+  "isError": false
+}

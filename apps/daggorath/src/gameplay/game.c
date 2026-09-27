@@ -116,6 +116,12 @@ static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir
   * HUMAN:HMAN70 flushes unconsumed tokens after the handler returns. */
  return GAME_OK;
 }
+/* PEXAM/PLOOK set DSPMOD without parsing operands; HUMAN discards trailing
+ * tokens. Full CMDTAB classification retains unique-prefix ambiguity rules. */
+Byte game_display_command(const char *s){Byte t[33];int cmd;
+ token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
+ return cmd==PAR_EXAM?GAME_VIEW_EXAMINE:cmd==PAR_LOOK?GAME_VIEW_DUNGEON:GAME_VIEW_KEEP;
+}
 Byte game_command(Game *g,const char *s){Word *hand;Byte *o;int r,c;Byte result=GAME_OK;
  if(g->faint||g->dead)return GAME_FAINT;
  if(!strcmp(s,"TURN LEFT"))g->dir=(g->dir-1)&3;
@@ -125,14 +131,14 @@ Byte game_command(Game *g,const char *s){Word *hand;Byte *o;int r,c;Byte result=
   g->damage=(Word)(g->damage+(g->weight>>3)+3);health(g);
  }else if(!strcmp(s,"USE LEFT")||!strcmp(s,"USE RIGHT")){hand=!strcmp(s,"USE LEFT")?&g->hand:&g->rightHand;if(!*hand||ocb(g,*hand)[10]!=5)return GAME_INVALID;
   g->torch=*hand;o=ocb(g,*hand);putword(o,g->bag);g->bag=*hand;*hand=0;
- }else if(strcmp(s,"LOOK")){if(bag_command(g,s)!=GAME_OK)return GAME_INVALID;}
+ }else if(!game_display_command(s)){if(bag_command(g,s)!=GAME_OK)return GAME_INVALID;}
  g->lit=g->torch!=0;return result;
 }
 /* PGET handlers print no success text; PARSER:CMDERR prints three I.QUES.
  * Preserve the older UI adapter for commands outside this slice. */
 const char *game_message(const char *s,Byte result){Byte t[33];int cmd;
  token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
- if((cmd==PAR_GET||cmd==PAR_DROP)&&result!=GAME_FAINT)return result==GAME_INVALID?"???":"";
+ if((cmd==PAR_GET||cmd==PAR_DROP||cmd==PAR_EXAM||cmd==PAR_LOOK)&&result!=GAME_FAINT)return result==GAME_INVALID?"???":"";
  return result==GAME_BLOCKED?"BLOCKED":result==GAME_INVALID?"UNKNOWN COMMAND":result==GAME_FAINT?"FAINT":"OK";
 }
 void game_tick(Game *g,Word ticks){Byte *o;while(ticks--){
@@ -197,4 +203,39 @@ void game_render(Game *g,Byte *frame,const char *input,const char *message){
  }
  game_render_status(g,frame,0);
  text(frame,message,168);text(frame,input,184);
+}
+
+/* PEXAM:EXAMIN/PRTOBJ/PCRLF; COMDAT:TXTEXA (32*19 chars);
+ * COMTXT:TXTDPB/TXTCR/TXTSCR; TXTSER:TXTCHR. No display-only object list.
+ * Level zero VDGINV=0. Only the active torch name is inverse, seven scanlines;
+ * the eighth scanline is not written by TXTDPB. Scroll after each OUTCHR. */
+typedef struct { Byte *frame;Word cursor;Byte inverse,pair; } ExamineText;
+static void examine_char(ExamineText *t,Byte c){Byte y;Word at;
+ if(c==31)t->cursor=(t->cursor+32)&0xffe0;
+ else {at=(t->cursor/32)*256+(t->cursor&31);
+  for(y=0;y<7;y++)t->frame[at+(Word)y*32]=(five(font+c*5,5+y*5)<<2)^t->inverse;
+  ++t->cursor;
+ }
+ if(t->cursor>=608){memmove(t->frame,t->frame+256,18*256);memset(t->frame+18*256,t->inverse,256);t->cursor=576;}
+}
+static void examine_string(ExamineText *t,const char *s){Byte c;
+ while(*s){c=*s++;examine_char(t,c=='^'?31:c=='!'?27:c==' '?0:c-'A'+1);}
+}
+static void examine_object(Game *g,ExamineText *t,Word p){Byte name[32],n,i;
+ n=object_name(g,p,name);for(i=0;i<n;i++)examine_char(t,name[i]);t->inverse=0;
+ t->pair=!t->pair;if(t->pair)t->cursor=(t->cursor+16)&0xfff0;else examine_char(t,31);
+}
+void game_render_examine(Game *g,Byte *frame,const char *input,const char *message){ExamineText t;Byte i;Word p;
+ memset(frame,0,FRAME_BYTES);t.frame=frame;t.cursor=10;t.inverse=0;t.pair=0;
+ examine_string(&t,"IN THIS ROOM^");
+ /* COMCRE:CFIND scans all 32 slots and requires P.CCUSE, regardless of type.
+  * Presence only: no name, AI, random calls, scheduler or creature mutation. */
+ for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][15]==g->row&&g->creatures[i][16]==g->col){
+  t.cursor+=11;examine_string(&t,"!CREATURE!^");break;}
+ for(i=0;i<g->count;i++)if(on_floor(g->objects[i],g->row,g->col))examine_object(g,&t,OBASE+(Word)i*14);
+ if(t.pair){examine_char(&t,31);t.pair=0;}
+ for(i=0;i<32;i++)examine_char(&t,27);
+ t.cursor+=12;examine_string(&t,"BACKPACK^");
+ for(p=g->bag;p;p=getword(ocb(g,p))){if(p==g->torch)t.inverse=255;examine_object(g,&t,p);}
+ game_render_status(g,frame,0);text(frame,message,168);text(frame,input,184);
 }

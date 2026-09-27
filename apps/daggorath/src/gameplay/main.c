@@ -11,7 +11,7 @@ static NativeHeartbeat heartbeat={255,0};
 static NativeHeartbeatState heartbeatState;
 /* PULL/STOW/GET/DROP use original token rules; other commands retain M1 adapters.
  * EXIT remains an isolated OS-9-only lifecycle command. */
-int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255;Word previous,now,delta;char input[32];const char *message="TURN LEFT RIGHT AROUND  MOVE";
+int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,view=GAME_VIEW_DUNGEON,nextView;Word previous,now,delta;char input[32];const char *message="TURN LEFT RIGHT AROUND  MOVE";
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
  e=os_intercept(&signalFlag);if(e)return e;
  e=os_clock(&previous,1);if(e)return e;
@@ -34,7 +34,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   e=game_input(screen_path(),&key);if(e)break;
   if(key){
    if(key==13){input[n]=0;if(!strcmp(input,"EXIT"))break;
-    result=game_command(&game,input);message=game_message(input,result);
+    result=game_command(&game,input);nextView=game_display_command(input);if(result==GAME_OK&&nextView)view=nextView;message=game_message(input,result);
     e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;n=0;input[0]=0;
    }else if(key==8){if(n)input[--n]=0;}
    else if(key>=32&&key<=126&&n<31){if(key>='a'&&key<='z')key-=32;input[n++]=key;input[n]=0;}
@@ -49,7 +49,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   if(heartbeatState.fault){e=heartbeatState.fault;break;}
   if(!dirty&&shownPhase!=heartbeatState.phase)dirty=2;
   if(dirty){
-   if(dirty==1){game_render(&game,frame,"",message);memcpy(inputUnderlay,frame+GAME_INPUT_OFFSET,GAME_INPUT_BYTES);}
+   if(dirty==1){if(view==GAME_VIEW_EXAMINE)game_render_examine(&game,frame,"",message);else game_render(&game,frame,"",message);memcpy(inputUnderlay,frame+GAME_INPUT_OFFSET,GAME_INPUT_BYTES);}
    /* Full scene calculation may take several heartbeat periods. Sample
     * again at presentation, so redraw never reverts to a stale phase. */
    e=native_heartbeat_query(&heartbeat,&heartbeatState);if(e)break;

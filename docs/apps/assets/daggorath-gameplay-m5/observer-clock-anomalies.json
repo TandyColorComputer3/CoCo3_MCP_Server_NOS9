@@ -1,0 +1,17 @@
+[
+  {
+    "before": {
+      "time": "0798.226285305",
+      "minute": "24",
+      "second": "59",
+      "tick": "1"
+    },
+    "after": {
+      "time": "0798.242973459",
+      "minute": "25",
+      "second": "5",
+      "tick": "59"
+    },
+    "observerGap": 302
+  }
+]

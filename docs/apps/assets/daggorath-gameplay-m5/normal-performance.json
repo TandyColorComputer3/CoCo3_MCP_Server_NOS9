@@ -1,0 +1,62 @@
+[
+  {
+    "command": "P L T",
+    "emulatedSecondsFromEnterEnqueueToReady": 0.8848136255799659
+  },
+  {
+    "command": "USE LEFT",
+    "emulatedSecondsFromEnterEnqueueToReady": 5.057335596780035
+  },
+  {
+    "command": "P R SW",
+    "emulatedSecondsFromEnterEnqueueToReady": 5.207528904640014
+  },
+  {
+    "command": "D R",
+    "emulatedSecondsFromEnterEnqueueToReady": 5.141034043730031
+  },
+  {
+    "command": "E",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.4522215829400125
+  },
+  {
+    "command": "G R W SW",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.4188446789200384
+  },
+  {
+    "command": "E",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.3687804585700292
+  },
+  {
+    "command": "S R",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.385468566730026
+  },
+  {
+    "command": "EXAMINE BAG",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.469381853199991
+  },
+  {
+    "command": "P L SW",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.485597060549992
+  },
+  {
+    "command": "D L",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.4188444020400084
+  },
+  {
+    "command": "E",
+    "emulatedSecondsFromEnterEnqueueToReady": 1.402155912149965
+  },
+  {
+    "command": "LOOK",
+    "emulatedSecondsFromEnterEnqueueToReady": 4.673033898660037
+  },
+  {
+    "command": "MOVE",
+    "emulatedSecondsFromEnterEnqueueToReady": 4.272506825470032
+  },
+  {
+    "command": "TURN RIGHT",
+    "emulatedSecondsFromEnterEnqueueToReady": 3.0542824839199625
+  }
+]

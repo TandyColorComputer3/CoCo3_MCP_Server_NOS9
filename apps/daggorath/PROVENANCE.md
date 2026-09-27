@@ -68,3 +68,15 @@ traversal. `game_message` carries `PARSER.ASM:CMDERR`'s three question marks;
 CD.ASM:I.QUES indexes the existing original font. The permanent floor reference
 fixture records independently captured cartridge state/frames, source identity
 and the capture gate; see the M4 report for equality and scope limitations.
+
+## Gameplay M5
+
+`game_display_command` / `game_render_examine` trace original `PEXAM.ASM`
+(PEXAM, EXAMIN, PRTOBJ, PCRLF), `PLOOK.ASM:PLOOK`, `COMCRE.ASM:CFIND/OFIND`,
+`COMDAT.ASM:TXTEXA`, `TXTSER.ASM:TXTCHR`, and `COMTXT.ASM:TXTDPB/TXTCR/TXTSCR`
+at the existing pinned original commit. `T.EXAM/T.LOOK` come from the assembler
+symbols. The read-only creature scan does not activate AI or combat.
+The Hunerlach/Linux interpretation was compared for readability, not used as the
+raster/state authority. `test/fixtures/examine-original.json` contains thirteen
+independent natural-command cartridge captures; see
+[the M5 report](../../docs/apps/DAGGORATH_GAMEPLAY_M5.md) for scope and limitations.

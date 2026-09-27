@@ -115,3 +115,14 @@ use the same disposable artifact workflow and resident preload sequence.
 Run `python3 apps/daggorath/test_floor.py` plus all existing suites.
 See [Gameplay M4](../../docs/apps/DAGGORATH_GAMEPLAY_M4.md) for source semantics,
 cartridge comparisons, live results, memory and I/O boundaries.
+
+## Gameplay M5: EXAMINE
+
+Original room/backpack examination and LOOK display restoration are implemented.
+EXAMINE does not parse a separate BAG/hand/object qualifier; trailing words are
+ignored as in the original handler. Inventory remains authoritative packed state.
+See [M5 results and live acceptance](../../docs/apps/DAGGORATH_GAMEPLAY_M5.md).
+
+```sh
+python3 apps/daggorath/test_examine.py
+```

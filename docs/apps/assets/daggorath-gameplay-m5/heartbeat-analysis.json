@@ -1,0 +1,86 @@
+{
+  "normal": {
+    "callbacks": 4575,
+    "edges": 100,
+    "largestCallbackIntervalMs": 16.99937199998658,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "cancel": {
+    "callbacks": 640,
+    "edges": 14,
+    "largestCallbackIntervalMs": 16.968641999937972,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 3,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "repeat": {
+    "callbacks": 944,
+    "edges": 21,
+    "largestCallbackIntervalMs": 16.802141000084703,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "creature": {
+    "callbacks": 4072,
+    "edges": 105,
+    "largestCallbackIntervalMs": 16.84236900007363,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "squeak": {
+    "callbacks": 1016,
+    "edges": 339,
+    "largestCallbackIntervalMs": 16.90271200004645,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  },
+  "whoop": {
+    "callbacks": 1015,
+    "edges": 339,
+    "largestCallbackIntervalMs": 16.96975899994868,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  },
+  "phaser": {
+    "callbacks": 1041,
+    "edges": 347,
+    "largestCallbackIntervalMs": 16.86527699985163,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  },
+  "wizard": {
+    "callbacks": 0,
+    "edges": 0,
+    "largestCallbackIntervalMs": null,
+    "missedVideoTickIntervals": 0,
+    "countdownViolations": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  }
+}
