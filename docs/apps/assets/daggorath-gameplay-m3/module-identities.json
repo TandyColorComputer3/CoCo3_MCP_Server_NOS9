@@ -1,0 +1,44 @@
+{
+  "dodgame": {
+    "sha256": "43628a8eddb4aff74c9a8667267c1c079a32010e11e3ae2aaf4bfc802eed4fd1",
+    "size": 20680,
+    "ident": "Header for : dodgame\nModule size: $50C8  #20680\nModule CRC : $5D9C42 (Good)\nHdr parity : $50\nExec. off  : $000D  #13\nData size  : $293E  #10558\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "reproducible": true
+  },
+  "dheartbeat": {
+    "sha256": "25ab79e9778962d1902111328a0a9dcccf49ace48548136bef0082c706aaecf0",
+    "size": 577,
+    "ident": "Header for : DHeartbeat\nModule size: $241  #577\nModule CRC : $DDB214 (Good)\nHdr parity : $99\nExec. off  : $0019  #25\nData size  : $002C  #44\nEdition    : $01  #1\nTy/La At/Rv: $E1 $80\nDevice Driver mod, 6809 Obj, re-ent, R/O\n\n",
+    "reproducible": true
+  },
+  "dhb": {
+    "sha256": "b9a847810894bf3d8cd806e7df64979a3a49c4a5e0df086723ab01a980befadb",
+    "size": 39,
+    "ident": "Header for : dhb\nModule size: $27  #39\nModule CRC : $BF478C (Good)\nHdr parity : $C3\nFile Mgr   : SCF\nDriver     : DHeartbeat\nEdition    : $01  #1\nTy/La At/Rv: $F1 $80\nDevice Descriptor mod, 6809 Obj, re-ent, R/O\n\n",
+    "reproducible": true
+  },
+  "dhbpack": {
+    "sha256": "d3842d08ecb17f6f4c9feda94dff623544a9990497873fd3086caaddbeaad0cb",
+    "size": 616,
+    "ident": "Header for : DHeartbeat\nModule size: $241  #577\nModule CRC : $DDB214 (Good)\nHdr parity : $99\nExec. off  : $0019  #25\nData size  : $002C  #44\nEdition    : $01  #1\nTy/La At/Rv: $E1 $80\nDevice Driver mod, 6809 Obj, re-ent, R/O\n\nHeader for : dhb\nModule size: $27  #39\nModule CRC : $BF478C (Good)\nHdr parity : $C3\nFile Mgr   : SCF\nDriver     : DHeartbeat\nEdition    : $01  #1\nTy/La At/Rv: $F1 $80\nDevice Descriptor mod, 6809 Obj, re-ent, R/O\n\n",
+    "reproducible": true
+  },
+  "dodaudio": {
+    "sha256": "e765ec62d15372bd82ed0a187a2f8a2195cb0d2acce63c3f091db7e3dee4ad95",
+    "size": 5571,
+    "ident": "Header for : dodaudio\nModule size: $15C3  #5571\nModule CRC : $ABB59D (Good)\nHdr parity : $D1\nExec. off  : $000D  #13\nData size  : $082F  #2095\nEdition    : $01  #1\nTy/La At/Rv: $11 $01\nProg mod, 6809 Obj, non-share, R/O\n\n",
+    "reproducible": true
+  },
+  "dodsnd": {
+    "sha256": "25a44fbcdd56673db362d12a63484b16026c022472a3f0ad7b4f4f7536933da3",
+    "size": 9710,
+    "ident": "Header for : dodsnd\nModule size: $25EE  #9710\nModule CRC : $CC26DC (Good)\nHdr parity : $2F\nExec. off  : $000D  #13\nData size  : $0826  #2086\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "reproducible": true
+  },
+  "dodwiz": {
+    "sha256": "ff0eef3bd0680649d54354ac043702e3a248610cfc5095e6518e505068fdd05e",
+    "size": 19822,
+    "ident": "Header for : dodwiz\nModule size: $4D6E  #19822\nModule CRC : $A75809 (Good)\nHdr parity : $2F\nExec. off  : $000D  #13\nData size  : $1E54  #7764\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "reproducible": true
+  }
+}

@@ -43,3 +43,14 @@ existing native driver and rendered in process context. No new geometry/font art
 was drawn. `test/fixtures/status-original.json` contains independently captured
 status pixels from the pinned cartridge executing in MAME. See the Gameplay M2
 report for capture gates, exact equality and display/timing limitations.
+
+### Gameplay M3 bag and parser slice
+
+`gameplay/game.c:token/classify/bag_command` adapts
+`HUMAN.ASM:PLAY10..14/HMAN70`, `PARSER.ASM:GETTOK/PARSE0/PAROBJ/PARHND`
+and `PGET.ASM:PPULL/PULL10..14/PSTOW/PSTOW0`. `import_gameplay.py` reads
+`TOKEN.ASM:CMDTAB/DIRTAB/ADJTAB/GENTAB` and their class bytes/token IDs at
+that same pinned commit. Original list order, OCB IDs, generic/type matching,
+active-torch clearing and retained removed-item next links are preserved.
+No object use/combat or new sound is inferred from carrying the starting sword.
+See the M3 report for scope and independently captured cartridge comparisons.

@@ -84,3 +84,20 @@ New checks: `python3 apps/daggorath/test_status.py` and
 See [Gameplay M2](../../docs/apps/DAGGORATH_GAMEPLAY_M2.md) for exact cartridge
 comparisons, lifecycle results, refresh limits, memory budget and complete
 regression results.
+
+## Gameplay M3 bag/hand operations
+
+`dodgame seed0` supports original `PULL LEFT/RIGHT <generic>` or
+`PULL LEFT/RIGHT <adjective> <generic>`, and `STOW LEFT/RIGHT`.
+Unique original-table prefixes work: `P R W SW` pulls the starting wooden sword
+into the right hand; `S R` stows it. `P L P T` pulls the pine torch; existing
+`USE LEFT` lights/stows it. Carrying a sword does **not** implement combat.
+Other commands retain their M1/M2 bounded adapters; `EXIT` is the OS-9 extension.
+
+Build with `python3 apps/daggorath/build_gameplay.py --out MCP/work/gameplay-m3/build`;
+use the [disposable artifact workflow](../../docs/architecture/NITROS9_ARTIFACT_STAGING.md),
+preloading the matching heartbeat pack and gameplay module before activation.
+Never install to the canonical EOU VHD or introduce active floppy I/O during play.
+Run `python3 apps/daggorath/test_bag.py` in addition to the complete existing suite.
+[Gameplay M3](../../docs/apps/DAGGORATH_GAMEPLAY_M3.md) records dependencies,
+original-cartridge comparisons, live acceptance and memory limits.

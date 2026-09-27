@@ -48,16 +48,20 @@ def generate(out):
  def array(name,values):lines.append('static const unsigned char '+name+'[]={'+','.join(map(str,values))+'};')
  for name,label,size in [('odb','ODBTAB',100),('cdb','CDBTAB',96),('omx','OMXTAB',18),('cmt','CMTTAB',12),('font','SWCTAB',155)]:
   array(name,[b(symbols[label]+i) for i in range(size)])
- # STATUS:COPY$ skips the first expanded byte (minimum abbreviation length).
+ # STATUS:COPY$ skips the first expanded byte (token class; PARSER:PARS20).
  # Retain the original 5-bit alphabet, not a hand-transcribed name catalog.
- for name,label in [('status_adjectives','ADJTAB'),('status_generics','GENTAB')]:
-  p=symbols[label];count=b(p);p+=1;rows=[]
+ for name,label in [('status_adjectives','ADJTAB'),('status_generics','GENTAB'),('parser_commands','CMDTAB'),('parser_directions','DIRTAB')]:
+  p=symbols[label];count=b(p);p+=1;rows=[];classes=[]
   def five_at(bit):return sum(((b(p+(bit+i)//8)>>(7-(bit+i)%8))&1)<<(4-i) for i in range(5))
   for _ in range(count):
    length=five_at(0)+1
-   values=[five_at(5+i*5) for i in range(length)][1:]
+   expanded=[five_at(5+i*5) for i in range(length)]
+   classes.append(expanded[0]);values=expanded[1:]
    rows.append(values+[255]);p+=(5+length*5+7)//8
   lines.append('static const unsigned char '+name+'[][16]={'+','.join('{'+','.join(map(str,row))+'}' for row in rows)+'};')
+  array(name+'_classes',classes)
+ for name in ['T.PULL','T.STOW','T.LT','T.RT']:
+  lines.append('#define PAR_'+name[2:]+' '+str(symbols[name]))
  array('status_hearts',[b(symbols['SPCTAB']+i) for i in range(28)])
  p=symbols['XXXTAB'];special=[]
  while b(p)<128:special.extend(b(p+i) for i in range(4));p+=4

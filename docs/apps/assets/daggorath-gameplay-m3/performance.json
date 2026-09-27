@@ -1,0 +1,30 @@
+[
+  {
+    "command": "P R W SW",
+    "enqueueToFirstPresentedReadySeconds": 0.9186796334300027
+  },
+  {
+    "command": "P L P T",
+    "enqueueToFirstPresentedReadySeconds": 1.1017654326199988
+  },
+  {
+    "command": "S R",
+    "enqueueToFirstPresentedReadySeconds": 0.768486268700002
+  },
+  {
+    "command": "USE LEFT",
+    "enqueueToFirstPresentedReadySeconds": 4.62344908723
+  },
+  {
+    "command": "P L SWORD",
+    "enqueueToFirstPresentedReadySeconds": 4.823706546950035
+  },
+  {
+    "command": "MOVE",
+    "enqueueToFirstPresentedReadySeconds": 4.540140443849964
+  },
+  {
+    "command": "TURN RIGHT",
+    "enqueueToFirstPresentedReadySeconds": 2.8873962949600127
+  }
+]

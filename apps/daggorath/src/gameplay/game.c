@@ -67,19 +67,53 @@ void game_init(Game *g,Byte second){Byte type,level,n,r,c,i;int t;Word p,tail;By
   if(tail)putword(ocb(g,tail),p);else g->bag=p;tail=p;}
  health(g);g->recovery=g->rate;g->burn=3600;
 }
-Byte game_command(Game *g,const char *s){Word p,previous,*hand;Byte *o;int r,c;Byte result=GAME_OK;
+/* PARSER.ASM GETTOK/PARSE0/PAROBJ/PARHND and PGET.ASM PPULL/PSTOW.
+ * Original HUMAN converts nonletters to spaces; host strings end at NUL.
+ * CD.ASM TOKEN permits 32 five-bit characters. Unique prefix only: a second
+ * match fails, even if another entry matched fully. No heap or shared scratch. */
+static const char *token(const char *s,Byte *t){Byte n=0,c;
+ while(*s&&(*s<'A'||*s>'Z'))++s;
+ while(*s&&n<32){c=*s++;if(c<'A'||c>'Z')break;t[n++]=c-'A'+1;}
+ t[n]=255;return s;
+}
+static int classify(const Byte *t,const Byte table[][16],Byte count){int found=-1;Byte i,j;
+ if(t[0]==255)return -1;
+ for(i=0;i<count;i++){j=0;while(t[j]!=255&&j<15&&t[j]==table[i][j])++j;
+  if(t[j]==255){if(found>=0)return -1;found=i;}}
+ return found;
+}
+static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir,kind,cls;Word p,previous,*hand;
+ s=token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
+ if(cmd!=PAR_PULL&&cmd!=PAR_STOW)return GAME_INVALID;
+ s=token(s,t);dir=classify(t,parser_directions,sizeof(parser_directions)/16);
+ if(dir==PAR_LT)hand=&g->hand;else if(dir==PAR_RT)hand=&g->rightHand;else return GAME_INVALID;
+ if(cmd==PAR_STOW){if(!*hand)return GAME_INVALID;
+  putword(ocb(g,*hand),g->bag);g->bag=*hand;*hand=0;return GAME_OK;}
+ if(*hand)return GAME_INVALID;
+ s=token(s,t);kind=classify(t,status_generics,sizeof(status_generics)/16);
+ if(kind>=0)cls=status_generics_classes[kind];
+ else {specific=1;kind=classify(t,status_adjectives,sizeof(status_adjectives)/16);if(kind<0)return GAME_INVALID;
+  cls=status_adjectives_classes[kind];token(s,t);dir=classify(t,status_generics,sizeof(status_generics)/16);
+  if(dir<0||status_generics_classes[dir]!=cls)return GAME_INVALID;}
+ previous=0;p=g->bag;
+ while(p&&(specific?ocb(g,p)[9]!=kind:ocb(g,p)[10]!=cls)){previous=p;p=getword(ocb(g,p));}
+ if(!p)return GAME_INVALID;
+ if(previous)putword(ocb(g,previous),getword(ocb(g,p)));else g->bag=getword(ocb(g,p));
+ *hand=p;if(g->torch==p)g->torch=0;
+ /* PULL leaves the removed OCB's next link intact. No owner/weight/RNG change.
+  * HUMAN:HMAN70 flushes unconsumed tokens after the handler returns. */
+ return GAME_OK;
+}
+Byte game_command(Game *g,const char *s){Word *hand;Byte *o;int r,c;Byte result=GAME_OK;
  if(g->faint||g->dead)return GAME_FAINT;
  if(!strcmp(s,"TURN LEFT"))g->dir=(g->dir-1)&3;
  else if(!strcmp(s,"TURN RIGHT"))g->dir=(g->dir+1)&3;
  else if(!strcmp(s,"TURN AROUND"))g->dir=(g->dir+2)&3;
  else if(!strcmp(s,"MOVE")){r=g->row+dr[g->dir];c=g->col+dc[g->dir];if(cell(g,r,c)==255)result=GAME_BLOCKED;else {g->row=r;g->col=c;}
   g->damage=(Word)(g->damage+(g->weight>>3)+3);health(g);
- }else if(!strcmp(s,"PULL LEFT TORCH")||!strcmp(s,"PULL RIGHT TORCH")){hand=!strcmp(s,"PULL LEFT TORCH")?&g->hand:&g->rightHand;if(*hand)return GAME_INVALID;p=g->bag;previous=0;
-  while(p&&ocb(g,p)[10]!=5){previous=p;p=getword(ocb(g,p));}if(!p)return GAME_INVALID;
-  if(previous)putword(ocb(g,previous),getword(ocb(g,p)));else g->bag=getword(ocb(g,p));*hand=p;if(g->torch==p)g->torch=0;
  }else if(!strcmp(s,"USE LEFT")||!strcmp(s,"USE RIGHT")){hand=!strcmp(s,"USE LEFT")?&g->hand:&g->rightHand;if(!*hand||ocb(g,*hand)[10]!=5)return GAME_INVALID;
   g->torch=*hand;o=ocb(g,*hand);putword(o,g->bag);g->bag=*hand;*hand=0;
- }else if(strcmp(s,"LOOK"))return GAME_INVALID;
+ }else if(strcmp(s,"LOOK")){if(bag_command(g,s)!=GAME_OK)return GAME_INVALID;}
  g->lit=g->torch!=0;return result;
 }
 void game_tick(Game *g,Word ticks){Byte *o;while(ticks--){

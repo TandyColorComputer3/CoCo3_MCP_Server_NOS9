@@ -9,7 +9,8 @@ static Byte frame[FRAME_BYTES],signalFlag;
 static Byte inputUnderlay[GAME_INPUT_BYTES];
 static NativeHeartbeat heartbeat={255,0};
 static NativeHeartbeatState heartbeatState;
-/* Thin, exact-word command adapter, not PARSER/TOKEN. EXIT is OS-9-only. */
+/* PULL/STOW use original token rules; other commands retain M1 adapters.
+ * EXIT remains an isolated OS-9-only lifecycle command. */
 int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255;Word previous,now,delta;char input[32];const char *message="TURN LEFT RIGHT AROUND  MOVE";
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
  e=os_intercept(&signalFlag);if(e)return e;

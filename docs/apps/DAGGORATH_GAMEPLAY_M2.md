@@ -22,13 +22,13 @@ in `/Volumes/SEDONA/Projects/daggorath-reference`, commit
 |---|---|
 | `STATUS.ASM: STATUX, SPACES` | Clear 15 character cells on each side; left starts at column 0, right area at 17. Right name begins at column `32-nameLength`. |
 | `STATUS.ASM: OBJNAM, COPY$, M$EMPT` | Empty pointer displays EMPTY. Revealed object gets adjective + space + generic name; unrevealed object gets generic only. Read actual OCB type/class/reveal fields. |
-| `TOKEN.ASM: ADJTAB, GENTAB`; `EXPAND.ASM: EXPANX, GETFIV` | Packed five-bit names. COPY$ skips the first expanded byte (minimum abbreviation length). Import directly from the assembled pinned source. |
+| `TOKEN.ASM: ADJTAB, GENTAB`; `EXPAND.ASM: EXPANX, GETFIV` | Packed five-bit names. COPY$ skips the first expanded byte (token class; see PARSER.ASM:PARS20). Import directly from the assembled pinned source. |
 | `COMTXT.ASM: TXTDPB`; `SWCHAR.ASM: SWCTAB, SPCTAB` | Seven rows per character. Ordinary glyph rows are five bits shifted left two; special heart glyphs are seven literal bytes per cell. XOR with the text inverse byte. |
 | `COMDAT.ASM: TXTSTS, STSVDB`; `CLEAR.ASM: CLRSTX, CLEAR` | Status pixel extent is **y=152..159**, x=0..255, 256 bytes. TXTSTS has a two-row text capacity, but STSVDB clears only eight scanlines. Do not confuse text capacity with the visible strip. |
 | `COMDAT.ASM: TXTPRI, PRIVDB`; `CLEAR.ASM: CLRPRX` | Primary text begins at y=160. The port's message at y=168 and input at y=184 remain outside the status strip. |
 | `COMMON.ASM: CLK30` | On countdown expiry, toggle PB1, reload HEARTR, and—if HEARTF is enabled—complement HEARTS and draw the matching glyph pair at columns 15–16, preserving the text cursor. |
 | `PLOOK.ASM: INIVUX` | Clear status and primary regions, calculate health/rate, initialize HEARTC to 1, enable visual and audio heartbeat, draw status. |
-| `PGET.ASM: COMUPD`, `PPULL.ASM`, `PUSE.ASM` | Hand/object changes update status. The already-supported torch operation moves the real OCB token between bag, selected hand and torch state. |
+| `PGET.ASM: COMUPD, PPULL`, `PUSE.ASM` | Hand/object changes update status. The already-supported torch operation moves the real OCB token between bag, selected hand and torch state. |
 | `HUPDAT.ASM: HUPDAX, HUPD30, HUPD42`; `PUSE.ASM: USC210` | Health changes rate; fainting has separate view fades. Scroll/map mode disables HEARTF. Those unported display modes are not added by M2. |
 
 Level-zero `VDGINV=0` gives an inverse strip: filled background, complemented

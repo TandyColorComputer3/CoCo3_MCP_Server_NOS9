@@ -1,0 +1,97 @@
+{
+  "commit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "romSha256": "35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571",
+  "gate": "Original STATUX return, both display buffers equal, both heart phases",
+  "states": [
+    {
+      "label": "empty",
+      "commands": [],
+      "phase": 0,
+      "left": 0,
+      "right": 0,
+      "stateHex": "0e870000000000000e9500000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "83bb8783bbffffffffffffffffffffffffffffffffffffffffffff83bb8783bbbf93bbabbbffffffffffffffffffffff5fffffffffffffffffffffbf93bbabbbbfabbbefd7fffffffffffffffffffffe0fffffffffffffffffffffbfabbbefd787ab87efeffffffffffffffffffffffe0fffffffffffffffffffff87ab87efefbfabbfefefffffffffffffffffffffff1fffffffffffffffffffffbfabbfefefbfbbbfefefffffffffffffffffffffffbfffffffffffffffffffffbfbbbfefef83bbbfefefffffffffffffffffffffffffffffffffffffffffffff83bbbfefefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "empty",
+      "commands": [],
+      "phase": 1,
+      "left": 0,
+      "right": 0,
+      "stateHex": "0e870000000000000e9500000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "83bb8783bbffffffffffffffffffffffffffffffffffffffffffff83bb8783bbbf93bbabbbfffffffffffffffffffffe4fffffffffffffffffffffbf93bbabbbbfabbbefd7fffffffffffffffffffffc07ffffffffffffffffffffbfabbbefd787ab87efeffffffffffffffffffffffc07ffffffffffffffffffff87ab87efefbfabbfefeffffffffffffffffffffffe0fffffffffffffffffffffbfabbfefefbfbbbfefefffffffffffffffffffffff1fffffffffffffffffffffbfbbbfefef83bbbfefefffffffffffffffffffffffbfffffffffffffffffffff83bbbfefefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "right",
+      "commands": [
+        "P R W SW"
+      ],
+      "phase": 0,
+      "left": 0,
+      "right": 3719,
+      "stateHex": "0e9500000e8700000e9500000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "83bb8783bbffffffffffffffffffffffffffffffbbc7c78783bbffc7bbc78787bf93bbabbbffffffffffffffffffffff5fffffffbbbbbbbbbfbbffbbbbbbbbbbbfabbbefd7fffffffffffffffffffffe0fffffffbbbbbbbbbf9bffbfbbbbbbbb87ab87efeffffffffffffffffffffffe0fffffffabbbbbbb87abffc7abbb87bbbfabbfefefffffffffffffffffffffff1fffffffabbbbbbbbfb3fffbabbbafbbbfbbbfefefffffffffffffffffffffffbfffffff93bbbbbbbfbbffbb93bbb7bb83bbbfefefffffffffffffffffffffffffffffffbbc7c78783bbffc7bbc7bb87ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "right",
+      "commands": [
+        "P R W SW"
+      ],
+      "phase": 1,
+      "left": 0,
+      "right": 3719,
+      "stateHex": "0e9500000e8700000e9500000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "83bb8783bbffffffffffffffffffffffffffffffbbc7c78783bbffc7bbc78787bf93bbabbbfffffffffffffffffffffe4fffffffbbbbbbbbbfbbffbbbbbbbbbbbfabbbefd7fffffffffffffffffffffc07ffffffbbbbbbbbbf9bffbfbbbbbbbb87ab87efeffffffffffffffffffffffc07ffffffabbbbbbb87abffc7abbb87bbbfabbfefeffffffffffffffffffffffe0fffffffabbbbbbbbfb3fffbabbbafbbbfbbbfefefffffffffffffffffffffff1fffffff93bbbbbbbfbbffbb93bbb7bb83bbbfefefffffffffffffffffffffffbfffffffbbc7c78783bbffc7bbc7bb87ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "both",
+      "commands": [
+        "P R W SW",
+        "P L P T"
+      ],
+      "phase": 0,
+      "left": 3733,
+      "right": 3719,
+      "stateHex": "00000e950e8700000e9500000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "87c7bb83ff83c787c7bbffffffffffffffffffffbbc7c78783bbffc7bbc78787bbefbbbfffabbbbbbbbbffffffffffff5fffffffbbbbbbbbbfbbffbbbbbbbbbbbbef9bbfffefbbbbbfbbfffffffffffe0fffffffbbbbbbbbbf9bffbfbbbbbbbb87efab87ffefbb87bf83fffffffffffe0fffffffabbbbbbb87abffc7abbb87bbbfefb3bfffefbbafbfbbffffffffffff1fffffffabbbbbbbbfb3fffbabbbafbbbfefbbbfffefbbb7bbbbffffffffffffbfffffff93bbbbbbbfbbffbb93bbb7bbbfc7bb83ffefc7bbc7bbffffffffffffffffffffbbc7c78783bbffc7bbc7bb87ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "both",
+      "commands": [
+        "P R W SW",
+        "P L P T"
+      ],
+      "phase": 1,
+      "left": 3733,
+      "right": 3719,
+      "stateHex": "00000e950e8700000e9500000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "87c7bb83ff83c787c7bbffffffffffffffffffffbbc7c78783bbffc7bbc78787bbefbbbfffabbbbbbbbbfffffffffffe4fffffffbbbbbbbbbfbbffbbbbbbbbbbbbef9bbfffefbbbbbfbbfffffffffffc07ffffffbbbbbbbbbf9bffbfbbbbbbbb87efab87ffefbb87bf83fffffffffffc07ffffffabbbbbbb87abffc7abbb87bbbfefb3bfffefbbafbfbbfffffffffffe0fffffffabbbbbbbbfb3fffbabbbafbbbfefbbbfffefbbb7bbbbffffffffffff1fffffff93bbbbbbbfbbffbb93bbb7bbbfc7bb83ffefc7bbc7bbffffffffffffbfffffffbbc7c78783bbffc7bbc7bb87ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "left",
+      "commands": [
+        "P R W SW",
+        "P L P T",
+        "S R"
+      ],
+      "phase": 0,
+      "left": 3733,
+      "right": 0,
+      "stateHex": "0e870e9500000000000000000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "87c7bb83ff83c787c7bbffffffffffffffffffffffffffffffffff83bb8783bbbbefbbbfffabbbbbbbbbffffffffffff5fffffffffffffffffffffbf93bbabbbbbef9bbfffefbbbbbfbbfffffffffffe0fffffffffffffffffffffbfabbbefd787efab87ffefbb87bf83fffffffffffe0fffffffffffffffffffff87ab87efefbfefb3bfffefbbafbfbbffffffffffff1fffffffffffffffffffffbfabbfefefbfefbbbfffefbbb7bbbbffffffffffffbfffffffffffffffffffffbfbbbfefefbfc7bb83ffefc7bbc7bbffffffffffffffffffffffffffffffffff83bbbfefefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "label": "left",
+      "commands": [
+        "P R W SW",
+        "P L P T",
+        "S R"
+      ],
+      "phase": 1,
+      "left": 3733,
+      "right": 0,
+      "stateHex": "0e870e9500000000000000000b010000001104000010000000000b010f07000f05000005",
+      "statusHex": "87c7bb83ff83c787c7bbffffffffffffffffffffffffffffffffff83bb8783bbbbefbbbfffabbbbbbbbbfffffffffffe4fffffffffffffffffffffbf93bbabbbbbef9bbfffefbbbbbfbbfffffffffffc07ffffffffffffffffffffbfabbbefd787efab87ffefbb87bf83fffffffffffc07ffffffffffffffffffff87ab87efefbfefb3bfffefbbafbfbbfffffffffffe0fffffffffffffffffffffbfabbfefefbfefbbbfffefbbb7bbbbffffffffffff1fffffffffffffffffffffbfbbbfefefbfc7bb83ffefc7bbc7bbffffffffffffbfffffffffffffffffffff83bbbfefefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  ]
+}
