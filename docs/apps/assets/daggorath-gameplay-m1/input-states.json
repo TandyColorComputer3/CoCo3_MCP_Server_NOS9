@@ -1,0 +1,101 @@
+[
+  {
+    "initial": {
+      "faint": 0,
+      "posting": false,
+      "dir": 0,
+      "time": 199.7223541169,
+      "empty": true,
+      "bag": 3719,
+      "hand": 0,
+      "physicalBase": 57388,
+      "row": 16,
+      "damage": 0,
+      "torch": 0,
+      "lit": 0,
+      "rate": 46,
+      "seq": 164,
+      "col": 11
+    }
+  },
+  {
+    "acceptedInput": "PULL LEFT TORCH",
+    "state": {
+      "faint": 0,
+      "posting": false,
+      "dir": 0,
+      "time": 210.00225657096,
+      "empty": true,
+      "bag": 3719,
+      "hand": 0,
+      "physicalBase": 57388,
+      "row": 16,
+      "damage": 0,
+      "torch": 0,
+      "lit": 0,
+      "rate": 46,
+      "seq": 780,
+      "col": 11
+    }
+  },
+  {
+    "command": "PULL LEFT TORCH",
+    "state": {
+      "faint": 0,
+      "posting": false,
+      "dir": 0,
+      "time": 210.71984716434,
+      "empty": true,
+      "bag": 3719,
+      "hand": 3733,
+      "physicalBase": 57388,
+      "row": 16,
+      "damage": 0,
+      "torch": 0,
+      "lit": 0,
+      "rate": 46,
+      "seq": 823,
+      "col": 11
+    }
+  },
+  {
+    "acceptedInput": "USE LEFT",
+    "state": {
+      "faint": 0,
+      "posting": false,
+      "dir": 0,
+      "time": 214.84182103797,
+      "empty": true,
+      "bag": 3719,
+      "hand": 3733,
+      "physicalBase": 57388,
+      "row": 16,
+      "damage": 0,
+      "torch": 0,
+      "lit": 0,
+      "rate": 46,
+      "seq": 1070,
+      "col": 11
+    }
+  },
+  {
+    "command": "USE LEFT",
+    "state": {
+      "faint": 0,
+      "posting": false,
+      "dir": 0,
+      "time": 219.23080536494,
+      "empty": true,
+      "bag": 3733,
+      "hand": 0,
+      "physicalBase": 57388,
+      "row": 16,
+      "damage": 0,
+      "torch": 3733,
+      "lit": 1,
+      "rate": 46,
+      "seq": 1333,
+      "col": 11
+    }
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "purpose": "diagnostic only: enable invokes freeze ($94), all other production code unchanged",
+  "command": [
+    "cmoc",
+    "--os9",
+    "-O0",
+    "--intermediate",
+    "--verbose",
+    "--add-os9-stack-space=1536",
+    "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-187-resolution/nohb-build",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-input-trace/final-build",
+    "-o",
+    "dognohb",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/gameplay/main.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/gameplay/game.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/gameplay/input.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-187-resolution/nohb-build/module.asm",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-187-resolution/nohb-build/native_heartbeat.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c"
+  ],
+  "ident": "Header for : dognohb\nModule size: $465D  #18013\nModule CRC : $E92A69 (Good)\nHdr parity : $2A\nExec. off  : $000D  #13\nData size  : $2936  #10550\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+  "sha256": "14ea4027084aec653d5818d2e564b9d19d4ffe6e3a90bd44b093fac2d034345f"
+}

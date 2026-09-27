@@ -4,3 +4,4 @@ Byte screen_prepare(const Byte *frame);
 Byte screen_flip(void);
 Byte screen_present(const Byte *frame);
 Byte screen_close(void);
+Byte screen_path(void);

@@ -1,0 +1,18 @@
+{
+  "scope": "partial failed input trial; not teardown acceptance",
+  "first": 199.104036715,
+  "last": 368.689033574,
+  "callbacks": 10163,
+  "maxCallbackMs": 16.714978000010206,
+  "minCallbackMs": 16.654076999998324,
+  "expectedEdges": 221,
+  "observedEdges": 221,
+  "missingDeadlines": [],
+  "minEdgeMs": 767.6312959999905,
+  "maxEdgeMs": 767.6810229999944,
+  "faults": 0,
+  "fdcAccessesBetweenFirstLastCallbacks": 0,
+  "rates": [
+    "46"
+  ]
+}

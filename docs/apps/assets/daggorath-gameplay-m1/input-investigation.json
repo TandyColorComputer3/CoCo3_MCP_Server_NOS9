@@ -1,0 +1,406 @@
+{
+  "completedTrials": 15,
+  "completedRequestedCharacters": 63,
+  "lostOrReorderedCharacters": 0,
+  "trials": [
+    {
+      "phase": "dark",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 2.7115370000028634,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 2.6903885830033687,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 2.6856047920009587,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "TORCH",
+      "received": "TORCH",
+      "wallSeconds": 4.82838420799817,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 2.687817333993735,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "MMMM",
+      "received": "MMMM",
+      "wallSeconds": 2.6834866249992047,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "EEEE",
+      "received": "EEEE",
+      "wallSeconds": 2.6778663330042036,
+      "note": null
+    },
+    {
+      "phase": "dark",
+      "requested": "MOVEE",
+      "received": "MOVEE",
+      "wallSeconds": 3.377406957995845,
+      "note": null
+    },
+    {
+      "phase": "lit",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 19.505645707999065,
+      "note": null
+    },
+    {
+      "phase": "lit",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 20.45678512500308,
+      "note": null
+    },
+    {
+      "phase": "lit",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 16.85349120799947,
+      "note": null
+    },
+    {
+      "phase": "lit",
+      "requested": "TORCH",
+      "received": "TORCH",
+      "wallSeconds": null,
+      "note": "25-second observation deadline expired during redraw; subsequently reached exact TORCH readiness"
+    },
+    {
+      "phase": "lit",
+      "requested": "MOVE",
+      "received": "MOVE",
+      "wallSeconds": 23.078090750001138,
+      "note": null
+    },
+    {
+      "phase": "lit",
+      "requested": "MMMM",
+      "received": "MMMM",
+      "wallSeconds": 16.83422275000339,
+      "note": null
+    },
+    {
+      "phase": "lit",
+      "requested": "EEEE",
+      "received": "EEEE",
+      "wallSeconds": 16.83454562499537,
+      "note": null
+    }
+  ],
+  "excludedTrial": "Final lit MOVEE queued all five VTIO bytes, but application exited 187 before consuming all five; not counted as a pass.",
+  "moveTimeline": [
+    {
+      "dirty": 0,
+      "base": 40960,
+      "hand": 0,
+      "pc": 45165,
+      "torch": 3733,
+      "dir": 0,
+      "input": "",
+      "y": 0,
+      "kind": "buffer_ready",
+      "lit": 1,
+      "u": 10482,
+      "time": 354.17914348816,
+      "phase": "ready",
+      "posting": false,
+      "row": 16,
+      "rate": 46,
+      "col": 11,
+      "n": 0,
+      "key": 0,
+      "empty": true,
+      "error": 0
+    },
+    {
+      "kind": "queue_flags",
+      "flags": "false,true",
+      "time": 354.18790138115
+    },
+    {
+      "kind": "matrix",
+      "time": 354.23796584116,
+      "rows": "255,255,255,255,255,255,127"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.28803030116,
+      "rows": "255,223,255,255,255,255,127"
+    },
+    {
+      "pc": 43324,
+      "inpPtr": 93,
+      "kind": "vtio_enqueue",
+      "character": 77,
+      "dev": 23552,
+      "time": 354.30495280912,
+      "endPtr": 94
+    },
+    {
+      "pc": 42595,
+      "inpPtr": 94,
+      "kind": "vtio_consume",
+      "character": 77,
+      "dev": 23552,
+      "time": 354.31340751732,
+      "endPtr": 94
+    },
+    {
+      "dirty": 0,
+      "base": 40960,
+      "hand": 0,
+      "torch": 3733,
+      "dir": 0,
+      "input": "",
+      "y": 0,
+      "lit": 1,
+      "u": 10482,
+      "time": 354.31422214622,
+      "kind": "app_read",
+      "posting": true,
+      "row": 16,
+      "rate": 46,
+      "col": 11,
+      "n": 0,
+      "key": 77,
+      "empty": false,
+      "error": 0
+    },
+    {
+      "kind": "matrix",
+      "time": 354.33809476116,
+      "rows": "255,255,255,255,255,255,255"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.38815922117,
+      "rows": "255,255,255,255,255,255,127"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.43822368117,
+      "rows": "255,127,255,255,255,255,127"
+    },
+    {
+      "pc": 43324,
+      "inpPtr": 94,
+      "kind": "vtio_enqueue",
+      "character": 79,
+      "dev": 23552,
+      "time": 354.45513227332,
+      "endPtr": 95
+    },
+    {
+      "kind": "matrix",
+      "time": 354.48828814117,
+      "rows": "255,255,255,255,255,255,255"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.53835260118,
+      "rows": "255,255,255,255,255,255,127"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.58841706118,
+      "rows": "255,255,191,255,255,255,127"
+    },
+    {
+      "pc": 43324,
+      "inpPtr": 94,
+      "kind": "vtio_enqueue",
+      "character": 86,
+      "dev": 23552,
+      "time": 354.60536816929,
+      "endPtr": 96
+    },
+    {
+      "kind": "matrix",
+      "time": 354.63848152118,
+      "rows": "255,255,255,255,255,255,255"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.68854598119,
+      "rows": "255,255,255,255,255,255,127"
+    },
+    {
+      "kind": "matrix",
+      "time": 354.73861044119,
+      "rows": "223,255,255,255,255,255,127"
+    },
+    {
+      "pc": 43324,
+      "inpPtr": 94,
+      "kind": "vtio_enqueue",
+      "character": 69,
+      "dev": 23552,
+      "time": 354.75555824937,
+      "endPtr": 97
+    },
+    {
+      "kind": "matrix",
+      "time": 354.7886749012,
+      "rows": "255,255,255,255,255,255,255"
+    },
+    {
+      "kind": "queue_flags",
+      "flags": "true,false",
+      "time": 354.7886749012
+    },
+    {
+      "pc": 42595,
+      "inpPtr": 95,
+      "kind": "vtio_consume",
+      "character": 79,
+      "dev": 23552,
+      "time": 358.49628500115,
+      "endPtr": 97
+    },
+    {
+      "dirty": 0,
+      "base": 40960,
+      "hand": 0,
+      "torch": 3733,
+      "dir": 0,
+      "input": "M",
+      "y": 0,
+      "lit": 1,
+      "u": 10482,
+      "time": 358.49709963005,
+      "kind": "app_read",
+      "posting": false,
+      "row": 16,
+      "rate": 46,
+      "col": 11,
+      "n": 1,
+      "key": 79,
+      "empty": true,
+      "error": 0
+    },
+    {
+      "pc": 42595,
+      "inpPtr": 96,
+      "kind": "vtio_consume",
+      "character": 86,
+      "dev": 23552,
+      "time": 362.67434734651,
+      "endPtr": 97
+    },
+    {
+      "dirty": 0,
+      "base": 40960,
+      "hand": 0,
+      "torch": 3733,
+      "dir": 0,
+      "input": "MO",
+      "y": 0,
+      "lit": 1,
+      "u": 10482,
+      "time": 362.67516197542,
+      "kind": "app_read",
+      "posting": false,
+      "row": 16,
+      "rate": 46,
+      "col": 11,
+      "n": 2,
+      "key": 86,
+      "empty": true,
+      "error": 0
+    },
+    {
+      "pc": 42595,
+      "inpPtr": 97,
+      "kind": "vtio_consume",
+      "character": 69,
+      "dev": 23552,
+      "time": 366.84029418219,
+      "endPtr": 97
+    },
+    {
+      "dirty": 0,
+      "base": 40960,
+      "hand": 0,
+      "torch": 3733,
+      "dir": 0,
+      "input": "MOV",
+      "y": 0,
+      "lit": 1,
+      "u": 10482,
+      "time": 366.8411088111,
+      "kind": "app_read",
+      "posting": false,
+      "row": 16,
+      "rate": 46,
+      "col": 11,
+      "n": 3,
+      "key": 69,
+      "empty": true,
+      "error": 0
+    },
+    {
+      "dirty": 0,
+      "base": 40960,
+      "hand": 0,
+      "pc": 45165,
+      "torch": 3733,
+      "dir": 0,
+      "input": "MOVE",
+      "y": 0,
+      "kind": "buffer_ready",
+      "lit": 1,
+      "u": 10482,
+      "time": 371.01764693997,
+      "phase": "ready",
+      "posting": false,
+      "row": 16,
+      "rate": 46,
+      "col": 11,
+      "n": 4,
+      "key": 0,
+      "empty": true,
+      "error": 0
+    },
+    {
+      "kind": "queue_flags",
+      "flags": "false,true",
+      "time": 371.02624809568
+    },
+    {
+      "kind": "matrix",
+      "time": 371.07631255568,
+      "rows": "255,255,255,223,255,255,255"
+    },
+    {
+      "pc": 43324,
+      "inpPtr": 97,
+      "kind": "vtio_enqueue",
+      "character": 8,
+      "dev": 23552,
+      "time": 371.09321298972,
+      "endPtr": 98
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "test": "apps/daggorath/test.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_audio.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_audio_m2.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_audio_m3.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_gameplay.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_gameplay_input_render.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_gameplay_lifecycle.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_lifecycle.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_native_heartbeat.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_playback.py",
+    "exit": 0
+  },
+  {
+    "test": "apps/daggorath/test_presentation.py",
+    "exit": 0
+  }
+]

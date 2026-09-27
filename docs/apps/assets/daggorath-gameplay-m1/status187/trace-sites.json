@@ -1,0 +1,102 @@
+{
+  "3055": {
+    "label": "os_intercept()",
+    "local": -49,
+    "sig": "1725643262e7c8cfe6c8cf5d10260003"
+  },
+  "3091": {
+    "label": "os_clock()",
+    "local": -49,
+    "sig": "17264f3264e7c8cfe6c8cf5d10260003"
+  },
+  "3168": {
+    "label": "screen_open()",
+    "local": -49,
+    "sig": "e784172064e7c8cfe6c8cf5d10260003"
+  },
+  "3200": {
+    "label": "os_clock()",
+    "local": -49,
+    "sig": "1725e23264e7c8cfe6c8cf5d10260003"
+  },
+  "3228": {
+    "label": "native_heartbeat_open()",
+    "local": -49,
+    "sig": "172c793262e7c8cfe6c8cf5d10260003"
+  },
+  "3263": {
+    "label": "native_heartbeat_rate()",
+    "local": -49,
+    "sig": "172cf13264e7c8cfe6c8cf5d10260003"
+  },
+  "3291": {
+    "label": "native_heartbeat_enable()",
+    "local": -49,
+    "sig": "172d093262e7c8cfe6c8cf5d10260003"
+  },
+  "3319": {
+    "label": "os_signal_value()",
+    "local": -49,
+    "sig": "1724f03262e7c8cfe6c8cf5d10260003"
+  },
+  "3350": {
+    "label": "os_clock()",
+    "local": -49,
+    "sig": "17254c3264e7c8cfe6c8cf5d10260003"
+  },
+  "3435": {
+    "label": "delta > 300 guard",
+    "local": -49,
+    "sig": "160008c6bbe7c8cf160373e6a90a44e7"
+  },
+  "3579": {
+    "label": "native_heartbeat_rate()",
+    "local": -49,
+    "sig": "172bb53264e7c8cfe6c8cf5d10260003"
+  },
+  "3743": {
+    "label": "screen_path()",
+    "local": -49,
+    "sig": "171d013264e7c8cfe6c8cf5d10260003"
+  },
+  "3843": {
+    "label": "game_command()",
+    "local": -44,
+    "sig": "170fed3264e7c8d4e6c8d4c101102700"
+  },
+  "3935": {
+    "label": "native_heartbeat_rate()",
+    "local": -49,
+    "sig": "172a513264e7c8cfe6c8cf5d10260003"
+  },
+  "4259": {
+    "label": "screen_present()",
+    "local": -49,
+    "sig": "171e783262e7c8cfe6c8cf5d10260003"
+  },
+  "4304": {
+    "label": "os_sleep()",
+    "local": -49,
+    "sig": "1720ae3262e7c8cfe6c8cf5d10260003"
+  },
+  "4335": {
+    "label": "native_heartbeat_close()",
+    "local": -48,
+    "sig": "1729cd3262e7c8d0e6c8cf5d10260009"
+  },
+  "4352": {
+    "label": "native_heartbeat_close()",
+    "local": -49,
+    "sig": "0000e6c8d0e7c8cf171e42e7c8d0e6c8"
+  },
+  "4358": {
+    "label": "screen_close()",
+    "local": -48,
+    "sig": "c8cf171e42e7c8d0e6c8cf5d10260009"
+  },
+  "4375": {
+    "label": "screen_close()",
+    "local": -49,
+    "sig": "0000e6c8d0e7c8cfe6c8cf4f3406e6a9"
+  }
+}

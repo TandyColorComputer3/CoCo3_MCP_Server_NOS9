@@ -1,0 +1,13 @@
+{
+  "callbacks": 754,
+  "minMs": 16.67307399998208,
+  "maxMs": 16.71497899997121,
+  "faults": 0,
+  "activeFdc": 0,
+  "expectedEdges": 17,
+  "observedEdges": 17,
+  "lastCallback": 295.778494131,
+  "teardown": 295.78241921275,
+  "lastObservedFrame": 374.864523362,
+  "callbacksAfterTeardown": 0
+}

@@ -99,3 +99,5 @@ Byte screen_close(void)
     e=window_close(fd);if(!error)error=e;fd=255;
     return error;
 }
+/* Owned path for interactive applications; never exposes/reconfigures Term. */
+Byte screen_path(void){return fd;}

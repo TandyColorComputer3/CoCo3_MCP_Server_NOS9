@@ -1,0 +1,15 @@
+{
+  "daggorathChecks": 162,
+  "mcpTests": 115,
+  "mcpPass": 115,
+  "mcpFail": 0,
+  "buildExit": 0,
+  "reproducible": true,
+  "moduleCrc": "64B763",
+  "gitDiffCheck": 0,
+  "links": {
+    "document": "docs/apps/DAGGORATH_GAMEPLAY_M1.md",
+    "localLinks": 35,
+    "missing": []
+  }
+}

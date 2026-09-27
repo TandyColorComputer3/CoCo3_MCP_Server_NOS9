@@ -1,0 +1,39 @@
+{
+  "q": {
+    "name": "os9_run",
+    "arguments": {
+      "command": "dodgame seed0",
+      "timeout_ms": 120000,
+      "allow_graphics": true
+    }
+  },
+  "r": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"command\":\"dodgame seed0\",\"completed\":false,\"commandCompleted\":false,\"status\":null,\"statusText\":null,\"timedOut\":true,\"shellReady\":false,\"outcome\":\"timeout\",\"phase\":\"command\",\"elapsedMs\":120030,\"outputComplete\":false,\"allowGraphics\":true,\"displayDepartures\":1,\"consoleReturned\":false,\"executionState\":\"AWAITING_TERM\",\"marker\":\"MCPDONE0770c84330fe11651594d3fbffb1a469\",\"error\":\"deadline exceeded during command\",\"timeoutReason\":\"console_not_returned\"}"
+      }
+    ],
+    "structuredContent": {
+      "command": "dodgame seed0",
+      "completed": false,
+      "commandCompleted": false,
+      "status": null,
+      "statusText": null,
+      "timedOut": true,
+      "shellReady": false,
+      "outcome": "timeout",
+      "phase": "command",
+      "elapsedMs": 120030,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": false,
+      "executionState": "AWAITING_TERM",
+      "marker": "MCPDONE0770c84330fe11651594d3fbffb1a469",
+      "error": "deadline exceeded during command",
+      "timeoutReason": "console_not_returned"
+    },
+    "isError": true
+  }
+}
