@@ -11,6 +11,7 @@ Inspected 2026-09-26. This is source/history research, not a build, deployment, 
 | What application patterns are worth reusing? | [mvedit/mvdraw](MVEDIT_MVDRAW.md) |
 | Can object files teach the MCP symbols and relocation? | [OS9 ROF disassembler](OS9ROF.md) |
 | What exactly is needed for the first wizard intro? | [Daggorath and Wizard Milestone 1](DAGGORATH.md) |
+| How do original ASM, Windows/Linux C ports and our NitrOS-9 implementation relate? | [Daggorath semantic crosswalk](DAGGORATH_C_CROSSWALK.md) |
 
 ## Reference identities
 
