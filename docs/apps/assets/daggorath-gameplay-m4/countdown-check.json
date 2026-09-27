@@ -1,0 +1,14 @@
+{
+  "normal": {
+    "checkedTransitions": 4250,
+    "mismatches": 0
+  },
+  "cancel": {
+    "checkedTransitions": 543,
+    "mismatches": 0
+  },
+  "repeat": {
+    "checkedTransitions": 759,
+    "mismatches": 0
+  }
+}

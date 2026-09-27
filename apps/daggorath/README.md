@@ -101,3 +101,17 @@ Never install to the canonical EOU VHD or introduce active floppy I/O during pla
 Run `python3 apps/daggorath/test_bag.py` in addition to the complete existing suite.
 [Gameplay M3](../../docs/apps/DAGGORATH_GAMEPLAY_M3.md) records dependencies,
 original-cartridge comparisons, live acceptance and memory limits.
+
+## Gameplay M4 floor objects
+
+Original GET/DROP now operates on real OCB owner/location state:
+`P R SW`, `D R`, `G L W SW`, `S L`, `P R SW`, `D R` demonstrates a round trip
+using the starting sword. Light the torch first (`P L T`, `USE LEFT`) to see
+floor objects. GET does not require visibility; it requires an empty selected
+hand and a matching unowned object in the current cell. It does not auto-stow.
+
+Build with `python3 apps/daggorath/build_gameplay.py --out MCP/work/gameplay-m4/build`;
+use the same disposable artifact workflow and resident preload sequence.
+Run `python3 apps/daggorath/test_floor.py` plus all existing suites.
+See [Gameplay M4](../../docs/apps/DAGGORATH_GAMEPLAY_M4.md) for source semantics,
+cartridge comparisons, live results, memory and I/O boundaries.

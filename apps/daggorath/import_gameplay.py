@@ -36,7 +36,7 @@ def generate(out):
   return result
  # VIEWER FLATAB draw order is retained separately; these IDs have no game meaning.
  names=['LPASAG','LDOOR','LSDOOR','LWALL','FPASAG','FDOOR','FSDOOR','FWALL','RPASAG','RDOOR','RSDOOR','RWALL','CELINE','LPEEK','RPEEK']
- for table,count in [('FWDVER',4),('FWDCRE',4)]:
+ for table,count in [('FWDVER',4),('FWDCRE',4),('FWDOBJ',6)]:
   for i in range(count):
    addr=word(symbols[table]+i*2);names.append(next(k for k,v in symbols.items() if v==addr))
  lines=['/* Generated original data only. Dyna Micro; see PROVENANCE.md. */']
@@ -46,7 +46,7 @@ def generate(out):
  lines+=['static const unsigned char game_vectors[][4]={']+['{'+','.join(map(str,v))+'},' for v in flat]+['};']
  lines+=['static const unsigned short game_lists[][2]={'+','.join('{%d,%d}'%v for v in ranges)+'};']
  def array(name,values):lines.append('static const unsigned char '+name+'[]={'+','.join(map(str,values))+'};')
- for name,label,size in [('odb','ODBTAB',100),('cdb','CDBTAB',96),('omx','OMXTAB',18),('cmt','CMTTAB',12),('font','SWCTAB',155)]:
+ for name,label,size in [('odb','ODBTAB',100),('cdb','CDBTAB',96),('omx','OMXTAB',18),('cmt','CMTTAB',12),('font','SWCTAB',155),('object_weights','OBJWGT',6)]:
   array(name,[b(symbols[label]+i) for i in range(size)])
  # STATUS:COPY$ skips the first expanded byte (token class; PARSER:PARS20).
  # Retain the original 5-bit alphabet, not a hand-transcribed name catalog.
@@ -60,7 +60,7 @@ def generate(out):
    rows.append(values+[255]);p+=(5+length*5+7)//8
   lines.append('static const unsigned char '+name+'[][16]={'+','.join('{'+','.join(map(str,row))+'}' for row in rows)+'};')
   array(name+'_classes',classes)
- for name in ['T.PULL','T.STOW','T.LT','T.RT']:
+ for name in ['T.PULL','T.STOW','T.GET','T.DROP','T.LT','T.RT']:
   lines.append('#define PAR_'+name[2:]+' '+str(symbols[name]))
  array('status_hearts',[b(symbols['SPCTAB']+i) for i in range(28)])
  p=symbols['XXXTAB'];special=[]

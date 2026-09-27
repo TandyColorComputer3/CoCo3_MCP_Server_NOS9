@@ -54,3 +54,17 @@ that same pinned commit. Original list order, OCB IDs, generic/type matching,
 active-torch clearing and retained removed-item next links are preserved.
 No object use/combat or new sound is inferred from carrying the starting sword.
 See the M3 report for scope and independently captured cartridge comparisons.
+
+### Gameplay M4 floor state and vectors
+
+`gameplay/game.c:on_floor` adapts `COMCRE.ASM:OFIND/FNDOBJ`, scanning allocated
+OCBs by level/location/owner in original address order. GET/DROP branches adapt
+`PGET.ASM:PGET10..30/PDROP/WUPDAT/COMUPD`, preserving next-link bytes, ownership,
+location and Word weight arithmetic. No floor list is invented.
+`import_gameplay.py` imports `DTABAS.ASM:FWDOBJ/OBJWGT` and the six `VOBJ.ASM`
+vector lists. The added renderer loop follows `VIEWER.ASM:VIEW52` and
+`VCTLST.ASM:SETFAX`: magic then regular light, before forward obstruction stops
+traversal. `game_message` carries `PARSER.ASM:CMDERR`'s three question marks;
+CD.ASM:I.QUES indexes the existing original font. The permanent floor reference
+fixture records independently captured cartridge state/frames, source identity
+and the capture gate; see the M4 report for equality and scope limitations.

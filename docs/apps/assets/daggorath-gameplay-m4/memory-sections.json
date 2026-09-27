@@ -1,0 +1,32 @@
+{
+  "M3": {
+    "start": 18,
+    "code": 17337,
+    "constructors_start": 0,
+    "constructors_end": 1,
+    "destructors_start": 0,
+    "destructors_end": 1,
+    "initgl_start": 0,
+    "initgl": 0,
+    "initgl_end": 1,
+    "rodata": 3292,
+    "program_end": 0,
+    "rwdata": 6,
+    "bss": 9022
+  },
+  "M4": {
+    "start": 18,
+    "code": 18252,
+    "constructors_start": 0,
+    "constructors_end": 1,
+    "destructors_start": 0,
+    "destructors_end": 1,
+    "initgl_start": 0,
+    "initgl": 0,
+    "initgl_end": 1,
+    "rodata": 3411,
+    "program_end": 0,
+    "rwdata": 6,
+    "bss": 9022
+  }
+}

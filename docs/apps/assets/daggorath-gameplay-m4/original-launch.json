@@ -1,0 +1,23 @@
+[
+  "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+  "coco3h",
+  "-window",
+  "-skip_gameinfo",
+  "-ramsize",
+  "2M",
+  "-rompath",
+  "/Users/magneto-optimus/Library/Application Support/Ample/roms",
+  "-cfg_directory",
+  "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m4/original/cfg",
+  "-cart",
+  "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m4/original/original.rom",
+  "-autoboot_delay",
+  "0",
+  "-autoboot_script",
+  "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m4/original/capture.lua",
+  "-nvram_directory",
+  "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m4/original/nvram",
+  "-nothrottle",
+  "-sound",
+  "none"
+]

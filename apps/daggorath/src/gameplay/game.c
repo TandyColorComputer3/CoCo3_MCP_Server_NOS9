@@ -1,5 +1,5 @@
 /* Original-derived GAME/DGNGEN/NEWLVX/OBIRTX/CBIRTH/PPULL/PUSE/PTURN/
- * PMOVE/HUPDAX/HSLOW/BURNER. Pinned paths/labels: import_gameplay.py and
+ * PMOVE/HUPDAX/HSLOW/BURNER/PGET/PDROP/OFIND/VIEW52. Pinned paths/labels: import_gameplay.py and
  * DAGGORATH_GAMEPLAY_M1.md. No hardware, OS calls, physical coordinates or AI. */
 #ifdef _CMOC_VERSION_
 #include <cmoc.h>
@@ -82,11 +82,18 @@ static int classify(const Byte *t,const Byte table[][16],Byte count){int found=-
   if(t[j]==255){if(found>=0)return -1;found=i;}}
  return found;
 }
-static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir,kind,cls;Word p,previous,*hand;
+/* COMCRE:OFIND/FNDOBJ: physical OCB order, only allocated records, owner zero.
+ * The current bounded game is level zero; no level transitions exist. */
+static Byte on_floor(const Byte *o,Byte r,Byte c){return !o[4]&&!o[5]&&o[2]==r&&o[3]==c;}
+static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir,kind,cls;Word p,previous,*hand;Byte i,*o;
  s=token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
- if(cmd!=PAR_PULL&&cmd!=PAR_STOW)return GAME_INVALID;
+ if(cmd!=PAR_PULL&&cmd!=PAR_STOW&&cmd!=PAR_GET&&cmd!=PAR_DROP)return GAME_INVALID;
  s=token(s,t);dir=classify(t,parser_directions,sizeof(parser_directions)/16);
  if(dir==PAR_LT)hand=&g->hand;else if(dir==PAR_RT)hand=&g->rightHand;else return GAME_INVALID;
+ /* PGET:PDROP/WUPDAT leaves next link/fuel/reveal untouched. No floor chain. */
+ if(cmd==PAR_DROP){if(!*hand)return GAME_INVALID;o=ocb(g,*hand);*hand=0;
+  o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=0;
+  g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));health(g);return GAME_OK;}
  if(cmd==PAR_STOW){if(!*hand)return GAME_INVALID;
   putword(ocb(g,*hand),g->bag);g->bag=*hand;*hand=0;return GAME_OK;}
  if(*hand)return GAME_INVALID;
@@ -95,6 +102,11 @@ static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir
  else {specific=1;kind=classify(t,status_adjectives,sizeof(status_adjectives)/16);if(kind<0)return GAME_INVALID;
   cls=status_adjectives_classes[kind];token(s,t);dir=classify(t,status_generics,sizeof(status_generics)/16);
   if(dir<0||status_generics_classes[dir]!=cls)return GAME_INVALID;}
+ /* PGET20: first class/type match in OFIND order; GET30 INC owner, add weight. */
+ if(cmd==PAR_GET){for(i=0;i<g->count;i++){o=g->objects[i];
+   if(on_floor(o,g->row,g->col)&&(specific?o[9]==kind:o[10]==cls)){
+    *hand=OBASE+(Word)i*14;++o[5];g->weight=(Word)(g->weight+object_weights[o[10]]);health(g);return GAME_OK;}}
+  return GAME_INVALID;}
  previous=0;p=g->bag;
  while(p&&(specific?ocb(g,p)[9]!=kind:ocb(g,p)[10]!=cls)){previous=p;p=getword(ocb(g,p));}
  if(!p)return GAME_INVALID;
@@ -116,6 +128,13 @@ Byte game_command(Game *g,const char *s){Word *hand;Byte *o;int r,c;Byte result=
  }else if(strcmp(s,"LOOK")){if(bag_command(g,s)!=GAME_OK)return GAME_INVALID;}
  g->lit=g->torch!=0;return result;
 }
+/* PGET handlers print no success text; PARSER:CMDERR prints three I.QUES.
+ * Preserve the older UI adapter for commands outside this slice. */
+const char *game_message(const char *s,Byte result){Byte t[33];int cmd;
+ token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
+ if((cmd==PAR_GET||cmd==PAR_DROP)&&result!=GAME_FAINT)return result==GAME_INVALID?"???":"";
+ return result==GAME_BLOCKED?"BLOCKED":result==GAME_INVALID?"UNKNOWN COMMAND":result==GAME_FAINT?"FAINT":"OK";
+}
 void game_tick(Game *g,Word ticks){Byte *o;while(ticks--){
  if(!--g->recovery){g->damage=g->damage-(g->damage+63)/64;health(g);g->recovery=g->rate?g->rate:256;}
  if(!--g->burn){g->burn=3600;if(g->torch){o=ocb(g,g->torch);if(o[6]){--o[6];if(o[6]<=5){o[9]=24;o[11]=0;}if(o[6]<o[7])o[7]=o[6];if(o[6]<o[8])o[8]=o[6];}}}
@@ -130,7 +149,7 @@ static void draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range){Word i
   const Byte *v=game_vectors[i];wizard_line(frame,scale(v[1],128,factor),scale(v[0],76,factor),scale(v[3],128,factor),scale(v[2],76,factor),fade);
  }}
 static Byte five(const Byte *p,Word bit){Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
-static void text(Byte *frame,const char *s,Byte row){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;col++;}}
+static void text(Byte *frame,const char *s,Byte row){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;col++;}}
 /* STATUS:OBJNAM/COPY$, COMTXT:TXTDPB, COMDAT:STSVDB. Level zero uses
  * VDGINV=0: inverse status glyphs on a filled 256x8 strip at y=152.
  * No physical presentation coordinates or duplicate inventory state. */
@@ -168,8 +187,12 @@ void game_render(Game *g,Byte *frame,const char *input,const char *message){
    if(!((cell(g,r,c)>>(which*2))&3)){cr=creature(g,r+dr[which],c+dc[which]);if(cr>=0)draw(frame,13+side,scales[range],g->creatures[cr][2]?magic:light,range);}}
   which=12;for(i=0;i<sizeof(vertical);i+=3)if(vertical[i+1]==r&&vertical[i+2]==c){which=15+vertical[i];break;}
   draw(frame,which,scales[range],light,range);
-  /* Initial objects are player/creature-owned. No DROP/combat can create
-   * floor objects in this bounded slice, so OFIND has no unowned matches. */
+  /* VIEW52: OFIND order, FWDOBJ indexed by class, magic then regular.
+   * SETFAX consumes MAGFLG on the first DRAWIT; both passes use same vectors.
+   * Do this before VIEW60 stops at a forward wall/door. No orientation field. */
+  for(i=0;i<g->count;i++)if(on_floor(g->objects[i],r,c)){
+   which=23+g->objects[i][10];draw(frame,which,scales[range],magic,range);draw(frame,which,scales[range],light,range);
+  }
   if((cell(g,r,c)>>(g->dir*2))&3)break;r+=dr[g->dir];c+=dc[g->dir];
  }
  game_render_status(g,frame,0);

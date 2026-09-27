@@ -1,0 +1,42 @@
+[
+  {
+    "command": "P L T",
+    "enqueueToFirstPresentedReadySeconds": 0.8519252992600173
+  },
+  {
+    "command": "USE LEFT",
+    "enqueueToFirstPresentedReadySeconds": 4.673511816949997
+  },
+  {
+    "command": "P R SW",
+    "enqueueToFirstPresentedReadySeconds": 4.823705107340004
+  },
+  {
+    "command": "D R",
+    "enqueueToFirstPresentedReadySeconds": 4.873779260960021
+  },
+  {
+    "command": "G R W SW",
+    "enqueueToFirstPresentedReadySeconds": 4.757123804169964
+  },
+  {
+    "command": "S R",
+    "enqueueToFirstPresentedReadySeconds": 4.740263704640029
+  },
+  {
+    "command": "P L SW",
+    "enqueueToFirstPresentedReadySeconds": 4.790327516280001
+  },
+  {
+    "command": "D L",
+    "enqueueToFirstPresentedReadySeconds": 4.923832943990021
+  },
+  {
+    "command": "MOVE",
+    "enqueueToFirstPresentedReadySeconds": 4.206251747009958
+  },
+  {
+    "command": "TURN RIGHT",
+    "enqueueToFirstPresentedReadySeconds": 2.804436870929976
+  }
+]

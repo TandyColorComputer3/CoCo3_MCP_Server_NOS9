@@ -12,6 +12,7 @@ typedef struct {
 enum { GAME_OK=0,GAME_BLOCKED=1,GAME_INVALID=2,GAME_FAINT=3 };
 void game_init(Game *g,Byte second);
 Byte game_command(Game *g,const char *command);
+const char *game_message(const char *command,Byte result);
 void game_tick(Game *g,Word ticks);
 void game_render(Game *g,Byte *frame,const char *input,const char *message);
 /* STATUS/COMTXT in logical coordinates. phase: COMMON:HEARTS, 0 small. */

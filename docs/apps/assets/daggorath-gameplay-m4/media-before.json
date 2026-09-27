@@ -1,0 +1,14 @@
+{
+  "media/63SDC.VHD": {
+    "sha256": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "mode": "0o444"
+  },
+  "media/63SDC-MCP-DEV.VHD": {
+    "sha256": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "mode": "0o644"
+  },
+  "media/63EMU.DSK": {
+    "sha256": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+    "mode": "0o664"
+  }
+}

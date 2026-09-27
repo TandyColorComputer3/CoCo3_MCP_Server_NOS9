@@ -9,7 +9,7 @@ static Byte frame[FRAME_BYTES],signalFlag;
 static Byte inputUnderlay[GAME_INPUT_BYTES];
 static NativeHeartbeat heartbeat={255,0};
 static NativeHeartbeatState heartbeatState;
-/* PULL/STOW use original token rules; other commands retain M1 adapters.
+/* PULL/STOW/GET/DROP use original token rules; other commands retain M1 adapters.
  * EXIT remains an isolated OS-9-only lifecycle command. */
 int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255;Word previous,now,delta;char input[32];const char *message="TURN LEFT RIGHT AROUND  MOVE";
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
@@ -34,7 +34,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   e=game_input(screen_path(),&key);if(e)break;
   if(key){
    if(key==13){input[n]=0;if(!strcmp(input,"EXIT"))break;
-    result=game_command(&game,input);message=result==GAME_BLOCKED?"BLOCKED":result==GAME_INVALID?"UNKNOWN COMMAND":result==GAME_FAINT?"FAINT":"OK";
+    result=game_command(&game,input);message=game_message(input,result);
     e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;n=0;input[0]=0;
    }else if(key==8){if(n)input[--n]=0;}
    else if(key>=32&&key<=126&&n<31){if(key>='a'&&key<='z')key-=32;input[n++]=key;input[n]=0;}
