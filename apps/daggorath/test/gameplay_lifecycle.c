@@ -17,6 +17,12 @@ Byte game_input(Byte path,Byte *key){assert(path==3);*key="EXIT\r"[readcount++];
 Byte native_heartbeat_open(NativeHeartbeat *h){h->opened=1;return 0;}
 Byte native_heartbeat_rate(NativeHeartbeat *h,Word rate){assert(h->opened&&rate==46);return 0;}
 Byte native_heartbeat_enable(NativeHeartbeat *h){assert(h->opened);enabled++;return 0;}
+Byte native_heartbeat_query(NativeHeartbeat *h,NativeHeartbeatState *state){
+ assert(h->opened);memset(state,0,sizeof(*state));
+ /* Lifecycle cases need a successful query, no fault and a stable phase.
+  * Waveform/countdown behavior is tested separately. */
+ state->active=1;state->enabled=enabled!=0;return 0;
+}
 Byte native_heartbeat_close(NativeHeartbeat *h){if(h->opened){removed++;h->opened=0;}return 0;}
 int main(void){char *argv[]={"dodgame","seed0",0};int expected[]={0,3,245,250};
  for(mode=0;mode<4;mode++){opened=closed=enabled=removed=presented=readcount=clockcount=0;

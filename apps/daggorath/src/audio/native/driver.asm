@@ -5,7 +5,8 @@
 * PIA: Tandy Technical Reference III, PIA/Sound Table 4; native_beat.c probe.
 * Private ABI: claim $90, release $91, rate $92 (X=0..255),
 * resume $93, freeze $94. Query $90: A=active, X=rate:remaining,
-* Y=enabled:fault. Zero rate/count byte means 256 decrements.
+* Y=enabled:fault, B=latched phase (0 small, 1 large). Zero rate/count
+* byte means 256 decrements. COMMON:CLK30 changes HEARTS on this edge.
  use defsfile
  org V.SCF
 packet rmb 5
@@ -18,6 +19,7 @@ rate rmb 1
 remaining rmb 1
 enabled rmb 1
 fault rmb 1
+phase rmb 1
 memsize equ .
  mod endmod,name,Drivr+Objct,ReEnt,entry,memsize
  fcb UPDAT.
@@ -44,6 +46,8 @@ getstat cmpa #$90
  orcc #IntMasks
  lda active,u
  sta R$A,y
+ lda phase,u
+ sta R$B,y
  lda rate,u
  ldb remaining,u
  std R$X,y
@@ -123,6 +127,7 @@ start tst active,u
  bcs startfailed
  clr enabled,u
  clr fault,u
+ clr phase,u
  clr rate,u
  lda #1
  sta remaining,u
@@ -256,6 +261,9 @@ tick pshs cc,d
 edge ldb $ff22
  eorb #2
  stb $ff22
+ lda phase,u
+ eora #1
+ sta phase,u
  lda rate,u
  sta remaining,u
 tickdone puls cc,d

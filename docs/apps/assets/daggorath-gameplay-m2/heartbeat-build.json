@@ -1,0 +1,45 @@
+{
+  "commands": [
+    [
+      "lwasm",
+      "--format=os9",
+      "--pragma=condundefzero",
+      "-I",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m2/heartbeat",
+      "--list=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m2/heartbeat/dheartbeat.lst",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m2/heartbeat/dheartbeat",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/native/driver.asm"
+    ],
+    [
+      "lwasm",
+      "--format=os9",
+      "--pragma=condundefzero",
+      "-I",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m2/heartbeat",
+      "--list=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m2/heartbeat/dhb.lst",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/gameplay-m2/heartbeat/dhb",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/native/descriptor.asm"
+    ]
+  ],
+  "ident": {
+    "dheartbeat": "Header for : DHeartbeat\nModule size: $241  #577\nModule CRC : $DDB214 (Good)\nHdr parity : $99\nExec. off  : $0019  #25\nData size  : $002C  #44\nEdition    : $01  #1\nTy/La At/Rv: $E1 $80\nDevice Driver mod, 6809 Obj, re-ent, R/O\n\n",
+    "dhb": "Header for : dhb\nModule size: $27  #39\nModule CRC : $BF478C (Good)\nHdr parity : $C3\nFile Mgr   : SCF\nDriver     : DHeartbeat\nEdition    : $01  #1\nTy/La At/Rv: $F1 $80\nDevice Descriptor mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "outputs": {
+    "dheartbeat": "25ab79e9778962d1902111328a0a9dcccf49ace48548136bef0082c706aaecf0",
+    "dhb": "b9a847810894bf3d8cd806e7df64979a3a49c4a5e0df086723ab01a980befadb",
+    "dhbpack": "d3842d08ecb17f6f4c9feda94dff623544a9990497873fd3086caaddbeaad0cb"
+  },
+  "sources": {
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/native/driver.asm": "6e93046a47260769f5213343dddf6af0b25a9831386e4e52b324357214aef011",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/native/descriptor.asm": "4bdfdc02fbcb82295c9702b9a2480f251f95304cf93540cbf0444c8c784ccac1",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/build_heartbeat.py": "b96f215021f01949700f2499e08cb3e6828a44348de349c0b5aad24919a2d01f",
+    "/Volumes/SEDONA/Projects/nitros9-reference/defs/os9.d": "7928ae45c697dc06619ea484f72f6d668ba5d3016d00c15928aace4a15dd70f6",
+    "/Volumes/SEDONA/Projects/nitros9-reference/defs/scf.d": "b3cde60215edf330b327c9d078d77bf54b5de1dce7a57f1bef52d97ed85c6b4e",
+    "/Volumes/SEDONA/Projects/nitros9-reference/defs/coco.d": "f17e4c52cd0e3a50e3dcb8da04902c8c459a7f5d42729e565db263a9b9f6fb4c"
+  },
+  "upstream": "f470fa52eb172b59b22c1b722074998cb42de9b1",
+  "assembler": "lwasm from lwtools 4.22\n"
+}

@@ -1,0 +1,197 @@
+[
+  {
+    "case": "cancel-response",
+    "response": {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 3,
+      "statusText": "003",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 42804,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE32aa71cf29cd4e57e92f4b793613e828",
+      "commandPromptMs": 37198
+    }
+  },
+  {
+    "case": "normal-response",
+    "response": {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 90966,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE449b6254b0a638e9cada2b4e777b460a",
+      "commandPromptMs": 85359
+    }
+  },
+  {
+    "case": "repeat-response",
+    "response": {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 28862,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEb2158f2202f60eff17ba09caaf1a0cc5",
+      "commandPromptMs": 23255
+    }
+  },
+  {
+    "case": "cancel-health",
+    "responses": [
+      {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6452,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEb4b6dd5ef3d0067047d82864925e424f",
+        "commandPromptMs": 862
+      },
+      {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7357,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE2a94db39accb183426436abdd42b7051",
+        "commandPromptMs": 1767
+      }
+    ]
+  },
+  {
+    "case": "normal-health",
+    "responses": [
+      {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6469,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE728878ca06baa6693a437ae06e571259",
+        "commandPromptMs": 862
+      },
+      {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7373,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE4a7dbf36e9024360a0590a54e70a1feb",
+        "commandPromptMs": 1767
+      }
+    ]
+  },
+  {
+    "case": "repeat-health",
+    "responses": [
+      {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6451,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE296478a0a76c7c45a842b75d03fcfada",
+        "commandPromptMs": 868
+      },
+      {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7407,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEaee8a215477a2929fb1fd68fb4fa0f22",
+        "commandPromptMs": 1801
+      }
+    ]
+  }
+]

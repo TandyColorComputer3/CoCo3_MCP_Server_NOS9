@@ -1,0 +1,30 @@
+{
+  "dodgame": {
+    "size": 19497,
+    "sha256": "a193b47f343cb778797d0fa23f097feeec8683e02af13bc77c4562d1dfd36ddd"
+  },
+  "dheartbeat": {
+    "size": 577,
+    "sha256": "25ab79e9778962d1902111328a0a9dcccf49ace48548136bef0082c706aaecf0"
+  },
+  "dhb": {
+    "size": 39,
+    "sha256": "b9a847810894bf3d8cd806e7df64979a3a49c4a5e0df086723ab01a980befadb"
+  },
+  "dhbpack": {
+    "size": 616,
+    "sha256": "d3842d08ecb17f6f4c9feda94dff623544a9990497873fd3086caaddbeaad0cb"
+  },
+  "dodaudio": {
+    "size": 5571,
+    "sha256": "e765ec62d15372bd82ed0a187a2f8a2195cb0d2acce63c3f091db7e3dee4ad95"
+  },
+  "dodsnd": {
+    "size": 9710,
+    "sha256": "25a44fbcdd56673db362d12a63484b16026c022472a3f0ad7b4f4f7536933da3"
+  },
+  "dodwiz": {
+    "size": 19822,
+    "sha256": "ff0eef3bd0680649d54354ac043702e3a248610cfc5095e6518e505068fdd05e"
+  }
+}

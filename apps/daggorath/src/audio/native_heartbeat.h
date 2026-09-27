@@ -8,7 +8,7 @@
  * No active HALT floppy I/O is within the current timing guarantee.
  */
 typedef struct { Byte path, opened; } NativeHeartbeat;
-typedef struct { Byte active,enabled,rateByte,remainingByte,fault; } NativeHeartbeatState;
+typedef struct { Byte active,enabled,rateByte,remainingByte,fault,phase; } NativeHeartbeatState;
 Byte native_heartbeat_open(NativeHeartbeat *h);
 Byte native_heartbeat_rate(NativeHeartbeat *h,Word rateByte);
 Byte native_heartbeat_enable(NativeHeartbeat *h);

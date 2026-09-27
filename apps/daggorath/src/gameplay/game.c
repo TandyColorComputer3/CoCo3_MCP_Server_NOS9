@@ -67,18 +67,18 @@ void game_init(Game *g,Byte second){Byte type,level,n,r,c,i;int t;Word p,tail;By
   if(tail)putword(ocb(g,tail),p);else g->bag=p;tail=p;}
  health(g);g->recovery=g->rate;g->burn=3600;
 }
-Byte game_command(Game *g,const char *s){Word p,previous;Byte *o;int r,c;Byte result=GAME_OK;
+Byte game_command(Game *g,const char *s){Word p,previous,*hand;Byte *o;int r,c;Byte result=GAME_OK;
  if(g->faint||g->dead)return GAME_FAINT;
  if(!strcmp(s,"TURN LEFT"))g->dir=(g->dir-1)&3;
  else if(!strcmp(s,"TURN RIGHT"))g->dir=(g->dir+1)&3;
  else if(!strcmp(s,"TURN AROUND"))g->dir=(g->dir+2)&3;
  else if(!strcmp(s,"MOVE")){r=g->row+dr[g->dir];c=g->col+dc[g->dir];if(cell(g,r,c)==255)result=GAME_BLOCKED;else {g->row=r;g->col=c;}
   g->damage=(Word)(g->damage+(g->weight>>3)+3);health(g);
- }else if(!strcmp(s,"PULL LEFT TORCH")){if(g->hand)return GAME_INVALID;p=g->bag;previous=0;
+ }else if(!strcmp(s,"PULL LEFT TORCH")||!strcmp(s,"PULL RIGHT TORCH")){hand=!strcmp(s,"PULL LEFT TORCH")?&g->hand:&g->rightHand;if(*hand)return GAME_INVALID;p=g->bag;previous=0;
   while(p&&ocb(g,p)[10]!=5){previous=p;p=getword(ocb(g,p));}if(!p)return GAME_INVALID;
-  if(previous)putword(ocb(g,previous),getword(ocb(g,p)));else g->bag=getword(ocb(g,p));g->hand=p;if(g->torch==p)g->torch=0;
- }else if(!strcmp(s,"USE LEFT")){if(!g->hand||ocb(g,g->hand)[10]!=5)return GAME_INVALID;
-  g->torch=g->hand;o=ocb(g,g->hand);putword(o,g->bag);g->bag=g->hand;g->hand=0;
+  if(previous)putword(ocb(g,previous),getword(ocb(g,p)));else g->bag=getword(ocb(g,p));*hand=p;if(g->torch==p)g->torch=0;
+ }else if(!strcmp(s,"USE LEFT")||!strcmp(s,"USE RIGHT")){hand=!strcmp(s,"USE LEFT")?&g->hand:&g->rightHand;if(!*hand||ocb(g,*hand)[10]!=5)return GAME_INVALID;
+  g->torch=*hand;o=ocb(g,*hand);putword(o,g->bag);g->bag=*hand;*hand=0;
  }else if(strcmp(s,"LOOK"))return GAME_INVALID;
  g->lit=g->torch!=0;return result;
 }
@@ -97,6 +97,25 @@ static void draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range){Word i
  }}
 static Byte five(const Byte *p,Word bit){Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
 static void text(Byte *frame,const char *s,Byte row){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;col++;}}
+/* STATUS:OBJNAM/COPY$, COMTXT:TXTDPB, COMDAT:STSVDB. Level zero uses
+ * VDGINV=0: inverse status glyphs on a filled 256x8 strip at y=152.
+ * No physical presentation coordinates or duplicate inventory state. */
+static Byte object_name(Game *g,Word token,Byte *name){
+ static const Byte empty[]={5,13,16,20,25,255};
+ const Byte *s;Byte *o,n=0;
+ if(!token)s=empty;
+ else {o=ocb(g,token);if(!o[11]){s=status_adjectives[o[9]];while(*s!=255)name[n++]=*s++;name[n++]=0;}s=status_generics[o[10]];}
+ while(*s!=255)name[n++]=*s++;return n;
+}
+static void status_name(Byte *frame,const Byte *name,Byte n,Byte col){Byte i,y;
+ for(i=0;i<n;i++)for(y=0;y<7;y++)frame[(152+(Word)y)*32+col+i]=255^(five(font+name[i]*5,5+y*5)<<2);
+}
+void game_render_status(Game *g,Byte *frame,Byte phase){Byte name[32],n,y;const Byte *heart=status_hearts+(phase?14:0);
+ memset(frame+152*32,255,8*32);
+ n=object_name(g,g->hand,name);status_name(frame,name,n,0);
+ n=object_name(g,g->rightHand,name);status_name(frame,name,n,32-n);
+ for(y=0;y<7;y++){frame[(152+(Word)y)*32+15]=255^heart[y];frame[(152+(Word)y)*32+16]=255^heart[7+y];}
+}
 void game_render_input(Byte *frame,const char *input,const Byte *underlay){
  memcpy(frame+GAME_INPUT_OFFSET,underlay,GAME_INPUT_BYTES);text(frame,input,184);
 }
@@ -119,7 +138,6 @@ void game_render(Game *g,Byte *frame,const char *input,const char *message){
    * floor objects in this bounded slice, so OFIND has no unowned matches. */
   if((cell(g,r,c)>>(g->dir*2))&3)break;r+=dr[g->dir];c+=dc[g->dir];
  }
- /* Isolated port UI: original font, not a claimed port of STATUS/TXTSER. */
- text(frame,g->faint?"FAINT":g->lit?"PINE TORCH LIT":"DARK  PULL LEFT TORCH",152);
+ game_render_status(g,frame,0);
  text(frame,message,168);text(frame,input,184);
 }

@@ -21,9 +21,12 @@ Byte native_heartbeat_rate(NativeHeartbeat *h,Word rateByte){
 Byte native_heartbeat_enable(NativeHeartbeat *h){return control(h,0x93,0);}
 Byte native_heartbeat_disable(NativeHeartbeat *h){return control(h,0x94,0);}
 Byte native_heartbeat_query(NativeHeartbeat *h,NativeHeartbeatState *state){Registers r;Byte e;
- if(!h->opened)return ERR_ARGUMENT;r.x=0;e=os_getstat(h->path,0x90,&r);if(e)return e;
+ if(!h->opened)return ERR_ARGUMENT;r.x=0;r.b=0;e=os_getstat(h->path,0x90,&r);if(e)return e;
+ /* An old driver leaves the GetStat function byte ($90) in B. Require
+  * the phase extension rather than displaying a permanently large heart. */
+ if(r.b>1)return ERR_ARGUMENT;
  state->active=r.a;state->rateByte=r.x>>8;state->remainingByte=r.x;
- state->enabled=r.y>>8;state->fault=r.y;return 0;
+ state->enabled=r.y>>8;state->fault=r.y;state->phase=r.b;return 0;
 }
 Byte native_heartbeat_close(NativeHeartbeat *h){Byte e;
  if(!h->opened)return 0;

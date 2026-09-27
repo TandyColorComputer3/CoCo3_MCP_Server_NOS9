@@ -8,8 +8,9 @@ static Game game;
 static Byte frame[FRAME_BYTES],signalFlag;
 static Byte inputUnderlay[GAME_INPUT_BYTES];
 static NativeHeartbeat heartbeat={255,0};
+static NativeHeartbeatState heartbeatState;
 /* Thin, exact-word command adapter, not PARSER/TOKEN. EXIT is OS-9-only. */
-int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight;Word previous,now,delta;char input[32];const char *message="TURN LEFT RIGHT AROUND  MOVE";
+int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255;Word previous,now,delta;char input[32];const char *message="TURN LEFT RIGHT AROUND  MOVE";
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
  e=os_intercept(&signalFlag);if(e)return e;
  e=os_clock(&previous,1);if(e)return e;
@@ -40,8 +41,19 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
     * state and requires a full render. Keep any pending game_tick redraw. */
    if(key==13)dirty=1;else if(dirty!=1)dirty=2;
   }
+  /* COMMON:CLK30 toggles HEARTS at the actual output edge. Query the
+   * driver's latched phase; never derive a second heartbeat from wall time.
+   * A heart-only change reuses every dungeon/input pixel. */
+  e=native_heartbeat_query(&heartbeat,&heartbeatState);if(e)break;
+  if(heartbeatState.fault){e=heartbeatState.fault;break;}
+  if(!dirty&&shownPhase!=heartbeatState.phase)dirty=2;
   if(dirty){
    if(dirty==1){game_render(&game,frame,"",message);memcpy(inputUnderlay,frame+GAME_INPUT_OFFSET,GAME_INPUT_BYTES);}
+   /* Full scene calculation may take several heartbeat periods. Sample
+    * again at presentation, so redraw never reverts to a stale phase. */
+   e=native_heartbeat_query(&heartbeat,&heartbeatState);if(e)break;
+   if(heartbeatState.fault){e=heartbeatState.fault;break;}
+   game_render_status(&game,frame,heartbeatState.phase);shownPhase=heartbeatState.phase;
    game_render_input(frame,input,inputUnderlay);e=screen_present(frame);if(e)break;dirty=0;
   }
   if(game.dead)break;

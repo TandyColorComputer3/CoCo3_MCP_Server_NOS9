@@ -1,0 +1,15 @@
+{
+  "start": 18,
+  "code": 16509,
+  "constructors_start": 0,
+  "constructors_end": 1,
+  "destructors_start": 0,
+  "destructors_end": 1,
+  "initgl_start": 0,
+  "initgl": 0,
+  "initgl_end": 1,
+  "rodata": 2937,
+  "program_end": 0,
+  "rwdata": 6,
+  "bss": 9022
+}

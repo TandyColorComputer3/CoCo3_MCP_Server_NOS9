@@ -16,7 +16,7 @@ effects independently. No application receives a kernel pointer or touches PB1.
 | Rate | `$92` | X must be 0..255; update only rate, preserve countdown and enable |
 | Enable/resume | `$93` | Enable without resetting countdown or phase |
 | Disable/freeze | `$94` | Freeze countdown and hold output phase |
-| Query | GetStat `$90` | A active; X high=rate, low=countdown; Y high=enabled, low=fault |
+| Query | GetStat `$90` | A active; X high=rate, low=countdown; Y high=enabled, low=fault; B latched output phase (0/1, Gameplay M2 extension) |
 
 Rate/countdown byte zero represents 256 decrements. Acquisition's initial 1
 comes from initial cleared HEARTC plus INIVUX's increment. Acquisition does not

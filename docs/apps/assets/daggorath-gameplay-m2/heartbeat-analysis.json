@@ -1,0 +1,68 @@
+{
+  "normal": {
+    "callbacks": 3680,
+    "edges": 82,
+    "largestCallbackIntervalMs": 16.927853999987974,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "cancel": {
+    "callbacks": 992,
+    "edges": 22,
+    "largestCallbackIntervalMs": 16.753529999959937,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 3,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "repeat": {
+    "callbacks": 178,
+    "edges": 4,
+    "largestCallbackIntervalMs": 16.71553699998185,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0,
+    "noCallbacksDuringFollowingDatePwd": true
+  },
+  "squeak": {
+    "callbacks": 1017,
+    "edges": 339,
+    "largestCallbackIntervalMs": 16.969759000005524,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  },
+  "whoop": {
+    "callbacks": 1016,
+    "edges": 339,
+    "largestCallbackIntervalMs": 16.875333999905706,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  },
+  "phaser": {
+    "callbacks": 1047,
+    "edges": 349,
+    "largestCallbackIntervalMs": 16.86918699999751,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  },
+  "wizard": {
+    "callbacks": 0,
+    "edges": 0,
+    "largestCallbackIntervalMs": null,
+    "callbackGapsOverTwoTicks": 0,
+    "faults": 0,
+    "fdcAccesses": 0,
+    "status": 0
+  }
+}

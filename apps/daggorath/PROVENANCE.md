@@ -31,3 +31,15 @@ Logical code contains no MMU, screen addresses, ROM calls, OS-9 syscalls, sound
 hardware or physical viewport translation. The presentation owns the (+192,+4)
 offset and its reserved buffer. Allocation failure is fatal and does not replace
 or free another application's buffer.
+
+### Gameplay M2 status strip
+
+`import_gameplay.py` imports `TOKEN.ASM:ADJTAB/GENTAB` through the original
+`EXPAND.ASM` packing rules and `SWCHAR.ASM:SPCTAB` heart bytes from the same pinned
+recovered source. `gameplay/game.c:object_name/status_name/game_render_status`
+adapts `STATUS.ASM:STATUX/OBJNAM/COPY$`, `COMTXT.ASM:TXTDPB` and
+`COMDAT.ASM:STSVDB`. Heart phase follows `COMMON.ASM:CLK30`; it is latched in the
+existing native driver and rendered in process context. No new geometry/font art
+was drawn. `test/fixtures/status-original.json` contains independently captured
+status pixels from the pinned cartridge executing in MAME. See the Gameplay M2
+report for capture gates, exact equality and display/timing limitations.

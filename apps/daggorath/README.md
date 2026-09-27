@@ -71,3 +71,16 @@ absolute deadlines and sleeps cooperatively. See the live report for measured
 Sound is silent in M1. Original buzz/explosion event boundaries are retained for a
 future OS-managed audio backend. No hardware writes, private interrupts, BASIC ROM
 calls, gameplay or side-panel UI are included.
+
+## Gameplay M2 status display
+
+The original left/right hand names and heart now occupy logical rows 152–159.
+The existing torch subset also accepts `PULL RIGHT TORCH` and `USE RIGHT`.
+Build/preload the matching `dhbpack`: Gameplay M2 queries its latched native
+heartbeat phase (GetStat `$90`, B=0/1); older drivers are rejected.
+
+New checks: `python3 apps/daggorath/test_status.py` and
+`python3 apps/daggorath/test_status_phase.py`.
+See [Gameplay M2](../../docs/apps/DAGGORATH_GAMEPLAY_M2.md) for exact cartridge
+comparisons, lifecycle results, refresh limits, memory budget and complete
+regression results.
