@@ -1,0 +1,62 @@
+{
+  "media/shot3.png": {
+    "before": "e8ec13fbd3f79c89487f8ebc160e08fdf8ed3041c22325927f1f7c4fb721659d",
+    "after": "e8ec13fbd3f79c89487f8ebc160e08fdf8ed3041c22325927f1f7c4fb721659d",
+    "permissions": "0o644"
+  },
+  "media/shot2.png": {
+    "before": "12c0b63ed91909209c039f0bcc279ec87b7aaecd90803750a42405852bbae645",
+    "after": "12c0b63ed91909209c039f0bcc279ec87b7aaecd90803750a42405852bbae645",
+    "permissions": "0o644"
+  },
+  "media/EOU_Drivewire_updates.pdf": {
+    "before": "676bbfb19afd34e2f3118b40f07c838477c755d619ecbd17dd0384689d41013a",
+    "after": "676bbfb19afd34e2f3118b40f07c838477c755d619ecbd17dd0384689d41013a",
+    "permissions": "0o664"
+  },
+  "media/shot1.png": {
+    "before": "a59986c1a2cc49f696d8ce382a333dbb67f1e94c47c574bd82f901c8c0cffa25",
+    "after": "a59986c1a2cc49f696d8ce382a333dbb67f1e94c47c574bd82f901c8c0cffa25",
+    "permissions": "0o644"
+  },
+  "media/.DS_Store": {
+    "before": "958e24530c95f548e12ba2b6ae1ca94583d8d1a411d45b1fb5e64e4f3626da01",
+    "after": "958e24530c95f548e12ba2b6ae1ca94583d8d1a411d45b1fb5e64e4f3626da01",
+    "permissions": "0o644"
+  },
+  "media/shot4.png": {
+    "before": "3c09bd95e628b9093dbbf75b0a3c9bd648f980f9655c9ae55b11a898a993f02f",
+    "after": "3c09bd95e628b9093dbbf75b0a3c9bd648f980f9655c9ae55b11a898a993f02f",
+    "permissions": "0o644"
+  },
+  "media/ENV_FILE_DOCUMENTATION.rtf": {
+    "before": "47c32b9c274f5e81ced446b9775d690f6a3fcdedd4e5c33aa98206d179bee147",
+    "after": "47c32b9c274f5e81ced446b9775d690f6a3fcdedd4e5c33aa98206d179bee147",
+    "permissions": "0o664"
+  },
+  "media/63SDC.VHD": {
+    "before": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "after": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "permissions": "0o444"
+  },
+  "media/NitrOS9_Ease_of_Use-VERSION1.0.1_UPDATE_NOTES.rtf": {
+    "before": "e448f6d051e41bb4cdd58f1ff2893fabc5b8321b2849adbe2d1c919e5d8f3e9f",
+    "after": "e448f6d051e41bb4cdd58f1ff2893fabc5b8321b2849adbe2d1c919e5d8f3e9f",
+    "permissions": "0o664"
+  },
+  "media/63SDC-MCP-DEV.VHD": {
+    "before": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "after": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "permissions": "0o644"
+  },
+  "media/63EMU.DSK": {
+    "before": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+    "after": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+    "permissions": "0o664"
+  },
+  "media/NitrOS9_Ease_of_Use-Beginners_documentation_(VERSION1.0.1).rtf": {
+    "before": "374a8275c912d411ae291b5ad0918b6b19cb24c8682c288bd0029f9b88e639fe",
+    "after": "374a8275c912d411ae291b5ad0918b6b19cb24c8682c288bd0029f9b88e639fe",
+    "permissions": "0o664"
+  }
+}

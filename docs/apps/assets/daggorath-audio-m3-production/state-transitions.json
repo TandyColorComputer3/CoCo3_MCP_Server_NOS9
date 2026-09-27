@@ -1,0 +1,329 @@
+{
+  "transition": {
+    "stateViolations": [],
+    "transitions": [
+      {
+        "before": {
+          "time": "0165.077571891",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "46",
+          "remaining": "13",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0165.094221498",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "12",
+          "enabled": "1",
+          "fault": "0"
+        }
+      }
+    ]
+  },
+  "freeze": {
+    "stateViolations": [],
+    "transitions": [
+      {
+        "before": {
+          "time": "0187.706653696",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "3",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0187.723352471",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "0",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0188.741330739",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "0",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0188.758019456",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "1",
+          "fault": "0"
+        }
+      }
+    ]
+  },
+  "repeat": {
+    "stateViolations": [],
+    "transitions": [
+      {
+        "before": {
+          "time": "0210.602799685",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "3",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0210.619500695",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "0",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0211.654164887",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "0",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0211.671164259",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "1",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0211.821034746",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0211.837735755",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "0",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0212.855711788",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "0",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0212.872696074",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "1",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0213.022581646",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0213.039279304",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "3",
+          "enabled": "0",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0214.073947407",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "3",
+          "enabled": "0",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0214.090761281",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "3",
+          "enabled": "1",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0214.240816707",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "3",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0214.257514364",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "0",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0215.275504365",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "0",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0215.292278569",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "1",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0215.442363608",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "2",
+          "enabled": "1",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0215.459061265",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "0",
+          "fault": "0"
+        }
+      },
+      {
+        "before": {
+          "time": "0216.477041768",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "0",
+          "fault": "0"
+        },
+        "after": {
+          "time": "0216.493807032",
+          "pc": "8698",
+          "u": "23552",
+          "cc": "216",
+          "active": "1",
+          "rate": "3",
+          "remaining": "1",
+          "enabled": "1",
+          "fault": "0"
+        }
+      }
+    ]
+  }
+}

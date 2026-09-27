@@ -1,0 +1,5 @@
+{
+  "cmoc --version": "cmoc (cmoc 0.1.90)\n",
+  "lwasm --version": "lwasm from lwtools 4.22\n",
+  "lwlink --version": "lwlink from lwtools 4.22\n"
+}

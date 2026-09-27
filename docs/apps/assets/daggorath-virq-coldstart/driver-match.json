@@ -1,0 +1,25 @@
+{
+  "installedBoot": "media/63EMU.DSK,OS9Boot",
+  "module": "rb1773",
+  "size": 1437,
+  "crc": "FBAA3C",
+  "sha256": "1b721446891709f8a903bea8e70a3b988d23bae477c6d919f2b2092cba0cbf3f",
+  "byteIdentical": true,
+  "upstreamCommit": "f470fa52eb172b59b22c1b722074998cb42de9b1",
+  "source": "/Volumes/SEDONA/Projects/nitros9-reference/level1/modules/rb1773.asm",
+  "defines": "Level equ 2\nH6309 equ 1\nSCII equ 0\nSCIIALT equ 0\n use /Volumes/SEDONA/Projects/nitros9-reference/defs/os9.d\n use /Volumes/SEDONA/Projects/nitros9-reference/defs/rbf.d\n use /Volumes/SEDONA/Projects/nitros9-reference/defs/coco.d\n",
+  "command": [
+    "lwasm",
+    "--no-warn=ifp1",
+    "--6309",
+    "--format=os9",
+    "--pragma=pcaspcr,nosymbolcase,condundefzero,undefextern,dollarnotlocal,noforwardrefmax",
+    "-I",
+    "MCP/work/virq-coldstart/rbbuild",
+    "--list=MCP/work/virq-coldstart/rbbuild/upstream.lst",
+    "-o",
+    "MCP/work/virq-coldstart/rbbuild/upstream",
+    "/Volumes/SEDONA/Projects/nitros9-reference/level1/modules/rb1773.asm"
+  ],
+  "notInstalled": true
+}

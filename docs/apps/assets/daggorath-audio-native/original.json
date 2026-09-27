@@ -1,0 +1,15 @@
+{
+  "edges": 19,
+  "intervalMin": 0.7676497340000026,
+  "intervalMax": 0.767660909,
+  "intervalMean": 0.7676548247777778,
+  "levels": [
+    248,
+    250
+  ],
+  "edgePC": "C2BB",
+  "firstEdge": 26.166058023,
+  "lastEdge": 39.983844869,
+  "romSha256": "35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571",
+  "rebuiltMatchesCapturedRom": true
+}

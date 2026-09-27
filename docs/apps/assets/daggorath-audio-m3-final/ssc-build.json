@@ -1,0 +1,80 @@
+{
+  "dodaudio": {
+    "command": [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production4/audio-build",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production4/audio-build/dodaudio",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/service.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ssc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ssc_io.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/service-module.asm",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c"
+    ],
+    "sources": {
+      "apps/daggorath/src/audio/service.c": "a858d2bba699f9d143dc2b5befa3fa6e714262b543eaae02118ed11769b45d81",
+      "apps/daggorath/src/audio/event.c": "404f1f4296e0a0d0d36b8f23ef6e0af5eb5ffee8db952221355c0086ef34648e",
+      "apps/daggorath/src/audio/ipc.c": "5d39c2f9ee5da4d99333984d5f34fd62c0e352807d9ba259642f95f53637042d",
+      "apps/daggorath/src/audio/ssc.c": "402c8b7bb6114598f03e2fff4ec17081753098ea124584e1d6bd438334d41918",
+      "apps/daggorath/src/audio/ssc_io.c": "82fe82cbd4a9d505a68434c0034bda8e74c09ed3f15e0441c3fea07c905b0f35",
+      "apps/daggorath/src/audio/service-module.asm": "2ecd04594df2a11e45a15d855945a49920690112bbf3cde555f023d6ccbeab5f",
+      "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+      "apps/daggorath/src/audio/native_heartbeat.h": "8a10b1b16d8c260febb76a1d57137ff4535bdaf78c34f3f05dbd628ad701c75b",
+      "apps/daggorath/src/audio/policy.h": "3a89906ef9b09903063a60295ccd92eb849547dd231844a4e6259fe3c7049215",
+      "apps/daggorath/src/audio/ssc_io.h": "99d69c1fd2935bb54cf64a876552491069b8cb61b4a520c1d1d79b510930ad43",
+      "apps/daggorath/src/audio/backend.h": "cef3ee7a9c56e07a7b879b7c41efc66e8a8774c846513b73a2170458d3d991b3",
+      "apps/daggorath/src/audio/heartbeat.h": "54955b8111ac09d62f50ff11b4e56e37ee506f5e6a67ee48586ae8661bd31e91",
+      "apps/daggorath/src/audio/ipc.h": "cf7b84532227466284c608f833a9a6c73d7d5ae1fb20509a27d810e2d13a5b18",
+      "apps/daggorath/src/audio/audio.h": "719677422c43606c8b60434e8c795b24770762552aa1fedbffbfe5c87978bae0",
+      "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+    },
+    "sha256": "e765ec62d15372bd82ed0a187a2f8a2195cb0d2acce63c3f091db7e3dee4ad95",
+    "ident": "Header for : dodaudio\nModule size: $15C3  #5571\nModule CRC : $ABB59D (Good)\nHdr parity : $D1\nExec. off  : $000D  #13\nData size  : $082F  #2095\nEdition    : $01  #1\nTy/La At/Rv: $11 $01\nProg mod, 6809 Obj, non-share, R/O\n\n"
+  },
+  "dodsnd": {
+    "command": [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production4/audio-build",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production4/audio-build/dodsnd",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/harness.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/client.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/harness-module.asm",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c"
+    ],
+    "sources": {
+      "apps/daggorath/src/audio/harness.c": "d45710d67ff26bff78dda037e96d97553d149b49a0117fa5e43a508a0edeabaa",
+      "apps/daggorath/src/audio/event.c": "404f1f4296e0a0d0d36b8f23ef6e0af5eb5ffee8db952221355c0086ef34648e",
+      "apps/daggorath/src/audio/ipc.c": "5d39c2f9ee5da4d99333984d5f34fd62c0e352807d9ba259642f95f53637042d",
+      "apps/daggorath/src/audio/client.c": "6b8f578a7836ce9829b81dc7f8569a008cadfac09c955adb6d6d3a792f922a5e",
+      "apps/daggorath/src/audio/harness-module.asm": "a3f2c1e5808338dc4f8e493fdb8165d1e639622a37a7f7ff75bd8714dc3fcc1e",
+      "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+      "apps/daggorath/src/audio/native_heartbeat.h": "8a10b1b16d8c260febb76a1d57137ff4535bdaf78c34f3f05dbd628ad701c75b",
+      "apps/daggorath/src/audio/policy.h": "3a89906ef9b09903063a60295ccd92eb849547dd231844a4e6259fe3c7049215",
+      "apps/daggorath/src/audio/ssc_io.h": "99d69c1fd2935bb54cf64a876552491069b8cb61b4a520c1d1d79b510930ad43",
+      "apps/daggorath/src/audio/backend.h": "cef3ee7a9c56e07a7b879b7c41efc66e8a8774c846513b73a2170458d3d991b3",
+      "apps/daggorath/src/audio/heartbeat.h": "54955b8111ac09d62f50ff11b4e56e37ee506f5e6a67ee48586ae8661bd31e91",
+      "apps/daggorath/src/audio/ipc.h": "cf7b84532227466284c608f833a9a6c73d7d5ae1fb20509a27d810e2d13a5b18",
+      "apps/daggorath/src/audio/audio.h": "719677422c43606c8b60434e8c795b24770762552aa1fedbffbfe5c87978bae0",
+      "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+    },
+    "sha256": "25a44fbcdd56673db362d12a63484b16026c022472a3f0ad7b4f4f7536933da3",
+    "ident": "Header for : dodsnd\nModule size: $25EE  #9710\nModule CRC : $CC26DC (Good)\nHdr parity : $2F\nExec. off  : $000D  #13\nData size  : $0826  #2086\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  }
+}

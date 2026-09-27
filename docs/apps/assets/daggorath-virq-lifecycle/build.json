@@ -1,0 +1,66 @@
+{
+  "commands": [
+    [
+      "lwasm",
+      "--format=os9",
+      "--pragma=condundefzero",
+      "-I",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build",
+      "--list=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build/vcounter.lst",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build/vcounter",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/virq/counter.asm"
+    ],
+    [
+      "lwasm",
+      "--format=os9",
+      "--pragma=condundefzero",
+      "-I",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build",
+      "--list=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build/vc.lst",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build/vc",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/virq/descriptor.asm"
+    ],
+    [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build/vctest",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/virq/controller.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-lifecycle/final-build/vctest-module.asm"
+    ]
+  ],
+  "upstream": "f470fa52eb172b59b22c1b722074998cb42de9b1",
+  "versions": {
+    "lwasm": "lwasm from lwtools 4.22\n",
+    "cmoc": "cmoc (cmoc 0.1.90)\n"
+  },
+  "ident": {
+    "vcounter": "Header for : VCounter\nModule size: $134  #308\nModule CRC : $3FA6AA (Good)\nHdr parity : $EF\nExec. off  : $0017  #23\nData size  : $0028  #40\nEdition    : $01  #1\nTy/La At/Rv: $E1 $80\nDevice Driver mod, 6809 Obj, re-ent, R/O\n\n",
+    "vc": "Header for : vc\nModule size: $24  #36\nModule CRC : $44E7F0 (Good)\nHdr parity : $FE\nFile Mgr   : SCF\nDriver     : VCounter\nEdition    : $01  #1\nTy/La At/Rv: $F1 $80\nDevice Descriptor mod, 6809 Obj, re-ent, R/O\n\n",
+    "vctest": "Header for : vctest\nModule size: $15D7  #5591\nModule CRC : $8C269C (Good)\nHdr parity : $3F\nExec. off  : $000D  #13\nData size  : $0826  #2086\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "vcpack": "Header for : VCounter\nModule size: $134  #308\nModule CRC : $3FA6AA (Good)\nHdr parity : $EF\nExec. off  : $0017  #23\nData size  : $0028  #40\nEdition    : $01  #1\nTy/La At/Rv: $E1 $80\nDevice Driver mod, 6809 Obj, re-ent, R/O\n\nHeader for : vc\nModule size: $24  #36\nModule CRC : $44E7F0 (Good)\nHdr parity : $FE\nFile Mgr   : SCF\nDriver     : VCounter\nEdition    : $01  #1\nTy/La At/Rv: $F1 $80\nDevice Descriptor mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "source_sha256": {
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/virq/counter.asm": "36d844c127201011e202ee67185ace90b1e8c95797c08a2167a8523cf5713be0",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/virq/descriptor.asm": "cf3ec25965649bbdb5ad511d66d204aeb5f567e8fa6944bf2ac7259723a9a450",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/virq/controller.c": "07019759760ac0c412dad6a8ccb2af649ec4f785e1f0834140e275938d85b686",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c": "5d39c2f9ee5da4d99333984d5f34fd62c0e352807d9ba259642f95f53637042d",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.h": "cf7b84532227466284c608f833a9a6c73d7d5ae1fb20509a27d810e2d13a5b18"
+  },
+  "sha256": {
+    "vcounter": "4ab46f9a69bd811c125907daa9aac8b59214b6ff2b4aaece9b5b979972c85d0f",
+    "vc": "c5e252aca9ef790193f7c83b6d944b0c6110239f0472009b417cd779a81dcffe",
+    "vctest": "42b57ae6402044d432e995c72c00f34300cf9c2a925558e88b4647ed8a4379ca",
+    "vcpack": "f727957f9fe36f949934b0214529fcb0a369d705ba53c463e2229a8e2c780f10"
+  }
+}

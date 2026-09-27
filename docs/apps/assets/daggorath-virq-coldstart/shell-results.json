@@ -1,0 +1,58 @@
+{
+  "strict-date": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6429,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEc47e7fc2ba7ba73174a0bfae6bd3737c\",\"commandPromptMs\":839}"
+      }
+    ],
+    "structuredContent": {
+      "command": "date",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 6429,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEc47e7fc2ba7ba73174a0bfae6bd3737c",
+      "commandPromptMs": 839
+    },
+    "isError": false
+  },
+  "strict-pwd": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7395,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE9056e3212f86ce826c53ca0fee27f026\",\"commandPromptMs\":1791}"
+      }
+    ],
+    "structuredContent": {
+      "command": "pwd",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 7395,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE9056e3212f86ce826c53ca0fee27f026",
+      "commandPromptMs": 1791
+    },
+    "isError": false
+  }
+}

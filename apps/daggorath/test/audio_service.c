@@ -14,6 +14,10 @@ Byte backend_close(void){++closed;return 0;}
 Byte backend_play(Byte s,Byte g){assert(s==0&&g==255);++played;return failplay;}
 Byte backend_stop(void){++stopped;return 0;}
 Byte backend_drain(void){return 0;}
+/* Approved M3 mock extension: M1 must never request heartbeat state. */
+Byte backend_heartbeat(Byte enabled,Byte interval){
+ (void)enabled;(void)interval;assert(!"unexpected heartbeat operation in M1");return AUDIO_BAD;
+}
 Byte ipc_read(Byte p,Byte *d,Word n){assert(p==0&&n==8);if(readerror){*signalptr=readerror;return readerror;}if(pos==size)return AUDIO_EOF;memcpy(d,input+pos,8);pos+=8;return 0;}
 Byte os_write(Byte p,const void *d,Word n){assert(p==1&&n==8);memcpy(output+written,d,8);written+=8;return 0;}
 int main(void){char *argv[]={"dodaudio","ssc-mame-fast"};int n=0;

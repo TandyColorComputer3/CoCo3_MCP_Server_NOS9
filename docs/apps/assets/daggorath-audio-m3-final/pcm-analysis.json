@@ -1,0 +1,22 @@
+{
+  "slow": {
+    "absoluteStepMin": 0.25,
+    "absoluteStepMax": 0.25,
+    "edgeSamplesMeasured": 12,
+    "sampleRate": 48000,
+    "rawExcerptStart": 218.88041415200001,
+    "rawExcerptEnd": 224.603988552,
+    "peakMin": -0.2648204565048218,
+    "peakMax": 0.012104138731956482
+  },
+  "fast": {
+    "absoluteStepMin": 0.25,
+    "absoluteStepMax": 0.25,
+    "edgeSamplesMeasured": 204,
+    "sampleRate": 48000,
+    "rawExcerptStart": 241.526237755,
+    "rawExcerptEnd": 242.226677922,
+    "peakMin": -0.26385506987571716,
+    "peakMax": 0.01404830813407898
+  }
+}

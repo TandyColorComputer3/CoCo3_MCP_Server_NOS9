@@ -1,0 +1,29 @@
+{
+  "error": [],
+  "wizard": [
+    {
+      "time": 484.70594861,
+      "deltaTicks": 212401
+    },
+    {
+      "time": 484.722636763,
+      "deltaTicks": 3601
+    }
+  ],
+  "squeak": [],
+  "slow": [],
+  "fast": [],
+  "cycles": [],
+  "repeat": [],
+  "phaser": [],
+  "whoop": [
+    {
+      "time": 185.604176395,
+      "deltaTicks": 61
+    }
+  ],
+  "freeze": [],
+  "transition": [],
+  "cancel": [],
+  "duplicate": []
+}

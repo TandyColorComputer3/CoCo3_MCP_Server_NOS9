@@ -1,0 +1,408 @@
+{
+  "cold": {
+    "slow": {
+      "control": "slow",
+      "start": 197.28588373,
+      "end": 215.459282711,
+      "response": {
+        "command": "natbeat slow",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 18032,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEedbae0b16e9e9ba814d2181a8131579a",
+        "commandPromptMs": 12444
+      }
+    },
+    "fast": {
+      "control": "fast",
+      "start": 248.28488032,
+      "end": 265.740688708,
+      "response": {
+        "command": "natbeat fast",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 17299,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE369c2af886c992cc8461dd31768ceabb",
+        "commandPromptMs": 11712
+      }
+    },
+    "repeat": {
+      "control": "repeat",
+      "start": 308.445673091,
+      "end": 325.901481479,
+      "response": {
+        "command": "natbeat fast",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 17313,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE003e5f9c266eaa6a7468dc14de3c848c",
+        "commandPromptMs": 11710
+      }
+    },
+    "observer": {
+      "control": "observer",
+      "start": 368.472960635,
+      "end": 396.141918864,
+      "response": {
+        "command": "natco fast",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 27505,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE64e184cb2d5428275a941e1a778588e7",
+        "commandPromptMs": 21897
+      }
+    },
+    "ssc": {
+      "control": "ssc",
+      "start": 428.466871873,
+      "end": 457.904774355,
+      "response": {
+        "command": "natco ssc",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 29297,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEb5d8965202da541c932994f3b331b232",
+        "commandPromptMs": 23707
+      }
+    },
+    "wizard": {
+      "control": "wizard",
+      "start": 488.46078311,
+      "end": 526.6933424,
+      "response": {
+        "command": "natco wizard",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 38092,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEefd5c2e1975efe1a0c83601bca225666",
+        "commandPromptMs": 32483
+      }
+    },
+    "cancel": {
+      "control": "cancel",
+      "start": 548.604887728,
+      "end": 558.000318055,
+      "response": {
+        "command": "natbeat cancel",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 3,
+        "statusText": "003",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 16217,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE7310a616dc3ff7f6b16173a05671dfd2",
+        "commandPromptMs": 8673
+      }
+    },
+    "error": {
+      "control": "error",
+      "start": 558.150511435,
+      "end": 567.212178696,
+      "response": {
+        "command": "natbeat error",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 187,
+        "statusText": "187",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 8963,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE722f29f4c32174ee4b527968b9a51862",
+        "commandPromptMs": 3379
+      }
+    },
+    "date": {
+      "control": "date",
+      "start": 608.682239732,
+      "end": 615.274060299,
+      "response": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6443,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEd94ee8a7ff5cba176c8de43b19e15f3c",
+        "commandPromptMs": 836
+      }
+    },
+    "pwd": {
+      "control": "pwd",
+      "start": 615.424253679,
+      "end": 622.917234526,
+      "response": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7379,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEcc350f3bd0b2ab6b4a0dfa7d44667662",
+        "commandPromptMs": 1787
+      }
+    }
+  },
+  "warm": {
+    "observer": {
+      "control": "observer",
+      "start": 152.811955093,
+      "end": 175.140704255,
+      "response": {
+        "command": "natco fast",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 22222,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEe1daccf9a3528501f368f9e22c23af4f",
+        "commandPromptMs": 16637
+      }
+    },
+    "ssc": {
+      "control": "ssc",
+      "start": 204.578606737,
+      "end": 226.840603285,
+      "response": {
+        "command": "natco ssc",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 22149,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE03b892b4afd6d7f3cbe6a98217462ac3",
+        "commandPromptMs": 16542
+      }
+    },
+    "wizard": {
+      "control": "wizard",
+      "start": 264.639270588,
+      "end": 309.663908284,
+      "response": {
+        "command": "natco wizard",
+        "completed": false,
+        "commandCompleted": false,
+        "status": null,
+        "statusText": null,
+        "timedOut": true,
+        "shellReady": false,
+        "outcome": "timeout",
+        "phase": "command",
+        "elapsedMs": 45006,
+        "outputComplete": false,
+        "allowGraphics": true,
+        "displayDepartures": 1,
+        "consoleReturned": true,
+        "executionState": "AWAITING_FRESH_PROMPT",
+        "marker": "MCPDONEa724fcbc2343a1ab1f18b7d6afcc32eb",
+        "error": "deadline exceeded during command"
+      }
+    },
+    "date": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"date\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":6467,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONE7504c75671dd13fc599a1aad40363329\",\"commandPromptMs\":863}"
+        }
+      ],
+      "structuredContent": {
+        "command": "date",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 6467,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONE7504c75671dd13fc599a1aad40363329",
+        "commandPromptMs": 863
+      },
+      "isError": false
+    },
+    "pwd": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"command\":\"pwd\",\"completed\":true,\"commandCompleted\":true,\"status\":0,\"statusText\":\"000\",\"timedOut\":false,\"shellReady\":true,\"outcome\":\"completed\",\"phase\":\"complete\",\"elapsedMs\":7355,\"outputComplete\":false,\"allowGraphics\":false,\"displayDepartures\":0,\"consoleReturned\":false,\"executionState\":\"COMPLETE\",\"marker\":\"MCPDONEd4c38f18c1b635cb0a9f2eb7f8a61c25\",\"commandPromptMs\":1766}"
+        }
+      ],
+      "structuredContent": {
+        "command": "pwd",
+        "completed": true,
+        "commandCompleted": true,
+        "status": 0,
+        "statusText": "000",
+        "timedOut": false,
+        "shellReady": true,
+        "outcome": "completed",
+        "phase": "complete",
+        "elapsedMs": 7355,
+        "outputComplete": false,
+        "allowGraphics": false,
+        "displayDepartures": 0,
+        "consoleReturned": false,
+        "executionState": "COMPLETE",
+        "marker": "MCPDONEd4c38f18c1b635cb0a9f2eb7f8a61c25",
+        "commandPromptMs": 1766
+      },
+      "isError": false
+    },
+    "recovery": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"ready\":true,\"state\":\"native_beat_ready\",\"loadScheduled\":true,\"loadCompleted\":true,\"shellVerified\":true,\"timedOut\":false,\"status\":\"ready\",\"phase\":\"ready\",\"elapsedMs\":6207,\"file\":\"/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-native/runtime/states/coco3h/native_beat_ready.sta\",\"postLoadEpoch\":2,\"console\":{\"columns\":80,\"rows\":25,\"source\":\"physical_ram\",\"text\":\"\\nMemory size - 2048k.\\nCpu type - 6309 (Native Mode)\\nDriveWire - Not detected.\\nCoCo3FPGA - Not detected.\\nCoco SDC - Not detected.\\nGime-X - Not found.\\nSetting configuration settings...\\n\\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\\nStarting Windows...\\n&005\\n&006\\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\\nLoading extended patterns for MVCanvas\\nTo run the GUI, simply type GSHELL\\n\\nShell+ v2.2a 26/09/26 17:02:43\\n\\n{Term|02}/DD:p=MCPe49ada9b2a68aec1:\\n\\nMCPe49ada9b2a68aec1:echo READYe49ada9b2a68aec1\\nREADYe49ada9b2a68aec1\\n\\nMCPe49ada9b2a68aec1:\"},\"handshake\":{\"prompt\":\"MCPe49ada9b2a68aec1:\",\"marker\":\"READYe49ada9b2a68aec1\",\"markerObserved\":true,\"promptReturned\":true}}"
+        }
+      ],
+      "structuredContent": {
+        "ready": true,
+        "state": "native_beat_ready",
+        "loadScheduled": true,
+        "loadCompleted": true,
+        "shellVerified": true,
+        "timedOut": false,
+        "status": "ready",
+        "phase": "ready",
+        "elapsedMs": 6207,
+        "file": "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-native/runtime/states/coco3h/native_beat_ready.sta",
+        "postLoadEpoch": 2,
+        "console": {
+          "columns": 80,
+          "rows": 25,
+          "source": "physical_ram",
+          "text": "\nMemory size - 2048k.\nCpu type - 6309 (Native Mode)\nDriveWire - Not detected.\nCoCo3FPGA - Not detected.\nCoco SDC - Not detected.\nGime-X - Not found.\nSetting configuration settings...\n\n*EOU Ver 1.0.1, Apr 07, 2024 Release*\nStarting Windows...\n&005\n&006\nLoading 49 fonts, plus graphics pointers, graphics patterns, etc...\nLoading extended patterns for MVCanvas\nTo run the GUI, simply type GSHELL\n\nShell+ v2.2a 26/09/26 17:02:43\n\n{Term|02}/DD:p=MCPe49ada9b2a68aec1:\n\nMCPe49ada9b2a68aec1:echo READYe49ada9b2a68aec1\nREADYe49ada9b2a68aec1\n\nMCPe49ada9b2a68aec1:"
+        },
+        "handshake": {
+          "prompt": "MCPe49ada9b2a68aec1:",
+          "marker": "READYe49ada9b2a68aec1",
+          "markerObserved": true,
+          "promptReturned": true
+        }
+      },
+      "isError": false
+    }
+  }
+}

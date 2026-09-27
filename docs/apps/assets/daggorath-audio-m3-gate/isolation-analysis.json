@@ -1,0 +1,1375 @@
+[
+  {
+    "mode": "natural-sync",
+    "playTime": 201.275576441,
+    "cfTime": 203.617890434,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08466483099999778,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.048840396000002784,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.18234562200001392,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.29916269599999623,
+        "ay0": 226,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.3992916159999993,
+        "ay0": 97,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.49942053600000236,
+        "ay0": 226,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.5661731490000079,
+        "ay0": 97,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6162376089999952,
+        "ay0": 225,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6496139159999927,
+        "ay0": 97,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.666302069000011,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 61,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 2.351805555999988,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 200.675576441,
+        "end": 201.075576441,
+        "rms": 0.41868061057445927,
+        "acStd": 0.09130257606721193,
+        "A225Hz": {
+          "hz": 225.0,
+          "magnitude": 0.02406924527992219
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.99170087879
+        }
+      },
+      "A_and_B": {
+        "start": 201.325576441,
+        "end": 201.435576441,
+        "rms": 0.5045673025014564,
+        "acStd": 0.11725101848480012,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.32760930541073
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.3828097813163
+        }
+      },
+      "after_A": {
+        "start": 202.125576441,
+        "end": 202.575576441,
+        "rms": 0.41879450009612373,
+        "acStd": 0.0913029450844025,
+        "A225Hz": {
+          "hz": 224.44444444444446,
+          "magnitude": 0.02983105822087551
+        },
+        "B490Hz": {
+          "hz": 491.11111111111114,
+          "magnitude": 613.220901206956
+        }
+      },
+      "after_all_silent": {
+        "start": 203.91789043400001,
+        "end": 204.067890434,
+        "rms": 0.3165228072926406,
+        "acStd": 1.519479601717e-08,
+        "A225Hz": {
+          "hz": 233.33333333333334,
+          "magnitude": 1.31502488317343e-06
+        },
+        "B490Hz": {
+          "hz": 486.6666666666667,
+          "magnitude": 9.475935199165345e-07
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [],
+    "response": {
+      "command": "m3gate natural",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 17036,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE6f6bc5e5d96c22419a25e97d1f84ec2d",
+      "commandPromptMs": 11429
+    }
+  },
+  {
+    "mode": "register-sync",
+    "playTime": 261.536496268,
+    "cfTime": 263.928775843,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08466296699998566,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.048842258999968635,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.1823474859999692,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.23241194600001336,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.2991645590000189,
+        "ay0": 226,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.39929347899999357,
+        "ay0": 97,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.4994223989999682,
+        "ay0": 226,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.56617501300002,
+        "ay0": 97,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6162394730000074,
+        "ay0": 225,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.649615778999987,
+        "ay0": 97,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6663039329999947,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 61,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 2.4018718799999874,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 260.936496268,
+        "end": 261.336496268,
+        "rms": 0.41864518582435367,
+        "acStd": 0.091302717946655,
+        "A225Hz": {
+          "hz": 225.0,
+          "magnitude": 0.024038582607619995
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.9916944529175
+        }
+      },
+      "A_and_B": {
+        "start": 261.586496268,
+        "end": 261.69649626800003,
+        "rms": 0.5060885299175854,
+        "acStd": 0.11675764095939685,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.3142286259189
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.3819290741106
+        }
+      },
+      "after_A": {
+        "start": 262.38649626800003,
+        "end": 262.836496268,
+        "rms": 0.38991769801210846,
+        "acStd": 0.16288710595162229,
+        "A225Hz": {
+          "hz": 220.0,
+          "magnitude": 58.65721425367692
+        },
+        "B490Hz": {
+          "hz": 491.11111111111114,
+          "magnitude": 494.54535005848925
+        }
+      },
+      "after_all_silent": {
+        "start": 264.228775843,
+        "end": 264.37877584299997,
+        "rms": 0.3165228073298935,
+        "acStd": 1.541540149827585e-08,
+        "A225Hz": {
+          "hz": 233.33333333333334,
+          "magnitude": 7.330033239328879e-07
+        },
+        "B490Hz": {
+          "hz": 486.6666666666667,
+          "magnitude": 1.0647715358990161e-06
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [
+      {
+        "start": 262.499996268,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0262.519708096",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0262.520022102",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      },
+      {
+        "start": 262.599996268,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0262.619837051",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0262.620151057",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      },
+      {
+        "start": 262.699996268,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0262.719966006",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0262.720280012",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      }
+    ],
+    "response": {
+      "command": "m3gate register",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 17175,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEee08f7db40e1c7f19651c78aaaf812c7",
+      "commandPromptMs": 11588
+    }
+  },
+  {
+    "mode": "isolation-observer",
+    "playTime": 329.341038411,
+    "cfTime": 331.709664694,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08523811200001319,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.04826711499998737,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.1817723409999985,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.2985894149999808,
+        "ay0": 226,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.3987183350000123,
+        "ay0": 97,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.49884725499998694,
+        "ay0": 226,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.5655998679999925,
+        "ay0": 97,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6156643279999798,
+        "ay0": 225,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6490406350000058,
+        "ay0": 97,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.665728788000024,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 61,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 2.384608581000009,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 328.741038411,
+        "end": 329.141038411,
+        "rms": 0.4186076643969157,
+        "acStd": 0.0912710912645908,
+        "A225Hz": {
+          "hz": 225.0,
+          "magnitude": 0.023759685596001626
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.9782013638849
+        }
+      },
+      "A_and_B": {
+        "start": 329.391038411,
+        "end": 329.501038411,
+        "rms": 0.5045918006801317,
+        "acStd": 0.11754477100736875,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.32266451399022
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.38593216981795
+        }
+      },
+      "after_A": {
+        "start": 330.191038411,
+        "end": 330.641038411,
+        "rms": 0.4187876972576047,
+        "acStd": 0.09127140294626956,
+        "A225Hz": {
+          "hz": 224.44444444444446,
+          "magnitude": 0.029338508669062825
+        },
+        "B490Hz": {
+          "hz": 491.11111111111114,
+          "magnitude": 613.2063429211028
+        }
+      },
+      "after_all_silent": {
+        "start": 332.00966469400004,
+        "end": 332.159664694,
+        "rms": 0.31652280705670555,
+        "acStd": 1.5203383919767154e-08,
+        "A225Hz": {
+          "hz": 226.66666666666669,
+          "magnitude": 8.264607586771898e-07
+        },
+        "B490Hz": {
+          "hz": 493.33333333333337,
+          "magnitude": 1.5783994920991247e-06
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [
+      {
+        "start": 329.6199967443333,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0329.639990456",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0329.640304462",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      },
+      {
+        "start": 329.8199967443333,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0329.839716455",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0329.840030461",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      },
+      {
+        "start": 329.91999674433333,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0329.939845410",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0329.940159416",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      },
+      {
+        "start": 330.01999674433335,
+        "durationMs": 20.0,
+        "muxWrites": [
+          {
+            "time": "0330.039974364",
+            "address": "65315",
+            "data": "52",
+            "pc": "45304"
+          },
+          {
+            "time": "0330.040288371",
+            "address": "65315",
+            "data": "60",
+            "pc": "45369"
+          }
+        ]
+      }
+    ],
+    "response": {
+      "command": "gateco tone",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 27501,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE3fd4336fa952fd760cbb00671ceaf6be",
+      "commandPromptMs": 21906
+    }
+  },
+  {
+    "mode": "cancel",
+    "playTime": 501.028176213,
+    "cfTime": 501.223996687,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08465440899999521,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.04885081800000535,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.1823560450000059,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.19904419800002415,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 500.428176213,
+        "end": 500.828176213,
+        "rms": 0.41862534632244613,
+        "acStd": 0.09127107913443759,
+        "A225Hz": {
+          "hz": 225.0,
+          "magnitude": 0.023837933296996357
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.9781899318501
+        }
+      },
+      "A_and_B": {
+        "start": 501.078176213,
+        "end": 501.188176213,
+        "rms": 0.5045659596316637,
+        "acStd": 0.11724266733101017,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.32185918406387
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.37573501582517
+        }
+      },
+      "after_A": {
+        "start": 501.878176213,
+        "end": 502.328176213,
+        "rms": 0.0,
+        "acStd": 0.0,
+        "A225Hz": {
+          "hz": 211.11111111111111,
+          "magnitude": 0.0
+        },
+        "B490Hz": {
+          "hz": 475.5555555555556,
+          "magnitude": 0.0
+        }
+      },
+      "after_all_silent": {
+        "start": 501.523996687,
+        "end": 501.673996687,
+        "rms": 0.0,
+        "acStd": 0.0,
+        "A225Hz": {
+          "hz": 213.33333333333334,
+          "magnitude": 0.0
+        },
+        "B490Hz": {
+          "hz": 480.0,
+          "magnitude": 0.0
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [],
+    "response": {
+      "command": "m3gate cancel",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 3,
+      "statusText": "003",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 14562,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE91d87c5bd4960a2754428f598c3b72fd",
+      "commandPromptMs": 8976
+    }
+  },
+  {
+    "mode": "error",
+    "playTime": 561.005397334,
+    "cfTime": 561.199800308,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08465244499996061,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.04885278099993684,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.1823580079999374,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.19904616099995565,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 560.405397334,
+        "end": 560.805397334,
+        "rms": 0.4110211795922151,
+        "acStd": 0.11790453162907204,
+        "A225Hz": {
+          "hz": 222.5,
+          "magnitude": 0.1914347944017628
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.8911659000311
+        }
+      },
+      "A_and_B": {
+        "start": 561.055397334,
+        "end": 561.165397334,
+        "rms": 0.5061830256801493,
+        "acStd": 0.11673633173828184,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.30721973987175
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.38327784247696
+        }
+      },
+      "after_A": {
+        "start": 561.855397334,
+        "end": 562.305397334,
+        "rms": 0.0,
+        "acStd": 0.0,
+        "A225Hz": {
+          "hz": 211.11111111111111,
+          "magnitude": 0.0
+        },
+        "B490Hz": {
+          "hz": 475.5555555555556,
+          "magnitude": 0.0
+        }
+      },
+      "after_all_silent": {
+        "start": 561.499800308,
+        "end": 561.6498003080001,
+        "rms": 0.0,
+        "acStd": 0.0,
+        "A225Hz": {
+          "hz": 213.33333333333334,
+          "magnitude": 0.0
+        },
+        "B490Hz": {
+          "hz": 480.0,
+          "magnitude": 0.0
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [],
+    "response": {
+      "command": "m3gate error",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 187,
+      "statusText": "187",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 14233,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEc5b0b18b2e4c8da0dbd6cc045e08ed9b",
+      "commandPromptMs": 8632
+    }
+  },
+  {
+    "mode": "silence",
+    "playTime": 131.902925623,
+    "cfTime": 134.264036424,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08466742499999214,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.04883780200000842,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.18234302900000898,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.29916010200000187,
+        "ay0": 226,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.4159771750000232,
+        "ay0": 97,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.499417942000008,
+        "ay0": 226,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.5661705550000136,
+        "ay0": 97,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6162350150000009,
+        "ay0": 225,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6496113220000268,
+        "ay0": 97,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.6662994750000166,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 61,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 2.368491115000012,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 131.302925623,
+        "end": 131.702925623,
+        "rms": 0.4188174524424516,
+        "acStd": 0.09130408718238463,
+        "A225Hz": {
+          "hz": 225.0,
+          "magnitude": 0.02415889260271897
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.9915088082226
+        }
+      },
+      "A_and_B": {
+        "start": 131.952925623,
+        "end": 132.06292562299998,
+        "rms": 0.5046265772222792,
+        "acStd": 0.11715974335175224,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.30063848686783
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.3813005726853
+        }
+      },
+      "after_A": {
+        "start": 132.75292562299998,
+        "end": 133.202925623,
+        "rms": 0.41861808870299827,
+        "acStd": 0.0913047419398152,
+        "A225Hz": {
+          "hz": 224.44444444444446,
+          "magnitude": 0.029706951955065147
+        },
+        "B490Hz": {
+          "hz": 491.11111111111114,
+          "magnitude": 613.2205786254796
+        }
+      },
+      "after_all_silent": {
+        "start": 134.56403642400002,
+        "end": 134.714036424,
+        "rms": 0.3165228069946173,
+        "acStd": 1.508586192562858e-08,
+        "A225Hz": {
+          "hz": 233.33333333333334,
+          "magnitude": 7.376088941009858e-07
+        },
+        "B490Hz": {
+          "hz": 493.33333333333337,
+          "magnitude": 1.7230797455677232e-06
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [],
+    "response": {
+      "command": "m3gate silence",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 17016,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE895f8daf1f2fe7be5be7f51f9d5497f9",
+      "commandPromptMs": 11411
+    }
+  },
+  {
+    "mode": "stop-b",
+    "playTime": 149.024970219,
+    "cfTime": 151.436132088,
+    "transitions": [
+      {
+        "afterPlaySeconds": -0.08466670000001386,
+        "ay0": 0,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 0,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.0488385269999867,
+        "ay0": 226,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.18234375399998726,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 12
+      },
+      {
+        "afterPlaySeconds": 0.232408214000003,
+        "ay0": 99,
+        "ay1": 3,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.29916082699998015,
+        "ay0": 226,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.4159779009999909,
+        "ay0": 97,
+        "ay1": 2,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.49941866699998627,
+        "ay0": 226,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.5661712809999813,
+        "ay0": 97,
+        "ay1": 1,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.616235740999997,
+        "ay0": 225,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.6496120469999767,
+        "ay0": 97,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 60,
+        "ay8": 12,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 0.6663002009999843,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 61,
+        "ay8": 0,
+        "ay9": 0
+      },
+      {
+        "afterPlaySeconds": 2.4185563009999953,
+        "ay0": 1,
+        "ay1": 0,
+        "ay2": 200,
+        "ay3": 1,
+        "ay7": 255,
+        "ay8": 0,
+        "ay9": 0
+      }
+    ],
+    "pcmWindows": {
+      "B_only": {
+        "start": 148.42497021900002,
+        "end": 148.82497021900002,
+        "rms": 0.41859173259950355,
+        "acStd": 0.09130588348036335,
+        "A225Hz": {
+          "hz": 225.0,
+          "magnitude": 0.02406741900493669
+        },
+        "B490Hz": {
+          "hz": 490.0,
+          "magnitude": 540.991527222603
+        }
+      },
+      "A_and_B": {
+        "start": 149.07497021900002,
+        "end": 149.184970219,
+        "rms": 0.5045424773483259,
+        "acStd": 0.11693210346443332,
+        "A225Hz": {
+          "hz": 227.27272727272728,
+          "magnitude": 134.31622591906418
+        },
+        "B490Hz": {
+          "hz": 490.90909090909093,
+          "magnitude": 139.3822435019496
+        }
+      },
+      "after_A": {
+        "start": 149.874970219,
+        "end": 150.32497021900002,
+        "rms": 0.31652280722089426,
+        "acStd": 1.5177608769838434e-08,
+        "A225Hz": {
+          "hz": 231.11111111111111,
+          "magnitude": 2.5199169288505636e-06
+        },
+        "B490Hz": {
+          "hz": 488.8888888888889,
+          "magnitude": 3.8748437580677485e-06
+        }
+      },
+      "after_all_silent": {
+        "start": 151.736132088,
+        "end": 151.88613208799998,
+        "rms": 0.3165228070649839,
+        "acStd": 1.494138602798736e-08,
+        "A225Hz": {
+          "hz": 226.66666666666669,
+          "magnitude": 7.912940885245895e-07
+        },
+        "B490Hz": {
+          "hz": 493.33333333333337,
+          "magnitude": 1.117892800294616e-06
+        }
+      }
+    },
+    "speakerZeroRunsWhileBActive": [],
+    "response": {
+      "command": "m3gate stop-b",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 16965,
+      "outputComplete": false,
+      "allowGraphics": false,
+      "displayDepartures": 0,
+      "consoleReturned": false,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEd7e8e1666856474455ac29e4acbeaff6",
+      "commandPromptMs": 11362
+    }
+  }
+]

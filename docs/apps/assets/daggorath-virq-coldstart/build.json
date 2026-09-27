@@ -1,0 +1,90 @@
+{
+  "commands": [
+    [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/startprobe",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/probe.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/wizard-main.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/presentation.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/playback.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/phase.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/startprobe-module.asm"
+    ],
+    [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/vgap",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/controller.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/phase.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/vgap-module.asm"
+    ],
+    [
+      "cmoc",
+      "--os9",
+      "-O0",
+      "--intermediate",
+      "--intdir=/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild",
+      "--add-os9-stack-space=2048",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+      "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild",
+      "-o",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/vready",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/enable.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/presentation.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/playback.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/original/logical.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/phase.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+      "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/virq-coldstart/rebuild/vready-module.asm"
+    ]
+  ],
+  "ident": {
+    "startprobe": "Header for : startprobe\nModule size: $5146  #20806\nModule CRC : $A5CBD1 (Good)\nHdr parity : $5B\nExec. off  : $000D  #13\nData size  : $3A55  #14933\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "vgap": "Header for : vgap\nModule size: $D4C  #3404\nModule CRC : $ABE287 (Good)\nHdr parity : $2D\nExec. off  : $000D  #13\nData size  : $0A25  #2597\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+    "vready": "Header for : vready\nModule size: $52C1  #21185\nModule CRC : $EDE9C1 (Good)\nHdr parity : $53\nExec. off  : $000D  #13\nData size  : $224F  #8783\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+  },
+  "inputs": {
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/build.py": "fd62a511804f8b39a093a7952d8f4ffea3d50b6e33b33c892afbb7729cdac6ed",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/controller.c": "a2d63d2e49b35aee244e2c301cfea41f527f835fe4e9a66e4635374c515293e7",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/phase.c": "9c7deca95b03f11fd33eb66ed5883847431af6a1b4b928f61fa01fff5a046954",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/capture.lua": "5487b2130efbe1a65d425a4e44493b03c6a15f5b8cb1c196d00512c6c703afc4",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/enable.c": "2b84976e550e7fb4f3f007591fc2a99d4512aebbed5419dbd258ae020edfcacc",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/probe.c": "019416eb89f9d482ba84601acd7ff21f2546b75e8b4a347ee7b77299247c464a",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/coldstart/analyze.py": "76045eac4eac35bb537b7a81816f5f484eecc4b38ce3c49493198f61056f6f68",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/presentation.c": "ff93b3687a45b7e64a1f7dd9a3cbbc65538dd07baddd45347bf9ac3859ffd377",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/window-path.c": "f8e1c45289e9e47791ad8949ff8209393b3ba54423082405124d12fa4230b94b",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/playback.c": "119ba7ee4ba0e24b6ca27a845f4945949dc2ecff69ab2a0f3444b3e8ef0ff23d",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/main.c": "99bdb2d8e01ddbf79ac7961e12b4eab04290db304102a147e06263b9970076bb"
+  },
+  "outputs": {
+    "startprobe": "ab331ee25fd3aa3b0b038cee65d622d3cd89495e889db88eb3e906947e8332db",
+    "vgap": "c0bbd9bd8612ae80e2de3df6875d9e1eaec9d7b5c4ddc510ff977252ad73518e",
+    "vready": "1551dda6d23293c4cd4d1ebf1511e28fb430ce7bd1169fa4a327ae24b93fef72"
+  }
+}

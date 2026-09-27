@@ -1,0 +1,14 @@
+{
+  "Source-built cartridge": {
+    "before": -0.015625,
+    "after": 0.234375,
+    "step": 0.25,
+    "transitionSample": 483
+  },
+  "EOU native probe": {
+    "before": -0.25,
+    "after": 0.0,
+    "step": 0.25,
+    "transitionSample": 482
+  }
+}

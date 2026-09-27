@@ -1,0 +1,121 @@
+{
+  "registrations": 19,
+  "removals": 19,
+  "observations": [
+    {
+      "removedAt": 132.892785784,
+      "observedUntil": 141.240759157,
+      "quietMs": 8347.973373000003,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 151.553121291,
+      "observedUntil": 164.502171226,
+      "quietMs": 12949.049935000005,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 175.393176337,
+      "observedUntil": 187.383091253,
+      "quietMs": 11989.914916000003,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 198.923558978,
+      "observedUntil": 210.279212659,
+      "quietMs": 11355.653681000007,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 226.629441068,
+      "observedUntil": 234.710679907,
+      "quietMs": 8081.238839000008,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 245.132970009,
+      "observedUntil": 266.657339034,
+      "quietMs": 21524.369025000025,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 283.352475063,
+      "observedUntil": 300.266774761,
+      "quietMs": 16914.299698000035,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 316.962602498,
+      "observedUntil": 333.976843418,
+      "quietMs": 17014.240919999964,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 340.915990974,
+      "observedUntil": 406.411269144,
+      "quietMs": 65495.278170000005,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 417.111328704,
+      "observedUntil": 431.131039036,
+      "quietMs": 14019.710331999988,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 432.797740158,
+      "observedUntil": 454.377894502,
+      "quietMs": 21580.154343999995,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 456.039570402,
+      "observedUntil": 477.557736962,
+      "quietMs": 21518.166559999998,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 478.217688621,
+      "observedUntil": 478.281514069,
+      "quietMs": 63.825448000045526,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 478.784554121,
+      "observedUntil": 478.847960521,
+      "quietMs": 63.4064000000194,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 479.351951532,
+      "observedUntil": 479.415357933,
+      "quietMs": 63.40640100000883,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 479.919852919,
+      "observedUntil": 479.983678367,
+      "quietMs": 63.82544799998868,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 490.143111524,
+      "observedUntil": 500.387511369,
+      "quietMs": 10244.399844999974,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 502.056026688,
+      "observedUntil": 509.936197459,
+      "quietMs": 7880.170771000053,
+      "callbacksAfterRemoval": 0
+    },
+    {
+      "removedAt": 520.275002625,
+      "observedUntil": 759.326199883,
+      "quietMs": 239051.197258,
+      "callbacksAfterRemoval": 0
+    }
+  ],
+  "zeroCallbacksAfterEveryRemoval": true
+}

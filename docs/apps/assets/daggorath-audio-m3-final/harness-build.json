@@ -1,0 +1,47 @@
+{
+  "command": [
+    "cmoc",
+    "--os9",
+    "-O0",
+    "--add-os9-stack-space=2048",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+    "-o",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production4/hbtest",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/heartbeat_service.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/native_heartbeat.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/client.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production/build/hbtest-module.asm"
+  ],
+  "sources": {
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/probes/heartbeat_service.c": "2560db6a07211d10d3defd63f1d59ce796c8880f7b79a5423255cbd0e6c15766",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/native_heartbeat.c": "94ae584d5dca46bf3781c30db1dfc6f1d37c5507648e92416384dd7318e9595c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ipc.c": "5d39c2f9ee5da4d99333984d5f34fd62c0e352807d9ba259642f95f53637042d",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/client.c": "6b8f578a7836ce9829b81dc7f8569a008cadfac09c955adb6d6d3a792f922a5e",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c": "404f1f4296e0a0d0d36b8f23ef6e0af5eb5ffee8db952221355c0086ef34648e",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/work/audio-m3-production/build/hbtest-module.asm": "432b2a8a7e4f91df08eb3c553e26f137cb0e440d26895cc8ce54931db38c8e90"
+  },
+  "module": {
+    "name": "hbtest",
+    "type": "Prgrm",
+    "language": "6809 Obj",
+    "typeLanguage": "11",
+    "size": 9636,
+    "crc": "1CE13F",
+    "revision": 1,
+    "attributes": 8,
+    "executionOffset": 13,
+    "dataSize": 2086,
+    "edition": 1
+  },
+  "artifactSha256": "75635953bba410392701fc703e39e264b39a5ceb3845933f50e6009535d0e909",
+  "ident": "Header for : hbtest\nModule size: $25A4  #9636\nModule CRC : $1CE13F (Good)\nHdr parity : $1B\nExec. off  : $000D  #13\nData size  : $0826  #2086\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n",
+  "cmoc": "cmoc (cmoc 0.1.90)\n",
+  "lwasm": "lwasm from lwtools 4.22\n",
+  "lwlink": "lwlink from lwtools 4.22\n",
+  "reproducedIdentically": true
+}

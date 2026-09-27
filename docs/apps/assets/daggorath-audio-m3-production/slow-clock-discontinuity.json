@@ -1,0 +1,17 @@
+[
+  {
+    "from": {
+      "time": "0133.637266912",
+      "minute": "3",
+      "second": "59",
+      "tick": "1"
+    },
+    "to": {
+      "time": "0133.653955065",
+      "minute": "4",
+      "second": "4",
+      "tick": "59"
+    },
+    "clockDeltaTicks": 242
+  }
+]

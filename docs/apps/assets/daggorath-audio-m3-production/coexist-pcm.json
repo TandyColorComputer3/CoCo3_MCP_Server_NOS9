@@ -1,0 +1,110 @@
+{
+  "squeak": {
+    "firstPlayCommand": "0xd8",
+    "playTime": 267.571497374,
+    "firstStopTime": 268.689058717,
+    "streams": {
+      ":ext:multi:slot2:ssc:ssc_audio": {
+        "minimum": 0.30473729968070984,
+        "maximum": 0.5125376582145691,
+        "standardDeviation": 0.022035542875528336,
+        "samples": 53643
+      },
+      ":ext:multi:slot2:ssc:coco_sac_tag": {
+        "minimum": 0.30473729968070984,
+        "maximum": 0.5125376582145691,
+        "standardDeviation": 0.022035542875528336,
+        "samples": 53643
+      },
+      ":speaker": {
+        "minimum": -0.01496991515159607,
+        "maximum": 0.26530277729034424,
+        "standardDeviation": 0.12497558444738388,
+        "samples": 53643
+      }
+    },
+    "activeAyFrames": 2,
+    "mixerValues": [
+      254
+    ],
+    "otherChannelAmplitudes": [
+      [
+        0,
+        0
+      ]
+    ],
+    "heartbeatEdgesDuringFirstEffect": 23
+  },
+  "whoop": {
+    "firstPlayCommand": "0xd9",
+    "playTime": 301.182090791,
+    "firstStopTime": 302.298998419,
+    "streams": {
+      ":ext:multi:slot2:ssc:ssc_audio": {
+        "minimum": 0.30471929907798767,
+        "maximum": 0.5125503540039062,
+        "standardDeviation": 0.0823315754532814,
+        "samples": 53612
+      },
+      ":ext:multi:slot2:ssc:coco_sac_tag": {
+        "minimum": 0.30471929907798767,
+        "maximum": 0.5125503540039062,
+        "standardDeviation": 0.0823315754532814,
+        "samples": 53612
+      },
+      ":speaker": {
+        "minimum": -0.015491276979446411,
+        "maximum": 0.26506540179252625,
+        "standardDeviation": 0.12497483938932419,
+        "samples": 53612
+      }
+    },
+    "activeAyFrames": 38,
+    "mixerValues": [
+      254
+    ],
+    "otherChannelAmplitudes": [
+      [
+        0,
+        0
+      ]
+    ],
+    "heartbeatEdgesDuringFirstEffect": 23
+  },
+  "phaser": {
+    "firstPlayCommand": "0xca",
+    "playTime": 334.892003003,
+    "firstStopTime": 336.206072057,
+    "streams": {
+      ":ext:multi:slot2:ssc:ssc_audio": {
+        "minimum": 0.3047058582305908,
+        "maximum": 0.5125474333763123,
+        "standardDeviation": 0.06981878727674484,
+        "samples": 63075
+      },
+      ":ext:multi:slot2:ssc:coco_sac_tag": {
+        "minimum": 0.3047058582305908,
+        "maximum": 0.5125474333763123,
+        "standardDeviation": 0.06981878727674484,
+        "samples": 63075
+      },
+      ":speaker": {
+        "minimum": -0.013414934277534485,
+        "maximum": 0.26403194665908813,
+        "standardDeviation": 0.12497690320014954,
+        "samples": 63075
+      }
+    },
+    "activeAyFrames": 29,
+    "mixerValues": [
+      254
+    ],
+    "otherChannelAmplitudes": [
+      [
+        0,
+        0
+      ]
+    ],
+    "heartbeatEdgesDuringFirstEffect": 27
+  }
+}
