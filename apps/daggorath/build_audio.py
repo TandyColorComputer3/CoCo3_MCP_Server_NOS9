@@ -3,7 +3,7 @@ from pathlib import Path
 import subprocess,sys,json,hashlib
 root=Path(__file__).resolve().parents[2];src=root/'apps/daggorath/src';out=Path(sys.argv[1]).resolve();out.mkdir(parents=True,exist_ok=True)
 records={}
-for name,parts in [('dodaudio',['service.c','event.c','ipc.c','ssc.c','ssc_io.c','service-module.asm']),('dodsnd',['harness.c','event.c','ipc.c','client.c','harness-module.asm'])]:
+for name,parts in [('dodaudio',['service.c','event.c','ipc.c','ssc.c','ssc_catalog.c','ssc_io.c','service-module.asm']),('dodsnd',['harness.c','event.c','ipc.c','client.c','harness-module.asm'])]:
  sources=[src/'audio'/p for p in parts]+[src/'os9.c']
  cmd=['cmoc','--os9','-O0','--intermediate','--intdir='+str(out),'--add-os9-stack-space=2048','-I'+str(src),'-I'+str(src/'audio'),'-o',str(out/name)]+list(map(str,sources))
  r=subprocess.run(cmd,cwd=root,capture_output=True,text=True);(out/(name+'.log')).write_text(r.stdout+r.stderr);r.check_returncode()

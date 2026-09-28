@@ -56,6 +56,18 @@ int main(int argc,char **argv){AudioClient c,second;Byte e,r,pid,status;Word i,s
   if(!strcmp(mode,"wizard-audio")){e=ipc_fork("dodwiz","\r",&pid);if(e)return e;children=3;}
   for(i=0;i<children;i++){r=ipc_wait(&pid,&status);printf("CHILD pid=%u status=%u syscall=%u\r",pid,status,r);if(r)e=r;else if(status)e=status;}return e;
  }
+ if(!strcmp(mode,"catalog")){
+  e=audio_start(&c,"/d1/dodaudio","ssc-mame-fast");printf("START status=%u\r",e);if(e)return e;
+  for(i=0;i<=AUDIO_LAST_SOURCE_ID;i++){
+   e=request(&c,AUDIO_CATALOG_PLAY,(Byte)i,255);
+   if(!e)e=request(&c,AUDIO_DRAIN,0,0);
+   printf("CAT %u status=%u\r",i,e);
+   if(e)break;
+   e=os_sleep(12);if(e)break;
+  }
+  r=audio_finish(&c);if(!e)e=r;
+  printf("FINISH status=%u\r",e);return e;
+ }
  if(!strcmp(mode,"whoop")||!strcmp(mode,"phaser")||!strcmp(mode,"phaser-loop")||!strcmp(mode,"rapid")||!strcmp(mode,"immediate")||!strcmp(mode,"replace")||!strcmp(mode,"coalesce")||!strcmp(mode,"suppress")||!strcmp(mode,"stop-active")||!strcmp(mode,"shutdown-active")||!strcmp(mode,"cancel-active")||!strcmp(mode,"error-active")){
   e=audio_start(&c,"/d1/dodaudio","ssc-mame-fast");printf("START status=%u\r",e);if(e)return e;
   e=m2case(&c,mode);printf("CASE status=%u\r",e);

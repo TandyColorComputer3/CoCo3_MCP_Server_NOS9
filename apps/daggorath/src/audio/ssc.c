@@ -10,13 +10,24 @@
 #include <cmoc.h>
 #include "backend.h"
 #include "policy.h"
+#include "ssc_catalog.h"
 static AudioVoice voice;
-static Byte owned,old1,old3,old23,*cancelled;
+static Byte owned,old1,old3,old23,fastClock,*cancelled;
 #include "ssc_io.h"
 static Byte send(Byte b){Byte i,e;
  for(i=0;i<12;i++){
   if(os_signal_value(cancelled))return os_signal_value(cancelled);
   if(ssc_read_io(0xff7e)&128){ssc_write_io(0xff7e,b);return os_sleep(1);}
+  e=os_sleep(1);if(e)return e;
+ }return 246;
+}
+/* Live M8 dodlisten buffer-6 loading accepted successive ready-gated bytes.
+ * Yield only while firmware is busy; one full OS tick after every accepted
+ * byte would add hundreds of milliseconds to a short catalog event. */
+static Byte send_catalog(Byte b){Byte i,e;
+ for(i=0;i<12;i++){
+  if(os_signal_value(cancelled))return os_signal_value(cancelled);
+  if(ssc_read_io(0xff7e)&128){ssc_write_io(0xff7e,b);return 0;}
   e=os_sleep(1);if(e)return e;
  }return 246;
 }
@@ -52,6 +63,7 @@ Byte backend_open(const char *profile,Byte *signal){
  if(!strcmp(profile,"ssc-mame-fast"))fast=1;
  else if(!strcmp(profile,"ssc-slow"))fast=0;
  else return AUDIO_UNSUPPORTED;
+ fastClock=fast;
  if((ssc_read_io(0xff7e)&0xe0)!=0xe0)return AUDIO_BUSY;
  old1=ssc_read_io(0xff01);old3=ssc_read_io(0xff03);old23=ssc_read_io(0xff23);owned=1;
  /* Acquisition once; never reset between events. */
@@ -91,18 +103,28 @@ Byte backend_open(const char *profile,Byte *signal){
 }
 Byte backend_play(Byte sound,Byte gain){Byte action,e,command;
  if(!owned)return AUDIO_BAD;
- if((sound!=AUDIO_SQUEAK&&sound!=AUDIO_WHOOP&&sound!=AUDIO_PHASER)||gain!=255)return AUDIO_UNSUPPORTED;
+ if(sound>AUDIO_LAST_SOURCE_ID||gain!=255)return AUDIO_UNSUPPORTED;
  refresh();action=audio_decide(&voice,sound);
  if(action==DEC_IGNORE||action==DEC_COALESCE)return 0;
  if(action==DEC_REPLACE||action==DEC_RETRIGGER){
   voice.phase=VOICE_REPLACING;e=backend_stop();if(e)return e;
  }
- command=sound==AUDIO_SQUEAK?0xd8:sound==AUDIO_WHOOP?0xd9:0xca;
- e=send(command);if(e)return e;
- /* Settling fence for the documented delayed sound-active detector, not a
-  * waveform loop. CA traverses a longer command buffer than D8/D9.
- * The submitter and other OS-9 processes remain schedulable. */
- e=os_sleep(sound==AUDIO_PHASER?18:6);if(e)return e;
+ if(sound==AUDIO_SQUEAK||sound==AUDIO_WHOOP||sound==AUDIO_PHASER){
+  command=sound==AUDIO_SQUEAK?0xd8:sound==AUDIO_WHOOP?0xd9:0xca;
+  e=send(command);if(e)return e;
+ }else{
+  Byte data[SSC_CATALOG_CAPACITY],length,i;
+  e=ssc_catalog_build(sound,fastClock,data,&length);if(e)return e;
+  e=send_catalog(0x9e);if(e)return e;
+  for(i=0;i<length;i++){e=send_catalog(data[i]);if(e)return e;}
+  e=send_catalog(0xde);if(e)return e;
+ }
+ /* MAME 0.289 per-ID PCM showed GROWL/GRAWL/SNARL truncated after the
+  * six-tick fence: refresh observed idle before firmware started buffer 6.
+  * The existing PHASER 18-tick yielding fence also covers catalog loads.
+  * This waits for delayed hardware startup, not audio-rate synthesis. */
+ e=os_sleep(sound==AUDIO_PHASER||
+            (sound!=AUDIO_SQUEAK&&sound!=AUDIO_WHOOP)?18:6);if(e)return e;
  audio_begin(&voice,sound);voice.decision=action;return 0;
 }
 Byte backend_drain(void){Byte e;Word ticks;

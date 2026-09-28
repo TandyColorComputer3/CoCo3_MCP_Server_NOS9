@@ -10,7 +10,7 @@ int main(int argc,char **argv){Byte f[8],e,r;Byte done=0;
   e=ipc_read(0,f,8);if(e)break;
   e=audio_validate(f);
   if(!e)switch(f[2]){
-   case AUDIO_PLAY:e=backend_play(f[3],f[4]);break;
+   case AUDIO_PLAY:case AUDIO_CATALOG_PLAY:e=backend_play(f[3],f[4]);break;
    case AUDIO_STOP:e=backend_stop();break;
    case AUDIO_DRAIN:e=backend_drain();break;
    case AUDIO_SHUTDOWN:done=1;e=backend_stop();break;
