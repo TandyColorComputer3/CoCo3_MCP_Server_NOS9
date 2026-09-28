@@ -1,0 +1,45 @@
+{
+  "format": "GSH1",
+  "probe": "gshell-path-probe.c",
+  "guestFile": "/dd/gshell-log on disposable clone",
+  "childPid": 4,
+  "parentPid": 3,
+  "selectedPath": 0,
+  "processDescriptorError": 0,
+  "paths": [
+    {
+      "path": 0,
+      "devNmError": 0,
+      "scTypError": 0,
+      "screenType": 5,
+      "scSizError": 0,
+      "columns": 80,
+      "rows": 25,
+      "device": "W3"
+    },
+    {
+      "path": 1,
+      "devNmError": 0,
+      "scTypError": 0,
+      "screenType": 5,
+      "scSizError": 0,
+      "columns": 80,
+      "rows": 25,
+      "device": "W3"
+    },
+    {
+      "path": 2,
+      "devNmError": 0,
+      "scTypError": 0,
+      "screenType": 5,
+      "scSizError": 0,
+      "columns": 80,
+      "rows": 25,
+      "device": "W3"
+    }
+  ],
+  "limits": [
+    "Probe AIF used the same type-5 80x25 request as dodgame but executed a separate disposable module.",
+    "The record does not identify dodgame owned window or cleanup."
+  ]
+}

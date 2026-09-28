@@ -1,0 +1,151 @@
+{
+  "trace_clock": "MAME machine.time seconds; guest rendering and host RPC timings are distinct",
+  "bridge_inputs": [
+    {
+      "time": 717.989644,
+      "text": "Z"
+    },
+    {
+      "time": 759.292824,
+      "text": "TURN LEFT{ENTER}"
+    },
+    {
+      "time": 785.393095,
+      "text": "EXIT{ENTER}"
+    },
+    {
+      "time": 872.538632,
+      "text": "Z{ENTER}"
+    },
+    {
+      "time": 892.98162,
+      "text": "EXIT{ENTER}"
+    }
+  ],
+  "gshell_bell_positive_control": [
+    {
+      "time": 718.19639,
+      "pc": 53090,
+      "value": 7
+    }
+  ],
+  "game_owned_local_path": [
+    {
+      "time": 744.013568,
+      "fd": 255
+    },
+    {
+      "time": 744.21612,
+      "fd": 3
+    },
+    {
+      "time": 787.291428,
+      "fd": 255
+    },
+    {
+      "time": 845.496341,
+      "fd": 3
+    },
+    {
+      "time": 895.313841,
+      "fd": 255
+    }
+  ],
+  "game_owned_buffer": [
+    {
+      "time": 744.013558,
+      "owned": 0
+    },
+    {
+      "time": 744.297384,
+      "owned": 1
+    },
+    {
+      "time": 787.283348,
+      "owned": 0
+    },
+    {
+      "time": 845.577604,
+      "owned": 1
+    },
+    {
+      "time": 895.305761,
+      "owned": 0
+    }
+  ],
+  "game_return_local_path": [
+    {
+      "time": 744.013573,
+      "path": 255
+    },
+    {
+      "time": 744.019913,
+      "path": 1
+    },
+    {
+      "time": 787.291433,
+      "path": 255
+    },
+    {
+      "time": 845.300155,
+      "path": 1
+    },
+    {
+      "time": 895.313846,
+      "path": 255
+    }
+  ],
+  "heartbeat_first_run": {
+    "started": 744.406129,
+    "virq_removed": 787.265446,
+    "callback_count_at_removal": 2569,
+    "native_pb1_edge_count_at_removal": 56,
+    "callback_count_between_removal_and_next_window_open": 0,
+    "edge_count_between_removal_and_next_window_open": 0
+  },
+  "gshell_child_wait_status": [
+    {
+      "time": 787.696792,
+      "high": 0,
+      "status": 0,
+      "site": "descriptor"
+    },
+    {
+      "time": 895.719612,
+      "high": 0,
+      "status": 0,
+      "site": "descriptor"
+    }
+  ],
+  "redraw_entry_intervals": {
+    "screen_prepare_to_screen_prepare_ui_ms": {
+      "count": 66,
+      "min": 262.67,
+      "median": 263.774,
+      "max": 811.433
+    },
+    "screen_prepare_ui_to_screen_flip_ms": {
+      "count": 128,
+      "min": 85.001,
+      "median": 85.109,
+      "max": 177.818
+    }
+  },
+  "turn_left_example": {
+    "bridge_type": 759.292824,
+    "screen_prepare": 759.556759,
+    "screen_prepare_ui": 760.368192,
+    "screen_flip": 760.545862
+  },
+  "active_ff40_ff5a_ff74_ff76_accesses_first_run": 0,
+  "valid_first_run_summary_count": 16,
+  "first_run_generation_minus_presented_samples": {
+    "0": 10,
+    "1": 6
+  },
+  "notes": [
+    "Summary values were accepted only when the game MMU mapping showed local path 3, owned buffer 1, return path 1; other process mappings gave invalid bytes.",
+    "screen_flip is an entry timestamp; the time spent in its GFX2/CoWin upload is not isolated by this trace.",
+    "The observer persisted across a second launch; callback counting after first teardown is bounded at the second game window open."
+  ]
+}
