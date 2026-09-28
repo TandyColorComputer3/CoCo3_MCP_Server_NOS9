@@ -1,0 +1,81 @@
+{
+  "source": "daggorath-reference/SOUNDS.ASM:SNDTAB, KLANK, KKLANK, CSETUP, SNCLK5, SNCLK2",
+  "interpretation": "SSC AY two-tone stepped decay; source counter ratio retained, waveform and timing not cartridge-identical",
+  "module": {
+    "name": "dodlisten",
+    "size": 7690,
+    "crc": "49860A",
+    "sha256": "2f017c33ad65fa86794dfd78005d09b83d80589bb45627a9639cba437230e5fe"
+  },
+  "staging": {
+    "method": "fresh-artifact-floppy",
+    "path": "/private/tmp/dod-m8-knight-staged/stage-HVyyrK/artifact.dsk",
+    "imageSha256": "2638822396ccba02759661c015e6fca1532f48b5454d219154d17c50963e1759",
+    "replacedExisting": false
+  },
+  "runtime": {
+    "machine": "coco3h",
+    "ram": "2M",
+    "media": "private cold-boot clones",
+    "readyState": "m8_knight_ready",
+    "restore": {
+      "ready": true,
+      "loadCompleted": true,
+      "shellVerified": true,
+      "elapsedMs": 6172
+    },
+    "load": {
+      "command": "load /d1/dodlisten",
+      "statusText": "000",
+      "completed": true,
+      "shellReady": true,
+      "elapsedMs": 11730
+    }
+  },
+  "commands": [
+    {
+      "command": "dodlisten knight-1",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "elapsedMs": 14675,
+      "marker": "MCPDONE3c3bc416c380800d2d5416b25bce5417",
+      "acActivitySeconds": [
+        289.96,
+        290.1
+      ],
+      "clip": "knight-1.wav",
+      "clipSha256": "613fc9187cfe95086a1cf8a0d788fbff2b12b68d491aa076db8060d746c5c67b"
+    },
+    {
+      "command": "dodlisten knight-2",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "elapsedMs": 14743,
+      "marker": "MCPDONEbe93fff1d02d34592326e741cb3211de",
+      "acActivitySeconds": [
+        323.82,
+        323.97
+      ],
+      "clip": "knight-2.wav",
+      "clipSha256": "1d8f45d92291c5e0ae5f62f913f1d87074189221b32396a353f5955e1758b0d9"
+    }
+  ],
+  "capture": {
+    "format": "MAME -wavwrite 48000 Hz four-channel PCM",
+    "channel": 1,
+    "processing": "20 Hz high-pass to remove captured DC; no interpolation/time scaling; 0.70 second clips",
+    "rawSession": "/private/tmp/dodm8-knight-mu08fa5a/session.wav (not retained in Git)"
+  },
+  "canonicalMediaSha256": {
+    "63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+    "nos9_ready_v2.sta": "a0f4ee094db471c596b9ecb9826922f80d982d2571fe7e72672a255ebca2effa"
+  }
+}

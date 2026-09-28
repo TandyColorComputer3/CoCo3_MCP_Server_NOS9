@@ -1,0 +1,242 @@
+{
+  "referenceCommit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "recoveredSourceRomSha256": "35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571",
+  "romBuildProvenance": "MCP/work/gameplay-m6/build-a/original.rom; source-built recovered assembly, not independent retail ROM",
+  "mame": "Ample MAME 0.289 coco3h -ramsize 2M -noreadconfig -nothrottle -video none -wavwrite",
+  "method": "Disposable MAME Lua harness writes transient RAM at $5000, calls unchanged cartridge SOUNDX $C7D0 for each dispatch ID at full gain, logs markers at $6000, disables concurrent wizard buzz/heartbeat, and captures mono PCM. No canonical media mounted. The harness changes control flow and is not a natural gameplay recording.",
+  "sampleRate": 48000,
+  "channels": 1,
+  "clipPadding": "0.08 seconds before marker, 0.16 after return; PCM otherwise unprocessed",
+  "sounds": [
+    {
+      "id": 0,
+      "sourceLabel": "spider-squeak",
+      "file": "00-spider-squeak.wav",
+      "startSeconds": 1.500481,
+      "endSeconds": 1.515064,
+      "durationSeconds": 0.014584,
+      "sourceEventRms": 7713.1,
+      "sha256": "190840144a7a5367890a0d5fbc70b6fa3fe70fa324c24a94f6f00a033e3b2566"
+    },
+    {
+      "id": 1,
+      "sourceLabel": "viper-rattle",
+      "file": "01-viper-rattle.wav",
+      "startSeconds": 2.110693,
+      "endSeconds": 2.658116,
+      "durationSeconds": 0.547423,
+      "sourceEventRms": 4693.0,
+      "sha256": "0f9250f06eed3f37d14aec13152f6a0c5ab57a6604b66457894d8e10d2688f7d"
+    },
+    {
+      "id": 2,
+      "sourceLabel": "stone-giant-1-growl",
+      "file": "02-stone-giant-1-growl.wav",
+      "startSeconds": 3.253745,
+      "endSeconds": 4.543837,
+      "durationSeconds": 1.290092,
+      "sourceEventRms": 5568.34,
+      "sha256": "9dea8fc21926cd02557dd202580370f15909d63aba8393768a3ae74e01701bfe"
+    },
+    {
+      "id": 3,
+      "sourceLabel": "blob-beoop",
+      "file": "03-blob-beoop.wav",
+      "startSeconds": 5.139466,
+      "endSeconds": 5.618905,
+      "durationSeconds": 0.479439,
+      "sourceEventRms": 8059.84,
+      "sha256": "a9929ac57e891442d2fe8dd4d44b7d44e5828878514cdb802ab85ea3d50ad976"
+    },
+    {
+      "id": 4,
+      "sourceLabel": "knight-1-klank",
+      "file": "04-knight-1-klank.wav",
+      "startSeconds": 6.214533,
+      "endSeconds": 6.825741,
+      "durationSeconds": 0.611207,
+      "sourceEventRms": 5858.26,
+      "sha256": "cd6a3b427a711ba185ec0bb8bb258a104db269591665bfac7d74f3b8ebc04076"
+    },
+    {
+      "id": 5,
+      "sourceLabel": "stone-giant-2-grawl",
+      "file": "05-stone-giant-2-grawl.wav",
+      "startSeconds": 7.421228,
+      "endSeconds": 8.811378,
+      "durationSeconds": 1.39015,
+      "sourceEventRms": 5640.59,
+      "sha256": "bd7a86a762fd67b1e51ee515149592ec7390cd6364c600e5b6bc53c2859e86b8"
+    },
+    {
+      "id": 6,
+      "sourceLabel": "scorpion-pssst",
+      "file": "06-scorpion-pssst.wav",
+      "startSeconds": 9.406865,
+      "endSeconds": 9.516469,
+      "durationSeconds": 0.109604,
+      "sourceEventRms": 3337.5,
+      "sha256": "ea69873833a09c51ab29c7681990729ce932f7a72b02b866433d88a5b3798742"
+    },
+    {
+      "id": 7,
+      "sourceLabel": "knight-2-kklank",
+      "file": "07-knight-2-kklank.wav",
+      "startSeconds": 10.111846,
+      "endSeconds": 10.375147,
+      "durationSeconds": 0.263302,
+      "sourceEventRms": 5849.22,
+      "sha256": "3899991d8274fe47b6773b649db4509f08e92dc64cd88dc7c7a3c357596a32b0"
+    },
+    {
+      "id": 8,
+      "sourceLabel": "wraith-pssht",
+      "file": "08-wraith-pssht.wav",
+      "startSeconds": 10.970776,
+      "endSeconds": 11.02543,
+      "durationSeconds": 0.054654,
+      "sourceEventRms": 5678.3,
+      "sha256": "fe2bd99512472037c1f36c05e6f7cf8d8bec4251616e1e686b918af2684dd5e0"
+    },
+    {
+      "id": 9,
+      "sourceLabel": "balrog-snarl",
+      "file": "09-balrog-snarl.wav",
+      "startSeconds": 11.62117,
+      "endSeconds": 13.31517,
+      "durationSeconds": 1.694,
+      "sourceEventRms": 5593.58,
+      "sha256": "4cc51c7bc97bcb2aa5e7e1315af22f6871ca74a7e5427c9a7fdd7746541aeb60"
+    },
+    {
+      "id": 10,
+      "sourceLabel": "wizard-1-bdlbdl",
+      "file": "10-wizard-1-bdlbdl.wav",
+      "startSeconds": 13.910909,
+      "endSeconds": 15.717995,
+      "durationSeconds": 1.807086,
+      "sourceEventRms": 5780.49,
+      "sha256": "3e258ddaa6a3dea97874becfbd1e380c911f98b956773fb2caaeb22bfe6909ff"
+    },
+    {
+      "id": 11,
+      "sourceLabel": "wizard-2-bdlbdl",
+      "file": "11-wizard-2-bdlbdl.wav",
+      "startSeconds": 16.313624,
+      "endSeconds": 18.127757,
+      "durationSeconds": 1.814133,
+      "sourceEventRms": 5890.27,
+      "sha256": "b2a3429aadda8f7d50fc41d53d70683b963dbe3040edbdf6048231bad78f745c"
+    },
+    {
+      "id": 12,
+      "sourceLabel": "flask-gluglg",
+      "file": "12-flask-gluglg.wav",
+      "startSeconds": 18.723497,
+      "endSeconds": 19.402388,
+      "durationSeconds": 0.678891,
+      "sourceEventRms": 7959.39,
+      "sha256": "7ebb5f63c46d5cf903c78bda48737bb51e094789afe9c53f2874a56c3916792f"
+    },
+    {
+      "id": 13,
+      "sourceLabel": "ring-phaser",
+      "file": "13-ring-phaser.wav",
+      "startSeconds": 19.998017,
+      "endSeconds": 20.474553,
+      "durationSeconds": 0.476537,
+      "sourceEventRms": 7877.23,
+      "sha256": "3e3d0e1d63b8c7406c574cab9654709c37f8288a4ef628c37d7fb819453592ec"
+    },
+    {
+      "id": 14,
+      "sourceLabel": "scroll-whoop",
+      "file": "14-scroll-whoop.wav",
+      "startSeconds": 21.070182,
+      "endSeconds": 21.707511,
+      "durationSeconds": 0.637329,
+      "sourceEventRms": 8007.78,
+      "sha256": "0bc7fd21eb8a3f4b64c5bc5ea77a6ff7772054909c3e9302ba3bc7a5217b9d1c"
+    },
+    {
+      "id": 15,
+      "sourceLabel": "shield-clang",
+      "file": "15-shield-clang.wav",
+      "startSeconds": 22.30314,
+      "endSeconds": 22.730886,
+      "durationSeconds": 0.427746,
+      "sourceEventRms": 5861.75,
+      "sha256": "48faf307877a18bb909f63b115fef6d1d7d2b9b3dfaea4aefb8f5527baec8c61"
+    },
+    {
+      "id": 16,
+      "sourceLabel": "sword-whoosh",
+      "file": "16-sword-whoosh.wav",
+      "startSeconds": 23.326263,
+      "endSeconds": 23.475842,
+      "durationSeconds": 0.149579,
+      "sourceEventRms": 5749.15,
+      "sha256": "73eb8722036d213813d3d3a0bdc0516cd739cc94b0fa67b733d320b33578a584"
+    },
+    {
+      "id": 17,
+      "sourceLabel": "torch-chuck",
+      "file": "17-torch-chuck.wav",
+      "startSeconds": 24.071471,
+      "endSeconds": 24.137278,
+      "durationSeconds": 0.065807,
+      "sourceEventRms": 5600.68,
+      "sha256": "3dfb5f11c5862f687c3bc5c53e1e396f35c4d18e63ebfcb191fbde4b59b9df81"
+    },
+    {
+      "id": 18,
+      "sourceLabel": "hit-creature-klink",
+      "file": "18-hit-creature-klink.wav",
+      "startSeconds": 24.733017,
+      "endSeconds": 24.84349,
+      "durationSeconds": 0.110472,
+      "sourceEventRms": 5573.99,
+      "sha256": "f5533f7e80a2344d51a133e78999567420f645b6b69cab388841fae5197521f5"
+    },
+    {
+      "id": 19,
+      "sourceLabel": "hit-player-clank",
+      "file": "19-hit-player-clank.wav",
+      "startSeconds": 25.439229,
+      "endSeconds": 25.620143,
+      "durationSeconds": 0.180914,
+      "sourceEventRms": 5843.21,
+      "sha256": "73a67162359b58e8b917d9373f761511b05791f548ab17736624c3d128554762"
+    },
+    {
+      "id": 20,
+      "sourceLabel": "wall-thud",
+      "file": "20-wall-thud.wav",
+      "startSeconds": 26.215519,
+      "endSeconds": 26.448753,
+      "durationSeconds": 0.233234,
+      "sourceEventRms": 4463.92,
+      "sha256": "88abedf287ca6ccd23f7356988294262e1a4bc42a40468faa90d3c0f6e759a9c"
+    },
+    {
+      "id": 21,
+      "sourceLabel": "creature-killed-bang",
+      "file": "21-creature-killed-bang.wav",
+      "startSeconds": 27.044382,
+      "endSeconds": 28.328306,
+      "durationSeconds": 1.283923,
+      "sourceEventRms": 4721.84,
+      "sha256": "3ab7f6ea0539c6d555a8c9a37f4fb8d1d1b1aa41de12624457dcd825ceab151e"
+    },
+    {
+      "id": 22,
+      "sourceLabel": "wizard-kaboom",
+      "file": "22-wizard-kaboom.wav",
+      "startSeconds": 28.924045,
+      "endSeconds": 30.222155,
+      "durationSeconds": 1.298109,
+      "sourceEventRms": 4761.57,
+      "sha256": "4cc6affb3e8b6bf818bc0973f87e5bc33b55bfe3cc07b450bda98e1abc322773"
+    }
+  ]
+}

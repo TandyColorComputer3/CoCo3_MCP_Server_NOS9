@@ -1,0 +1,111 @@
+{
+  "machine": "coco3h",
+  "ram": "2M",
+  "monitor": "RGB",
+  "sscSlot": "ext:multi:slot2",
+  "bootFloppy": "/private/tmp/dodm8-rgzzxs_r/63EMU.DSK",
+  "developmentVhdClone": "/private/tmp/dodm8-rgzzxs_r/63SDC-MCP-DEV.VHD",
+  "artifactFloppy": "/private/tmp/dod-m8-staged/stage-bp3Ydu/artifact.dsk",
+  "wavwrite": "/private/tmp/dodm8-rgzzxs_r/session.wav",
+  "wavwriteChannels": 4,
+  "wavwriteRate": 48000,
+  "clipProcessing": "Select channel 1; 20 Hz highpass removes captured DC; no gap interpolation or time scaling.",
+  "module": {
+    "name": "dodlisten",
+    "size": 7234,
+    "crc": "87AB32",
+    "sha256": "1d93b9aed462f58c67eef2ad3bea0f29c8d88d498dae25481a7c2f9923174b27"
+  },
+  "load": {
+    "command": "load /d1/dodlisten",
+    "status": 0,
+    "statusText": "000"
+  },
+  "commands": [
+    {
+      "command": "dodlisten spider",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "shellReady": true,
+      "timedOut": false,
+      "elapsedMs": 14500,
+      "marker": "MCPDONE80b7c97134aef943ada5b9dd5ac015fb",
+      "sscChannel": 1,
+      "acActivitySeconds": [
+        318.16,
+        318.2
+      ],
+      "clip": "spider.wav",
+      "clipSha256": "2bde2b4cefd01693d90a5d67b830427d50ebc078f24993b67c937b0daf342042"
+    },
+    {
+      "command": "dodlisten snake",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "shellReady": true,
+      "timedOut": false,
+      "elapsedMs": 14435,
+      "marker": "MCPDONE3772fd356e825e47a29e5da71fb7349d",
+      "sscChannel": 1,
+      "acActivitySeconds": [
+        353.81,
+        354.16
+      ],
+      "clip": "snake.wav",
+      "clipSha256": "072d07dcad587a154dcca0e460d77c02fb2f662332f3fefe91fc3773c5e50f0c"
+    },
+    {
+      "command": "dodlisten sword-swing",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "shellReady": true,
+      "timedOut": false,
+      "elapsedMs": 14918,
+      "marker": "MCPDONEfb43653b131d70391328ebdfc19bc0e7",
+      "sscChannel": 1,
+      "acActivitySeconds": [
+        389.68,
+        389.8
+      ],
+      "clip": "sword-swing.wav",
+      "clipSha256": "d5443a78848184b5aadc2d83865a166d9744751db48947fb09f2ebc989ea41df"
+    },
+    {
+      "command": "dodlisten sword-hit",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "shellReady": true,
+      "timedOut": false,
+      "elapsedMs": 14717,
+      "marker": "MCPDONE3288f179fb49c556c48e3fe4781215bb",
+      "sscChannel": 1,
+      "acActivitySeconds": [
+        424.26,
+        424.39
+      ],
+      "clip": "sword-hit.wav",
+      "clipSha256": "5d8c590363fb292ef159f666bfbb018e0bcbb9290a3177a386ef7b2db8b50b53"
+    },
+    {
+      "command": "dodlisten player-hit",
+      "completed": true,
+      "status": 0,
+      "statusText": "000",
+      "shellReady": true,
+      "timedOut": false,
+      "elapsedMs": 14871,
+      "marker": "MCPDONE133fb834d440ee6161dbf8a9df07eca0",
+      "sscChannel": 1,
+      "acActivitySeconds": [
+        460.42,
+        460.47
+      ],
+      "clip": "player-hit.wav",
+      "clipSha256": "91e6b7caf6f3ba8a02c81f8a8ce2b2153d22d942744fe81b7cfb006b77620060"
+    }
+  ]
+}

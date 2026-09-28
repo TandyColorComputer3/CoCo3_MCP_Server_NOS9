@@ -1,0 +1,35 @@
+{
+  "command": [
+    "cmoc",
+    "--os9",
+    "-O0",
+    "--intermediate",
+    "--intdir=/private/tmp/dod-m8-listen",
+    "--add-os9-stack-space=2048",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src",
+    "-I/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio",
+    "-o",
+    "/private/tmp/dod-m8-listen/dodlisten",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/listen.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ssc.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/ssc_io.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/event.c",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/audio/listen-module.asm",
+    "/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/apps/daggorath/src/os9.c"
+  ],
+  "sources": {
+    "apps/daggorath/src/audio/listen.c": "74d30b855480d6ba8a62f8c6c85b567ae24a6778153ec62823498882a6449dc7",
+    "apps/daggorath/src/audio/ssc.c": "402c8b7bb6114598f03e2fff4ec17081753098ea124584e1d6bd438334d41918",
+    "apps/daggorath/src/audio/ssc_io.c": "82fe82cbd4a9d505a68434c0034bda8e74c09ed3f15e0441c3fea07c905b0f35",
+    "apps/daggorath/src/audio/event.c": "404f1f4296e0a0d0d36b8f23ef6e0af5eb5ffee8db952221355c0086ef34648e",
+    "apps/daggorath/src/audio/listen-module.asm": "fdc8239ff205a35b556f3fc827216f0a1bcf75bb83179c8864b51290cc3fdc1d",
+    "apps/daggorath/src/os9.c": "f0dd915dcc9f1ca4c27fdc91e693a4a5da17b34b15309543114ef7d7392effe0",
+    "apps/daggorath/src/audio/audio.h": "719677422c43606c8b60434e8c795b24770762552aa1fedbffbfe5c87978bae0",
+    "apps/daggorath/src/audio/backend.h": "cef3ee7a9c56e07a7b879b7c41efc66e8a8774c846513b73a2170458d3d991b3",
+    "apps/daggorath/src/audio/policy.h": "3a89906ef9b09903063a60295ccd92eb849547dd231844a4e6259fe3c7049215",
+    "apps/daggorath/src/audio/ssc_io.h": "99d69c1fd2935bb54cf64a876552491069b8cb61b4a520c1d1d79b510930ad43",
+    "apps/daggorath/src/platform.h": "660496a14b3da977e8ec542471dd75f98e0a801af03ba09fce685107f03cb111"
+  },
+  "sha256": "1d93b9aed462f58c67eef2ad3bea0f29c8d88d498dae25481a7c2f9923174b27",
+  "ident": "Header for : dodlisten\nModule size: $1C42  #7234\nModule CRC : $87AB32 (Good)\nHdr parity : $52\nExec. off  : $000D  #13\nData size  : $082F  #2095\nEdition    : $01  #1\nTy/La At/Rv: $11 $81\nProg mod, 6809 Obj, re-ent, R/O\n\n"
+}
