@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import http from 'node:http';
+import {loadConfig,writeBridgePortFile} from '/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/dist/config.js';
+import {createBridgeServer} from '/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/dist/bridge-server.js';
+import {createMameController} from '/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/dist/mame-process.js';
+import {createToolHandlers} from '/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/dist/tools.js';
+import {createToolchain} from '/Volumes/SEDONA/Projects/CoCo3_MCP_Server_NOS9/MCP/dist/toolchain.js';
+const root='/private/tmp/m6-boundary';
+const config=loadConfig({MAME_PATH:'/Applications/Emulators/Ample.app/Contents/MacOS/mame64',MAME_ROMPATH:'/Users/magneto-optimus/Library/Application Support/Ample/roms',COCO_RAM:'2M',MAME_BOOT_FLOPPY:root+'/63EMU.DSK',MAME_VHD:root+'/63SDC-MCP-DEV.VHD',BRIDGE_PORT:'18806'},root);
+writeBridgePortFile(config);
+const bridge=createBridgeServer(config.bridgePort,()=>{});const mame=createMameController(config);
+const handlers=createToolHandlers({config,bridge,mame,toolchain:createToolchain('decb'),logger:{log:(s)=>fs.appendFileSync(root+'/host.log',s+'\n')}});
+http.createServer(async(req,res)=>{let body='';for await(const part of req)body+=part;try{const q=JSON.parse(body);const started=performance.now();const r=await handlers[q.name](q.arguments??{});fs.appendFileSync(root+'/results.jsonl',JSON.stringify({q,r,elapsed:performance.now()-started})+'\n');res.end(JSON.stringify(r));}catch(e){res.statusCode=500;res.end(String(e));}}).listen(5996,'127.0.0.1');

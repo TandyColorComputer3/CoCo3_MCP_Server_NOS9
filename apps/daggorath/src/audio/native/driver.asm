@@ -20,6 +20,8 @@ remaining rmb 1
 enabled rmb 1
 fault rmb 1
 phase rmb 1
+videoticks rmb 2
+edgegen rmb 4
 memsize equ .
  mod endmod,name,Drivr+Objct,ReEnt,entry,memsize
  fcb UPDAT.
@@ -40,7 +42,13 @@ read comb
 write clrb
  rts
 getstat cmpa #$90
- lbne bad
+ beq query
+ cmpa #$95
+ lbeq getticks
+ cmpa #$96
+ lbeq snapshot
+ lbra bad
+query
  ldy PD.RGS,y
  pshs cc
  orcc #IntMasks
@@ -54,6 +62,42 @@ getstat cmpa #$90
  lda enabled,u
  ldb fault,u
  std R$Y,y
+ puls cc
+ clrb
+ rts
+* Atomic observation of the existing VIRQ-owned phase and edge counter.
+* X=low edge generation, Y=high edge generation, B=latched phase, A=fault.
+snapshot ldb PD.PD,y
+ cmpb owner,u
+ lbne busy
+ ldy PD.RGS,y
+ pshs cc
+ orcc #IntMasks
+ lda fault,u
+ sta R$A,y
+ lda phase,u
+ sta R$B,y
+ ldd edgegen,u
+ std R$Y,y
+ ldd edgegen+2,u
+ std R$X,y
+ puls cc
+ clrb
+ rts
+* M6: atomically drain elapsed 60 Hz callbacks for simulation scheduling.
+* This is a private service operation on the existing VIRQ, not a second
+* interrupt hook. Counter bytes are appended after the M2 ABI fields.
+getticks ldb PD.PD,y
+ cmpb owner,u
+ lbne busy
+ ldy PD.RGS,y
+ pshs cc
+ orcc #IntMasks
+ ldd videoticks,u
+ std R$X,y
+ clra
+ clrb
+ std videoticks,u
  puls cc
  clrb
  rts
@@ -128,6 +172,10 @@ start tst active,u
  clr enabled,u
  clr fault,u
  clr phase,u
+ clr edgegen,u
+ clr edgegen+1,u
+ clr edgegen+2,u
+ clr edgegen+3,u
  clr rate,u
  lda #1
  sta remaining,u
@@ -243,6 +291,9 @@ tick pshs cc,d
  lda packet+Vi.Stat,u
  anda #$fe
  sta packet+Vi.Stat,u
+ ldd videoticks,u
+ addd #1
+ std videoticks,u
  tst enabled,u
  beq tickdone
  dec remaining,u
@@ -264,6 +315,14 @@ edge ldb $ff22
  lda phase,u
  eora #1
  sta phase,u
+ ldd edgegen+2,u
+ addd #1
+ std edgegen+2,u
+ bne edgecountdone
+ ldd edgegen,u
+ addd #1
+ std edgegen,u
+edgecountdone
  lda rate,u
  sta remaining,u
 tickdone puls cc,d

@@ -28,6 +28,15 @@ Byte native_heartbeat_query(NativeHeartbeat *h,NativeHeartbeatState *state){Regi
  state->active=r.a;state->rateByte=r.x>>8;state->remainingByte=r.x;
  state->enabled=r.y>>8;state->fault=r.y;state->phase=r.b;return 0;
 }
+Byte native_heartbeat_snapshot(NativeHeartbeat *h,NativeHeartbeatState *state){Registers r;Byte e;
+ if(!h->opened)return ERR_ARGUMENT;r.x=0;r.y=0;r.b=0;e=os_getstat(h->path,0x96,&r);if(e)return e;
+ if(r.b>1)return ERR_ARGUMENT;
+ state->phase=r.b;state->fault=r.a;state->edgeGeneration=((unsigned long)r.y<<16)|r.x;return 0;
+}
+Byte native_heartbeat_take_ticks(NativeHeartbeat *h,Word *videoTicks){Registers r;Byte e;
+ if(!h->opened)return ERR_ARGUMENT;r.x=0;r.y=0;e=os_getstat(h->path,0x95,&r);if(e)return e;
+ *videoTicks=r.x;return 0;
+}
 Byte native_heartbeat_close(NativeHeartbeat *h){Byte e;
  if(!h->opened)return 0;
  /* Explicit release first: duplicated/inherited references cannot keep PB1

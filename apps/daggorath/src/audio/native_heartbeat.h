@@ -8,11 +8,14 @@
  * No active HALT floppy I/O is within the current timing guarantee.
  */
 typedef struct { Byte path, opened; } NativeHeartbeat;
-typedef struct { Byte active,enabled,rateByte,remainingByte,fault,phase; } NativeHeartbeatState;
+typedef struct { Byte active,enabled,rateByte,remainingByte,fault,phase; unsigned long edgeGeneration; } NativeHeartbeatState;
 Byte native_heartbeat_open(NativeHeartbeat *h);
 Byte native_heartbeat_rate(NativeHeartbeat *h,Word rateByte);
 Byte native_heartbeat_enable(NativeHeartbeat *h);
 Byte native_heartbeat_disable(NativeHeartbeat *h);
 Byte native_heartbeat_query(NativeHeartbeat *h,NativeHeartbeatState *state);
+/* Atomic read-only snapshot of VIRQ-owned edge generation and output phase. */
+Byte native_heartbeat_snapshot(NativeHeartbeat *h,NativeHeartbeatState *state);
+Byte native_heartbeat_take_ticks(NativeHeartbeat *h,Word *videoTicks);
 Byte native_heartbeat_close(NativeHeartbeat *h);
 #endif

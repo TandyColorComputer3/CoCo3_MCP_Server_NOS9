@@ -43,7 +43,7 @@ static void fill(Byte *o,Byte type){Word i;memcpy(o+10,odb+type*4,4);
 static Word birth(Game *g,Byte type,Byte level){Byte *o=g->objects[g->count];Word addr=OBASE+(Word)g->count*14;Byte rev;
  ++g->count;o[9]=type;o[4]=level;fill(o,type);rev=o[11];
  if(o[10]>=3){fill(o,o[10]==3?16:o[10]==4?17:15);o[11]=rev;}return addr;}
-static int creature(Game *g,Byte r,Byte c){Byte i;for(i=0;i<g->creatureCount;i++)if(g->creatures[i][15]==r&&g->creatures[i][16]==c)return i;return -1;}
+static int creature(Game *g,Byte r,Byte c){Byte i;for(i=0;i<g->creatureCount;i++)if(g->creatures[i][12]&&g->creatures[i][15]==r&&g->creatures[i][16]==c)return i;return -1;}
 /* Exact increment-before-borrow quotient; 24-bit quantities fit unsigned long.
  * Original faint/death flags retained; visual faint transitions are not here. */
 static void health(Game *g){unsigned long numerator=(unsigned long)g->power*64,den=(unsigned long)g->power+2UL*g->damage;
@@ -156,6 +156,11 @@ static void draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range){Word i
  }}
 static Byte five(const Byte *p,Word bit){Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
 static void text(Byte *frame,const char *s,Byte row){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;col++;}}
+/* HUMAN:M$CURS writes original I.BAR ($1C, underline) then I.BS, leaving
+ * the cursor position in place. The original-derived font's code 28 is used. */
+static void input_line(Byte *frame,const char *input){Byte n=0,y;while(input[n]&&n<31)n++;text(frame,input,184);
+ if(n<32)for(y=0;y<7;y++)frame[(184+(Word)y)*32+n]=five(font+28*5,5+y*5)<<2;
+}
 /* STATUS:OBJNAM/COPY$, COMTXT:TXTDPB, COMDAT:STSVDB. Level zero uses
  * VDGINV=0: inverse status glyphs on a filled 256x8 strip at y=152.
  * No physical presentation coordinates or duplicate inventory state. */
@@ -169,18 +174,22 @@ static Byte object_name(Game *g,Word token,Byte *name){
 static void status_name(Byte *frame,const Byte *name,Byte n,Byte col){Byte i,y;
  for(i=0;i<n;i++)for(y=0;y<7;y++)frame[(152+(Word)y)*32+col+i]=255^(five(font+name[i]*5,5+y*5)<<2);
 }
-void game_render_status(Game *g,Byte *frame,Byte phase){Byte name[32],n,y;const Byte *heart=status_hearts+(phase?14:0);
+void game_render_heart(Byte *frame,Byte phase){Byte y;const Byte *heart=status_hearts+(phase?14:0);
+ for(y=0;y<7;y++){frame[(152+(Word)y)*32+15]=255^heart[y];frame[(152+(Word)y)*32+16]=255^heart[7+y];}
+}
+void game_render_status(Game *g,Byte *frame,Byte phase){Byte name[32],n;
  memset(frame+152*32,255,8*32);
  n=object_name(g,g->hand,name);status_name(frame,name,n,0);
  n=object_name(g,g->rightHand,name);status_name(frame,name,n,32-n);
- for(y=0;y<7;y++){frame[(152+(Word)y)*32+15]=255^heart[y];frame[(152+(Word)y)*32+16]=255^heart[7+y];}
+ game_render_heart(frame,phase);
 }
 void game_render_input(Byte *frame,const char *input,const Byte *underlay){
- memcpy(frame+GAME_INPUT_OFFSET,underlay,GAME_INPUT_BYTES);text(frame,input,184);
+ memcpy(frame+GAME_INPUT_OFFSET,underlay,GAME_INPUT_BYTES);input_line(frame,input);
 }
-void game_render(Game *g,Byte *frame,const char *input,const char *message){
+Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
+                              const char *message,GameRenderProgress progress,void *context){
  static const Byte scales[]={200,128,80,50,31,20,12,8,4,2};
- Byte r=g->row,c=g->col,range,side,feature,relative,light=0,magic=0,i,which;int cr;
+ Byte r=g->row,c=g->col,range,side,feature,relative,light=0,magic=0,i,which,e;int cr;
  memset(frame,0,FRAME_BYTES);
  if(g->torch){light=ocb(g,g->torch)[7];magic=ocb(g,g->torch)[8];}
  if(!g->faint&&!g->dead)for(range=0;range<10;range++){
@@ -199,10 +208,17 @@ void game_render(Game *g,Byte *frame,const char *input,const char *message){
   for(i=0;i<g->count;i++)if(on_floor(g->objects[i],r,c)){
    which=23+g->objects[i][10];draw(frame,which,scales[range],magic,range);draw(frame,which,scales[range],light,range);
   }
+  /* A foreground observer may update only the already displayed heart. It
+   * must not upload this incomplete logical dungeon or alter game state. */
+  if(progress){e=progress(g,frame,context);if(e)return e;}
   if((cell(g,r,c)>>(g->dir*2))&3)break;r+=dr[g->dir];c+=dc[g->dir];
  }
  game_render_status(g,frame,0);
- text(frame,message,168);text(frame,input,184);
+ text(frame,message,168);input_line(frame,input);
+ return 0;
+}
+void game_render(Game *g,Byte *frame,const char *input,const char *message){
+ (void)game_render_with_progress(g,frame,input,message,0,0);
 }
 
 /* PEXAM:EXAMIN/PRTOBJ/PCRLF; COMDAT:TXTEXA (32*19 chars);
@@ -237,5 +253,5 @@ void game_render_examine(Game *g,Byte *frame,const char *input,const char *messa
  for(i=0;i<32;i++)examine_char(&t,27);
  t.cursor+=12;examine_string(&t,"BACKPACK^");
  for(p=g->bag;p;p=getword(ocb(g,p))){if(p==g->torch)t.inverse=255;examine_object(g,&t,p);}
- game_render_status(g,frame,0);text(frame,message,168);text(frame,input,184);
+ game_render_status(g,frame,0);text(frame,message,168);input_line(frame,input);
 }

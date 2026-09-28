@@ -1,0 +1,1907 @@
+[
+  {
+    "text": "p=MCPf80bba63a9bfa3b6:{ENTER}",
+    "kind": "bridge_type",
+    "time": 136.87476865912
+  },
+  {
+    "text": "echo READYf80bba63a9bfa3b6{ENTER}",
+    "kind": "bridge_type",
+    "time": 139.71175472599
+  },
+  {
+    "text": "p=MCP1ada5f7f70671e67:{ENTER}",
+    "kind": "bridge_type",
+    "time": 136.87476865912
+  },
+  {
+    "text": "echo READY1ada5f7f70671e67{ENTER}",
+    "kind": "bridge_type",
+    "time": 139.69506657265
+  },
+  {
+    "text": "load /d1/dhbpack{ENTER}",
+    "kind": "bridge_type",
+    "time": 143.13282615956
+  },
+  {
+    "text": "echo MCPDONE3204aac15b7b9046c4f9ef0461a871da %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 148.00576693324
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 153.57961014697
+  },
+  {
+    "text": "load /d1/dodgame{ENTER}",
+    "kind": "bridge_type",
+    "time": 153.69642722031
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 162.5912129476,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE8543376e1c512314f961e1f52428bee1 %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 162.60790110094
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 168.18174431467
+  },
+  {
+    "text": "dodgame seed0{ENTER}",
+    "kind": "bridge_type",
+    "time": 175.04057533515
+  },
+  {
+    "bit": 2,
+    "tick": 1,
+    "edge": 1,
+    "time": 195.06554745493,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 47,
+    "edge": 2,
+    "time": 195.83320445258,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 93,
+    "edge": 3,
+    "time": 196.60085753911,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 139,
+    "edge": 4,
+    "time": 197.36851230184,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 185,
+    "edge": 5,
+    "time": 198.13616706457,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 231,
+    "edge": 6,
+    "time": 198.90382406222,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 277,
+    "edge": 7,
+    "time": 199.67147770749,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 323,
+    "edge": 8,
+    "time": 200.43913358768,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 369,
+    "edge": 9,
+    "time": 201.2067883504,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 415,
+    "edge": 10,
+    "time": 201.97444311313,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 461,
+    "edge": 11,
+    "time": 202.74209899332,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 507,
+    "edge": 12,
+    "time": 203.50972861318,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 553,
+    "edge": 13,
+    "time": 204.27740796005,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 599,
+    "edge": 14,
+    "time": 205.04503869737,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 645,
+    "edge": 15,
+    "time": 205.8126934601,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 691,
+    "edge": 16,
+    "time": 206.58037336569,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "EXIT",
+    "state": {
+      "time": 206.58118513738,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "",
+      "signal": 0,
+      "posting": false,
+      "n": 0,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 206.58118513738
+  },
+  {
+    "bit": 2,
+    "tick": 737,
+    "edge": 17,
+    "time": 207.34801807128,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "{ENTER}",
+    "state": {
+      "time": 207.64922695079,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "EXIT",
+      "signal": 0,
+      "posting": false,
+      "n": 4,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 207.64922695079
+  },
+  {
+    "bit": 0,
+    "tick": 783,
+    "edge": 18,
+    "time": 208.11568344988,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "pc": 56513,
+    "time": 208.74345447323,
+    "kind": "enter",
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "time": 208.74345447323,
+    "phase": 2,
+    "dirty": 0,
+    "y": 0,
+    "kind": "loop_terminated",
+    "error": 0,
+    "col": 11,
+    "u": 10738,
+    "pc": 56513,
+    "key": 13,
+    "base": 32768,
+    "input": "EXIT",
+    "signal": 0,
+    "inputEmpty": 0,
+    "n": 4,
+    "row": 16
+  },
+  {
+    "pc": 56513,
+    "time": 208.74345503196,
+    "kind": "enter",
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "time": 208.74345503196,
+    "phase": 2,
+    "dirty": 0,
+    "y": 0,
+    "kind": "loop_terminated",
+    "error": 0,
+    "col": 11,
+    "u": 10738,
+    "pc": 56513,
+    "key": 13,
+    "base": 32768,
+    "input": "EXIT",
+    "signal": 0,
+    "inputEmpty": 0,
+    "n": 4,
+    "row": 16
+  },
+  {
+    "kind": "virq_removed",
+    "tick": 820,
+    "edges": 18,
+    "time": 208.74517592155
+  },
+  {
+    "kind": "virq_removed",
+    "tick": 820,
+    "edges": 18,
+    "time": 208.74871212616
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 208.75563311945,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 208.75563367818,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 208.75563423691,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 53228,
+    "time": 208.7556616147,
+    "kind": "enter",
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53228,
+    "time": 208.75566217343,
+    "kind": "enter",
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 208.77938977672,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 208.77939033545,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 208.77939089418,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 208.80070953087,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 208.83408583754,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 208.86746214421,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 208.90083845088,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 208.93421475755,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 208.96759106422,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 209.00096737089,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 209.03434367756,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 209.05778836604,
+    "status": 0,
+    "name": "_main"
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 209.05778892477,
+    "status": 0,
+    "name": "_main"
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 209.0577894835,
+    "status": 0,
+    "name": "_main"
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 209.06771998422,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 209.10109629089,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONEf21e118d5d706751d7b494dc8a6954b1 %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 209.11778444423
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 214.70831581129
+  },
+  {
+    "text": "date{ENTER}",
+    "kind": "bridge_type",
+    "time": 214.75838027129
+  },
+  {
+    "text": "echo MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 215.59278793802
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 221.16663115175
+  },
+  {
+    "text": "pwd{ENTER}",
+    "kind": "bridge_type",
+    "time": 221.21669561175
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 222.95226355854,
+    "lines": [
+      "MCPDONE3204aac15b7b9046c4f9ef0461a871da 000",
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE09032449a3398e35311df0a2d19b5e2d %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 222.96895171187
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 228.55948307894
+  },
+  {
+    "text": "dodgame seed0{ENTER}",
+    "kind": "bridge_type",
+    "time": 407.22285267824
+  },
+  {
+    "bit": 2,
+    "tick": 821,
+    "edge": 19,
+    "time": 427.24781648104,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 867,
+    "edge": 20,
+    "time": 428.01547180249,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "@SHIFT_BREAK@",
+    "state": {
+      "time": 428.75057047976,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "",
+      "signal": 0,
+      "posting": false,
+      "n": 0,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 428.75057047976
+  },
+  {
+    "bit": 2,
+    "tick": 913,
+    "edge": 21,
+    "time": 428.78312824141,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "kind": "break_down",
+    "time": 428.80063493976
+  },
+  {
+    "kind": "keys_released",
+    "time": 428.88407570643
+  },
+  {
+    "bit": 0,
+    "tick": 959,
+    "edge": 22,
+    "time": 429.55078244541,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "pc": 56513,
+    "time": 429.70524401929,
+    "kind": "enter",
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "time": 429.70524401929,
+    "phase": 0,
+    "dirty": 2,
+    "y": 0,
+    "kind": "loop_terminated",
+    "error": 3,
+    "col": 11,
+    "u": 10738,
+    "pc": 56513,
+    "key": 0,
+    "base": 32768,
+    "input": "",
+    "signal": 3,
+    "inputEmpty": 0,
+    "n": 0,
+    "row": 16
+  },
+  {
+    "pc": 56513,
+    "time": 429.70524457802,
+    "kind": "enter",
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "time": 429.70524457802,
+    "phase": 0,
+    "dirty": 2,
+    "y": 0,
+    "kind": "loop_terminated",
+    "error": 3,
+    "col": 11,
+    "u": 10738,
+    "pc": 56513,
+    "key": 0,
+    "base": 32768,
+    "input": "",
+    "signal": 3,
+    "inputEmpty": 0,
+    "n": 0,
+    "row": 16
+  },
+  {
+    "kind": "virq_removed",
+    "tick": 968,
+    "edges": 22,
+    "time": 429.70696546761
+  },
+  {
+    "kind": "virq_removed",
+    "tick": 968,
+    "edges": 22,
+    "time": 429.71050167222
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 429.71648008735,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 429.71648064608,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 429.71648120481,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 53228,
+    "time": 429.71650076037,
+    "kind": "enter",
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53228,
+    "time": 429.7165013191,
+    "kind": "enter",
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 429.74739240467,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 429.7473929634,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 429.74739352213,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.76854783316,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.7852359865,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.8353004465,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.86867675317,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.90205305984,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.93542936651,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 429.96880567318,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 430.00218197985,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 430.02138093505,
+    "status": 3,
+    "name": "_main"
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 430.02138149378,
+    "status": 3,
+    "name": "_main"
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 430.02138205251,
+    "status": 3,
+    "name": "_main"
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 430.03555828652,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 430.06893459319,
+    "lines": [
+      "MCPDONE8543376e1c512314f961e1f52428bee1 000",
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 430.40269765988,
+    "lines": [
+      "MCPDONEf21e118d5d706751d7b494dc8a6954b1 000",
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE1c67be9dbb0088bb10943833a16fb76e %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 430.41938581321
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 436.00991718027
+  },
+  {
+    "text": "date{ENTER}",
+    "kind": "bridge_type",
+    "time": 436.05998164028
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 436.86101300033,
+    "lines": [
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE428cd0946e1df482fb45eb0ebd9112a8 %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 436.87770115367
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 442.45154436739
+  },
+  {
+    "text": "pwd{ENTER}",
+    "kind": "bridge_type",
+    "time": 442.5016088274
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 444.18711231418,
+    "lines": [
+      "MCPDONE2e15d692dd4dde9cd34e41a885e5ff36 000",
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 444.22048862085,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE4ff8d33d3777942da5ca71f7bf62e675 %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 444.23717677419
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 449.81101998791
+  },
+  {
+    "text": "dodgame seed0{ENTER}",
+    "kind": "bridge_type",
+    "time": 518.93335109947
+  },
+  {
+    "bit": 2,
+    "tick": 969,
+    "edge": 23,
+    "time": 538.97499960811,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1015,
+    "edge": 24,
+    "time": 539.74265660576,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "PULL LEFT TORCH",
+    "state": {
+      "time": 540.47775705433,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "",
+      "signal": 0,
+      "posting": false,
+      "n": 0,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 540.47775705433
+  },
+  {
+    "bit": 2,
+    "tick": 1061,
+    "edge": 25,
+    "time": 540.51031080976,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1107,
+    "edge": 26,
+    "time": 541.27796445503,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1153,
+    "edge": 27,
+    "time": 542.04562145268,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1199,
+    "edge": 28,
+    "time": 542.81326224714,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1245,
+    "edge": 29,
+    "time": 543.58093097813,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1291,
+    "edge": 30,
+    "time": 544.34857233133,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1337,
+    "edge": 31,
+    "time": 545.11624217978,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "{ENTER}",
+    "state": {
+      "time": 545.55095566802,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "PULL LEFT TORCH",
+      "signal": 0,
+      "posting": false,
+      "n": 15,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 545.55095566802
+  },
+  {
+    "bit": 0,
+    "tick": 1383,
+    "edge": 32,
+    "time": 545.88389638378,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1429,
+    "edge": 33,
+    "time": 546.65155002905,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1475,
+    "edge": 34,
+    "time": 547.41920535051,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1521,
+    "edge": 35,
+    "time": 548.1868595545,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1567,
+    "edge": 36,
+    "time": 548.95451487596,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1613,
+    "edge": 37,
+    "time": 549.72217243234,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "USE LEFT",
+    "state": {
+      "time": 550.07344522167,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "",
+      "signal": 0,
+      "posting": false,
+      "n": 0,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 550.07344522167
+  },
+  {
+    "bit": 0,
+    "tick": 1659,
+    "edge": 38,
+    "time": 550.48982719507,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1705,
+    "edge": 39,
+    "time": 551.25747916415,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1751,
+    "edge": 40,
+    "time": 552.02512386973,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "{ENTER}",
+    "state": {
+      "time": 552.37641038183,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "USE LEFT",
+      "signal": 0,
+      "posting": false,
+      "n": 8,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 552.37641038183
+  },
+  {
+    "bit": 2,
+    "tick": 1797,
+    "edge": 41,
+    "time": 552.79279092453,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1843,
+    "edge": 42,
+    "time": 553.56044624598,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1889,
+    "edge": 43,
+    "time": 554.32809989125,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 1935,
+    "edge": 44,
+    "time": 555.09575521271,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 1981,
+    "edge": 45,
+    "time": 555.8634110929,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2027,
+    "edge": 46,
+    "time": 556.63106697309,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2073,
+    "edge": 47,
+    "time": 557.3987195009,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2119,
+    "edge": 48,
+    "time": 558.16637649855,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2165,
+    "edge": 49,
+    "time": 558.93403237874,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2211,
+    "edge": 50,
+    "time": 559.701686024,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2257,
+    "edge": 51,
+    "time": 560.469340228,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2303,
+    "edge": 52,
+    "time": 561.23699554946,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2349,
+    "edge": 53,
+    "time": 562.00465031219,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2395,
+    "edge": 54,
+    "time": 562.77230507492,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2441,
+    "edge": 55,
+    "time": 563.5399626313,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2487,
+    "edge": 56,
+    "time": 564.3076151591,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2533,
+    "edge": 57,
+    "time": 565.07527103929,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2579,
+    "edge": 58,
+    "time": 565.84292468456,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2625,
+    "edge": 59,
+    "time": 566.61058168221,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2671,
+    "edge": 60,
+    "time": 567.37823867986,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2717,
+    "edge": 61,
+    "time": 568.1458917664,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2763,
+    "edge": 62,
+    "time": 568.9135459704,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2809,
+    "edge": 63,
+    "time": 569.68120129186,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2855,
+    "edge": 64,
+    "time": 570.44885493712,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2901,
+    "edge": 65,
+    "time": 571.21651081731,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 2947,
+    "edge": 66,
+    "time": 571.98416837369,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 2993,
+    "edge": 67,
+    "time": 572.7518209015,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3039,
+    "edge": 68,
+    "time": 573.51947678169,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3085,
+    "edge": 69,
+    "time": 574.28713098569,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3131,
+    "edge": 70,
+    "time": 575.05478630715,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "EXIT",
+    "state": {
+      "time": 575.33930937012,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "",
+      "signal": 0,
+      "posting": false,
+      "n": 0,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 575.33930937012
+  },
+  {
+    "bit": 2,
+    "tick": 3177,
+    "edge": 71,
+    "time": 575.82244218734,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3223,
+    "edge": 72,
+    "time": 576.59009695006,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3269,
+    "edge": 73,
+    "time": 577.35775283025,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3315,
+    "edge": 74,
+    "time": 578.12540703425,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3361,
+    "edge": 75,
+    "time": 578.89306123825,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3407,
+    "edge": 76,
+    "time": 579.66071544225,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3453,
+    "edge": 77,
+    "time": 580.42837188117,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3499,
+    "edge": 78,
+    "time": 581.19602832009,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "text": "{ENTER}",
+    "state": {
+      "time": 581.84768917058,
+      "phase": 0,
+      "dirty": 0,
+      "y": 0,
+      "inputEmpty": 1,
+      "error": 0,
+      "empty": true,
+      "u": 10738,
+      "col": 11,
+      "key": 0,
+      "base": 32768,
+      "input": "EXIT",
+      "signal": 0,
+      "posting": false,
+      "n": 4,
+      "row": 16
+    },
+    "kind": "harness_input",
+    "time": 581.84768917058
+  },
+  {
+    "bit": 2,
+    "tick": 3545,
+    "edge": 79,
+    "time": 581.96368196535,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3591,
+    "edge": 80,
+    "time": 582.73133616935,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3637,
+    "edge": 81,
+    "time": 583.49899037335,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3683,
+    "edge": 82,
+    "time": 584.26664848846,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3729,
+    "edge": 83,
+    "time": 585.03430213373,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3775,
+    "edge": 84,
+    "time": 585.80195857265,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 2,
+    "tick": 3821,
+    "edge": 85,
+    "time": 586.56961221792,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "bit": 0,
+    "tick": 3867,
+    "edge": 86,
+    "time": 587.33726642191,
+    "kind": "heartbeat_edge",
+    "pc": 8851
+  },
+  {
+    "pc": 56513,
+    "time": 587.60385009849,
+    "kind": "enter",
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "time": 587.60385009849,
+    "phase": 5,
+    "dirty": 0,
+    "y": 0,
+    "kind": "loop_terminated",
+    "error": 0,
+    "col": 11,
+    "u": 10738,
+    "pc": 56513,
+    "key": 13,
+    "base": 32768,
+    "input": "EXIT",
+    "signal": 0,
+    "inputEmpty": 0,
+    "n": 4,
+    "row": 16
+  },
+  {
+    "pc": 56513,
+    "time": 587.60385065722,
+    "kind": "enter",
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "time": 587.60385065722,
+    "phase": 5,
+    "dirty": 0,
+    "y": 0,
+    "kind": "loop_terminated",
+    "error": 0,
+    "col": 11,
+    "u": 10738,
+    "pc": 56513,
+    "key": 13,
+    "base": 32768,
+    "input": "EXIT",
+    "signal": 0,
+    "inputEmpty": 0,
+    "n": 4,
+    "row": 16
+  },
+  {
+    "kind": "virq_removed",
+    "tick": 3883,
+    "edges": 86,
+    "time": 587.60720471573
+  },
+  {
+    "kind": "virq_removed",
+    "tick": 3883,
+    "edges": 86,
+    "time": 587.61074092034
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 587.61671933547,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 587.6167198942,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 56629,
+    "kind": "leave",
+    "time": 587.61672045293,
+    "status": 0,
+    "name": "_native_heartbeat_close"
+  },
+  {
+    "pc": 53228,
+    "time": 587.61674783072,
+    "kind": "enter",
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53228,
+    "time": 587.61674838945,
+    "kind": "enter",
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 587.63382207258,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 587.63382263131,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "pc": 53504,
+    "kind": "leave",
+    "time": 587.63382319004,
+    "status": 0,
+    "name": "_screen_close"
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.655166531,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.68854283766,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.72191914433,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.755295451,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.78867175767,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.82204806434,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.85542437101,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.88880067768,
+    "lines": [
+      "MCPDONE09032449a3398e35311df0a2d19b5e2d 000",
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 587.91334594489,
+    "status": 0,
+    "name": "_main"
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 587.91334650362,
+    "status": 0,
+    "name": "_main"
+  },
+  {
+    "pc": 38746,
+    "kind": "leave",
+    "time": 587.91334706235,
+    "status": 0,
+    "name": "_main"
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.92217698435,
+    "lines": [
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 587.95555329102,
+    "lines": [
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE8fda7a13ef763d2c5b33a88ba9741948 %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 587.97224144435
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 593.54608465808
+  },
+  {
+    "text": "date{ENTER}",
+    "kind": "bridge_type",
+    "time": 593.59614911808
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 594.39718047814,
+    "lines": [
+      "MCPDONE1c67be9dbb0088bb10943833a16fb76e 003",
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000",
+      "MCPDONE8fda7a13ef763d2c5b33a88ba9741948 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE9fb5d0b8ad6f42d7e72511e3a83ed31f %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 594.41386863147
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 600.00439999854
+  },
+  {
+    "text": "pwd{ENTER}",
+    "kind": "bridge_type",
+    "time": 600.05446445854
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 601.75665609866,
+    "lines": [
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000",
+      "MCPDONE8fda7a13ef763d2c5b33a88ba9741948 000",
+      "MCPDONE9fb5d0b8ad6f42d7e72511e3a83ed31f 000"
+    ],
+    "idle": true
+  },
+  {
+    "kind": "decoded_marker",
+    "time": 601.79003240533,
+    "lines": [
+      "MCPDONE428cd0946e1df482fb45eb0ebd9112a8 000",
+      "MCPDONE4ff8d33d3777942da5ca71f7bf62e675 000",
+      "MCPDONE8fda7a13ef763d2c5b33a88ba9741948 000",
+      "MCPDONE9fb5d0b8ad6f42d7e72511e3a83ed31f 000"
+    ],
+    "idle": true
+  },
+  {
+    "text": "echo MCPDONE206b27a362e7ea2dbfea5d219928161f %*{ENTER}",
+    "kind": "bridge_type",
+    "time": 601.80672055866
+  },
+  {
+    "kind": "bridge_finish",
+    "invalidated": false,
+    "released": true,
+    "time": 607.38056377239
+  }
+]

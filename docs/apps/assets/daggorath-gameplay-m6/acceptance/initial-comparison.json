@@ -1,0 +1,26 @@
+{
+  "method": "Read-only exact linked game_init return; unmodified dodgame default clock-seeded path",
+  "capturedSecond": 2,
+  "capturedClockTicks": 144,
+  "portSha256": "3f4391f34c5b7b6a4b560bb637a7a12493a5d421fb359cb62b41fe98852a251f",
+  "fixture": "apps/daggorath/test/fixtures/gameplay-original.json",
+  "originalRomSha256": "35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571",
+  "originalSecondEvidence": "Only post-maze SECOND=2 among 0..255 reproduces all 544 creature bytes; inferred, not sampled at DGEN90",
+  "tables": {
+    "MAZLND": {
+      "bytes": 1024,
+      "exactMatch": true,
+      "sha256": "f106c1af258e55a2e9f868ba55c3a355383466b0f19fbd3f63aea2339ebfab89"
+    },
+    "OCBLND": {
+      "bytes": 1008,
+      "exactMatch": true,
+      "sha256": "f2527707e74da31efaa08530782133b6f4ed0a4ee52b3e11468d0c75553b4716"
+    },
+    "CCBLND": {
+      "bytes": 544,
+      "exactMatch": true,
+      "sha256": "4614df316b15ef5f17694ff945ddda5d45e14bf50b6df8eb74938fc6115a9885"
+    }
+  }
+}

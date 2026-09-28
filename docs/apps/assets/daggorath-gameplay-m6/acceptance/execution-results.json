@@ -1,0 +1,149 @@
+{
+  "normal.log": [
+    {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 30685,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEe66c50db09eb771e3df5f483b76035f6",
+      "commandPromptMs": 25094
+    }
+  ],
+  "resident.log": [
+    {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 39733,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEf21e118d5d706751d7b494dc8a6954b1",
+      "commandPromptMs": 34127
+    }
+  ],
+  "cancel-instrumented.log": [
+    {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 3,
+      "statusText": "003",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 29445,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE1c67be9dbb0088bb10943833a16fb76e",
+      "commandPromptMs": 23843
+    }
+  ],
+  "lit.log": [
+    {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 76065,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE8fda7a13ef763d2c5b33a88ba9741948",
+      "commandPromptMs": 70474
+    }
+  ],
+  "resident-wide.log": [
+    {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 39700,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONEaaa1359a8cdd48ba199a668e651516a5",
+      "commandPromptMs": 34110
+    }
+  ],
+  "compare.log": [
+    {
+      "command": "dodgame",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 0,
+      "statusText": "000",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 39145,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE15075dfdcbb7d6b091e6b7a47274ae15",
+      "commandPromptMs": 33555
+    }
+  ],
+  "cancel-wide.log": [
+    {
+      "command": "dodgame seed0",
+      "completed": true,
+      "commandCompleted": true,
+      "status": 3,
+      "statusText": "003",
+      "timedOut": false,
+      "shellReady": true,
+      "outcome": "completed",
+      "phase": "complete",
+      "elapsedMs": 28828,
+      "outputComplete": false,
+      "allowGraphics": true,
+      "displayDepartures": 1,
+      "consoleReturned": true,
+      "executionState": "COMPLETE",
+      "marker": "MCPDONE87456dfc0b30adcbc33502c5fa9a8c39",
+      "commandPromptMs": 23238
+    }
+  ]
+}

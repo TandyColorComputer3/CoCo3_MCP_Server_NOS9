@@ -1,6 +1,6 @@
 # NitrOS-9 EOU live boot investigations
 
-**Current baseline:** [SCII slot 4 / option 3 / nos9_ready_v2](#final-canonical-layout-scii-slot-4-and-option-3). Earlier configurations and checkpoints below are historical.
+**Current verified baseline:** [SCII slot 4 / option 3 / nos9_ready_v2](#final-canonical-layout-scii-slot-4-and-option-3). A prior MCP process inherited `COCO_RAM=512K`, causing a real 512K launch and a state restore timeout. The restarted MCP hosts were verified with effective `COCO_RAM=2M`; MAME argv contained `-ramsize 2M`, the EOU banner reported 2048K/6309 native mode, and `nos9_ready_v2` restored with the post-load and fresh-shell handshake. Earlier configurations and checkpoints below are historical.
 
 Executed September 25, 2026, America/Los_Angeles (tool log UTC crosses into September 26).
 
