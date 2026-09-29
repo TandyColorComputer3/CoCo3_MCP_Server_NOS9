@@ -29,15 +29,24 @@ Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
                               const char *message,GameRenderProgress progress,void *context);
 /* STATUS/COMTXT in logical coordinates. phase: COMMON:HEARTS, 0 small. */
 void game_render_status(Game *g,Byte *frame,Byte phase);
+Byte game_render_status_progress(Game *g,Byte *frame,Byte phase,
+                                 GameRenderProgress progress,void *context);
 void game_render_heart(Byte *frame,Byte phase);
+void game_heart_patterns(Byte patterns[28]);
 /* Port UI only: restore the seven input rows before drawing the next line.
  * The underlay preserves dungeon pixels when the edited line becomes shorter. */
 #define GAME_INPUT_OFFSET (184*32)
 #define GAME_INPUT_BYTES (7*32)
 void game_render_input(Byte *frame,const char *input,const Byte *underlay);
+Byte game_render_input_progress(Game *g,Byte *frame,const char *input,const Byte *underlay,
+                                GameRenderProgress progress,void *context);
 Byte game_random(Game *g);
 void game_creature_init(Game *g,CreatureScheduler *scheduler);
 /* Consume emulated 60 Hz video ticks. Returns nonzero when the visible scene
  * needs a redraw; same-cell attack entry is reported, never executed. */
 Byte game_creature_advance(Game *g,CreatureScheduler *scheduler,Word videoTicks);
+/* Identical Q.TEN advancement with optional bounded foreground service after
+ * each completed tenth-second step. The callback may update only UI status. */
+Byte game_creature_advance_progress(Game *g,CreatureScheduler *scheduler,Word videoTicks,
+                                    Byte (*progress)(void *),void *context,Byte *dirty);
 #endif

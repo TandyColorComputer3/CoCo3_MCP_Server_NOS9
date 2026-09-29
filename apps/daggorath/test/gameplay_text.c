@@ -11,13 +11,26 @@ Byte os_signal_value(Byte *s){(void)s;return 0;}
 Byte os_clock(Word *ticks,Byte validate){(void)validate;*ticks=0;return 0;}
 Byte os_sleep(Word ticks){assert(ticks==1);assert(readAt>=sizeof(keys)-1);++sleeps;return 0;}
 Byte screen_open(void){return 0;}
+void screen_set_heart_patterns(const Byte *patterns){assert(patterns);}
 Byte screen_close(void){return 0;}
 Byte screen_path(void){return 3;}
 Byte screen_prepare(const Byte *frame){(void)frame;++fullPrepares;return 0;}
+Byte screen_prepare_progress(const Byte *frame,Byte (*progress)(void *),void *context){Byte row,e;
+ (void)frame;++fullPrepares;
+ for(row=0;row<=192;row+=8){if(progress){e=progress(context);if(e)return e;}if(row==192)break;}
+ return 0;}
 Byte screen_prepare_ui(const Byte *frame){(void)frame;return 0;}
+Byte screen_prepare_ui_progress(const Byte *frame,Byte (*progress)(void *),void *context){Byte row,e;
+ (void)frame;
+ for(row=152;row<=160;row+=2){if(progress){e=progress(context);if(e)return e;}}
+ for(row=184;row<=190;row+=2){if(progress){e=progress(context);if(e)return e;}}
+ return 0;}
 Byte screen_flip(void){return 0;}
 Byte screen_present(const Byte *frame){(void)frame;return 0;}
 Byte screen_present_ui(const Byte *frame){(void)frame;++uiPresents;assert(readAt>uiPresents-1);return 0;}
+Byte screen_present_ui_progress(const Byte *frame,Byte (*progress)(void *),void *context){
+ Byte e=screen_prepare_ui_progress(frame,progress,context);
+ return e?e:screen_present_ui(frame);}
 Byte screen_present_heart(const Byte *frame){(void)frame;assert(!"stable mock heartbeat must not request a heart-only flip");return ERR_ARGUMENT;}
 Byte game_input(Byte path,Byte *key){assert(path==3);*key=keys[readAt];if(*key)++readAt;return 0;}
 Byte native_heartbeat_open(NativeHeartbeat *h){h->opened=1;return 0;}

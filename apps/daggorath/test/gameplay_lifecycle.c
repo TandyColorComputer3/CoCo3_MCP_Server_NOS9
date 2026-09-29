@@ -10,13 +10,23 @@ Byte os_signal_value(Byte *s){(void)s;return mode==1&&readcount>=2?3:0;}
 Byte os_clock(Word *ticks,Byte validate){(void)validate;*ticks=clockcount++;return 0;}
 Byte os_sleep(Word n){assert(n==1);return 0;}
 Byte screen_open(void){opened++;return mode==3?250:0;}
+void screen_set_heart_patterns(const Byte *patterns){assert(patterns);}
 Byte screen_close(void){closed++;return 0;}
 Byte screen_path(void){return 3;}
 Byte screen_prepare(const Byte *p){(void)p;return 0;}
+Byte screen_prepare_progress(const Byte *p,Byte (*progress)(void *),void *context){Byte row,e;(void)p;
+ for(row=0;row<=192;row+=8){if(progress){e=progress(context);if(e)return e;}if(row==192)break;}
+ return 0;}
 Byte screen_prepare_ui(const Byte *p){(void)p;return 0;}
+Byte screen_prepare_ui_progress(const Byte *p,Byte (*progress)(void *),void *context){Byte row,e;(void)p;
+ for(row=152;row<=160;row+=2){if(progress){e=progress(context);if(e)return e;}}
+ for(row=184;row<=190;row+=2){if(progress){e=progress(context);if(e)return e;}}
+ return 0;}
 Byte screen_flip(void){presented++;return mode==2?245:0;}
 Byte screen_present(const Byte *p){(void)p;presented++;return mode==2?245:0;}
 Byte screen_present_ui(const Byte *p){(void)p;return screen_flip();}
+Byte screen_present_ui_progress(const Byte *p,Byte (*progress)(void *),void *context){
+ Byte e=screen_prepare_ui_progress(p,progress,context);return e?e:screen_flip();}
 Byte screen_present_heart(const Byte *p){(void)p;return screen_flip();}
 Byte game_input(Byte path,Byte *key){assert(path==3);*key="EXIT\r"[readcount++];return 0;}
 Byte native_heartbeat_open(NativeHeartbeat *h){h->opened=1;return 0;}

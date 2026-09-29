@@ -8,17 +8,29 @@
 #endif
 #include "logical.h"
 #include "data.h"
-void wizard_line(unsigned char *frame,int x0,int y0,int x1,int y1,unsigned char fade)
+unsigned char wizard_line_progress(unsigned char *frame,int x0,int y0,int x1,int y1,
+                                   unsigned char fade,unsigned char (*progress)(void *),void *context)
 {
     int dx=x1-x0,dy=y1-y0,n,ay,i;
     long xx=(long)x0*256+128,yy=(long)y0*256+128,sx,sy;
     unsigned int period=(unsigned int)fade+1,count=period;
     n=dx<0?-dx:dx;ay=dy<0?-dy:dy;if(ay>n)n=ay;
-    if(!n||fade==255)return;
+    if(!n||fade==255)return 0;
+    /* Line setup below performs two generated 32-bit divides before the
+     * pixel-loop callback.  Service once at this natural vector boundary so
+     * coordinate transforms and fixed-point setup are separately bounded. */
+    if(progress&&progress(context))return 1;
     /* INCRE truncates magnitude before restoring sign (signed C division).
      * 24-bit accumulators represented by long; selected geometry cannot overflow. */
     sx=(long)dx*256/n;sy=(long)dy*256/n;
     for(i=0;i<n;++i){
+        /* Cooperative foreground service; this changes no VECTOR coordinates,
+         * fade samples or pixels. No graphics operation runs in VIRQ context. */
+        /* The native PB1 transition is a cheap foreground edge hint; the
+         * callback still obtains authoritative phase/generation atomically.
+         * Two pixels bound the measured lit-vector gap without changing any
+         * original coordinate, fade sample or framebuffer bit. */
+        if(progress&&!(i&1)&&progress(context))return 1;
         if(--count==0){
             /* VECTOR reads the integer bytes directly; avoid general long
              * division for fixed-point extraction on the 6809. */
@@ -28,6 +40,11 @@ void wizard_line(unsigned char *frame,int x0,int y0,int x1,int y1,unsigned char 
         }
         xx+=sx;yy+=sy;
     }
+    return 0;
+}
+void wizard_line(unsigned char *frame,int x0,int y0,int x1,int y1,unsigned char fade)
+{
+    (void)wizard_line_progress(frame,x0,y0,x1,y1,fade,0,0);
 }
 /* EXPAND GETFIV: MSB-first five-bit stream. SWCTAB stores 7 rows following
  * a five-bit length. COMTXT NDPB10 centers the glyph by shifting two bits. */

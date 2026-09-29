@@ -149,13 +149,38 @@ void game_tick(Game *g,Word ticks){Byte *o;while(ticks--){
  * shift by seven; VECTOR retains original fade sampling and clipping. */
 #include "logical.h"
 static int scale(Byte x,int centre,Byte factor){int d=(int)x-centre;long v=(long)d*factor;return centre+(int)(v>=0?v/128:-((-v+127)/128));}
-static void draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range){Word i,end;int diff=(int)light-7-range;Byte fade;
- if(diff<=-7)return;fade=diff>=0?0:(1<<(-diff-1));
+typedef struct {Game *game;Byte *frame;GameRenderProgress progress;void *context;Byte error;} DrawProgress;
+static unsigned char draw_checkpoint(void *context){DrawProgress *p=(DrawProgress *)context;
+ p->error=p->progress(p->game,p->frame,p->context);return p->error!=0;
+}
+static Byte draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range,DrawProgress *progress){Word i,end;int diff=(int)light-7-range;Byte fade;
+ if(diff<=-7)return 0;fade=diff>=0?0:(1<<(-diff-1));
  i=game_lists[list][0];end=i+game_lists[list][1];for(;i<end;i++){
-  const Byte *v=game_vectors[i];wizard_line(frame,scale(v[1],128,factor),scale(v[0],76,factor),scale(v[3],128,factor),scale(v[2],76,factor),fade);
- }}
+  const Byte *v=game_vectors[i];int x0,y0,x1,y1;
+  /* CMOC lowers each signed scale to several 32-bit helpers.  Keep no more
+   * than two transforms between heartbeat service points; live HD6309
+   * tracing measured a transform at about 6-7 ms. */
+  if(progress&&progress->progress&&draw_checkpoint(progress))return progress->error;
+  x0=scale(v[1],128,factor);y0=scale(v[0],76,factor);
+  if(progress&&progress->progress&&draw_checkpoint(progress))return progress->error;
+  x1=scale(v[3],128,factor);y1=scale(v[2],76,factor);
+  /* CMOC initializes both 32-bit fixed-point accumulators on entry to
+   * wizard_line_progress before that routine reaches its first callback.
+   * Bound the measured endpoint-scale + line-setup interval here; this only
+   * services the already displayed authoritative heart and cannot expose the
+   * unfinished logical vector. */
+  if(progress&&progress->progress&&draw_checkpoint(progress))return progress->error;
+  if(progress&&progress->progress){
+   if(wizard_line_progress(frame,x0,y0,x1,y1,fade,draw_checkpoint,progress))return progress->error;
+  }else wizard_line(frame,x0,y0,x1,y1,fade);
+ }return 0;}
 static Byte five(const Byte *p,Word bit){Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
-static void text(Byte *frame,const char *s,Byte row){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;col++;}}
+static Byte text_progress(Byte *frame,const char *s,Byte row,DrawProgress *progress){Byte col=0,c,y,e;while(*s&&col<32){
+ c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;
+ for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;
+ ++col;if(progress&&progress->progress&&!(col&1)){e=draw_checkpoint(progress);if(e)return progress->error;}
+ }return 0;}
+static void text(Byte *frame,const char *s,Byte row){(void)text_progress(frame,s,row,0);}
 /* HUMAN:M$CURS writes original I.BAR ($1C, underline) then I.BS, leaving
  * the cursor position in place. The original-derived font's code 28 is used. */
 static void input_line(Byte *frame,const char *input){Byte n=0,y;while(input[n]&&n<31)n++;text(frame,input,184);
@@ -171,50 +196,92 @@ static Byte object_name(Game *g,Word token,Byte *name){
  else {o=ocb(g,token);if(!o[11]){s=status_adjectives[o[9]];while(*s!=255)name[n++]=*s++;name[n++]=0;}s=status_generics[o[10]];}
  while(*s!=255)name[n++]=*s++;return n;
 }
-static void status_name(Byte *frame,const Byte *name,Byte n,Byte col){Byte i,y;
- for(i=0;i<n;i++)for(y=0;y<7;y++)frame[(152+(Word)y)*32+col+i]=255^(five(font+name[i]*5,5+y*5)<<2);
+static Byte status_name(Byte *frame,const Byte *name,Byte n,Byte col,DrawProgress *progress){Byte i,y,e;
+ for(i=0;i<n;i++){
+  for(y=0;y<7;y++)frame[(152+(Word)y)*32+col+i]=255^(five(font+name[i]*5,5+y*5)<<2);
+  if(progress&&progress->progress){e=draw_checkpoint(progress);if(e)return progress->error;}
+ }
+ return 0;
 }
+void game_heart_patterns(Byte patterns[28]){Byte i;for(i=0;i<28;i++)patterns[i]=255^status_hearts[i];}
 void game_render_heart(Byte *frame,Byte phase){Byte y;const Byte *heart=status_hearts+(phase?14:0);
  for(y=0;y<7;y++){frame[(152+(Word)y)*32+15]=255^heart[y];frame[(152+(Word)y)*32+16]=255^heart[7+y];}
 }
-void game_render_status(Game *g,Byte *frame,Byte phase){Byte name[32],n;
+Byte game_render_status_progress(Game *g,Byte *frame,Byte phase,
+                                 GameRenderProgress progress,void *context){Byte name[32],n,e;
+ DrawProgress drawProgress={g,frame,progress,context,0};
  memset(frame+152*32,255,8*32);
- n=object_name(g,g->hand,name);status_name(frame,name,n,0);
- n=object_name(g,g->rightHand,name);status_name(frame,name,n,32-n);
+ if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
+ n=object_name(g,g->hand,name);e=status_name(frame,name,n,0,&drawProgress);if(e)return e;
+ n=object_name(g,g->rightHand,name);e=status_name(frame,name,n,32-n,&drawProgress);if(e)return e;
  game_render_heart(frame,phase);
+ if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
+ return 0;
+}
+void game_render_status(Game *g,Byte *frame,Byte phase){
+ (void)game_render_status_progress(g,frame,phase,0,0);
 }
 void game_render_input(Byte *frame,const char *input,const Byte *underlay){
  memcpy(frame+GAME_INPUT_OFFSET,underlay,GAME_INPUT_BYTES);input_line(frame,input);
 }
+Byte game_render_input_progress(Game *g,Byte *frame,const char *input,const Byte *underlay,
+                                GameRenderProgress progress,void *context){Byte row,e;
+ DrawProgress drawProgress={g,frame,progress,context,0};
+ for(row=0;row<7;row++){
+  memcpy(frame+GAME_INPUT_OFFSET+(Word)row*32,underlay+(Word)row*32,32);
+  if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
+ }
+ e=text_progress(frame,input,184,&drawProgress);if(e)return e;
+ /* HUMAN:M$CURS underline after the final character. */
+ {Byte n=0,y;while(input[n]&&n<31)n++;
+  if(n<32)for(y=0;y<7;y++)frame[(184+(Word)y)*32+n]=five(font+28*5,5+y*5)<<2;}
+ if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
+ return 0;
+}
 Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
                               const char *message,GameRenderProgress progress,void *context){
  static const Byte scales[]={200,128,80,50,31,20,12,8,4,2};
- Byte r=g->row,c=g->col,range,side,feature,relative,light=0,magic=0,i,which,e;int cr;
- memset(frame,0,FRAME_BYTES);
+ Byte r=g->row,c=g->col,range,side,feature,relative,light=0,magic=0,i,which,e;int cr;DrawProgress drawProgress={g,frame,progress,context,0};
+ if(progress){Word at;
+  /* The original frame clear is semantically atomic only to the unfinished
+   * logical image. Clear 256-byte pieces so the already displayed heart can
+   * follow a native edge while this private work proceeds. */
+  for(at=0;at<FRAME_BYTES;at+=256){
+   memset(frame+at,0,256);e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;
+  }
+ }else memset(frame,0,FRAME_BYTES);
  if(g->torch){light=ocb(g,g->torch)[7];magic=ocb(g,g->torch)[8];}
  if(!g->faint&&!g->dead)for(range=0;range<10;range++){
   for(side=0;side<3;side++){relative=draw_order[side];feature=(cell(g,r,c)>>(((g->dir+relative)&3)*2))&3;
-   if(feature==2){draw(frame,side*4+2,scales[range],magic,range);feature=3;}
-   draw(frame,side*4+feature,scales[range],light,range);
+   if(feature==2){e=draw(frame,side*4+2,scales[range],magic,range,&drawProgress);if(e)return e;feature=3;}
+   e=draw(frame,side*4+feature,scales[range],light,range,&drawProgress);if(e)return e;
   }
-  cr=creature(g,r,c);if(cr>=0)draw(frame,19+g->creatures[cr][13],scales[range],g->creatures[cr][2]?magic:light,range);
+  cr=creature(g,r,c);if(cr>=0){e=draw(frame,19+g->creatures[cr][13],scales[range],g->creatures[cr][2]?magic:light,range,&drawProgress);if(e)return e;}
   for(side=0;side<2;side++){relative=side?1:3;which=(g->dir+relative)&3;
-   if(!((cell(g,r,c)>>(which*2))&3)){cr=creature(g,r+dr[which],c+dc[which]);if(cr>=0)draw(frame,13+side,scales[range],g->creatures[cr][2]?magic:light,range);}}
+   if(!((cell(g,r,c)>>(which*2))&3)){cr=creature(g,r+dr[which],c+dc[which]);if(cr>=0){e=draw(frame,13+side,scales[range],g->creatures[cr][2]?magic:light,range,&drawProgress);if(e)return e;}}}
   which=12;for(i=0;i<sizeof(vertical);i+=3)if(vertical[i+1]==r&&vertical[i+2]==c){which=15+vertical[i];break;}
-  draw(frame,which,scales[range],light,range);
+  e=draw(frame,which,scales[range],light,range,&drawProgress);if(e)return e;
   /* VIEW52: OFIND order, FWDOBJ indexed by class, magic then regular.
    * SETFAX consumes MAGFLG on the first DRAWIT; both passes use same vectors.
    * Do this before VIEW60 stops at a forward wall/door. No orientation field. */
   for(i=0;i<g->count;i++)if(on_floor(g->objects[i],r,c)){
-   which=23+g->objects[i][10];draw(frame,which,scales[range],magic,range);draw(frame,which,scales[range],light,range);
+   which=23+g->objects[i][10];e=draw(frame,which,scales[range],magic,range,&drawProgress);if(e)return e;
+   e=draw(frame,which,scales[range],light,range,&drawProgress);if(e)return e;
   }
   /* A foreground observer may update only the already displayed heart. It
    * must not upload this incomplete logical dungeon or alter game state. */
   if(progress){e=progress(g,frame,context);if(e)return e;}
   if((cell(g,r,c)>>(g->dir*2))&3)break;r+=dr[g->dir];c+=dc[g->dir];
  }
- game_render_status(g,frame,0);
- text(frame,message,168);input_line(frame,input);
+ e=game_render_status_progress(g,frame,0,progress,context);if(e)return e;
+ if(progress){e=progress(g,frame,context);if(e)return e;}
+ e=text_progress(frame,message,168,&drawProgress);if(e)return e;
+ input_line(frame,input);
+ if(progress){e=progress(g,frame,context);if(e)return e;}
+ /* Progress may temporarily paint the authoritative live heart into this
+  * unfinished frame. The completed logical render retains its phase-zero
+  * status template; the presenter applies the latest phase before flipping. */
+ game_render_heart(frame,0);
  return 0;
 }
 void game_render(Game *g,Byte *frame,const char *input,const char *message){
