@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-28",
+  "status": "incomplete",
+  "productionArtifact": {
+    "size": 33765,
+    "dataSize": 10765,
+    "edition": 1,
+    "crc": "CB25FE",
+    "sha256": "e175f961030e5e54c63c296d864a2d1329418914f7aff29185713bc9a4d7be00"
+  },
+  "deterministicWorkload": {
+    "method": "disposable module replacing only game_input; production main/parser/game/creature/render/presentation/heartbeat objects unchanged",
+    "commands": ["PULL LEFT PINE TORCH", "USE LEFT", "TURN RIGHT", "MOVE"],
+    "publishedGenerations": 123,
+    "presentedGenerations": 123,
+    "supersededGenerations": 0,
+    "medianMs": 13.995078700020258,
+    "p95Ms": 20.90098627999737,
+    "maximumMs": 26.894487119989208,
+    "over33_34Ms": 0,
+    "activeFdcAccesses": 0,
+    "completedFullRenders": 6
+  },
+  "gshellLifecycle": {
+    "launch": "AIF mouse path",
+    "firstExitStatus": 0,
+    "firstRemovalObserved": true,
+    "firstCallbacksAfterRemoval": 0,
+    "secondExitStatus": 0,
+    "repeatedRunCallbackCounterValid": false,
+    "reason": "private observer failed to clear its removed latch at second native_active"
+  },
+  "hostAutomation": {
+    "singlePhysicalCharacterSndDrvSamples": 5,
+    "instructionLevelInputHooksAccepted": false,
+    "reason": "did not reproduce OS-9/CMOC input semantics"
+  },
+  "remaining": [
+    "clean repeated-run teardown observation",
+    "Shift-BREAK status 003 on exact artifact",
+    "SQUEAK coexistence",
+    "PHASER coexistence",
+    "strict post-run date and pwd",
+    "final complete regressions"
+  ]
+}

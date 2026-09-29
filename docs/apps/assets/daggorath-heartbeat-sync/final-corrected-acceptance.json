@@ -1,0 +1,68 @@
+{
+  "gate_ms": 33.34,
+  "cause": {
+    "classification": "foreground_logical_draw_checkpoint_gap",
+    "work": [
+      "second endpoint 32-bit x scale",
+      "second endpoint 32-bit y scale",
+      "line fixed-point accumulator initialization"
+    ],
+    "failed_sample_ms": {
+      "edge_to_previous_progress": 0.791,
+      "edge_to_heart_start": 26.620,
+      "edge_to_putblk_return": 35.434,
+      "edge_to_bookkeeping": 35.508
+    }
+  },
+  "correction": "generation-aware foreground service point after second endpoint scaling and before line setup",
+  "ssc_trials": [
+    {
+      "generations": 88,
+      "presented": 88,
+      "superseded": 0,
+      "median_ms": 13.882,
+      "p95_ms": 21.665,
+      "maximum_ms": 28.879,
+      "over_gate": 0,
+      "fdc_accesses": 0
+    },
+    {
+      "generations": 92,
+      "presented": 92,
+      "superseded": 0,
+      "median_ms": 13.545,
+      "p95_ms": 20.717,
+      "maximum_ms": 26.872,
+      "over_gate": 0,
+      "fdc_accesses": 0
+    }
+  ],
+  "ssc_commands_hex": ["D8", "CA", "CF", "CF"],
+  "module": {
+    "name": "dodgame",
+    "edition": 1,
+    "size": 33815,
+    "size_hex": "8417",
+    "data_size": 10765,
+    "data_size_hex": "2A0D",
+    "crc": "9D2CD2",
+    "sha256": "c4054c761987664e17c58a81a842afefced3221fe241855ba6626708b20c51f6",
+    "reproducible": true
+  },
+  "validation": {
+    "daggorath_scripts": 20,
+    "daggorath_checks": 237,
+    "mcp_tests": 115,
+    "mcp_failures": 0,
+    "typescript_build": "passed",
+    "strict_date_status": 0,
+    "strict_pwd_status": 0,
+    "git_diff_check": "passed"
+  },
+  "integrity_sha256": {
+    "media/63SDC.VHD": "db2f0f444073d3b88a3610a63ec9f7d2e2dd4299347181faa6b2b2aa9637de2c",
+    "media/63SDC-MCP-DEV.VHD": "4c6bdc0cd2f68aa57a9c75f75f15fe429f30926aa522917dd8d14aa1b9ae622e",
+    "media/63EMU.DSK": "9a51adb8656b9f003c7f822352c291487362f1b4c43aac1a16672d5d2bcb4c40",
+    "MCP/states/coco3h/nos9_ready_v2.sta": "a0f4ee094db471c596b9ecb9826922f80d982d2571fe7e72672a255ebca2effa"
+  }
+}

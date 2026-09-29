@@ -1,0 +1,362 @@
+{
+  "measurement": "private appended MAME Lua observer, machine.time, disposable Term-launched EOU clone; completed means guest presentedGeneration write after synchronous small PutBlk return",
+  "reference": "baseline-summary.json is a separate GShell-launched run; sections and sample sizes differ",
+  "trials": {
+    "small_gpload_only": {
+      "module_bytes": 29925,
+      "module_crc": "191ADC",
+      "observed_deadlines_with_completion": 201,
+      "exact_ms": {
+        "count": 183,
+        "median_ms": 70.413,
+        "p95_ms": 506.628,
+        "max_ms": 761.524
+      },
+      "superseded_count": 18,
+      "small_put_begin_to_completed_generation_ms": {
+        "count": 139,
+        "median_ms": 18.327,
+        "p95_ms": 19.333,
+        "max_ms": 21.642
+      },
+      "sections": {
+        "idle": {
+          "deadlines_with_completion": 57,
+          "exact_ms": {
+            "count": 57,
+            "median_ms": 213.467,
+            "p95_ms": 573.118,
+            "max_ms": 588.167
+          },
+          "superseded_count": 0
+        },
+        "pull_torch": {
+          "deadlines_with_completion": 26,
+          "exact_ms": {
+            "count": 26,
+            "median_ms": 228.805,
+            "p95_ms": 636.139,
+            "max_ms": 761.524
+          },
+          "superseded_count": 0
+        },
+        "use_torch": {
+          "deadlines_with_completion": 54,
+          "exact_ms": {
+            "count": 46,
+            "median_ms": 34.116,
+            "p95_ms": 237.688,
+            "max_ms": 625.218
+          },
+          "superseded_count": 8
+        },
+        "lit_turn": {
+          "deadlines_with_completion": 29,
+          "exact_ms": {
+            "count": 25,
+            "median_ms": 40.879,
+            "p95_ms": 406.117,
+            "max_ms": 629.94
+          },
+          "superseded_count": 4
+        },
+        "lit_move": {
+          "deadlines_with_completion": 30,
+          "exact_ms": {
+            "count": 24,
+            "median_ms": 37.367,
+            "p95_ms": 354.989,
+            "max_ms": 465.524
+          },
+          "superseded_count": 6
+        }
+      }
+    },
+    "creature_qten_checkpoint": {
+      "module_bytes": 30101,
+      "module_crc": "771816",
+      "observed_deadlines_with_completion": 143,
+      "exact_ms": {
+        "count": 143,
+        "median_ms": 63.139,
+        "p95_ms": 427.775,
+        "max_ms": 539.104
+      },
+      "superseded_count": 0,
+      "small_put_begin_to_completed_generation_ms": {
+        "count": 119,
+        "median_ms": 18.327,
+        "p95_ms": 19.52,
+        "max_ms": 22.702
+      },
+      "sections": {
+        "idle": {
+          "deadlines_with_completion": 22,
+          "exact_ms": {
+            "count": 22,
+            "median_ms": 152.756,
+            "p95_ms": 397.741,
+            "max_ms": 471.511
+          },
+          "superseded_count": 0
+        },
+        "pull_torch": {
+          "deadlines_with_completion": 33,
+          "exact_ms": {
+            "count": 33,
+            "median_ms": 148.513,
+            "p95_ms": 506.568,
+            "max_ms": 539.104
+          },
+          "superseded_count": 0
+        },
+        "use_torch": {
+          "deadlines_with_completion": 26,
+          "exact_ms": {
+            "count": 26,
+            "median_ms": 35.342,
+            "p95_ms": 244.091,
+            "max_ms": 463.508
+          },
+          "superseded_count": 0
+        },
+        "lit_turn": {
+          "deadlines_with_completion": 30,
+          "exact_ms": {
+            "count": 30,
+            "median_ms": 32.276,
+            "p95_ms": 242.669,
+            "max_ms": 392.511
+          },
+          "superseded_count": 0
+        },
+        "lit_move": {
+          "deadlines_with_completion": 29,
+          "exact_ms": {
+            "count": 29,
+            "median_ms": 34.638,
+            "p95_ms": 161.143,
+            "max_ms": 229.263
+          },
+          "superseded_count": 0
+        }
+      }
+    },
+    "chunked_full_prepare": {
+      "module_bytes": 30327,
+      "module_crc": "541EB5",
+      "observed_deadlines_with_completion": 190,
+      "exact_ms": {
+        "count": 190,
+        "median_ms": 40.502,
+        "p95_ms": 215.415,
+        "max_ms": 262.32
+      },
+      "superseded_count": 0,
+      "small_put_begin_to_completed_generation_ms": {
+        "count": 184,
+        "median_ms": 18.327,
+        "p95_ms": 19.429,
+        "max_ms": 23.302
+      },
+      "sections": {
+        "idle": {
+          "deadlines_with_completion": 74,
+          "exact_ms": {
+            "count": 74,
+            "median_ms": 80.28,
+            "p95_ms": 223.202,
+            "max_ms": 262.32
+          },
+          "superseded_count": 0
+        },
+        "pull_torch": {
+          "deadlines_with_completion": 26,
+          "exact_ms": {
+            "count": 26,
+            "median_ms": 32.667,
+            "p95_ms": 226.242,
+            "max_ms": 252.869
+          },
+          "superseded_count": 0
+        },
+        "use_torch": {
+          "deadlines_with_completion": 23,
+          "exact_ms": {
+            "count": 23,
+            "median_ms": 35.172,
+            "p95_ms": 132.649,
+            "max_ms": 140.298
+          },
+          "superseded_count": 0
+        },
+        "lit_turn": {
+          "deadlines_with_completion": 27,
+          "exact_ms": {
+            "count": 27,
+            "median_ms": 32.069,
+            "p95_ms": 175.874,
+            "max_ms": 227.305
+          },
+          "superseded_count": 0
+        },
+        "lit_move": {
+          "deadlines_with_completion": 29,
+          "exact_ms": {
+            "count": 29,
+            "median_ms": 30.352,
+            "p95_ms": 135.14,
+            "max_ms": 138.261
+          },
+          "superseded_count": 0
+        }
+      }
+    },
+    "chunked_ui_and_text": {
+      "module_bytes": 30943,
+      "module_crc": "282EEE",
+      "observed_deadlines_with_completion": 126,
+      "exact_ms": {
+        "count": 126,
+        "median_ms": 34.903,
+        "p95_ms": 153.795,
+        "max_ms": 181.848
+      },
+      "superseded_count": 0,
+      "small_put_begin_to_completed_generation_ms": {
+        "count": 125,
+        "median_ms": 18.327,
+        "p95_ms": 19.429,
+        "max_ms": 20.264
+      },
+      "sections": {
+        "idle": {
+          "deadlines_with_completion": 45,
+          "exact_ms": {
+            "count": 45,
+            "median_ms": 35.216,
+            "p95_ms": 151.556,
+            "max_ms": 154.529
+          },
+          "superseded_count": 0
+        },
+        "pull_torch": {
+          "deadlines_with_completion": 21,
+          "exact_ms": {
+            "count": 21,
+            "median_ms": 36.468,
+            "p95_ms": 131.046,
+            "max_ms": 181.848
+          },
+          "superseded_count": 0
+        },
+        "use_torch": {
+          "deadlines_with_completion": 17,
+          "exact_ms": {
+            "count": 17,
+            "median_ms": 39.041,
+            "p95_ms": 175.374,
+            "max_ms": 175.374
+          },
+          "superseded_count": 0
+        },
+        "lit_turn": {
+          "deadlines_with_completion": 19,
+          "exact_ms": {
+            "count": 19,
+            "median_ms": 31.707,
+            "p95_ms": 124.889,
+            "max_ms": 124.889
+          },
+          "superseded_count": 0
+        },
+        "lit_move": {
+          "deadlines_with_completion": 19,
+          "exact_ms": {
+            "count": 19,
+            "median_ms": 32.106,
+            "p95_ms": 158.049,
+            "max_ms": 158.049
+          },
+          "superseded_count": 0
+        }
+      }
+    },
+    "per_video_tick_service": {
+      "module_bytes": 30940,
+      "module_crc": "AFA858",
+      "observed_deadlines_with_completion": 131,
+      "exact_ms": {
+        "count": 131,
+        "median_ms": 30.153,
+        "p95_ms": 143.09,
+        "max_ms": 174.149
+      },
+      "superseded_count": 0,
+      "small_put_begin_to_completed_generation_ms": {
+        "count": 131,
+        "median_ms": 18.327,
+        "p95_ms": 19.424,
+        "max_ms": 19.52
+      },
+      "sections": {
+        "idle": {
+          "deadlines_with_completion": 37,
+          "exact_ms": {
+            "count": 37,
+            "median_ms": 31.216,
+            "p95_ms": 153.793,
+            "max_ms": 154.526
+          },
+          "superseded_count": 0
+        },
+        "pull_torch": {
+          "deadlines_with_completion": 18,
+          "exact_ms": {
+            "count": 18,
+            "median_ms": 28.104,
+            "p95_ms": 143.09,
+            "max_ms": 143.09
+          },
+          "superseded_count": 0
+        },
+        "use_torch": {
+          "deadlines_with_completion": 21,
+          "exact_ms": {
+            "count": 21,
+            "median_ms": 27.158,
+            "p95_ms": 148.555,
+            "max_ms": 174.149
+          },
+          "superseded_count": 0
+        },
+        "lit_turn": {
+          "deadlines_with_completion": 21,
+          "exact_ms": {
+            "count": 21,
+            "median_ms": 39.031,
+            "p95_ms": 135.599,
+            "max_ms": 172.598
+          },
+          "superseded_count": 0
+        },
+        "lit_move": {
+          "deadlines_with_completion": 19,
+          "exact_ms": {
+            "count": 19,
+            "median_ms": 26.865,
+            "p95_ms": 119.791,
+            "max_ms": 119.791
+          },
+          "superseded_count": 0
+        }
+      }
+    }
+  },
+  "limitations": [
+    "No optical pixel or acoustic transducer measurement; native $FF22 write and synchronous GFX2 completion are emulator boundaries.",
+    "The final 30953-byte source build adds a logical-frame restoration after the last render callback; it passed host tests but is not a separately live-measured trial.",
+    "Trial sections are separated by MCP coco_type enqueue timestamps; a command may take additional guest time to complete.",
+    "These Term trials did not repeat GShell, damaged-rate, SSC coexistence, or cancellation acceptance."
+  ]
+}

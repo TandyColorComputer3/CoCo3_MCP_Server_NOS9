@@ -1,0 +1,49 @@
+{
+  "artifact": {
+    "productionModuleCrc": "CB25FE",
+    "productionModuleSize": 33765,
+    "note": "SSC workload wrappers were disposable; production gameplay, rendering, presentation, heartbeat, and audio client/service objects were unchanged."
+  },
+  "preservedAcceptedEvidence": {
+    "term": {"generations": 172, "presented": 172, "superseded": 0, "maxMs": 27.535, "over33_34": 0, "activeFdc": 0},
+    "deterministicWorkload": {"generations": 123, "presented": 123, "superseded": 0, "medianMs": 13.995, "p95Ms": 20.901, "maxMs": 26.894, "over33_34": 0, "activeFdc": 0}
+  },
+  "gshellLifecycle": {
+    "priorNormalExitStatuses": [0, 0],
+    "correctedPrivateObserver": {"registrations": 2, "removals": 2, "postRemovalCallbacks": 0},
+    "realShiftBreak": {"statuses": [3, 3], "registrations": 2, "removals": 2, "postRemovalCallbacks": 0, "desktopRecovered": true}
+  },
+  "sscCoexistence": {
+    "events": [
+      {"name": "SQUEAK", "sscCommand": "D8"},
+      {"name": "PHASER", "sscCommand": "CA"}
+    ],
+    "shutdownCommands": ["CF", "CF"],
+    "generations": 93,
+    "presented": 93,
+    "superseded": 0,
+    "medianMs": 13.970,
+    "p95Ms": 21.864,
+    "maxMs": 35.508,
+    "over33_34": 1,
+    "activeFdc": 0,
+    "nativeRemovalObserved": true,
+    "postRemovalCallbacks": 0
+  },
+  "failedGeneration": {
+    "generation": 4,
+    "edgeTime": 119.70186817075,
+    "firstProgressCheckpointDelayMs": 0.791,
+    "heartPresentationStartDelayMs": 26.620,
+    "heartPutBlkEntryDelayMs": 30.403,
+    "heartPutBlkReturnDelayMs": 35.434,
+    "presentedGenerationDelayMs": 35.508,
+    "attribution": "production logical draw path; checkpoint ran but did not service the pending generation; SSC SQUEAK command preceded the edge by 1.232 seconds and PHASER had not yet been issued"
+  },
+  "shellHealth": {
+    "termVisuallyRestored": true,
+    "strictDatePwd": "not rerun: private MCP correctly rejected os9_run because its cold-boot session had not established os9_restore_ready"
+  },
+  "decision": "not_ready_to_commit",
+  "reason": "one exact combined SSC coexistence generation exceeded the unchanged 33.34 ms gate"
+}

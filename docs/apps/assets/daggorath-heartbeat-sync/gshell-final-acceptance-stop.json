@@ -1,0 +1,151 @@
+{
+  "artifact": {
+    "size": 33178,
+    "dataAllocation": 10737,
+    "edition": 1,
+    "crc": "1F237B",
+    "sha256": "73c9e48f34765b840e1dae76fbfc39f5e89d828a9a3000d657f9fb993dd52953"
+  },
+  "launch": "GShell AIF from disposable gshell_trace_idle state",
+  "workload": [
+    "initial dark resident",
+    "PULL LEFT PINE TORCH",
+    "USE LEFT",
+    "TURN RIGHT",
+    "MOVE",
+    "lit resident creature processing"
+  ],
+  "gateMs": 33.34,
+  "generations": 227,
+  "presented": 227,
+  "superseded": 0,
+  "medianMs": 14.054304,
+  "p95Ms": 28.106932,
+  "maximumMs": 108.451244,
+  "overGate": 11,
+  "failures": [
+    {
+      "generation": 2,
+      "latencyMs": 36.462186,
+      "preHeartMs": 9.523001,
+      "osWriteDurationsMs": [
+        9.060931,
+        8.844702,
+        4.996726
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 13,
+      "latencyMs": 35.126262,
+      "preHeartMs": 26.208925,
+      "osWriteDurationsMs": [
+        5.058745
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 56,
+      "latencyMs": 72.152207,
+      "preHeartMs": 62.681168,
+      "osWriteDurationsMs": [
+        4.093259
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 58,
+      "latencyMs": 87.223401,
+      "preHeartMs": 77.774152,
+      "osWriteDurationsMs": [
+        5.401805
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 69,
+      "latencyMs": 44.288881,
+      "preHeartMs": 36.294567,
+      "osWriteDurationsMs": [
+        4.135722
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 70,
+      "latencyMs": 108.451244,
+      "preHeartMs": 9.28107,
+      "osWriteDurationsMs": [
+        95.122731
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 95,
+      "latencyMs": 104.208246,
+      "preHeartMs": 94.988635,
+      "osWriteDurationsMs": [
+        5.361018
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 96,
+      "latencyMs": 38.337844,
+      "preHeartMs": 28.971847,
+      "osWriteDurationsMs": [
+        5.318555
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 114,
+      "latencyMs": 87.211108,
+      "preHeartMs": 77.845111,
+      "osWriteDurationsMs": [
+        5.318555
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 115,
+      "latencyMs": 75.781161,
+      "preHeartMs": 67.786847,
+      "osWriteDurationsMs": [
+        4.135722
+      ],
+      "stripY": null
+    },
+    {
+      "generation": 136,
+      "latencyMs": 61.350831,
+      "preHeartMs": 53.21013,
+      "osWriteDurationsMs": [
+        4.093259
+      ],
+      "stripY": null
+    }
+  ],
+  "stripWritesByY": {
+    "4": 14,
+    "36": 14,
+    "68": 14,
+    "100": 14,
+    "132": 53,
+    "164": 53
+  },
+  "residentIoByAddress": {
+    "0xff51": 52,
+    "0xff50": 52
+  },
+  "activeFdcAccesses": 0,
+  "stoppedBefore": [
+    "normal EXIT acceptance",
+    "repeat launch",
+    "Shift-BREAK cancellation",
+    "SQUEAK coexistence",
+    "PHASER coexistence",
+    "final regression rerun",
+    "commit"
+  ]
+}

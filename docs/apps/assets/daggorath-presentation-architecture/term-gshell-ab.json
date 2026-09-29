@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "artifact": {
+    "size": 33178,
+    "dataAllocation": 10737,
+    "edition": 1,
+    "crc": "1F237B",
+    "sha256": "73c9e48f34765b840e1dae76fbfc39f5e89d828a9a3000d657f9fb993dd52953"
+  },
+  "gateMs": 33.34,
+  "constantConfiguration": {
+    "machine": "coco3h",
+    "ram": "2M",
+    "cpu": "HD6309 native",
+    "presentation": "512x192 at (64,4), 512x32 maximum strip",
+    "heartbeat": "native VIRQ generation/phase"
+  },
+  "runs": {
+    "term": {
+      "generations": 382,
+      "presented": 382,
+      "superseded": 0,
+      "medianMs": 13.945631,
+      "p95Ms": 21.099336,
+      "maximumMs": 37.163393,
+      "overGate": 1,
+      "pendingFrameModules": {
+        "dodgame": 4124,
+        "SCF": 222,
+        "&": 7028,
+        "GrfDrv": 614,
+        "Krn": 954,
+        "unknown": 2231,
+        "VTIO": 348,
+        "DHeartbeat": 273,
+        "KrnP2": 132,
+        "IOMan": 825,
+        "Clock2": 5
+      },
+      "failures": [
+        {
+          "generation": 18,
+          "latencyMs": 37.163393,
+          "preHeartMs": 28.130957,
+          "heartWriteMs": 4.984993,
+          "videoFrameModules": [
+            {
+              "module": "&",
+              "writeOutstanding": false
+            },
+            {
+              "module": "dodgame",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SCF",
+              "writeOutstanding": true
+            }
+          ]
+        }
+      ]
+    },
+    "gshell_with_bell": {
+      "generations": 362,
+      "presented": 362,
+      "superseded": 0,
+      "medianMs": 14.015752,
+      "p95Ms": 22.20618,
+      "maximumMs": 178.267958,
+      "overGate": 6,
+      "pendingFrameModules": {
+        "&": 6478,
+        "SCF": 175,
+        "GrfDrv": 566,
+        "dodgame": 3938,
+        "Krn": 874,
+        "IOMan": 816,
+        "unknown": 2086,
+        "KrnP2": 108,
+        "DHeartbeat": 247,
+        "VTIO": 174,
+        "SndDrv": 229,
+        "JoyDrv": 1,
+        "Clock2": 5
+      },
+      "failures": [
+        {
+          "generation": 2,
+          "latencyMs": 36.462186,
+          "preHeartMs": 9.523001,
+          "heartWriteMs": 9.060931,
+          "videoFrameModules": [
+            {
+              "module": "unknown",
+              "writeOutstanding": false
+            },
+            {
+              "module": "GrfDrv",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SCF",
+              "writeOutstanding": true
+            }
+          ]
+        },
+        {
+          "generation": 13,
+          "latencyMs": 35.126262,
+          "preHeartMs": 26.208925,
+          "heartWriteMs": 5.058745,
+          "videoFrameModules": [
+            {
+              "module": "&",
+              "writeOutstanding": false
+            },
+            {
+              "module": "dodgame",
+              "writeOutstanding": false
+            },
+            {
+              "module": "GrfDrv",
+              "writeOutstanding": true
+            }
+          ]
+        },
+        {
+          "generation": 19,
+          "latencyMs": 71.801883,
+          "preHeartMs": 62.571098,
+          "heartWriteMs": 5.372193,
+          "videoFrameModules": [
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "VTIO",
+              "writeOutstanding": true
+            }
+          ]
+        },
+        {
+          "generation": 21,
+          "latencyMs": 90.671884,
+          "preHeartMs": 81.347233,
+          "heartWriteMs": 4.135722,
+          "videoFrameModules": [
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "VTIO",
+              "writeOutstanding": false
+            }
+          ]
+        },
+        {
+          "generation": 34,
+          "latencyMs": 178.267958,
+          "preHeartMs": 79.083816,
+          "heartWriteMs": 95.136699,
+          "videoFrameModules": [
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "VTIO",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": true
+            }
+          ]
+        },
+        {
+          "generation": 70,
+          "latencyMs": 88.69342,
+          "preHeartMs": 79.222381,
+          "heartWriteMs": 5.423596,
+          "videoFrameModules": [
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "SndDrv",
+              "writeOutstanding": false
+            },
+            {
+              "module": "VTIO",
+              "writeOutstanding": true
+            }
+          ]
+        }
+      ]
+    },
+    "gshell_quiescent": {
+      "generations": 128,
+      "presented": 128,
+      "superseded": 0,
+      "medianMs": 14.076374,
+      "p95Ms": 23.330346,
+      "maximumMs": 36.462186,
+      "overGate": 2,
+      "pendingFrameModules": {
+        "&": 2493,
+        "SCF": 67,
+        "GrfDrv": 232,
+        "dodgame": 1414,
+        "Krn": 352,
+        "IOMan": 361,
+        "unknown": 845,
+        "KrnP2": 51,
+        "DHeartbeat": 100,
+        "VTIO": 4,
+        "Clock2": 2
+      },
+      "failures": [
+        {
+          "generation": 2,
+          "latencyMs": 36.462186,
+          "preHeartMs": 9.523001,
+          "heartWriteMs": 9.060931,
+          "videoFrameModules": [
+            {
+              "module": "unknown",
+              "writeOutstanding": false
+            },
+            {
+              "module": "GrfDrv",
+              "writeOutstanding": true
+            },
+            {
+              "module": "SCF",
+              "writeOutstanding": true
+            }
+          ]
+        },
+        {
+          "generation": 13,
+          "latencyMs": 35.126262,
+          "preHeartMs": 26.208925,
+          "heartWriteMs": 5.058745,
+          "videoFrameModules": [
+            {
+              "module": "&",
+              "writeOutstanding": false
+            },
+            {
+              "module": "dodgame",
+              "writeOutstanding": false
+            },
+            {
+              "module": "GrfDrv",
+              "writeOutstanding": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "verifiedResourceContract": {
+    "term": {
+      "inheritedPaths": "0-2 Term (prior verified probe)",
+      "gameGraphicsLocalPath": 3,
+      "returnPath": 1,
+      "moduleBase": "0x6000",
+      "dataBase": "0x0000"
+    },
+    "gshell": {
+      "inheritedPaths": "0-2 W3 (prior verified AIF probe)",
+      "launcherPid": 3,
+      "childPid": 4,
+      "gameGraphicsLocalPath": 3,
+      "returnPath": 1,
+      "moduleBase": "0x6000",
+      "dataBase": "0x0000"
+    }
+  },
+  "causeDecision": {
+    "longForegroundDelay": "System-bell SS.Tone/SndDrv activity descheduled dodgame; 4-10 consecutive 60Hz samples mapped SndDrv in long failures.",
+    "longOutstandingWrite": "The 95.137ms wall-clock heart write included five consecutive SndDrv frame samples while outstanding; not evidence of 95ms continuous GrfDrv execution.",
+    "gshellResidency": "Not sufficient: the quiescent mouse-launched GShell control had no SndDrv samples and no post-warmup failures.",
+    "startupCaveat": "Both GShell controls exceeded the gate at generations 2 and 13 during first-use/warmup; Term had one 37.163ms failure at generation 18 in the instrumented run. No correction made."
+  },
+  "priorArt": {
+    "BFX2": "Only compiled /dd/SOURCECODE/ASM/BASIC09/bfx2_ver1 module found; exports ordinary GFX2 operations including GPLoad/Get/Put, but no inspected source or documentation establishes a faster PutBlk/dirty-update technique.",
+    "CFX2": "No CFX2 source or documentation found in repository, EOU index, or inspected external reference checkouts."
+  },
+  "startupInvestigation": {
+    "generation2": "Second visual phase first use: screen_present_heart defines GP buffer 196/3, GPLoads 28 bytes, then PutBlk. Quiescent GShell measured 9.061, 8.845, and 4.997 ms writes plus dispatch, totaling 36.462 ms.",
+    "generation13": "Not buffer initialization: only one cached-buffer write (5.059 ms); 26.209 ms elapsed before heart-call entry with dodgame then GrfDrv sampled. Classified scheduling/foreground service, not first-use allocation.",
+    "termOutlier": "Generation 18: 28.131 ms before heart entry, one 4.985 ms cached write; frame samples unknown, dodgame, then SCF while write outstanding. It did not reproduce in prior 121- and 298-generation Term runs.",
+    "decision": "Deterministic startup requires both exact phase buffers to be defined and GPLoaded during presentation initialization before native heartbeat enablement. This is a production change; investigation stopped before implementation per instruction."
+  }
+}

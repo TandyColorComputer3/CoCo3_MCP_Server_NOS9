@@ -1,0 +1,143 @@
+{
+  "schema": "daggorath-heartbeat-dirty-strip-workload-stop-v1",
+  "date": "2026-09-28",
+  "module": {
+    "size": 33042,
+    "dataSize": 10737,
+    "edition": 1,
+    "crc": "C4778E",
+    "sha256": "6d6b75533dfb51579713da14f40498c8cd39dc508f2e385c830b8a2850286d68"
+  },
+  "environment": {
+    "machine": "coco3h",
+    "ram": "2M",
+    "launch": "Term",
+    "media": "disposable boot DSK and VHD clone",
+    "clock": "MAME machine.time",
+    "completionProxy": "presentedGeneration write after synchronous 32x7 GFX2 return"
+  },
+  "gateMs": 33.34,
+  "result": "failed",
+  "overall": {
+    "authoritativeGenerationsWithCompletion": 89,
+    "individuallyPresented": 89,
+    "intentionallySuperseded": 0,
+    "medianMs": 14.424183640016963,
+    "p95Ms": 29.41045005002252,
+    "maximumMs": 45.63989156000048,
+    "overGate": 3
+  },
+  "enqueueBoundedIntervals": [
+    {
+      "label": "initial dark resident interval",
+      "generations": 13,
+      "individuallyPresented": 13,
+      "superseded": 0,
+      "medianMs": 15.660095250012773,
+      "p95Ms": 29.41045005002252,
+      "maximumMs": 29.41045005002252,
+      "overGate": 0
+    },
+    {
+      "label": "torch-use processing interval",
+      "generations": 8,
+      "individuallyPresented": 8,
+      "superseded": 0,
+      "medianMs": 14.934863215003702,
+      "p95Ms": 25.648518360014805,
+      "maximumMs": 25.648518360014805,
+      "overGate": 0
+    },
+    {
+      "label": "lit-turn processing interval",
+      "generations": 13,
+      "individuallyPresented": 13,
+      "superseded": 0,
+      "medianMs": 14.253770869999016,
+      "p95Ms": 19.971817639998335,
+      "maximumMs": 19.971817639998335,
+      "overGate": 0
+    },
+    {
+      "label": "lit-movement and subsequent resident creature redraw interval",
+      "generations": 55,
+      "individuallyPresented": 55,
+      "superseded": 0,
+      "medianMs": 14.300704230009842,
+      "p95Ms": 34.380915550002555,
+      "maximumMs": 45.63989156000048,
+      "overGate": 3
+    }
+  ],
+  "outliers": [
+    {
+      "generation": 46,
+      "completionMs": 45.63989156000048,
+      "deadlineToObservedVectorWorkMs": 20.889811454999352,
+      "deadlineToHeartCallMs": 37.49918984000589,
+      "heartCallMs": 8.140701720003918,
+      "stripWriteOverlap": false,
+      "attribution": "lit logical vector rendering before the next effective heartbeat service"
+    },
+    {
+      "generation": 80,
+      "completionMs": 34.380915550002555,
+      "deadlineToObservedVectorWorkMs": 8.902809959999036,
+      "deadlineToHeartCallMs": 25.342892829993026,
+      "heartCallMs": 9.03802272001002,
+      "stripWriteOverlap": false,
+      "attribution": "resident creature-triggered lit vector rendering before the next effective heartbeat service"
+    },
+    {
+      "generation": 81,
+      "completionMs": 36.99353884999823,
+      "deadlineToObservedVectorWorkMs": 11.666849189995832,
+      "deadlineToHeartCallMs": 28.10749078999364,
+      "heartCallMs": 8.88604806000459,
+      "stripWriteOverlap": false,
+      "attribution": "resident creature-triggered lit vector rendering before the next effective heartbeat service"
+    }
+  ],
+  "stripEvidence": {
+    "deadlinesInsideSynchronousStripWrites": [
+      {"generation": 15, "stripY": 164, "remainingWriteMs": 6.724878929986744},
+      {"generation": 36, "stripY": 164, "remainingWriteMs": 8.375927220015456}
+    ],
+    "positionsWithForcedOrObservedDeadline": [164],
+    "allSixPositionsCompleted": false,
+    "reasonStopped": "unchanged latency gate failed before the forced-position matrix was complete"
+  },
+  "residentIo": {
+    "ff50ReadsOrWrites": 13,
+    "ff51ReadsOrWrites": 13,
+    "activeRb1773OrFdcAccesses": 0,
+    "note": "$FF50/$FF51 are the expected software-clock addresses and were separated from FDC ranges"
+  },
+  "presentationTimingMs": {
+    "statusOnlyTwoStripFlip": {
+      "count": 36,
+      "median": 114.98950704000777,
+      "p95": 132.7124348800055,
+      "maximum": 134.5618324600082
+    },
+    "fullSixStripFlip": {
+      "count": 11,
+      "median": 351.5313682399892,
+      "p95": 368.52794656999777,
+      "maximum": 368.52794656999777
+    },
+    "representativeStripWriteSum": "51.5-56.9 ms per six-strip flip; the remaining flip interval is primarily CPU expansion, heartbeat checks, dispatch, and observer overhead",
+    "darkInitialLogicalRender": 587.5888102000033,
+    "litMovementLogicalRender": 6532.551632270014,
+    "note": "MAME machine-time intervals include normal preemption and private tracing. Command enqueue boundaries are not exact render-start boundaries."
+  },
+  "scopeStoppedBefore": [
+    "GShell exact-build acceptance",
+    "Shift-BREAK exact-build cancellation",
+    "short SSC coexistence",
+    "long SSC coexistence",
+    "heartbeat edges in all six strip positions",
+    "complete repeated-launch lifecycle"
+  ],
+  "caveat": "Command sections use input-enqueue boundaries. Background creature redraws can begin near those boundaries; outlier attribution uses function and GFX2 call events rather than section labels alone."
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "daggorath-heartbeat-dirty-strips-v1",
+  "module": {
+    "size": 33042,
+    "crc": "C4778E",
+    "sha256": "6d6b75533dfb51579713da14f40498c8cd39dc508f2e385c830b8a2850286d68",
+    "dataSize": 10737
+  },
+  "heartbeat": {
+    "published": 73,
+    "presented": 73,
+    "missing": [],
+    "intentionallySuperseded": 0,
+    "latencyMs": {
+      "median": 14.135878759987008,
+      "p95": 22.00000894001164,
+      "maximum": 29.90492643999687,
+      "gate": 33.34,
+      "overGate": 0
+    }
+  },
+  "strips": {
+    "dimensions": [512, 32],
+    "count": 72,
+    "transferMs": {
+      "median": 9.179381504992534,
+      "p95": 9.348676819996626,
+      "maximum": 9.586695960024372
+    },
+    "positions": {
+      "4": 10,
+      "36": 10,
+      "68": 10,
+      "100": 10,
+      "132": 16,
+      "164": 16
+    }
+  },
+  "heartOperation": {
+    "dimensions": [32, 7],
+    "calls": 73,
+    "latencyMs": {
+      "median": 8.077565179992467,
+      "p95": 8.974886190000751,
+      "maximum": 25.103197500002217
+    },
+    "note": "The maximum includes first-use GPLoad. Both exact phase images are then retained in unmapped CoWin GP buffers."
+  },
+  "foreground": {
+    "screenFlipMs": {
+      "count": 16,
+      "median": 337.7581,
+      "maximum": 368.6145
+    },
+    "darkGameRenderMs": {
+      "count": 10,
+      "median": 578.3323,
+      "maximum": 587.434
+    }
+  },
+  "lifecycle": {
+    "guestPrintedStatus": 0,
+    "virqRemoved": true,
+    "strictDateStatus": 0,
+    "strictPwdStatus": 0,
+    "privateRpcWrapper": "HTTP 500 after marker emission; subsequent strict MCP commands succeeded"
+  },
+  "scope": {
+    "launch": "Term",
+    "verified": [
+      "exact authoritative generation completion",
+      "all six strip positions transferred",
+      "normal guest teardown",
+      "strict post-exit shell commands"
+    ],
+    "notVerifiedForThisExactBuild": [
+      "GShell launch",
+      "Shift-BREAK cancellation",
+      "short and long SSC coexistence",
+      "synchronized lit movement and turn workloads",
+      "creature-active redraw",
+      "heartbeat event inside every strip position",
+      "active resident FDC tap"
+    ]
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "evidence": "private read-only MAME/Lua observer against disposable GShell-launched EOU clone; exact dodgame module 28950 bytes CRC 50683B",
+  "clock": "MAME machine.time seconds; intervals include OS scheduling and instrumentation overhead",
+  "baseline": {
+    "deadlines": 465,
+    "generation_writes": 465,
+    "physical_pb1_transitions": 464,
+    "deadline_spacing_ticks": {
+      "46": 133,
+      "40": 68,
+      "41": 61,
+      "42": 26,
+      "37": 29,
+      "38": 124,
+      "39": 23
+    },
+    "deadline_spacing_mismatch_against_previous_rate": 0,
+    "exact_generation_completion_ms": {
+      "count": 237,
+      "min": 40.697,
+      "median": 290.346,
+      "p95_nearest_rank": 588.059,
+      "max": 863.717
+    },
+    "superseded_generation_next_completion_ms": {
+      "count": 227,
+      "min": 707.424,
+      "median": 3431.881,
+      "p95_nearest_rank": 6913.655,
+      "max": 9142.191
+    },
+    "right_censored_generations": [
+      465
+    ]
+  },
+  "sections": {
+    "idle_dark": {
+      "native_generations": 104,
+      "exact_completion_ms": {
+        "count": 104,
+        "min": 40.697,
+        "median": 261.915,
+        "p95_nearest_rank": 581.022,
+        "max": 626.856
+      },
+      "superseded_count": 0,
+      "superseded_next_completion_ms": {
+        "count": 0
+      },
+      "right_censored": 0
+    },
+    "dark_turn": {
+      "native_generations": 27,
+      "exact_completion_ms": {
+        "count": 26,
+        "min": 61.843,
+        "median": 267.717,
+        "p95_nearest_rank": 575.349,
+        "max": 591.404
+      },
+      "superseded_count": 1,
+      "superseded_next_completion_ms": {
+        "count": 1,
+        "min": 852.686,
+        "median": 852.686,
+        "p95_nearest_rank": 852.686,
+        "max": 852.686
+      },
+      "right_censored": 0
+    },
+    "dark_move": {
+      "native_generations": 25,
+      "exact_completion_ms": {
+        "count": 25,
+        "min": 49.201,
+        "median": 338.489,
+        "p95_nearest_rank": 498.088,
+        "max": 503.107
+      },
+      "superseded_count": 0,
+      "superseded_next_completion_ms": {
+        "count": 0
+      },
+      "right_censored": 0
+    },
+    "pull_torch": {
+      "native_generations": 29,
+      "exact_completion_ms": {
+        "count": 27,
+        "min": 46.096,
+        "median": 292.797,
+        "p95_nearest_rank": 588.059,
+        "max": 863.717
+      },
+      "superseded_count": 2,
+      "superseded_next_completion_ms": {
+        "count": 2,
+        "min": 1030.202,
+        "median": 1142.899,
+        "p95_nearest_rank": 1255.596,
+        "max": 1255.596
+      },
+      "right_censored": 0
+    },
+    "use_torch": {
+      "native_generations": 49,
+      "exact_completion_ms": {
+        "count": 14,
+        "min": 155.366,
+        "median": 385.271,
+        "p95_nearest_rank": 695.023,
+        "max": 695.023
+      },
+      "superseded_count": 35,
+      "superseded_next_completion_ms": {
+        "count": 35,
+        "min": 822.902,
+        "median": 3200.709,
+        "p95_nearest_rank": 5484.549,
+        "max": 5610.973
+      },
+      "right_censored": 0
+    },
+    "lit_turn": {
+      "native_generations": 39,
+      "exact_completion_ms": {
+        "count": 10,
+        "min": 147.906,
+        "median": 354.626,
+        "p95_nearest_rank": 555.03,
+        "max": 555.03
+      },
+      "superseded_count": 29,
+      "superseded_next_completion_ms": {
+        "count": 29,
+        "min": 848.808,
+        "median": 2607.67,
+        "p95_nearest_rank": 5938.984,
+        "max": 6372.585
+      },
+      "right_censored": 0
+    },
+    "lit_move": {
+      "native_generations": 192,
+      "exact_completion_ms": {
+        "count": 31,
+        "min": 73.275,
+        "median": 338.018,
+        "p95_nearest_rank": 631.83,
+        "max": 681.911
+      },
+      "superseded_count": 160,
+      "superseded_next_completion_ms": {
+        "count": 160,
+        "min": 707.424,
+        "median": 3829.125,
+        "p95_nearest_rank": 7130.242,
+        "max": 9142.191
+      },
+      "right_censored": 1
+    }
+  },
+  "native_event_order_microseconds": {
+    "deadline_to_ff22_transition": {
+      "count": 464,
+      "min": 30.73,
+      "median": 30.73,
+      "p95_nearest_rank": 30.73,
+      "max": 33.524
+    },
+    "ff22_transition_to_phase_write": {
+      "count": 464,
+      "min": 6.705,
+      "median": 6.705,
+      "p95_nearest_rank": 6.705,
+      "max": 6.705
+    },
+    "ff22_transition_to_generation_write": {
+      "count": 464,
+      "min": 15.086,
+      "median": 15.086,
+      "p95_nearest_rank": 15.086,
+      "max": 15.086
+    }
+  },
+  "refined": {
+    "counts": {
+      "deadlines": 146,
+      "generation_writes": 146,
+      "physical_pb1_transitions": 145,
+      "deadline_spacing_ticks": {
+        "46": 145
+      },
+      "deadline_spacing_mismatch_against_previous_rate": 0,
+      "exact_generation_completion_ms": {
+        "count": 105,
+        "min": 42.17,
+        "median": 311.54,
+        "p95_nearest_rank": 703.326,
+        "max": 820.29
+      },
+      "superseded_generation_next_completion_ms": {
+        "count": 40,
+        "min": 891.696,
+        "median": 2296.519,
+        "p95_nearest_rank": 5784.601,
+        "max": 6844.567
+      },
+      "right_censored_generations": [
+        146
+      ]
+    },
+    "heart_pixel_expansion_to_flip_begin_ms": {
+      "count": 53,
+      "min": 3.163,
+      "median": 3.163,
+      "p95_nearest_rank": 4.268,
+      "max": 4.268
+    },
+    "flip_begin_to_completed_generation_write_ms": {
+      "count": 53,
+      "min": 31.13,
+      "median": 32.068,
+      "p95_nearest_rank": 32.113,
+      "max": 32.24
+    },
+    "completed_write_to_next_video_frame_ms": {
+      "count": 152,
+      "min": 1.09,
+      "median": 9.085,
+      "p95_nearest_rank": 15.615,
+      "max": 16.043
+    },
+    "lit_scene_duration_ms": {
+      "count": 9,
+      "min": 2332.916,
+      "median": 4155.269,
+      "p95_nearest_rank": 6262.413,
+      "max": 6262.413
+    },
+    "lit_max_inter_line_entry_ms": {
+      "count": 9,
+      "min": 335.449,
+      "median": 470.401,
+      "p95_nearest_rank": 701.471,
+      "max": 701.471
+    },
+    "lit_scene_details": [
+      {
+        "time": 702.006662,
+        "duration_ms": 4140.033,
+        "lines": 53,
+        "progress_callbacks": 14,
+        "max_inter_line_entry_ms": 470.444
+      },
+      {
+        "time": 708.488553,
+        "duration_ms": 4179.482,
+        "lines": 53,
+        "progress_callbacks": 14,
+        "max_inter_line_entry_ms": 470.4
+      },
+      {
+        "time": 714.339452,
+        "duration_ms": 4140.101,
+        "lines": 53,
+        "progress_callbacks": 14,
+        "max_inter_line_entry_ms": 470.421
+      },
+      {
+        "time": 721.386117,
+        "duration_ms": 5250.313,
+        "lines": 81,
+        "progress_callbacks": 14,
+        "max_inter_line_entry_ms": 471.442
+      },
+      {
+        "time": 729.581171,
+        "duration_ms": 6262.413,
+        "lines": 81,
+        "progress_callbacks": 14,
+        "max_inter_line_entry_ms": 470.401
+      },
+      {
+        "time": 734.372736,
+        "duration_ms": 2332.916,
+        "lines": 11,
+        "progress_callbacks": 2,
+        "max_inter_line_entry_ms": 335.449
+      },
+      {
+        "time": 741.970734,
+        "duration_ms": 4155.269,
+        "lines": 43,
+        "progress_callbacks": 2,
+        "max_inter_line_entry_ms": 335.473
+      },
+      {
+        "time": 748.149155,
+        "duration_ms": 4155.132,
+        "lines": 43,
+        "progress_callbacks": 2,
+        "max_inter_line_entry_ms": 335.483
+      },
+      {
+        "time": 754.728524,
+        "duration_ms": 4801.875,
+        "lines": 47,
+        "progress_callbacks": 2,
+        "max_inter_line_entry_ms": 701.471
+      }
+    ],
+    "guest_bell_writes": 0
+  },
+  "limits": [
+    "A presentation write is after the synchronous GFX2 PutBlk return but is not an optical scanout measurement.",
+    "The next frame notifier bounds the next scan opportunity, not the exact displayed pixel timestamp.",
+    "A generation superseded by a newer completed presentation never received a separately completed frame in this trace.",
+    "All audiovisual distributions here are from a GShell-launched run; no separate Term audiovisual trace was taken before the architecture stop gate.",
+    "The first heartbeat FF22 write established the tap initial bit state and was not counted as a transition; a later shutdown PB1 restore write was excluded by its PC. Subsequent native tick-body writes have PC 8851."
+  ]
+}

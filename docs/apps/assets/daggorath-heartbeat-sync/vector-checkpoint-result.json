@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "build": {
+    "size": 33178,
+    "data_size": 10737,
+    "edition": 1,
+    "crc": "1F237B",
+    "sha256": "73c9e48f34765b840e1dae76fbfc39f5e89d828a9a3000d657f9fb993dd52953"
+  },
+  "gate_ms": 33.34,
+  "generations": 298,
+  "presented_exactly": 298,
+  "superseded": 0,
+  "median_ms": 14.21019,
+  "p95_ms": 22.161482,
+  "maximum_ms": 29.708812,
+  "over_gate": 0,
+  "strip_writes": {
+    "4": 12,
+    "36": 12,
+    "68": 12,
+    "100": 12,
+    "132": 64,
+    "164": 64
+  },
+  "resident_io": {
+    "0xff51": 52,
+    "0xff50": 52
+  },
+  "fdc_accesses": 0,
+  "worst": [
+    {
+      "generation": 2,
+      "latency_ms": 29.708812
+    },
+    {
+      "generation": 45,
+      "latency_ms": 28.139897
+    },
+    {
+      "generation": 274,
+      "latency_ms": 26.947008
+    },
+    {
+      "generation": 46,
+      "latency_ms": 25.959172
+    },
+    {
+      "generation": 96,
+      "latency_ms": 25.716683
+    },
+    {
+      "generation": 84,
+      "latency_ms": 25.021064
+    },
+    {
+      "generation": 159,
+      "latency_ms": 24.918258
+    },
+    {
+      "generation": 279,
+      "latency_ms": 24.5562
+    },
+    {
+      "generation": 1,
+      "latency_ms": 24.248899
+    },
+    {
+      "generation": 83,
+      "latency_ms": 24.207553
+    },
+    {
+      "generation": 37,
+      "latency_ms": 23.747718
+    },
+    {
+      "generation": 39,
+      "latency_ms": 23.461648
+    }
+  ],
+  "workload": [
+    "initial dark",
+    "torch pull/use",
+    "lit turn",
+    "lit move",
+    "resident creature redraw",
+    "repeated turns"
+  ],
+  "notes": [
+    "completion is synchronous heart PutBlk return proxy, not optical scanout",
+    "narrow pre-fix trace measured scale transforms at about 5.8-7.2 ms each and line setup at about 11-13 ms before its first old checkpoint"
+  ]
+}

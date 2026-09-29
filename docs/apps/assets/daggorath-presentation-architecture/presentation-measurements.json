@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "environment": {"mame": "0.289 Ample", "machine": "coco3h", "ram": "2M", "guest": "NitrOS-9 EOU Level II"},
+  "clock": "MAME machine.time (emulated seconds)",
+  "prepared_putblk_curve": [
+    {"width": 32, "height": 7, "payload_bytes": 28, "allocated_bytes": 32, "n": 40, "min_ms": 4.201, "median_ms": 4.211, "p95_ms": 4.211, "max_ms": 4.378, "source": "sequential size probe"},
+    {"width": 512, "height": 8, "payload_bytes": 512, "n": 40, "min_ms": 5.051, "median_ms": 5.051, "p95_ms": 5.051, "max_ms": 5.218, "source": "sequential size probe"},
+    {"width": 256, "height": 16, "payload_bytes": 512, "n": 40, "min_ms": 5.283, "median_ms": 5.283, "p95_ms": 5.450, "max_ms": 5.450, "source": "sequential size probe; equal-payload shape control"},
+    {"width": 512, "height": 16, "payload_bytes": 1024, "n": 40, "min_ms": 6.142, "median_ms": 6.142, "p95_ms": 6.142, "max_ms": 6.309, "source": "sequential size probe"},
+    {"width": 512, "height": 32, "payload_bytes": 2048, "n": 40, "min_ms": 8.323, "median_ms": 8.323, "p95_ms": 8.490, "max_ms": 8.758, "source": "sequential size probe"},
+    {"width": 512, "height": 64, "payload_bytes": 4096, "n": 40, "min_ms": 12.685, "median_ms": 12.685, "p95_ms": 12.852, "max_ms": 13.105, "source": "sequential size probe"},
+    {"width": 512, "height": 96, "payload_bytes": 6144, "n": 40, "min_ms": 17.472, "median_ms": 17.472, "p95_ms": 17.483, "max_ms": 17.639, "source": "sequential size probe"},
+    {"width": 512, "height": 192, "payload_bytes": 12288, "n": 40, "min_ms": 31.087, "median_ms": 31.087, "p95_ms": 32.048, "max_ms": 32.420, "source": "separate-path forced-transfer control; identical prepared PutBlk boundary"}
+  ],
+  "cpu_decomposition": [
+    {"operation": "current 6809-compatible horizontal expansion", "input_bytes": 6144, "output_bytes": 12288, "n": 40, "min_ms": 182.876, "median_ms": 182.876, "p95_ms": 182.886, "max_ms": 182.994},
+    {"operation": "process-memory memcpy", "input_bytes": 12288, "output_bytes": 12288, "n": 40, "min_ms": 136.058, "median_ms": 136.058, "p95_ms": 136.068, "max_ms": 136.344}
+  ],
+  "production_context": {
+    "complete_heart_path_median_ms": 18.263,
+    "complete_heart_path_max_ms": 21.171,
+    "gate_ms": 33.34,
+    "max_512x32_plus_complete_heart_ms": 29.929,
+    "max_512x64_plus_complete_heart_ms": 34.276
+  },
+  "limits": [
+    "Call return is not optical scanout completion.",
+    "The standalone size process returned EOU error 237 when it later attempted a 512x192 allocation; the full point is therefore taken from the identical prepared full-write control.",
+    "CPU timings are process-level elapsed emulated time and are not cycle-exact instruction counts.",
+    "Dirty-region feasibility requires a fresh production live trace; it is not an accepted heartbeat result."
+  ],
+  "decision": "A"
+}
