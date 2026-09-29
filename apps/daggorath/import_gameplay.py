@@ -60,7 +60,7 @@ def generate(out):
    rows.append(values+[255]);p+=(5+length*5+7)//8
   lines.append('static const unsigned char '+name+'[][16]={'+','.join('{'+','.join(map(str,row))+'}' for row in rows)+'};')
   array(name+'_classes',classes)
- for name in ['T.PULL','T.STOW','T.GET','T.DROP','T.EXAM','T.LOOK','T.LT','T.RT']:
+ for name in ['T.ATTK','T.PULL','T.STOW','T.GET','T.DROP','T.EXAM','T.LOOK','T.LT','T.RT']:
   lines.append('#define PAR_'+name[2:]+' '+str(symbols[name]))
  array('status_hearts',[b(symbols['SPCTAB']+i) for i in range(28)])
  p=symbols['XXXTAB'];special=[]

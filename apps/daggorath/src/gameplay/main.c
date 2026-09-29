@@ -3,6 +3,7 @@
 #include "presentation.h"
 #include "logical.h"
 #include "native_heartbeat.h"
+#include "audio.h"
 Byte game_input(Byte path,Byte *key);
 static Game game;
 static CreatureScheduler creatureScheduler;
@@ -14,6 +15,10 @@ static unsigned long presentedGeneration;
 static unsigned long maximumPresentationLag;
 static unsigned long heartPresentations;
 static Byte phaseRefreshNeeded,audioBitValid,observedAudioBit;
+#ifdef _CMOC_VERSION_
+static AudioClient combatAudio;
+static Byte combatAudioState;
+#endif
 typedef struct { Byte *shownPhase; } RenderProgressContext;
 static Byte render_heart_progress(Game *g,Byte *partial,void *context);
 static Byte creature_heart_progress(void *context);
@@ -91,7 +96,7 @@ static Byte creature_heart_progress(void *context){
 }
 /* PULL/STOW/GET/DROP use original token rules; other commands retain M1 adapters.
  * EXIT remains an isolated OS-9-only lifecycle command. */
-int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,framePhase,view=GAME_VIEW_DUNGEON,nextView,secondPhase=0,frameRemainder,drained,inputEmpty,heartPatterns[28];Word previous,videoTicks,seconds;unsigned long frameGeneration;char input[32];RenderProgressContext renderContext;const char *message="TURN LEFT RIGHT AROUND  MOVE";
+int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,framePhase,view=GAME_VIEW_DUNGEON,nextView,secondPhase=0,frameRemainder,drained,inputEmpty,heartPatterns[28];Word previous,videoTicks,seconds;unsigned long frameGeneration;char input[32];RenderProgressContext renderContext;GameCombat combat;const char *message="TURN LEFT RIGHT AROUND  MOVE";
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
  presentedGeneration=maximumPresentationLag=heartPresentations=0;phaseRefreshNeeded=audioBitValid=0;
  memset(&heartbeatState,0,sizeof(heartbeatState));
@@ -152,8 +157,13 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
    e=os_signal_value(&signalFlag);if(e)break;
    e=game_input(screen_path(),&key);if(e||!key){inputEmpty=1;break;}
    if(key==13){input[n]=0;if(!strcmp(input,"EXIT"))break;
-    result=game_command(&game,input);nextView=game_display_command(input);if(result==GAME_OK&&nextView)view=nextView;message=game_message(input,result);
-    e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;n=0;input[0]=0;
+    result=game_command_combat(&game,input,&combat);nextView=game_display_command(input);if(result==GAME_OK&&nextView)view=nextView;message=game_message(input,result);
+    e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;
+#ifdef _CMOC_VERSION_
+    if(result==GAME_OK)audio_present_optional(&combatAudio,&combatAudioState,
+      combat.events,combat.eventCount,"/d1/dodaudio","ssc-mame-fast");
+#endif
+    n=0;input[0]=0;
    }else if(key==8){if(n)input[--n]=0;}
    else if(key>=32&&key<=126&&n<31){if(key>='a'&&key<='z')key-=32;input[n++]=key;input[n]=0;}
    /* Enter changes game/message state and requires a full scene render.
@@ -195,7 +205,11 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   if(game.dead)break;
   if(inputEmpty){e=os_sleep(1);if(e)break;}
  }
- done:r=native_heartbeat_close(&heartbeat);if(!e)e=r;r=screen_close();if(!e)e=r;
+ done:
+#ifdef _CMOC_VERSION_
+ if(combatAudioState==AUDIO_OPTIONAL_READY){audio_finish(&combatAudio);combatAudioState=AUDIO_OPTIONAL_DISABLED;}
+#endif
+ r=native_heartbeat_close(&heartbeat);if(!e)e=r;r=screen_close();if(!e)e=r;
  printf("DODGAME HEARTBEAT EDGE %lu PRESENTED %lu MAX_PHASE_LAG %lu HEART_PRESENTS %lu\r",heartbeatState.edgeGeneration,presentedGeneration,maximumPresentationLag,heartPresentations);
  printf("DODGAME TERM RESTORED ROW %u COL %u DIR %u RATE %u STATUS %u\r",game.row,game.col,game.dir,game.rate,e);
  return e;

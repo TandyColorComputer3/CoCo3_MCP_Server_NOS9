@@ -13,8 +13,16 @@ typedef struct {
  * byte-for-byte stable. countdown[] models the original Q.TEN TCB timers. */
 typedef struct { Word countdown[32]; Byte framePhase; Byte combatPending[32]; } CreatureScheduler;
 enum { GAME_OK=0,GAME_BLOCKED=1,GAME_INVALID=2,GAME_FAINT=3 };
+/* PATTK/ATTACK/DAMAGE result facts. Event values are original SOUNDS.ASM
+ * dispatch IDs, consumed by the existing semantic audio service. */
+typedef struct {
+ Byte events[3],eventCount,rngCalls,hit,killed,target;
+ Word energy,hitValue,damage;
+} GameCombat;
 void game_init(Game *g,Byte second);
 Byte game_command(Game *g,const char *command);
+Byte game_command_combat(Game *g,const char *command,GameCombat *combat);
+Byte game_population(const Game *g,Byte type);
 const char *game_message(const char *command,Byte result);
 /* DSPMOD is UI state, separate from authoritative Game inventory. */
 enum { GAME_VIEW_KEEP=0,GAME_VIEW_DUNGEON=1,GAME_VIEW_EXAMINE=2 };

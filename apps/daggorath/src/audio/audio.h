@@ -44,6 +44,9 @@
 #define AUDIO_IO 245
 #define AUDIO_EOF 211
 typedef struct { Byte command, reply, pid, sequence, pending, opened; } AudioClient;
+#define AUDIO_OPTIONAL_NEW 0
+#define AUDIO_OPTIONAL_READY 1
+#define AUDIO_OPTIONAL_DISABLED 2
 Byte audio_validate(const Byte *frame);
 void audio_frame(Byte *frame, Byte op, Byte sound, Byte gain, Byte sequence);
 Byte audio_start(AudioClient *client, const char *service, const char *profile);
@@ -51,4 +54,7 @@ Byte audio_submit(AudioClient *client, Byte op, Byte sound, Byte gain);
 Byte audio_receive(AudioClient *client);
 Byte audio_finish(AudioClient *client);
 Byte audio_cancel(AudioClient *client);
+void audio_present_optional(AudioClient *client, Byte *state,
+                            const Byte *events, Byte eventCount,
+                            const char *service, const char *profile);
 #endif

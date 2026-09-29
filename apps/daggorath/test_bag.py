@@ -47,8 +47,14 @@ class Bag(unittest.TestCase):
   self.cmd('PULL-LEFT-WOODEN-SWORD');self.hands(0xe87,0)
  def test_wrong_direction_and_absent_objects(self):
   before=self.g.raw
-  for s in ['PULL UP TORCH','PULL BACKWARD TORCH','PULL L SHIELD','PULL L ELVISH SWORD','DROP LEFT','GET RIGHT TORCH','ATTACK LEFT']:
+  for s in ['PULL UP TORCH','PULL BACKWARD TORCH','PULL L SHIELD','PULL L ELVISH SWORD','DROP LEFT','GET RIGHT TORCH']:
    self.cmd(s,2);self.assertEqual(self.g.raw,before)
+  # PATTK substitutes EMPHND for an empty selected hand. COMDAT gives it
+  # sword class, magic offense 0 and physical offense 5; 5>>3 charges zero
+  # energy at this power. With no creature at the initial cell, no RNG is used.
+  before=self.g.raw;seed=self.g.raw[2576:2579];power=self.word(2588);damage=self.word(2590)
+  self.cmd('ATTACK LEFT');self.assertEqual(self.g.raw,before)
+  self.assertEqual((self.g.raw[2576:2579],self.word(2588),self.word(2590)),(seed,power,damage))
  def test_torch_selection_extinguished_by_pull(self):
   self.cmd('PULL LEFT TORCH');self.cmd('USE LEFT');self.assertEqual(self.word(2598),0xe95)
   self.cmd('P R PINE TORCH');self.assertEqual(self.word(2598),0);self.assertEqual(self.g.raw[2586],0)

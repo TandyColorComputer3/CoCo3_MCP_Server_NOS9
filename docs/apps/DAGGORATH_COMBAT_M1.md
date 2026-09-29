@@ -1,9 +1,10 @@
 # Dungeons of Daggorath Combat Milestone 1 Reference
 
-Combat M1 is currently a reference-analysis checkpoint. No production combat code is
-implemented by this pass. Its purpose is to resolve the command-10 `ATTACK RIGHT`
-dependency that blocked the full attract loop in
-[`DAGGORATH_ATTRACT_M1.md`](DAGGORATH_ATTRACT_M1.md).
+Combat M1 began as the reference-analysis checkpoint below and now includes the
+bounded production implementation and validation recorded at the end of this report.
+Its purpose is to resolve the command-10 `ATTACK RIGHT` dependency that blocked the
+full attract loop in [`DAGGORATH_ATTRACT_M1.md`](DAGGORATH_ATTRACT_M1.md), while
+retaining ordinary `ATTACK LEFT|RIGHT` behavior inside the same source-derived path.
 
 The authoritative program source is the read-only checkout
 `/Volumes/SEDONA/Projects/daggorath-reference` at commit
@@ -335,3 +336,146 @@ The acceptance reference for the attract path is the exact transition documented
 above: live SGINT2 slot 18 at `(9,22)`, seed `$F194D4`, iron sword attack, one RNG draw
 to `$65F194`, hit result `$005E`, damage `$02C4`, kill, population `6 -> 5`, power
 `$17A0 -> $17F8`, player damage `$0010 -> $00FC`, and the three semantic sound events.
+
+## Production implementation
+
+The implementation remains in the existing gameplay state layer. `game.c` adds a
+general `ATTACK LEFT|RIGHT` path rather than an autoplay or command-10 branch. It uses
+the port's existing packed 14-byte OCBs, 17-byte CCBs, 24-bit RNG, player fields and
+health calculation. Address-token OCB links are translated only at the existing OCB
+boundary. `GameCombat` reports the source-visible result and ordered semantic sound
+events to the platform layer without placing OS-9 or SSC operations in game logic.
+
+The implemented order follows `PATTK.ASM`:
+
+1. select the requested hand and substitute `EMPHND` when it is empty;
+2. copy magic/physical offense, charge attack energy with `SCAL16` truncation, and
+   request the weapon-class sound;
+3. consume ring charge where applicable, find the first live same-cell CCB, and run
+   the original hit calculation;
+4. consume the second RNG byte only for the source darkness gate;
+5. request `KLINK`, apply separately truncated magic and physical damage, and take
+   either the nonlethal return or death path;
+6. follow the creature's packed carried-object list, drop those OCBs into its cell,
+   release the CCB, request `BANG`, absorb one eighth of creature power with the
+   original cap, and recalculate health/heartbeat rate.
+
+The current level has no separately retained `CMXLND` regeneration matrix in the
+bounded port. Its population is represented by live packed CCBs; releasing the killed
+type-5 CCB changes the observable type-5 population from six to five. Level-transition
+regeneration remains outside M1.
+
+`main.c` sends `GameCombat.events` through the established semantic `dodaudio` client.
+The service is started lazily at `/d1/dodaudio` with the existing `ssc-mame-fast`
+profile. Each event is submitted and drained before the next, preserving the original
+synchronous event order without moving waveform generation into the game process.
+The native VIRQ heartbeat code and the 23-effect SSC catalog are unchanged.
+
+Audio is an optional presentation service. `main.c` propagates the authoritative
+post-command heartbeat rate before it calls the audio client. Failure to start the
+service, validate its greeting, send or receive an event, or drain an effect is not a
+game error. Startup failure marks audio unavailable for the rest of that process, so
+later attacks do not repeat a failing fork. An established client that fails is
+cancelled/closed and likewise disabled. Combat state, RNG state, parser continuation,
+heartbeat propagation and normal exit do not depend on audio availability. Audio
+shutdown errors during final cleanup are also presentation-only and do not replace the
+game's exit status.
+
+## Approved correction to the pre-Combat test contract
+
+One existing `test_bag.py` expectation classified empty-hand `ATTACK LEFT` as invalid
+and required rejection. That expectation contradicted the original source and was
+changed only after explicit approval:
+
+- `PATTK.ASM:11-14` selects the hand and substitutes `EMPHND` when its pointer is zero.
+- `COMDAT.ASM:123-127` initializes `EMPHND` with class 4, magic offense 0 and physical
+  offense 5.
+- `PATTK.ASM:24-40` charges energy and emits `SNDOBJ + class`; `SOUNDS.ASM:80-90`
+  maps class 4 to `WHOOSH`.
+
+The corrected legacy test now requires success, unchanged initial state, zero energy
+at power 160 (`(0 + 5) >> 3 == 0`), and no RNG consumption when no creature occupies
+the cell. A new Combat M1 assertion additionally observes the class-4 `WHOOSH` event.
+All unrelated bag assertions remain unchanged.
+
+## Golden fixture and bounded branch coverage
+
+The host C fixture mechanically constructs the documented command-10 state and runs
+the production combat function. Its exact assertions pass:
+
+| Result | Required and observed |
+|---|---:|
+| attack energy / player damage | `236` / `252` |
+| RNG calls / transition | `1`, `$F194D4 -> $65F194` |
+| signed hit result | `94` |
+| physical damage | `708` |
+| target / death | CCB 18 / killed and released |
+| type-5 live population | `6 -> 5` |
+| player power / heartbeat rate | `6136` / `41` |
+| semantic events | `WHOOSH -> KLINK -> BANG` |
+
+The same test executable also verifies parser continuation after the golden attack,
+empty-hand class/energy/RNG behavior, a
+left-hand ring with charge consumption and a guaranteed nonlethal hit, a weak miss,
+the second darkness RNG draw and miss, packed carried-object dropping, and invalid
+direction rejection. These branches use the same production function as the golden
+fixture. No command-10 constant or fixture-specific production branch exists.
+
+## Build provenance and module impact
+
+The reproducible target command is generated by `build_gameplay.py` and invokes CMOC
+with `--os9 -O0 --intermediate --verbose --add-os9-stack-space=1536`, the application
+include paths, and the production gameplay, presentation, OS-9, heartbeat and audio
+client sources. The resolved tools were:
+
+```text
+/usr/local/bin/cmoc   cmoc 0.1.90
+/usr/local/bin/lwasm lwasm from lwtools 4.22
+/usr/local/bin/lwlink lwlink from lwtools 4.22
+```
+
+CMOC compiled and drove the OS-9 link. Its generated/intermediate assembly used
+`lwasm`; `lwlink` produced the module. Two clean builds were byte-identical with
+SHA-256 `9d802e55458c7024bed1bb9df6bda0787c37b11fa461c6ab0a2496573f91ce2f`.
+ToolShed identifies `dodgame` as an edition-1, re-entrant/read-only OS-9 6809 program:
+
+```text
+module size  $96B1 / 38,577 bytes
+data size    $2A14 / 10,772 bytes
+entry        $000D
+CRC          90C7EF (Good)
+```
+
+The committed pre-Combat artifact rebuilt as 33,815 bytes with 10,765 bytes of data
+and CRC `9D2CD2`. Combat M1 therefore adds 4,762 module bytes and seven requested data
+bytes. The increase includes linking the already established audio client/event code;
+it does not add a framebuffer or another large runtime allocation. The 64K Level II
+process ceiling remains a constraint for subsequent milestones. The optional-audio
+correction added eight bytes relative to the audited 38,569-byte build. The module
+still uses five 8K program blocks and has 2,383 bytes before the 40,960-byte boundary.
+
+## Validation and limitations
+
+All 20 Daggorath host test scripts passed after the implementation, including 13
+Combat M1 source-state checks and the corrected 13-test bag suite. The complete MCP
+suite passed 115/115 and the TypeScript build passed. Both clean target builds were
+byte-identical and ToolShed reported a good CRC.
+
+The existing audio client suite now also proves the optional policy: the golden three
+events retain `WHOOSH -> KLINK -> BANG` order when the service works; startup failure
+is swallowed and not retried; and a send failure after successful initialization
+cancels the client and disables later audio. The Combat fixture retains the exact
+rate-41 state and accepts the next ordinary parser command. A source-order assertion
+guards the critical `combat -> heartbeat propagation -> optional audio` sequence.
+
+No MAME run was made for this implementation pass. The exact cartridge result was
+already established by the two reproducible debugger captures, and the task forbids
+reusing the crashing Lua tap path. Consequently the arithmetic/state transition and
+semantic event sequence are verified, while live PCM timing and an EOU execution of
+the new module remain future integration evidence.
+
+M1 still excludes creature attacks against the player, complete shield/defense and
+faint/death presentation, level regeneration, wizard/endgame branches, and Attract
+M1B chaining. Its type-10/type-11 endgame effects are not implemented. Combat sound
+events use the already accepted enhanced SSC recipes; they are semantic mappings, not
+claims of cartridge-waveform identity.

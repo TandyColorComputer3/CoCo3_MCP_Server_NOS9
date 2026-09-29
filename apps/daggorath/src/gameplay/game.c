@@ -8,11 +8,13 @@
 #endif
 #include "game.h"
 #include "game_data.h"
+#include "audio/audio.h"
 static const signed char dr[]={-1,0,1,0},dc[]={0,1,0,-1};
 static Word getword(const Byte *p){return (Word)p[0]*256+p[1];}
 static void putword(Byte *p,Word w){p[0]=w>>8;p[1]=w&255;}
 #define OBASE 0x0b15
 static Byte *ocb(Game *g,Word p){return g->objects[(p-OBASE)/14];}
+static Byte valid_ocb(const Game *g,Word p){return p>=OBASE&&p<OBASE+(Word)g->count*14&&((p-OBASE)%14)==0;}
 Byte game_random(Game *g){Byte n,i,b,carry,next;
  for(n=0;n<8;n++){b=g->seed[2]&0xe1;carry=0;for(i=0;i<8;i++){carry^=b&1;b>>=1;}
   for(i=0;i<3;i++){next=g->seed[i]>>7;g->seed[i]=(g->seed[i]<<1)|carry;carry=next;}}
@@ -51,6 +53,10 @@ static void health(Game *g){unsigned long numerator=(unsigned long)g->power*64,d
  if(!g->faint&&(signed char)g->rate<=3)g->faint=1;
  else if(g->faint&&(signed char)g->rate>4)g->faint=0;
  g->dead=g->power<g->damage;
+}
+Byte game_population(const Game *g,Byte type){Byte i,n=0;
+ for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][13]==type)++n;
+ return n;
 }
 void game_init(Game *g,Byte second){Byte type,level,n,r,c,i;int t;Word p,tail;Byte *o,*cr;
  memset(g,0,sizeof(*g));g->row=16;g->col=11;g->power=160;g->weight=35;
@@ -122,8 +128,55 @@ Byte game_display_command(const char *s){Byte t[33];int cmd;
  token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
  return cmd==PAR_EXAM?GAME_VIEW_EXAMINE:cmd==PAR_LOOK?GAME_VIEW_DUNGEON:GAME_VIEW_KEEP;
 }
-Byte game_command(Game *g,const char *s){Word *hand;Byte *o;int r,c;Byte result=GAME_OK;
+/* PATTK.ASM:SCAL16 is unsigned radix-7 multiplication. The original
+ * bytewise routine truncates the discarded seven low bits. */
+static Word scale16(Word value,Byte radix){return (Word)(((unsigned long)value*radix)>>7);}
+static void combat_event(GameCombat *c,Byte event){if(c&&c->eventCount<3)c->events[c->eventCount++]=event;}
+static Byte attack(Game *g,const char *s,GameCombat *combat){Byte t[33],*weapon=0,*creature=0,i,index=15,mgo=0,pho=5,kind=0,cls=4,random;
+ Word *hand,power,remaining,value,energy,magic,physical,next;int adjustment,score;Byte ring=0;
+ if(combat){memset(combat,0,sizeof(*combat));combat->target=255;}
+ s=token(s,t);if(classify(t,parser_commands,sizeof(parser_commands)/16)!=PAR_ATTK)return 255;
+ token(s,t);i=(Byte)classify(t,parser_directions,sizeof(parser_directions)/16);
+ if(i==PAR_LT)hand=&g->hand;else if(i==PAR_RT)hand=&g->rightHand;else return GAME_INVALID;
+ if(*hand){if(!valid_ocb(g,*hand))return GAME_INVALID;weapon=ocb(g,*hand);kind=weapon[9];cls=weapon[10];mgo=weapon[12];pho=weapon[13];}
+ /* PATTK: empty hand is initialized as sword class, magic 0, physical 5. */
+ energy=scale16(g->power,(Byte)(((Word)mgo+pho)>>3));g->damage=(Word)(g->damage+energy);
+ if(combat)combat->energy=energy;combat_event(combat,(Byte)(AUDIO_GLUGLG+cls));
+ /* Incantable rings spend one charge before target lookup and always hit. */
+ if(weapon&&kind>=19&&kind<=21){ring=1;if(--weapon[6]==0)weapon[9]=22;}
+ for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][15]==g->row&&g->creatures[i][16]==g->col){creature=g->creatures[i];break;}
+ if(!creature){health(g);return GAME_OK;}if(combat)combat->target=i;
+ if(!ring){
+  remaining=(Word)(getword(creature)-getword(creature+10));value=(Word)(remaining<<2);
+  do{Word old=value;value=(Word)(value-g->power);if(old<g->power)break;--index;}while(index);
+  adjustment=index>=3?(index-3)*10:-(3-index)*25;
+  random=game_random(g);if(combat)++combat->rngCalls;score=(int)random+adjustment-127;
+  if(combat)combat->hitValue=(Word)score;
+  if(score<0){health(g);return GAME_OK;}
+  /* A live torch admits the hit. Darkness consumes a second RANDOM and
+   * retains the hit only for the source's one-in-four low-bit result. */
+  if(!g->torch||!valid_ocb(g,g->torch)||ocb(g,g->torch)[9]==24){random=game_random(g);if(combat)++combat->rngCalls;if(random&3){health(g);return GAME_OK;}}
+ }
+ if(combat)combat->hit=1;combat_event(combat,AUDIO_KLINK);
+ power=g->power;magic=scale16(scale16(power,mgo),creature[3]);
+ physical=scale16(scale16(power,pho),creature[5]);
+ value=(Word)(getword(creature+10)+magic+physical);putword(creature+10,value);
+ if(combat)combat->damage=(Word)(magic+physical);
+ if(value<getword(creature)){health(g);return GAME_OK;}
+ if(combat)combat->killed=1;
+ /* PATTK:PATT30 follows the packed address-token object list, drops each
+  * object in CCB order, and deliberately leaves the dead CCB's head token. */
+ next=getword(creature+8);for(i=0;next&&i<72;i++){
+  if(!valid_ocb(g,next))break;weapon=ocb(g,next);weapon[5]=0;weapon[2]=creature[15];weapon[3]=creature[16];next=getword(weapon);
+ }
+ creature[12]=0;combat_event(combat,AUDIO_BANG);
+ next=(Word)(g->power+(getword(creature)>>3));g->power=(next&0x8000)?(Word)(0x7f00|(next&255)):next;
+ health(g);return GAME_OK;
+}
+Byte game_command_combat(Game *g,const char *s,GameCombat *combat){Word *hand;Byte *o,attackResult;int r,c;Byte result=GAME_OK;
+ if(combat){memset(combat,0,sizeof(*combat));combat->target=255;}
  if(g->faint||g->dead)return GAME_FAINT;
+ attackResult=attack(g,s,combat);if(attackResult!=255)return attackResult;
  if(!strcmp(s,"TURN LEFT"))g->dir=(g->dir-1)&3;
  else if(!strcmp(s,"TURN RIGHT"))g->dir=(g->dir+1)&3;
  else if(!strcmp(s,"TURN AROUND"))g->dir=(g->dir+2)&3;
@@ -134,6 +187,7 @@ Byte game_command(Game *g,const char *s){Word *hand;Byte *o;int r,c;Byte result=
  }else if(!game_display_command(s)){if(bag_command(g,s)!=GAME_OK)return GAME_INVALID;}
  g->lit=g->torch!=0;return result;
 }
+Byte game_command(Game *g,const char *s){return game_command_combat(g,s,0);}
 /* PGET handlers print no success text; PARSER:CMDERR prints three I.QUES.
  * Preserve the older UI adapter for commands outside this slice. */
 const char *game_message(const char *s,Byte result){Byte t[33];int cmd;

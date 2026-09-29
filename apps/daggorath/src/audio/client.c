@@ -55,3 +55,23 @@ Byte audio_cancel(AudioClient *c){Byte e,pid,status,r;
  r=ipc_wait(&pid,&status);if(!e)e=r;if(!e&&pid!=c->pid)e=AUDIO_BAD;if(!e)e=status;
  ipc_close(c->command);ipc_close(c->reply);c->opened=0;return e;
 }
+/* Presentation must not control authoritative gameplay. A failed optional
+ * service is disabled for this process lifetime so combat and heartbeat state
+ * continue without repeated fork/IPC delays. */
+void audio_present_optional(AudioClient *c,Byte *state,const Byte *events,
+                            Byte eventCount,const char *service,const char *profile){
+ Byte i,e;
+ if(!eventCount||*state==AUDIO_OPTIONAL_DISABLED)return;
+ if(*state==AUDIO_OPTIONAL_NEW){
+  e=audio_start(c,service,profile);
+  if(e){*state=AUDIO_OPTIONAL_DISABLED;return;}
+  *state=AUDIO_OPTIONAL_READY;
+ }
+ for(i=0;i<eventCount;i++){
+  e=audio_submit(c,AUDIO_CATALOG_PLAY,events[i],255);
+  if(!e)e=audio_receive(c);
+  if(!e)e=audio_submit(c,AUDIO_DRAIN,0,0);
+  if(!e)e=audio_receive(c);
+  if(e){if(c->opened)audio_cancel(c);*state=AUDIO_OPTIONAL_DISABLED;return;}
+ }
+}
