@@ -656,6 +656,154 @@ cancellation and complete gameplay behavior before replacing production code.
 
 ## Staged migration plan
 
+## Production command-overlay extraction (uncommitted)
+
+The first extraction moves the low-frequency command subsystem from the permanent
+`dodgame` map into a one-block callable module named `dodcmd`.  It deliberately
+keeps `Game`, the RNG seed, native-heartbeat state, the logical framebuffer and
+all CoWin/presentation ownership resident in `dodgame`.
+
+### Boundary and ABI
+
+`command-overlay.c` contains the existing general implementations of command
+tokenization/classification, bag operations, `ATTACK LEFT|RIGHT`, `EXAMINE`, and
+their private tables.  It has no persistent game copy.  `overlay-api.h` defines
+ABI v1: A=`1`, B=`DOD_OVERLAY_COMMAND` or `DOD_OVERLAY_EXAMINE`, and X points to
+the caller-owned `DagOverlayContextV1`.  The context carries the resident
+`Game *`, an explicit versioned callback table, command/result fields and an
+optional framebuffer pointer.  The callable header in
+`command-overlay-module.asm` validates A/B before calling the CMOC leaf and
+returns `E$IllArg` (`187`) without modifying the context or `Game` for a bad ABI.
+
+The resident callbacks are intentionally narrow: health calculation, object-name
+lookup and status rendering.  This prevents the overlay from importing host C
+globals or assuming the host module's U/data layout.  Combat audio remains in
+the resident best-effort client: the overlay reports semantic combat events to
+the ordinary host path after gameplay state and heartbeat propagation have
+completed.  Missing or failed `dodaudio` therefore cannot affect combat, RNG or
+heartbeat state.
+
+### Retained residency and mapping
+
+The production host follows the proven retained-reference lifetime, using the
+Level II non-mapping load form `F$NMLoad` (`$22`) for `/d1/dodcmd`, then a
+temporary `F$Link` (`$00`) by module name for each command, and `F$UnLink`
+(`$02`) immediately after the call.  The final retained reference is released
+with `F$UnLoad` (`$1D`) during normal game teardown.  This is the non-mapping
+equivalent needed for the requested retained load: using ordinary mapping
+`F$Load` would occupy the free DAT slot that must remain available for the
+temporary link.  Current upstream evidence is `level1/modules/ioman.asm`
+(`FNMLoad`) and `level1/modules/kernel/funlink.asm` in
+[`nitros9-reference`](/Volumes/SEDONA/Projects/nitros9-reference); the earlier
+EOU ABI proof supplies the runtime evidence for the retained-reference pattern.
+
+The intended Level II logical-map accounting is:
+
+| State | Program | Process data | CoWin | `dodcmd` | Total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Normal graphical gameplay | 4 × 8K | 2 × 8K | 1 × 8K | 0 | 7 / 8 |
+| During a command-overlay call | 4 × 8K | 2 × 8K | 1 × 8K | 1 × 8K | 8 / 8 |
+| After `F$UnLink` | 4 × 8K | 2 × 8K | 1 × 8K | 0 | 7 / 8 |
+
+`dodcmd` remains physically resident through the retained non-mapping reference,
+so later calls should relink from the module directory without a disk read.  The
+host disables future calls if an unlink failure makes the mapping lifetime
+uncertain; an unavailable module makes the command fail explicitly before
+authoritative execution rather than partially updating `Game`.
+
+### Exact build result
+
+Two clean builds on 2026-09-29 were byte-identical.
+
+| Artifact | Size | Data request | Identity | SHA-256 | Mapping |
+| --- | ---: | ---: | --- | --- | --- |
+| pre-extraction `dodgame` | 38,577 B | 10,772 B | committed Combat M1 baseline | `9d802e55458c7024bed1bb9df6bda0787c37b11fa461c6ab0a2496573f91ce2f` | 5 program + 2 data blocks |
+| extracted `dodgame` | 32,758 B | 10,786 B | `$11/$81`, edition 1, CRC `F46F28` | `029739f98752479bde0d60b1a72b8b762a38d023242e622c62e12c8c1e179df0` | 4 program + 2 data blocks |
+| `dodcmd` | 6,901 B | module-local CMOC leaf stack only | `$21/$80`, edition 1, CRC `8C162B` | `9ab5ff77e14c0da5ce7f0956e09ef337bfe8a11e2b045fb3a5d1dd9524f98355` | 1 temporary program block |
+
+The resident module is 10 bytes below the 32,768-byte four-block boundary.  Its
+10,786-byte data request remains inside two 8K logical blocks (16,384 bytes).
+The command overlay is 1,291 bytes below the one-block 8,192-byte boundary.
+The 5,819-byte resident reduction is 10 bytes beyond the required 5,809-byte
+reclamation.
+
+### Validation and remaining live boundary
+
+New overlay checks compile the exact command overlay against the resident game
+API and verify command/bag/combat parity, `EXAMINE` framebuffer parity, rejected
+ABI v1 mismatch without state mutation, retained-link ownership, balanced
+link/unlink and missing-module behavior.  The complete Daggorath test set passed
+after the extraction, including Combat (13), bag (13), EXAMINE (11), audio,
+creature, heartbeat, presentation and lifecycle suites.  The MCP suite and its
+TypeScript build also passed without source changes in MCP.
+
+An isolated disposable EOU run restored `nos9_ready_v2` and mounted a copied
+artifact floppy containing `dodcmd` and an overlay-only probe.  Its raw
+keyboard launch did not yield a reliable Shell+ process-status observation, so
+it is **not** evidence that the production `/d1/dodcmd` load/link/call/unlink
+cycle has completed live.  The earlier ABI prototype did prove the same
+`Sbrtn+Objct` call, unlink, retained residency and relink behavior (10 → 11 →
+12), but the production overlay still needs one controlled guest-status run
+before this extraction can be accepted as live-complete.  No canonical media
+was used for that attempt.
+
+### Final production-extraction acceptance
+
+#### Proven
+
+- Two clean builds produced byte-identical `dodgame` artifacts: 32,758 bytes,
+  CRC `F46F28`, SHA-256
+  `029739f98752479bde0d60b1a72b8b762a38d023242e622c62e12c8c1e179df0`.
+  The resident program therefore uses four 8 KiB logical blocks rather than the
+  committed Combat M1 baseline's five; its 10,786-byte data request remains two
+  blocks. Normal graphical gameplay is consequently `4 program + 2 data + 1
+  CoWin = 7/8` logical blocks.
+- Two clean builds produced byte-identical `dodcmd` artifacts: 6,901 bytes,
+  CRC `8C162B`, SHA-256
+  `9ab5ff77e14c0da5ce7f0956e09ef337bfe8a11e2b045fb3a5d1dd9524f98355`.
+  It is a reentrant/read-only `$21/$80` `Sbrtn+Objct` module and fits one 8 KiB
+  temporary logical block.
+- The independent live Level II ABI prototype established retained physical
+  residency, `F$Link`, callable module execution, host-state persistence
+  (`10 → 11 → 12`), `F$UnLink`, relink without a disk reread, and rejected-ABI
+  `E$IllArg` handling without state corruption.
+- Production overlay-host/unit tests pass, including retained-link ownership,
+  balanced link/unlink, missing-module handling, command/bag/combat parity and
+  EXAMINE framebuffer parity. The Combat M1 golden fixture traverses the
+  extracted implementation; bag and EXAMINE suites, the relevant Daggorath
+  regressions, MCP's 115 tests, and the TypeScript build have passed.
+- In the recovered M6 disposable EOU environment, the exact production
+  `dhbpack` and `dodgame` modules loaded through verified Shell+/MCPDONE status
+  handling with guest status `000`. Canonical media and the canonical ready
+  state remained unchanged.
+
+#### Live production `/w` overlay-cycle acceptance pending
+
+We have **not** observed one complete live production cycle:
+
+```text
+/w input → parser → F$Link dodcmd → command → F$UnLink → continuation → status
+```
+
+`dodgame` owns a private graphics `/w` input path, so inherited standard input
+cannot drive its command loop. Timing-sensitive keyboard delivery was rejected
+as unreliable. The bounded debugger-assisted attempt could not obtain a
+trustworthy live runtime input/mapping observation before the application
+returned to Term. No production input behavior was changed to make that test
+possible. This is an **acceptance instrumentation limitation**, not an observed
+`dodgame` or `dodcmd` defect.
+
+Future graphical applications should prefer a deliberately designed diagnostic
+or test seam over ad-hoc keyboard/debugger injection. Such a seam is deferred;
+it must not alter normal production semantics merely to support acceptance.
+
+### Scope status
+
+This extraction does not begin Attract M1B and does not change the high-frequency
+renderer, CoWin ownership, heartbeat VIRQ, audio recipes, parser semantics or
+canonical media. It is ready for source review with the live `/w` observation
+explicitly pending.
+
 1. **Freeze the baseline.** Preserve the current module identity, map and behavioral
    suites as the comparison point.
 2. **Build a disposable ABI proof.** A tiny CMOC host links a reentrant one-block

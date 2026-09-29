@@ -40,14 +40,19 @@ def generate(out):
   for i in range(count):
    addr=word(symbols[table]+i*2);names.append(next(k for k,v in symbols.items() if v==addr))
  lines=['/* Generated original data only. Dyna Micro; see PROVENANCE.md. */']
+ overlay=['/* Generated command-overlay data only. Dyna Micro; see PROVENANCE.md. */']
  flat=[];ranges=[]
  for name in names:
   v=segments(symbols[name]);ranges.append((len(flat),len(v)));flat+=v
  lines+=['static const unsigned char game_vectors[][4]={']+['{'+','.join(map(str,v))+'},' for v in flat]+['};']
  lines+=['static const unsigned short game_lists[][2]={'+','.join('{%d,%d}'%v for v in ranges)+'};']
  def array(name,values):lines.append('static const unsigned char '+name+'[]={'+','.join(map(str,values))+'};')
+ def overlay_array(name,values):overlay.append('static const unsigned char '+name+'[]={'+','.join(map(str,values))+'};')
  for name,label,size in [('odb','ODBTAB',100),('cdb','CDBTAB',96),('omx','OMXTAB',18),('cmt','CMTTAB',12),('font','SWCTAB',155),('object_weights','OBJWGT',6)]:
+  if name=='object_weights': lines.append('#ifndef DOD_COMMAND_OVERLAY')
   array(name,[b(symbols[label]+i) for i in range(size)])
+  if name=='object_weights': lines.append('#endif')
+  if name in ['object_weights','font']:overlay_array(name,[b(symbols[label]+i) for i in range(size)])
  # STATUS:COPY$ skips the first expanded byte (token class; PARSER:PARS20).
  # Retain the original 5-bit alphabet, not a hand-transcribed name catalog.
  for name,label in [('status_adjectives','ADJTAB'),('status_generics','GENTAB'),('parser_commands','CMDTAB'),('parser_directions','DIRTAB')]:
@@ -58,10 +63,16 @@ def generate(out):
    expanded=[five_at(5+i*5) for i in range(length)]
    classes.append(expanded[0]);values=expanded[1:]
    rows.append(values+[255]);p+=(5+length*5+7)//8
+  if name in ['parser_commands','parser_directions']: lines.append('#ifndef DOD_COMMAND_OVERLAY')
   lines.append('static const unsigned char '+name+'[][16]={'+','.join('{'+','.join(map(str,row))+'}' for row in rows)+'};')
   array(name+'_classes',classes)
+  if name in ['parser_commands','parser_directions']: lines.append('#endif')
+  if name in ['status_adjectives','status_generics','parser_commands','parser_directions']:
+   overlay.append('static const unsigned char '+name+'[][16]={'+','.join('{'+','.join(map(str,row))+'}' for row in rows)+'};')
+   overlay_array(name+'_classes',classes)
  for name in ['T.ATTK','T.PULL','T.STOW','T.GET','T.DROP','T.EXAM','T.LOOK','T.LT','T.RT']:
   lines.append('#define PAR_'+name[2:]+' '+str(symbols[name]))
+  overlay.append('#define PAR_'+name[2:]+' '+str(symbols[name]))
  array('status_hearts',[b(symbols['SPCTAB']+i) for i in range(28)])
  p=symbols['XXXTAB'];special=[]
  while b(p)<128:special.extend(b(p+i) for i in range(4));p+=4
@@ -76,6 +87,7 @@ def generate(out):
   p+=1
  array('vertical',vertical)
  (out/'game_data.h').write_text('\n'.join(lines)+'\n')
+ (out/'overlay_data.h').write_text('\n'.join(overlay)+'\n')
  record={'commit':COMMIT,'command':cmd,'vectorLists':names,'files':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in REF.glob('*.ASM')},'headerSha256':hashlib.sha256((out/'game_data.h').read_bytes()).hexdigest()}
  (out/'game-data-provenance.json').write_text(json.dumps(record,indent=2)+'\n')
  return record

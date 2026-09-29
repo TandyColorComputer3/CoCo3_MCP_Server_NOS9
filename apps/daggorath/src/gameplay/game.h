@@ -49,6 +49,11 @@ void game_render_input(Byte *frame,const char *input,const Byte *underlay);
 Byte game_render_input_progress(Game *g,Byte *frame,const char *input,const Byte *underlay,
                                 GameRenderProgress progress,void *context);
 Byte game_random(Game *g);
+/* Narrow resident services passed explicitly to the dynamic command overlay.
+ * They preserve the existing packed-state interpretation; the overlay never
+ * imports resident C symbols directly. */
+void game_health(Game *g);
+Byte game_object_name(Game *g,Word token,Byte *name);
 void game_creature_init(Game *g,CreatureScheduler *scheduler);
 /* Consume emulated 60 Hz video ticks. Returns nonzero when the visible scene
  * needs a redraw; same-cell attack entry is reported, never executed. */

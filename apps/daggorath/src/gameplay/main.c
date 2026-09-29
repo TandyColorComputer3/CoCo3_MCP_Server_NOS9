@@ -4,6 +4,9 @@
 #include "logical.h"
 #include "native_heartbeat.h"
 #include "audio.h"
+#ifdef DOD_COMMAND_OVERLAY
+#include "overlay-api.h"
+#endif
 Byte game_input(Byte path,Byte *key);
 static Game game;
 static CreatureScheduler creatureScheduler;
@@ -106,6 +109,11 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   * an explicit deterministic test mode; neither changes LVLTAB maze seeds. */
  game_init(&game,argc==2?0:previous/60);game_creature_init(&game,&creatureScheduler);input[0]=0;renderContext.shownPhase=&shownPhase;
  game_heart_patterns(heartPatterns);screen_set_heart_patterns(heartPatterns);e=screen_open();if(e)goto done;
+#ifdef DOD_COMMAND_OVERLAY
+ /* Retain the module before the heartbeat-critical interval.  Its non-mapped
+  * reference leaves the eighth DAT slot free until a command actually links. */
+ (void)game_overlay_open();
+#endif
  /* INIVUX: rate already computed; activation starts with remaining=1.
   * All module loads and graphics allocation precede the native claim. */
  e=os_clock(&previous,1);if(e)goto done;e=native_heartbeat_open(&heartbeat);if(e)goto done;
@@ -129,7 +137,13 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   /* Present simulation/scene changes before accepting another text byte, so
    * every subsequently consumed character can use the fast UI-only path. */
   if(dirty==1){
-   if(view==GAME_VIEW_EXAMINE)game_render_examine(&game,frame,"",message);
+   if(view==GAME_VIEW_EXAMINE){
+#ifdef DOD_COMMAND_OVERLAY
+    e=game_overlay_examine(&game,frame,"",message);if(e){view=GAME_VIEW_DUNGEON;message="COMMAND MODULE UNAVAILABLE";game_render(&game,frame,"",message);e=0;}
+#else
+    game_render_examine(&game,frame,"",message);
+#endif
+   }
    else {e=game_render_with_progress(&game,frame,"",message,render_heart_progress,&renderContext);if(e)break;}
    memcpy(inputUnderlay,frame+GAME_INPUT_OFFSET,GAME_INPUT_BYTES);game_render_input(frame,input,inputUnderlay);
    e=screen_prepare_progress(frame,creature_heart_progress,&renderContext);if(e)break;
@@ -157,7 +171,13 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
    e=os_signal_value(&signalFlag);if(e)break;
    e=game_input(screen_path(),&key);if(e||!key){inputEmpty=1;break;}
    if(key==13){input[n]=0;if(!strcmp(input,"EXIT"))break;
-    result=game_command_combat(&game,input,&combat);nextView=game_display_command(input);if(result==GAME_OK&&nextView)view=nextView;message=game_message(input,result);
+#ifdef DOD_COMMAND_OVERLAY
+    e=game_overlay_command(&game,input,&combat,&result,&nextView,&message);
+    if(e){result=GAME_INVALID;nextView=GAME_VIEW_KEEP;message="COMMAND MODULE UNAVAILABLE";e=0;}
+#else
+    result=game_command_combat(&game,input,&combat);nextView=game_display_command(input);message=game_message(input,result);
+#endif
+    if(result==GAME_OK&&nextView)view=nextView;
     e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;
 #ifdef _CMOC_VERSION_
     if(result==GAME_OK)audio_present_optional(&combatAudio,&combatAudioState,
@@ -180,7 +200,13 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   if(heartbeatState.fault){e=heartbeatState.fault;break;}
   if(!dirty&&(shownPhase!=heartbeatState.phase||presentedGeneration!=heartbeatState.edgeGeneration))dirty=2;
   if(dirty){
-   if(dirty==1){if(view==GAME_VIEW_EXAMINE)game_render_examine(&game,frame,"",message);
+   if(dirty==1){if(view==GAME_VIEW_EXAMINE){
+#ifdef DOD_COMMAND_OVERLAY
+    e=game_overlay_examine(&game,frame,"",message);if(e){view=GAME_VIEW_DUNGEON;message="COMMAND MODULE UNAVAILABLE";game_render(&game,frame,"",message);e=0;}
+#else
+    game_render_examine(&game,frame,"",message);
+#endif
+   }
     else {e=game_render_with_progress(&game,frame,"",message,render_heart_progress,&renderContext);if(e)break;}
     memcpy(inputUnderlay,frame+GAME_INPUT_OFFSET,GAME_INPUT_BYTES);game_render_input(frame,input,inputUnderlay);
     e=screen_prepare_progress(frame,creature_heart_progress,&renderContext);if(e)break;}
@@ -208,6 +234,9 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
  done:
 #ifdef _CMOC_VERSION_
  if(combatAudioState==AUDIO_OPTIONAL_READY){audio_finish(&combatAudio);combatAudioState=AUDIO_OPTIONAL_DISABLED;}
+#endif
+#ifdef DOD_COMMAND_OVERLAY
+ r=game_overlay_close();if(!e)e=r;
 #endif
  r=native_heartbeat_close(&heartbeat);if(!e)e=r;r=screen_close();if(!e)e=r;
  printf("DODGAME HEARTBEAT EDGE %lu PRESENTED %lu MAX_PHASE_LAG %lu HEART_PRESENTS %lu\r",heartbeatState.edgeGeneration,presentedGeneration,maximumPresentationLag,heartPresentations);

@@ -14,7 +14,9 @@ static Word getword(const Byte *p){return (Word)p[0]*256+p[1];}
 static void putword(Byte *p,Word w){p[0]=w>>8;p[1]=w&255;}
 #define OBASE 0x0b15
 static Byte *ocb(Game *g,Word p){return g->objects[(p-OBASE)/14];}
+#ifndef DOD_COMMAND_OVERLAY
 static Byte valid_ocb(const Game *g,Word p){return p>=OBASE&&p<OBASE+(Word)g->count*14&&((p-OBASE)%14)==0;}
+#endif
 Byte game_random(Game *g){Byte n,i,b,carry,next;
  for(n=0;n<8;n++){b=g->seed[2]&0xe1;carry=0;for(i=0;i<8;i++){carry^=b&1;b>>=1;}
   for(i=0;i<3;i++){next=g->seed[i]>>7;g->seed[i]=(g->seed[i]<<1)|carry;carry=next;}}
@@ -48,16 +50,18 @@ static Word birth(Game *g,Byte type,Byte level){Byte *o=g->objects[g->count];Wor
 static int creature(Game *g,Byte r,Byte c){Byte i;for(i=0;i<g->creatureCount;i++)if(g->creatures[i][12]&&g->creatures[i][15]==r&&g->creatures[i][16]==c)return i;return -1;}
 /* Exact increment-before-borrow quotient; 24-bit quantities fit unsigned long.
  * Original faint/death flags retained; visual faint transitions are not here. */
-static void health(Game *g){unsigned long numerator=(unsigned long)g->power*64,den=(unsigned long)g->power+2UL*g->damage;
+void game_health(Game *g){unsigned long numerator=(unsigned long)g->power*64,den=(unsigned long)g->power+2UL*g->damage;
  g->rate=(Byte)((numerator/den+1)-19);
  if(!g->faint&&(signed char)g->rate<=3)g->faint=1;
  else if(g->faint&&(signed char)g->rate>4)g->faint=0;
  g->dead=g->power<g->damage;
 }
+#ifndef DOD_COMMAND_OVERLAY
 Byte game_population(const Game *g,Byte type){Byte i,n=0;
  for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][13]==type)++n;
  return n;
 }
+#endif
 void game_init(Game *g,Byte second){Byte type,level,n,r,c,i;int t;Word p,tail;Byte *o,*cr;
  memset(g,0,sizeof(*g));g->row=16;g->col=11;g->power=160;g->weight=35;
  for(type=0;type<sizeof(omx);type++){level=omx[type]>>4;n=omx[type]&15;while(n--){p=birth(g,type,level);ocb(g,p)[5]=255;if(++level>5)level=omx[type]>>4;}}
@@ -71,8 +75,17 @@ void game_init(Game *g,Byte second){Byte type,level,n,r,c,i;int t;Word p,tail;By
  tail=0;for(i=0;i<2;i++){/* GAME10 leaves B=11; SWI preserves it through NEWLVX/GAME30. */
  p=birth(g,i?15:17,11);o=ocb(g,p);o[5]=1;fill(o,i?15:17);o[11]=0;
   if(tail)putword(ocb(g,tail),p);else g->bag=p;tail=p;}
- health(g);g->recovery=g->rate;g->burn=3600;
+ game_health(g);g->recovery=g->rate;g->burn=3600;
 }
+/* COMCRE:OFIND/FNDOBJ: this helper remains resident because the ordinary
+ * dungeon renderer uses it on every visible object pass.  The command overlay
+ * receives it through its v1 host-services table rather than duplicating a
+ * second interpretation of packed OCB ownership. */
+static Byte on_floor(const Byte *o,Byte r,Byte c){return !o[4]&&!o[5]&&o[2]==r&&o[3]==c;}
+/* The command parser/Combat/bag implementation is compiled into the production
+ * Sbrtn+Objct overlay. Host fidelity tests keep the direct implementation here;
+ * the resident build uses overlay-host.c through the documented ABI. */
+#ifndef DOD_COMMAND_OVERLAY
 /* PARSER.ASM GETTOK/PARSE0/PAROBJ/PARHND and PGET.ASM PPULL/PSTOW.
  * Original HUMAN converts nonletters to spaces; host strings end at NUL.
  * CD.ASM TOKEN permits 32 five-bit characters. Unique prefix only: a second
@@ -88,9 +101,6 @@ static int classify(const Byte *t,const Byte table[][16],Byte count){int found=-
   if(t[j]==255){if(found>=0)return -1;found=i;}}
  return found;
 }
-/* COMCRE:OFIND/FNDOBJ: physical OCB order, only allocated records, owner zero.
- * The current bounded game is level zero; no level transitions exist. */
-static Byte on_floor(const Byte *o,Byte r,Byte c){return !o[4]&&!o[5]&&o[2]==r&&o[3]==c;}
 static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir,kind,cls;Word p,previous,*hand;Byte i,*o;
  s=token(s,t);cmd=classify(t,parser_commands,sizeof(parser_commands)/16);
  if(cmd!=PAR_PULL&&cmd!=PAR_STOW&&cmd!=PAR_GET&&cmd!=PAR_DROP)return GAME_INVALID;
@@ -99,7 +109,7 @@ static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir
  /* PGET:PDROP/WUPDAT leaves next link/fuel/reveal untouched. No floor chain. */
  if(cmd==PAR_DROP){if(!*hand)return GAME_INVALID;o=ocb(g,*hand);*hand=0;
   o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=0;
-  g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));health(g);return GAME_OK;}
+  g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));game_health(g);return GAME_OK;}
  if(cmd==PAR_STOW){if(!*hand)return GAME_INVALID;
   putword(ocb(g,*hand),g->bag);g->bag=*hand;*hand=0;return GAME_OK;}
  if(*hand)return GAME_INVALID;
@@ -111,7 +121,7 @@ static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir
  /* PGET20: first class/type match in OFIND order; GET30 INC owner, add weight. */
  if(cmd==PAR_GET){for(i=0;i<g->count;i++){o=g->objects[i];
    if(on_floor(o,g->row,g->col)&&(specific?o[9]==kind:o[10]==cls)){
-    *hand=OBASE+(Word)i*14;++o[5];g->weight=(Word)(g->weight+object_weights[o[10]]);health(g);return GAME_OK;}}
+    *hand=OBASE+(Word)i*14;++o[5];g->weight=(Word)(g->weight+object_weights[o[10]]);game_health(g);return GAME_OK;}}
   return GAME_INVALID;}
  previous=0;p=g->bag;
  while(p&&(specific?ocb(g,p)[9]!=kind:ocb(g,p)[10]!=cls)){previous=p;p=getword(ocb(g,p));}
@@ -145,24 +155,24 @@ static Byte attack(Game *g,const char *s,GameCombat *combat){Byte t[33],*weapon=
  /* Incantable rings spend one charge before target lookup and always hit. */
  if(weapon&&kind>=19&&kind<=21){ring=1;if(--weapon[6]==0)weapon[9]=22;}
  for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][15]==g->row&&g->creatures[i][16]==g->col){creature=g->creatures[i];break;}
- if(!creature){health(g);return GAME_OK;}if(combat)combat->target=i;
+ if(!creature){game_health(g);return GAME_OK;}if(combat)combat->target=i;
  if(!ring){
   remaining=(Word)(getword(creature)-getword(creature+10));value=(Word)(remaining<<2);
   do{Word old=value;value=(Word)(value-g->power);if(old<g->power)break;--index;}while(index);
   adjustment=index>=3?(index-3)*10:-(3-index)*25;
   random=game_random(g);if(combat)++combat->rngCalls;score=(int)random+adjustment-127;
   if(combat)combat->hitValue=(Word)score;
-  if(score<0){health(g);return GAME_OK;}
+  if(score<0){game_health(g);return GAME_OK;}
   /* A live torch admits the hit. Darkness consumes a second RANDOM and
    * retains the hit only for the source's one-in-four low-bit result. */
-  if(!g->torch||!valid_ocb(g,g->torch)||ocb(g,g->torch)[9]==24){random=game_random(g);if(combat)++combat->rngCalls;if(random&3){health(g);return GAME_OK;}}
+  if(!g->torch||!valid_ocb(g,g->torch)||ocb(g,g->torch)[9]==24){random=game_random(g);if(combat)++combat->rngCalls;if(random&3){game_health(g);return GAME_OK;}}
  }
  if(combat)combat->hit=1;combat_event(combat,AUDIO_KLINK);
  power=g->power;magic=scale16(scale16(power,mgo),creature[3]);
  physical=scale16(scale16(power,pho),creature[5]);
  value=(Word)(getword(creature+10)+magic+physical);putword(creature+10,value);
  if(combat)combat->damage=(Word)(magic+physical);
- if(value<getword(creature)){health(g);return GAME_OK;}
+ if(value<getword(creature)){game_health(g);return GAME_OK;}
  if(combat)combat->killed=1;
  /* PATTK:PATT30 follows the packed address-token object list, drops each
   * object in CCB order, and deliberately leaves the dead CCB's head token. */
@@ -171,7 +181,7 @@ static Byte attack(Game *g,const char *s,GameCombat *combat){Byte t[33],*weapon=
  }
  creature[12]=0;combat_event(combat,AUDIO_BANG);
  next=(Word)(g->power+(getword(creature)>>3));g->power=(next&0x8000)?(Word)(0x7f00|(next&255)):next;
- health(g);return GAME_OK;
+ game_health(g);return GAME_OK;
 }
 Byte game_command_combat(Game *g,const char *s,GameCombat *combat){Word *hand;Byte *o,attackResult;int r,c;Byte result=GAME_OK;
  if(combat){memset(combat,0,sizeof(*combat));combat->target=255;}
@@ -181,7 +191,7 @@ Byte game_command_combat(Game *g,const char *s,GameCombat *combat){Word *hand;By
  else if(!strcmp(s,"TURN RIGHT"))g->dir=(g->dir+1)&3;
  else if(!strcmp(s,"TURN AROUND"))g->dir=(g->dir+2)&3;
  else if(!strcmp(s,"MOVE")){r=g->row+dr[g->dir];c=g->col+dc[g->dir];if(cell(g,r,c)==255)result=GAME_BLOCKED;else {g->row=r;g->col=c;}
-  g->damage=(Word)(g->damage+(g->weight>>3)+3);health(g);
+  g->damage=(Word)(g->damage+(g->weight>>3)+3);game_health(g);
  }else if(!strcmp(s,"USE LEFT")||!strcmp(s,"USE RIGHT")){hand=!strcmp(s,"USE LEFT")?&g->hand:&g->rightHand;if(!*hand||ocb(g,*hand)[10]!=5)return GAME_INVALID;
   g->torch=*hand;o=ocb(g,*hand);putword(o,g->bag);g->bag=*hand;*hand=0;
  }else if(!game_display_command(s)){if(bag_command(g,s)!=GAME_OK)return GAME_INVALID;}
@@ -195,8 +205,9 @@ const char *game_message(const char *s,Byte result){Byte t[33];int cmd;
  if((cmd==PAR_GET||cmd==PAR_DROP||cmd==PAR_EXAM||cmd==PAR_LOOK)&&result!=GAME_FAINT)return result==GAME_INVALID?"???":"";
  return result==GAME_BLOCKED?"BLOCKED":result==GAME_INVALID?"UNKNOWN COMMAND":result==GAME_FAINT?"FAINT":"OK";
 }
+#endif
 void game_tick(Game *g,Word ticks){Byte *o;while(ticks--){
- if(!--g->recovery){g->damage=g->damage-(g->damage+63)/64;health(g);g->recovery=g->rate?g->rate:256;}
+ if(!--g->recovery){g->damage=g->damage-(g->damage+63)/64;game_health(g);g->recovery=g->rate?g->rate:256;}
  if(!--g->burn){g->burn=3600;if(g->torch){o=ocb(g,g->torch);if(o[6]){--o[6];if(o[6]<=5){o[9]=24;o[11]=0;}if(o[6]<o[7])o[7]=o[6];if(o[6]<o[8])o[8]=o[6];}}}
 }}
 /* VIEWER/VCTLST: absolute endpoint scaling about (128,76), signed arithmetic
@@ -243,7 +254,7 @@ static void input_line(Byte *frame,const char *input){Byte n=0,y;while(input[n]&
 /* STATUS:OBJNAM/COPY$, COMTXT:TXTDPB, COMDAT:STSVDB. Level zero uses
  * VDGINV=0: inverse status glyphs on a filled 256x8 strip at y=152.
  * No physical presentation coordinates or duplicate inventory state. */
-static Byte object_name(Game *g,Word token,Byte *name){
+Byte game_object_name(Game *g,Word token,Byte *name){
  static const Byte empty[]={5,13,16,20,25,255};
  const Byte *s;Byte *o,n=0;
  if(!token)s=empty;
@@ -266,8 +277,8 @@ Byte game_render_status_progress(Game *g,Byte *frame,Byte phase,
  DrawProgress drawProgress={g,frame,progress,context,0};
  memset(frame+152*32,255,8*32);
  if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
- n=object_name(g,g->hand,name);e=status_name(frame,name,n,0,&drawProgress);if(e)return e;
- n=object_name(g,g->rightHand,name);e=status_name(frame,name,n,32-n,&drawProgress);if(e)return e;
+ n=game_object_name(g,g->hand,name);e=status_name(frame,name,n,0,&drawProgress);if(e)return e;
+ n=game_object_name(g,g->rightHand,name);e=status_name(frame,name,n,32-n,&drawProgress);if(e)return e;
  game_render_heart(frame,phase);
  if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
  return 0;
@@ -346,6 +357,7 @@ void game_render(Game *g,Byte *frame,const char *input,const char *message){
  * COMTXT:TXTDPB/TXTCR/TXTSCR; TXTSER:TXTCHR. No display-only object list.
  * Level zero VDGINV=0. Only the active torch name is inverse, seven scanlines;
  * the eighth scanline is not written by TXTDPB. Scroll after each OUTCHR. */
+#ifndef DOD_COMMAND_OVERLAY
 typedef struct { Byte *frame;Word cursor;Byte inverse,pair; } ExamineText;
 static void examine_char(ExamineText *t,Byte c){Byte y;Word at;
  if(c==31)t->cursor=(t->cursor+32)&0xffe0;
@@ -359,7 +371,7 @@ static void examine_string(ExamineText *t,const char *s){Byte c;
  while(*s){c=*s++;examine_char(t,c=='^'?31:c=='!'?27:c==' '?0:c-'A'+1);}
 }
 static void examine_object(Game *g,ExamineText *t,Word p){Byte name[32],n,i;
- n=object_name(g,p,name);for(i=0;i<n;i++)examine_char(t,name[i]);t->inverse=0;
+ n=game_object_name(g,p,name);for(i=0;i<n;i++)examine_char(t,name[i]);t->inverse=0;
  t->pair=!t->pair;if(t->pair)t->cursor=(t->cursor+16)&0xfff0;else examine_char(t,31);
 }
 void game_render_examine(Game *g,Byte *frame,const char *input,const char *message){ExamineText t;Byte i;Word p;
@@ -376,3 +388,4 @@ void game_render_examine(Game *g,Byte *frame,const char *input,const char *messa
  for(p=g->bag;p;p=getword(ocb(g,p))){if(p==g->torch)t.inverse=255;examine_object(g,&t,p);}
  game_render_status(g,frame,0);text(frame,message,168);input_line(frame,input);
 }
+#endif
