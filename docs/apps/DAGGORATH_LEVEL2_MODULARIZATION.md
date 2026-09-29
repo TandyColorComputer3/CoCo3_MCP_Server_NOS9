@@ -885,3 +885,122 @@ remain disposable under `/private/tmp/dod-level2-study/` and
 `/private/tmp/dod-overlay-abi/`; they are not repository artifacts.
 
 **READY FOR PRODUCTION OVERLAY EXTRACTION**
+
+## Resident-core headroom pass — 2026-09-29
+
+This pass starts from the accepted extraction artifact above; it does not alter the
+overlay ABI, command ownership, `Game`, RNG, heartbeat/VIRQ, framebuffer or CoWin
+ownership.  Its purpose is to replace the accidental ten-byte resident margin with a
+measured margin before Attract M1B adds a separate chain phase.
+
+### Measured baseline and attribution
+
+A fresh build of commit `0fec21f` using the historical resident `-O0` setting produced
+the accepted `$7FF6` / 32,758-byte `dodgame`, data request `$2A22` / 10,786 bytes and
+the unchanged `$1AF5` / 6,901-byte `dodcmd`.  Its map ended at `$7FA4` before the
+82-byte OS-9 packaging overhead, leaving only ten bytes before the four-block boundary.
+
+The table below compares that exact source link with a disposable `-O2` resident link.
+These are map-section code measurements; they are not source-line estimates.
+
+| Resident contributor | `-O0` | `-O2` | Reduction | Ownership assessment |
+| --- | ---: | ---: | ---: | --- |
+| CMOC CRT and selected runtime | 3,074 | 3,074 | 0 | resident runtime; no extraction candidate |
+| `main.c` lifecycle/heartbeat coordination | 4,341 | 3,341 | 1,000 | continuous resident core |
+| `game.c` initialization, renderer and resident callbacks | 8,595 | 6,777 | 1,818 | core/renderer; retain resident |
+| `creature.c` | 3,013 | 2,262 | 751 | high-frequency scheduler; retain resident |
+| `input.c` | 294 | 179 | 115 | ordinary input; retain resident |
+| `presentation.c` | 3,534 | 2,713 | 821 | exclusive graphics owner; retain resident |
+| `window-path.c`, `os9.c`, logical renderer | 2,286 | 1,877 | 409 | graphics/OS wrappers; retain resident |
+| native heartbeat client | 972 | 641 | 331 | authoritative coordination; retain resident |
+| audio IPC/client/event | 2,861 | 1,964 | 897 | resident optional-audio facade; retained-load semantics require its persistent client state to stay here |
+| overlay host/shim | 529 | 529 | 0 | required resident ABI boundary |
+| **Total module reduction** | **32,758** | **26,616** | **6,142** | — |
+
+The current command extraction has already moved the genuine low-frequency command
+implementation and its private tables into `dodcmd`.  The remaining large code is
+either continuous gameplay/presentation ownership or the persistent best-effort audio
+client.  Moving that client into `dodcmd` would lose its start-once/disable-on-failure
+state between temporary links, or require a new service/overlay architecture.  This
+pass intentionally does neither.
+
+This is deliberately a resident-build policy change, selected after the map
+attribution rather than assumed at the start of the pass. The source-derived command
+functionality remains in `dodcmd`, while all authoritative and high-frequency state
+remains resident. `build_gameplay.py` now uses the measured `-O2` setting for
+`dodgame`; the callable overlay already used `-O2` and its bytes did not change. The
+overlay build test now retains a `<= 30,720` resident-size regression gate.
+
+### Resulting map and artifact contract
+
+Two clean builds of the revised command must be byte-identical.  The measured first
+build is:
+
+| Artifact | Size | Change | Data request | Mapping result |
+| --- | ---: | ---: | ---: | --- |
+| prior extracted `dodgame` | 32,758 B | baseline | 10,786 B | 4 program + 2 data blocks |
+| optimized resident `dodgame` | 26,616 B | -6,142 B | 10,786 B | `$11/$81`, edition 1, CRC `859B22`, SHA-256 `28b5debc208221373d22c4400570f416812745527b707d977fc602245e21f994`; 4 program + 2 data blocks |
+| `dodcmd` | 6,901 B | 0 B | module-local leaf stack | `$21/$80`, edition 1, CRC `8C162B`, SHA-256 `9ab5ff77e14c0da5ce7f0956e09ef337bfe8a11e2b045fb3a5d1dd9524f98355`; 1 temporary program block |
+
+`dodgame` now has 6,152 bytes of raw headroom below 32,768, exceeding the requested
+2,048-byte margin while retaining the same normal graphical map:
+
+```text
+normal gameplay:  4 program + 2 process-data + 1 CoWin = 7 / 8
+command call:     4 program + 2 process-data + 1 CoWin + 1 dodcmd = 8 / 8
+```
+
+There is no new overlay, no new data module, no changed process-data allocation and no
+claim that physical RAM is the limiting resource.  The pending live production `/w`
+overlay-cycle acceptance remains pending exactly as documented above.
+
+### CMOC 0.1.90 `-O2` production validation
+
+The resident policy is intentionally `cmoc --os9 -O2`; it is not a generic compiler
+assumption.  The installed compiler identifies itself as **CMOC 0.1.90**, and its own
+`--help` says that `-O2` is the default optimization level while `-O0` compiles faster.
+Its installed `NEWS` records a low-level optimizer and fixes to individual optimizer
+passes, but does **not** define a GCC-like public pass or aliasing contract.  Therefore
+the validation below describes observed CMOC output and does not claim unverified
+strict-aliasing, volatile, or interprocedural-reordering semantics.
+
+The generated `-O2` listings show only the expected local transformations at the
+reviewed boundaries: redundant push/load removal, constant-load shortening,
+load/compare-zero folding, branch inversion/removal, and simple address/arithmetic
+simplification.  The current compiler also documents that an absolute-address load is
+treated as volatile by the `storeLoad` optimization.  The resident heartbeat sample
+still emits a fresh `LDB $FF22` on every `heartbeat_audio_bit()` call; it was not folded
+or cached.  This matters because CMOC's historical NEWS also cautions that `volatile`
+has not been a general language-level guarantee in every release.
+
+Focused listing review compared the historical `-O0` link with the candidate `-O2`
+link.  The explicit `asm {}` bodies in `os9.c`, `window-path.c`, and `audio/ipc.c`
+remain the OS-9 boundary; `os_getstat`/`os_setstat` still save and restore `Y`/`U` and
+issue their `os9` instructions, while graphics mapping/presentation retains every
+`os_write`, `os_map_buffer`, `expand_chunk`, and progress-callback call.  The main-loop
+listing still calls `game_overlay_command`, `native_heartbeat_rate`, and the optional
+audio path in their source-defined order.  `overlay-host-shim.asm` is assembled source,
+not optimized C: its `F$NMLoad`, `F$Link`, call, and `F$UnLink` sequence is unchanged.
+The small C overlay host was already compiled at `-O2` before this resident policy
+change, so the overlay ABI itself is not newly exposed to a different optimization
+level.  The native heartbeat driver remains separate assembly.
+
+No optimizer-sensitive defect was found in this review.  Externally changed heartbeat
+state is obtained through the driver's atomic system-call interface; graphics state is
+owned by the one foreground process; and optional audio failures are returned through
+the already-tested client policy rather than changing game state.  Direct I/O paths use
+explicit assembly where needed.  We did **not** enable CMOC's separate
+`-fomit-frame-pointer` option.
+
+Semantic validation used the exact `-O2` build.  All 20 Daggorath `test_*.py` scripts
+passed, including the Combat M1 13/13 golden fixture and RNG assertions, Bag 13/13,
+EXAMINE 11/11, overlay ABI/retained-load lifecycle, creature scheduling, native
+heartbeat, presentation, audio protocol/client/service, and process-lifecycle checks.
+The deterministic fixtures include exact combat/game-state assertions and the playback
+suite's exact cached-frame comparisons; they exercise production rendering and command
+logic rather than merely module loading.  Two fresh `dodgame` builds and their
+unchanged `dodcmd` companion were byte-identical.  ToolShed `ident` accepted both
+modules with good CRCs.
+
+This establishes `-O2` as the measured resident production baseline.  The historical
+`-O0` artifact above remains the comparison baseline; it is not erased or rewritten.

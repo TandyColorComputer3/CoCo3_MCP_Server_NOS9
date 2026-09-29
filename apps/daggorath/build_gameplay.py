@@ -12,7 +12,7 @@ host_cmd=['cmoc','--os9','-O2','--compile','-DDOD_COMMAND_OVERLAY','--intdir='+s
 r=subprocess.run(host_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'overlay-host-build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/creature.c','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/event.c']]
-cmd=['cmoc','--os9','-O0','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodgame']+list(map(str,sources+[host_object]))
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodgame']+list(map(str,sources+[host_object]))
 r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 ident=subprocess.check_output([a.os9,'ident',str(out/'dodgame')],text=True);assert '(Good)' in ident

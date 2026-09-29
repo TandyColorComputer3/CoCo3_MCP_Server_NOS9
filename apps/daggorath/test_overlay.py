@@ -14,6 +14,7 @@ with tempfile.TemporaryDirectory(prefix='dod-overlay-test-') as tmp:
  subprocess.run(['python3',str(app/'build_gameplay.py'),'--out',str(out/'build')],check=True)
  record=json.loads((out/'build/build.json').read_text())
  assert (out/'build/dodgame').stat().st_size<=32768
+ assert (out/'build/dodgame').stat().st_size<=30720
  assert (out/'build/dodcmd').stat().st_size<=8192
  assert 'Subr mod' in record['overlay']['ident'] and '$21' in record['overlay']['ident']
  host=(app/'src/gameplay/overlay-host.c').read_text();shim=(app/'src/gameplay/overlay-host-shim.asm').read_text()
