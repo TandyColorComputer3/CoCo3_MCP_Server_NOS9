@@ -332,4 +332,466 @@ coding the slice.
 - The original full-loop timing and all sound/event overlap after command 10 remain to
   be measured.
 
-No production Daggorath or MCP source was changed in this architecture/proof pass.
+No production Daggorath or MCP source was changed in the preceding
+architecture/proof pass.
+
+## Attract M1B initialization integration (in progress)
+
+The source-derived level-two initializer is now implemented as
+`game_init_demo(game, 21)`.  It shares the normal `ONCE.ASM:GAME20` /
+`NEWLVL.ASM` construction path instead of loading a later combat fixture.
+The `21` is the verified `DGNGEN.ASM:DGEN90` final-spin count; it is not a
+compensating RNG adjustment.
+
+The initializer uses `COMDAT.ASM:CMTTAB`'s level-two row and
+`DGNGEN.ASM:LVLTAB`'s rolling level-two seed.  It retains the original
+`NEWLVL.ASM:NLVL30` descending birth order and `NLVL40..44` post-birth object
+attachment order.  Its `COMDAT.ASM:DEMDAT` bag is iron sword (`$0D`), pine
+torch (`$0F`), and leather shield (`$10`).
+
+### Exact GAME40 pre-AUTTAB comparison
+
+The host regression compares the source-derived portions of the constructed
+state with the disposable original-cartridge `GAME40` capture made before
+AUTTAB dispatch:
+
+| Portion | Result |
+| --- | --- |
+| `MAZLND` (1,024 bytes) | exact SHA-256 `391f323f5a68ca330a2a7c0afa343121794c3d2e1f3bb4af9c66190b64cd90c9` |
+| `OCBLND` (1,008 bytes) | exact SHA-256 `dd160d070725056c3e2ae48378fbfe06e7e158cc0ff0a8217aaa8dd086b35526` |
+| `CCBLND` (544 bytes) | exact SHA-256 `9b96c8c5c71869c3b90d8b26b44448ae8c652f9b9c018881b6d916dafdcce9ee` |
+| player | level 2; `(12,22)`; direction 0; power 6048; damage 0 |
+| creatures | 23 populated CCBs; source-derived positions, attachment chains and final RNG `$75,$65,$19` |
+| normal command proof | `PULL LEFT SHIELD` finds the DEMDAT leather shield through the ordinary command implementation |
+
+The original `GAME30` reaches `OBIRTH` with register B=`$3C` after this demo
+path; the three appended DEMDAT OCBs retain that observed source byte in their
+OCB level field.  This is why their exact OCB comparison must not normalize the
+field to logical level 2.
+
+### Port-owned logical-level ABI revision
+
+The original stores `LEVEL` separately from its OCB/CCB tables.  The port now
+appends one `Game.level` byte after the pre-existing 2,606-byte source-derived
+state prefix, making `sizeof(Game)` 2,608 bytes on the supported host ABI.
+It preserves every packed maze/OCB/CCB offset and supplies the authoritative
+current level for normal later commands such as `DROP`.  The dynamic overlay
+and resident host both compile against the same versioned header; the existing
+overlay context passes a `Game *` and contains no stale size field.  The new
+state remains within the existing two 8K Level II data mappings: the rebuilt
+resident data request is 10,788 bytes.
+
+The appended port metadata is deliberately excluded from byte-for-byte claims
+about original cartridge RAM.  Regression coverage asserts normal level 0,
+demo level 2, the 2,608-byte ABI, exact source-derived table hashes, and a
+level-aware ordinary `DROP` after `PULL LEFT SHIELD`.
+
+### AUTTAB prefix result and next dependency
+
+The first nine AUTTAB commands were invoked in order through the production
+`dod_overlay_execute` command body and its normal parser/command implementation:
+
+| # | command | result | resulting checkpoint |
+| --- | --- | --- | --- |
+| 1 | `EXAMINE` | success | state unchanged |
+| 2 | `PULL RIGHT TORCH` | success | pine torch in right hand |
+| 3 | `USE RIGHT` | success | torch active and lit |
+| 4 | `LOOK` | success | state unchanged |
+| 5 | `MOVE` | success | `(11,22)`, damage 7 |
+| 6 | `PULL LEFT SHIELD` | success | leather shield in left hand |
+| 7 | `PULL RIGHT SWORD` | success | iron sword in right hand |
+| 8 | `MOVE` | success | `(10,22)`, damage 14 |
+| 9 | `MOVE` | success | `(9,22)`, damage 21 |
+
+`PTURN.ASM:PMOV90` confirms that each move correctly adds `(weight / 8) + 3`;
+with source weight 35 this is seven damage.  The known original command-10
+checkpoint instead has damage 16.  This is the first genuine integration gap:
+`COMPLR.ASM:HSLOW` runs on the source jiffy queue between autoplay actions and
+recovers damage at the source heartbeat-derived cadence.  The port's current
+`game_tick()` applies recovery only from elapsed whole seconds and no AUTTAB
+scheduler currently drives those jiffy intervals.  No state, RNG, or damage was
+patched to bypass that gap, and `ATTACK RIGHT` was not treated as accepted.
+
+### HSLOW logical-jiffy recovery (resolved)
+
+The earlier damage-21 result was an integration timing defect, not a movement
+or combat defect.  Source evidence is retained in the pinned original tree:
+
+- `COMMON.ASM:CLOCK` runs the jiffy queue at 60 Hz and `QUESCN` moves a due
+  timer-control block from that clock queue to `SCDQUE`; it does not execute
+  the task in interrupt context.
+- `COMPLR.ASM:HSLOW` runs when the foreground scheduler next dispatches that
+  queued block.  It performs `PDAM - ceil(PDAM / 64)`, invokes `HUPDAT`, and
+  returns the new `HEARTR` as its next `Q.JIF` delay.
+- `HUMAN.ASM:PLAYER` processes AUTTAB tokens through `MISC.ASM:WAITX`, whose
+  81 `SYNC` operations advance 81 jiffies (1.35 s) per command word.  A due
+  HSLOW block therefore waits until PLAYER gives the scheduler a turn; it is
+  not repeatedly executed while a single `WAITX` still owns PLAYER execution.
+
+`GameTiming` now separates those two source concepts.  `game_timing_advance()`
+advances logical 60-Hz clock queues and merely marks due recovery/burn work;
+`game_timing_service()` runs each due work item once at a foreground scheduling
+boundary.  The NitrOS-9 main loop supplies observed video jiffies as the
+wall-clock driver.  No whole-second recovery path remains, and no audio service
+is involved in recovery or health-rate propagation.
+
+The deterministic `test_autoplay_timing.py` invokes commands 1–9 through the
+ordinary production overlay command implementation, applies the actual AUTTAB
+word counts (1, 3, 2, 1, 1, 3, 3, 1, 1), and uses 81 source jiffies per word.
+It also proves that a due recovery block does not fire early or fire repeatedly
+before the foreground service boundary.
+
+| command | resulting state after its source wait/service boundary |
+| --- | --- |
+| 1 `EXAMINE` | damage 0; initial rate 46 |
+| 2 `PULL RIGHT TORCH` | damage 0 |
+| 3 `USE RIGHT` | damage 0; pine torch active |
+| 4 `LOOK` | damage 0 |
+| 5 `MOVE` | `(11,22)`, damage 7 then HSLOW -> 6, rate 45 |
+| 6 `PULL LEFT SHIELD` | damage 6 -> 5 |
+| 7 `PULL RIGHT SWORD` | damage 5 -> 4 |
+| 8 `MOVE` | `(10,22)`, damage 11 -> 10 |
+| 9 `MOVE` | `(9,22)`, damage 17 -> **16** |
+
+Thus the command-10 entry's source-derived player state now matches naturally:
+level 2; `(9,22)`; direction 0; power 6048; damage 16; leather shield left;
+iron sword right; active pine torch; and the original GAME40 seed remains
+`$75,$65,$19`.  Damage was never set specially for autoplay.
+
+### Next dependency: queued creature scheduling
+
+The first remaining gap was the original scheduler's independently queued
+creature work while PLAYER releases scheduling during its waits.
+
+### Q.TEN creature due/service model (partially resolved)
+
+`COMCRE.ASM:CBIRTH` gives every CCB a `CMOVE` task on `Q.TEN`, initialized from
+`P.CCTMV`. `COMMON.ASM:CLK42` calls `QUESCN` only when JIFFY rolls every six
+60-Hz ticks. `QUESCN` decrements the linked queue and appends an expired task to
+`SCDQUE`; `COMMON.ASM:SCHED` later runs that task and only then accepts CMOVE's
+next `P.CCTMV` or `P.CCTAT` delay. A task cannot repeatedly run and requeue
+itself while `HUMAN.ASM:PLAYER` remains inside one `WAITX`.
+
+The port now applies the same due-then-service rule to `CreatureScheduler`:
+Q.TEN expiry records CCB indices in source queue order, and one foreground
+service pass dispatches each entry exactly once. It reuses the existing
+`CRETUR.ASM:CMOVE/CWALK`-derived code and now searches floor objects at
+`Game.level`, matching `COMCRE.ASM:FNDOBJ`'s `LEVEL` filter. It remains normal
+resident gameplay behavior, not an attract-only move loop.
+
+The AUTTAB regression now proves source-derived movement of CCB slot 18 (type 5,
+power 704, damage 0) from its exact GAME40 position `(11,25)` to the captured
+command-10 cell `(9,22)`, while preserving player `(9,22)`, damage 16, equipment
+and torch state. No CCB coordinate was patched.
+
+Before the later CREGEN-model update below, the bounded port CMOVE/CWALK calls
+consumed 187 post-GAME40 RNG transitions and finished at
+`$8E,$B4,$F2`; the original captured seed `$F1,$94,$D4` is 203 transitions from
+`$75,$65,$19`. `COMCRE.ASM:CREGEN` accounts for one source RNG consumer during
+the initial system-task pass, but it does not explain the remaining 15 calls.
+
+This boundary is sensitive to the full `SCDQUE` order: `LUKNEW` can enter
+`PUPDAT`/rendering, interrupts continue moving tasks to queues during that work,
+and already-serviced CMOVE tasks can become due again before the scheduler drains
+its work. The bounded port queue model does not yet represent those source
+render-duration-driven interleavings. A disposable built-in-debugger capture was
+attempted for the autonomous cartridge path, but did not produce a trustworthy
+per-call trace; it is not used as evidence. No dummy RNG calls, forced creature
+moves, or command-10 execution were added.
+
+The subsequent CREGEN accounting below resolves its one transition. The
+remaining source-faithful `SCDQUE`/presentation interleaving is still required
+before command 10 can be compared or executed.
+
+### SCDQUE population and CREGEN update
+
+The later scheduler pass resolves the initial CREGEN accounting while retaining
+the broader dependency. `ONCE.ASM:SYSTCB` resets every queue and appends the
+five `COMDAT.ASM:TCBDAT` routines to `SCDQUE` in this order: `PLAYER`,
+`LUKNEW`, `HSLOW`, `BURNER`, then `CREGEN`. `CBIRTH` separately appends each
+CCB's `CMOVE` task to `Q.TEN` with `CCTMV` as its timer.
+
+`COMMON.ASM:QUEADD` is FIFO within each queue. `QUESCN` only removes an
+expired clock-queue entry and appends it to `SCDQUE`; it does not run it.
+`SCHED` calls one SCD entry to completion, unlinks it, and appends it to its
+returned queue. `RSTART` restarts that scan when queue topology requires it.
+Thus `PLAYER` owns the scheduler for every 81-jiffy `WAITX` interval: CMOVE
+entries can become due during the wait, but cannot execute until `PLAYER`
+returns.
+
+The port's scheduler state now represents `CMXLND` separately from packed
+CCBs. `game_creature_regenerate()` implements `COMCRE.ASM:CREGEN` itself: it
+sums the desired matrix, takes one `RANDOM` only below the source cap of 32,
+selects type `2 + (random & 7)`, and increments that desired type. It does not
+create a creature. The AUTTAB-prefix regression executes it at the first
+system-task boundary and proves the single transition.
+
+| source/model state | transitions from `$75,$65,$19` | seed |
+| --- | ---: | --- |
+| bounded CMOVE/CWALK queue | 187 | `$8E,$B4,$F2` |
+| same queue plus actual CREGEN | 189 | `$48,$87,$8E` |
+| independently captured original pre-command-10 state | 203 | `$F1,$94,$D4` |
+
+CREGEN consumes one direct transition, then changes later CMOVE branch choices;
+the resulting model therefore adds two transitions overall. Fourteen transitions
+remain. They are not inserted as compensation.
+
+### Source-cartridge recovery and presentation-timing measurement
+
+`CRETUR.ASM:CWLK90` requests a delayed update by decrementing `NEWLUK` after a
+successful move. At `LUKNEW`'s `3,Q.TEN` dispatch, `COMPLR.ASM:LUKNEW` clears
+the flag and runs `PUPDAT`. `PUPDAT` calls `PUPSUB`, dispatches the current
+`DSPMOD` (`VIEWER` during the demo), then waits for a display flip with `SYNC`.
+IRQs are enabled throughout that vector rendering and flip wait. `CLOCK` may
+therefore append more expired CMOVE entries before `SCHED` resumes, and those
+entries can run in the same foreground pass.
+
+The earlier bootstrap conclusion was incorrect. The exact source build was
+assembled with `lwasm --format=raw` from `DAGGORATH.ASM`; its 8,192-byte payload
+has SHA-256 `35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571`
+and starts with the `ONCE.ASM` `$C000` bytes. The historical successful MAME
+launch used that same raw file directly in the `coco3h` generic `-cart` slot.
+A fresh normal, Lua-free launch reproduced the Wizard at five and nine seconds.
+No header, wrapper, address padding, or source change is required.
+
+This agrees with MAME 0.289's installed-emulator source: the generic CoCo cart
+loader copies conventional raw ROM bytes into the cart image, and the Program
+Pak reset behavior asserts the cartridge line from `Q`. The source artifact is
+therefore a source-correlated Program Pak payload, not a malformed image.
+
+The failed first debugger scripts armed their breakpoints after the initial
+source entry had already run and used an ineffective action form. The corrected
+disposable scripts use `gtime` only to reach autonomous demo activity and
+`bpset address,,{ action ; go }`. They byte-validated live RAM against the
+assembled artifact before measuring: `PUPDAX=$C656`, `PUPD99=$C65F`,
+`LUKNEW=$D1C2`, `VIEWER=$CE66`, `MAPPER=$CDB2`, `CLOCK=$C27D`, and
+`SCHED=$C1F5` all contained the expected assembled instruction bytes. No Lua,
+keyboard input, memory tap, canonical media, or repository artifact was used.
+
+Two autonomous 90-second debugger captures produced the same 299 ordered
+`CMD`, `PUPDAT`, and `CMOVE` events. The `JIFFY`, `TENTH`, and `SECOND` values
+written only by `COMMON.ASM:CLOCK` establish actual 60 Hz logical time during
+presentation. Measured `PUPDAT` windows were variable and source-mode-specific:
+
+| display routine | observed source windows |
+| --- | --- |
+| initial `MAPPER` | 17 jiffies |
+| initial `VIEWER` | 4 jiffies |
+| text display `$D495` | 15–18 jiffies |
+| demo `VIEWER` updates | 17–40 jiffies |
+
+The RNG seed remained unchanged across each measured `PUPDAT` window. The
+effect is indirect and source-defined: enabled `CLOCK` calls `QUESCN` during
+the window, expired `Q.TEN` entries are appended to `SCDQUE`, and `SCHED` runs
+their `CMOVE` bodies only when the foreground task returns.
+
+Most importantly, the trace contains the previously unexplained transition
+block. After the port model's `$48878E` state, the original executes queued
+`CMOVE` work with observed seed boundaries
+`$48878E → $EA4887 → $8F30EA → $D48E8F → $69D48E → $C269D4 → $19C269 →
+$FC19C2 → $42FC19 → $D4B342 → $94D4B3 → $F194D4`. Applying the source
+`RANDOM.ASM` generator between those boundaries yields exactly 14 transitions.
+The resulting `$F194D4` is the accepted state at the command-10 boundary.
+
+`HUMAN.ASM:PLAY30` also establishes an important phase detail: it calls
+`WAITX` before feeding each word. Thus the command-10 boundary includes the
+two 81-jiffy waits for `ATTACK RIGHT` before its carriage return dispatches.
+A disposable port-model trial that appended those 162 ticks to the current
+aggregate scheduler produced 25 transitions and `$4C504C`, not the required
+14 and `$F194D4`. A constant renderer cost or a final tick lump would therefore
+be invented behavior and would also perturb source-derived damage recovery.
+
+**NEXT ATTRACT DEPENDENCY IDENTIFIED:** replace the current aggregate
+`game_creature_advance_progress()` timing approximation with a source-order
+logical task-queue model for this attract path: `PLAYER` word waits, `CLOCK`/
+`QUESCN` queue promotion, `LUKNEW`/`PUPDAT` windows, and `SCHED` re-entry must
+remain distinct boundaries. The recovered source timing is sufficient to test
+that model, but does not justify a static presentation-delay constant. No dummy
+RNG calls, forced moves, seed assignment, command-10 execution, or production
+NitrOS-9 change was added in this measurement pass.
+
+### Resident-core scheduler placement boundary
+
+A disposable source-order scheduler prototype modeled the distinct `PLAYER`
+word waits, `CLOCK`/`QUESCN` promotion, `LUKNEW` presentation boundaries, and
+foreground `SCHED` dispatch. It was intentionally **not retained**: compiling
+that model into resident `dodgame` grew the module to 31,172 bytes, exceeding
+the existing 30,720-byte resident-core test limit by 452 bytes. The failure
+was an established size assertion, so neither the assertion nor the resident
+limit was changed. No production scheduler implementation from that prototype
+remains in this worktree.
+
+The trace still establishes that the 14 transitions must arise from exact timer
+state and queue order, not aggregate elapsed time. The next bounded dependency
+is therefore an explicit Level II placement decision for a source-order logical
+scheduler, together with capture of the original `HSLOW`/`LUKNEW` remaining
+timers and `SCDQUE` position at the `$48878E` trace boundary. That work cannot
+be silently folded into the current four-block resident module. No dummy RNG
+calls, forced moves, seed assignment, command-10 execution, or production
+NitrOS-9 change was added in this measurement pass.
+
+### Dedicated scheduler module checkpoint
+
+The placement decision is now implemented as `dodsched`, a 1,608-byte one-block
+`$21/$80` callable module. Its caller-owned 52-byte state models source FIFO/clock
+state and survives its temporary link/unlink lifecycle. The resident owns Game, RNG,
+CCB/OCB data and graphics; `dodsched` owns source queue ordering and calls narrowly
+defined resident primitives. The full mapping remains `4 dodgame + 2 data + 1 CoWin +
+1 temporary module`; command and scheduler modules alternate and are never mapped at
+the same time. Details, ABI, artifacts and the mandatory error policy are in
+[DAGGORATH_LEVEL2_MODULARIZATION.md](DAGGORATH_LEVEL2_MODULARIZATION.md).
+
+The first module-driven AUTTAB boundary matches the autonomous cartridge capture:
+`EXAMINE` reaches `$A5B1C9`, whereas the earlier aggregate approximation was already one
+`RANDOM` transition early. This proves the source-order module is necessary. It does
+not yet establish the full `$F194D4` command-10 checkpoint: the remaining dependency is
+the verified, variable source logical cost of later `PUPDAT`/`VIEWER` windows. Its
+deliberately zero-presentation baseline ends at 185 transitions / `$F2A74C`, not a
+source target. No fixed delay, seed adjustment, forced movement, or command-10 execution
+has been used.
+
+### AUTTAB 1--9 presentation-timing mapping boundary
+
+The recovered original-cartridge trace has now been reduced to its complete chronological
+`PUPDAX` record through the command-10 boundary.  Times are the source `CLOCK` jiffies
+(`JIFFY`, `TENTH`, `SECOND`), not host or CoWin time.  Each measured interval starts at
+`PUPDAT.ASM:PUPDAX`, includes its `PUPSUB` call and final display-flip `SYNC`, and leaves
+the RNG unchanged.  The final two columns are independently derived from the trace's
+`CMD` seed boundaries using the source `RANDOM.ASM` transition.
+
+| phase | source-selected display path | measured `PUPDAX` windows (jiffies) | RNG transitions to next AUTTAB command | next-command seed |
+| --- | --- | --- | ---: | --- |
+| `GAME40` map | `ONCE.ASM:GAME40` sets `DSPMOD=MAPPER`, `MAPFLG=-1` | 17 | — | — |
+| initial dungeon | `GAME50 -> INIVU -> PLOOK` sets `DSPMOD=VIEWER` | 4 | — | `$756519` before command 1 |
+| 1 `EXAMINE` | `PEXAM.ASM:PEXAM -> EXAMIN` | 18 | 15 | `$A5B1C9` |
+| 2 `PULL RIGHT TORCH` | `PGET.ASM:PPULL -> COMUPD`, current `DSPMOD=EXAMIN` | 15, 15 | 26 | `$93F916` |
+| 3 `USE RIGHT` | `PUSE.ASM:PUSE12`, current `DSPMOD=EXAMIN` | 17, 17, 18 | 22 | `$3D4150` |
+| 4 `LOOK` | `PLOOK.ASM:PLOOK -> VIEWER` | 25, 25 | 13 | `$7EF0F8` |
+| 5 `MOVE` | `PTURN.ASM:PMOVE` half-step `PUPDAT`; then its direct `PUPSUB` | 28, 23 | 20 | `$58C320` |
+| 6 `PULL LEFT SHIELD` | `PPULL -> COMUPD`, current `DSPMOD=VIEWER` | 23, 23 | 27 | `$B96508` |
+| 7 `PULL RIGHT SWORD` | `PPULL -> COMUPD`, current `DSPMOD=VIEWER` | 23, 24 | 29 | `$E0D2D4` |
+| 8 `MOVE` | `PMOVE` half-step `PUPDAT`; then its direct `PUPSUB` | 35, 31, 36 | 24 | `$E5C340` |
+| 9 `MOVE` | `PMOVE` half-step `PUPDAT`; then its direct `PUPSUB` | 40, 17, 33 | 27 | `$F194D4` |
+
+The columns deliberately do **not** label every second or third `PUPDAX` call as a
+particular caller.  The existing trace records the entry/exit of `PUPDAX`, not its
+return address or source `SCDQUE` record.  `COMPLR.ASM:LUKNEW` is a possible caller
+after `CRETUR.ASM:CWLK90` decrements `NEWLUK`; a creature object pickup can also call
+`PUPDAT` directly in `CRETUR.ASM:CMOV10..12`.  Calling either one from timing proximity
+would turn an observed window into an unsupported attribution.
+
+The source nevertheless explains why a fixed `VIEWER` value is invalid.  `VIEWER.ASM`
+derives a scene from player row/column/direction, each visible cell's `FLATAB` feature
+list, regular and magical light through `SETFAX`, forward and side `CFIND` creature
+queries, `OFIND` object queries at every visible range, vertical features, and the
+range at which a wall terminates the loop.  It calls `DRAWIT`/`VCTLST` for each selected
+vector list.  `PEXAM.ASM:EXAMIN` varies separately with room objects, creature presence,
+bag contents, and text-scroll work.  The recorded 15--18-jiffy text windows and
+17--40-jiffy viewer windows are therefore source-state-dependent work, plus the final
+`SYNC` phase, rather than AUTTAB-command constants.
+
+**SOURCE PRESENTATION TIMING BLOCKED.**  The available repeatable trace proves the
+windows and their total RNG consequence, but cannot distinguish the remaining source
+conditions needed for a portable model: it lacks (1) `PUPDAX` call-site identity,
+(2) direct `PUPSUB` entry/exit from `PMOVE`, (3) per-window scene inputs or `DRAWIT`/
+`VCTLST` work, and (4) `Q.TEN`/`SCDQUE` snapshots at `PUPDAX` exit and the next `SCHED`
+entry.  A debugger capture of those four facts is required before `dodsched` can return
+logical presentation time from source state.  A command-number table, a fixed `VIEWER`
+delay, RNG padding, forced movement, or a seed assignment would not meet this standard.
+
+No production timing model was added in this pass.  `dodsched` remains inactive in
+normal `dodgame`, and command 10 has not been executed through the scheduler path.
+
+### Portable logical-scheduler policy
+
+The source-timing investigation is now closed with an intentional fidelity boundary.
+The cartridge reference from the source-correlated 8 KiB build remains:
+
+```text
+GAME40 seed 75 65 19
+  -> 203 RANDOM transitions
+  -> pre-command-10 seed F1 94 D4
+```
+
+That exact checkpoint is not a portable NitrOS-9 invariant.  `COMMON.ASM:CLOCK`
+continues to receive 60 Hz IRQ opportunities while the bare-metal cartridge is in
+`PUPDAT.ASM:VIEWER`/`MAPPER` and their variable vector work.  Those opportunities
+promote queued work that later reaches `SCHED`; their count varies with incidental
+6809 renderer execution time.  The CoWin renderer has no source-equivalent portable
+time function, and using its host/GFX2 duration would make gameplay speed dependent.
+Reproducing the cartridge value would therefore require cycle-level emulation or an
+AUTTAB-specific timing trace.  Neither is part of this port.
+
+`dodsched` consequently models only source-semantic and explicit logical time:
+
+- `HUMAN.ASM:PLAYER`'s 81-jiffy `WAITX` per AUTTAB word;
+- `COMMON.ASM:CLOCK` and `QUESCN` promotion order;
+- FIFO foreground `SCHED` service for `HSLOW`, `BURNER`, `CREGEN`, and `CMOVE`;
+- `LUKNEW` source requests and the resulting foreground boundary.
+
+The selected source-presentation callback contributes zero logical jiffies.  It does
+not measure or compensate for CoWin/GFX2 rendering.  This is deliberate: the port
+must be deterministic across rendering speed, and it must not pad RANDOM, force a
+creature move, or use command-number timing constants.
+
+The regression in `test/scheduler_attract.c` establishes the deterministic portable
+pre-command-10 state.  It preserves the source-semantic player/equipment/creature
+checkpoint—level 2, player `(9,22)`, direction 0, power 6048, damage 16, active torch,
+shield, iron sword, and Stone Giant 2/CCB 18 at `(9,22)` with power 704 and damage
+zero—but reaches 185 transitions and `F2 A7 4C`.  This is the expected result of the
+portable policy, not a failed attempt to reach `F1 94 D4`.
+
+At that checkpoint CCB 18 is also due in the player's cell.  The later CMOV20
+integration records and services that source attack before command 10; the exact
+portable consequence is documented below.  The independent Combat M1 fixture remains
+exact: its cartridge seed `F1 94 D4` must still yield `65 F1 94`, hit value 94, and the
+same source-defined kill result.  It was not weakened or replaced by the portable test.
+
+### CMOV20 creature-initiated combat — portable scheduler integration
+
+`CRETUR.ASM:CMOV20` is now implemented through the existing callable
+`dodsched` module.  The resident creature primitive only detects a same-cell
+CCB and records an `attackDue` boundary.  The foreground owner temporarily
+links `dodsched`, which performs the source order
+`CMOV20 -> SOUNDS -> SHIELD (left, then right) -> ATTACK -> [A$KLK3] ->
+DAMAGE -> CMOV30/HUPDAT`, then unlinks before any command overlay can map.
+The VIRQ remains uninvolved in graphics or combat.
+
+The implementation is source semantic rather than symmetric with player
+combat.  It uses the CCB power/offense fields, selects the lower `P.OCXXX`
+shield word from a hand whose OCB class is `K.SHIE`, makes exactly one
+`RANDOM.ASM` transition for `ATTACK`, and calls `HUPDAT` after both a hit and
+a miss.  It does not apply player darkness or energy rules.  `SOUNDS.ASM`
+creature-type sound is queued first; a successful player hit queues `A$KLK3`
+(`CLANK`) second.  The foreground drains this bounded presentation batch only
+after authoritative damage and heartbeat-rate propagation, so a missing or
+failed optional `dodaudio` cannot affect game state, RNG, or scheduler state.
+
+This changes the portable AUTTAB trajectory in a deliberate, observable way.
+After command 9, the explicit portable queue state is the prior
+`$F2A74C` reference.  CCB 18 is due in the player's cell, so CMOV20 consumes
+the next result and misses:
+
+```text
+pre-CMOV20                 F2 A7 4C
+CMOV20 RANDOM / GRAWL      B4 F2 A7
+ATTACK RIGHT RANDOM        8E B4 F2
+```
+
+The regression proves the actual cause: `combatPending=1`, `attackDue=0`, the
+CCB attack delay is reset to 13 tenths, and exactly one `GRAWL` is queued
+before command 10.  The ordinary command-overlay Combat M1 call then has hit
+value 135, but retains the expected energy 236, target damage 708, player
+damage 252, CCB-18 death, power 6136, and `WHOOSH -> KLINK -> BANG` events.
+This portable sequence does **not** replace the independent exact
+cartridge-combat fixture: its `$F194D4` seed and captured expected result stay
+unchanged.
+
+The CMOV20 source dependency that previously blocked normal scheduler use is
+therefore resolved.  The approved production activation now gives `dodsched`
+the whole normal CLOCK/QUESCN/SCHED boundary, including CMOVE and CMOV20.  The
+resident loop holds authoritative `Game` state and invokes one retained-load,
+temporary-link scheduler call per foreground boundary.  The module is exactly
+one 8 KiB block; `dodcmd` is unlinked before that call, preserving the one-slot
+alternation.  The activated portable policy remains independent of GFX2 render
+duration and retains the source-semantic AUTTAB trajectory above.

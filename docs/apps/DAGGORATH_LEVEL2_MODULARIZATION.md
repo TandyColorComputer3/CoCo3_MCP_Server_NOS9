@@ -1004,3 +1004,473 @@ modules with good CRCs.
 
 This establishes `-O2` as the measured resident production baseline.  The historical
 `-O0` artifact above remains the comparison baseline; it is not erased or rewritten.
+
+## Attract M1B source-order scheduler placement study — 2026-09-29
+
+This section is a design study only.  It records no new executable, ABI shim, test
+expectation, or media change.  It starts from the current uncommitted Attract M1B
+candidate, not from an earlier committed artifact:
+
+| artifact | measured module bytes | data request | logical mapping during normal graphics |
+| --- | ---: | ---: | --- |
+| `dodgame` | 29,724 | 10,867 | 4 program + 2 data + 1 CoWin = 7/8 |
+| `dodcmd` | 6,908 | module-local stack only | 1 temporary program block |
+
+The `test_overlay.py` `<= 30,720` resident-size assertion remains intentional.  It
+leaves 996 bytes below that policy threshold and 3,044 bytes below the hard fifth
+program-block boundary at 32,768 bytes.  It must not be relaxed merely because the
+normal map presently has one free slot.
+
+### Required behavior and source evidence
+
+The pending machinery is ordinary Daggorath gameplay behavior, not an attract-only
+script.  The source evidence recorded in
+[DAGGORATH_ATTRACT_M1.md](DAGGORATH_ATTRACT_M1.md) comes from original
+`HUMAN.ASM:PLAYER`/`MISC.ASM:WAITX`, `COMMON.ASM:CLOCK`, `QUESCN` and `SCHED`,
+`COMPLR.ASM:LUKNEW`/`PUPDAT`, and `COMCRE.ASM:CREGEN`:
+
+```text
+PLAYER word wait
+  -> CLOCK/QUESCN promotes due work
+  -> foreground SCHED dispatches one source task
+  -> LUKNEW may run PUPDAT/VIEWER or MAPPER
+  -> CLOCK continues during that measured source presentation window
+  -> later SCHED dispatches the newly eligible work
+```
+
+The two autonomous cartridge traces establish source presentation windows of 17
+jiffies for the initial `MAPPER`, 4 for initial `VIEWER`, 15–18 for the text display,
+and 17–40 for demo `VIEWER` updates.  They also show the fourteen real `RANDOM`
+transitions from port-model `$48,$87,$8E` to source checkpoint `$F1,$94,$D4`.  Those
+intervals are logical source costs.  They must be passed explicitly by the
+source-mode/presentation operation; they must never be inferred from CMOC speed,
+GFX2/CoWin elapsed time, or host/MAME wall time.
+
+The rejected prototype made these boundaries explicit but was deliberately removed.
+It enlarged resident `dodgame` from 29,724 to 31,172 bytes: **1,448 code bytes**.
+Its data request remained 10,867 bytes because its state was caller-owned rather than
+a new module global.  The prototype therefore exceeded the policy limit by 452 bytes.
+That is build evidence, not a speculative estimate.
+
+### Persistent state ownership
+
+Authoritative state remains in the one `dodgame` process.  It must survive a temporary
+module mapping and its subsequent `F$UnLink`; a subroutine module must not keep mutable
+globals or pointers after returning.  The present resident state is already explicit:
+
+| state | current owner / size | required source-order role |
+| --- | --- | --- |
+| packed game tables, RNG, player health/countdowns | `Game`, 2,608 bytes | source-derived game state and `HSLOW`/`BURNER` countdowns |
+| CCB Q.TEN countdowns, pending/ready CCB work, CMXLND model | `CreatureScheduler`, 174 bytes | `CLOCK` promotion and later `CMOVE` service |
+| promoted `HSLOW`/`BURNER` flags | `GameTiming`, 2 bytes | separates due work from foreground service |
+
+The full model additionally needs a compact resident `DagSchedulerState`.  Its intended
+contents are a FIFO of at most 36 non-PLAYER foreground entries (four system tasks plus
+up to 32 CCB tasks), queue head/tail/count, system-task queued bits, `LUKNEW` and
+`CREGEN` countdown/queued state, and the source logical clock fields needed at a phase
+handoff.  A conservative compact-layout budget is 52 bytes: 39 bytes for the FIFO and
+indices, 4 task flags, 4 bytes of countdowns, and 5 clock/phase bytes.  It is a design
+budget, not a committed C layout.  Added to the measured 10,867-byte request, it would
+remain 10,919 bytes and therefore within the existing two 8 KiB process-data blocks.
+
+Keeping this structure beside the resident `Game`/scheduler instances, rather than
+appending it to `Game`, preserves byte-for-byte source-table comparisons and avoids
+turning a port scheduling implementation detail into serialized gameplay-table ABI.
+It is passed by pointer for the duration of one subroutine call.  `F$Chain` remains a
+separate phase boundary and rebuilds this process-local state from the intended phase
+initialization; no retained pointer crosses it.
+
+### A. Resident scheduler
+
+Restoring the measured 1,448-byte prototype would produce 31,172 bytes and fail the
+existing resident policy.  No demonstrated low-frequency resident extraction remains
+that can save the required 452 bytes without moving ownership or reintroducing a
+separate architecture decision.  The high-frequency renderer, native-heartbeat client,
+and process lifecycle must remain resident; extracting them merely to make room for a
+scheduler would be worse ownership.
+
+Ordinary source cleanup might change the result, but no measured cleanup removes the
+shortfall.  Counting an unimplemented assembly rewrite, code golf, or altered ownership
+as reclaimed budget would be speculative.  This option is therefore not suitable for
+the next bounded implementation.
+
+```text
+resident scheduler: 4 dodgame + 2 data + 1 CoWin = 7/8
+                     but dodgame = 31,172 > 30,720 policy
+```
+
+### B. Dedicated callable `dodsched` module
+
+This is the preferred design.  It follows the demonstrated `dodcmd` pattern and the
+Level II module behavior documented above from upstream
+`level1/modules/kernel/flink.asm` and `funlink.asm`: a retained non-mapping reference
+keeps the module resident; a temporary `F$Link` consumes one 8 KiB process slot; and
+`F$UnLink` returns that slot after the call.  The existing independent ABI probe already
+proved link, call, caller-state persistence, unlink, and relink without a disk reread.
+The same evidence supports the lifecycle, not a claim that the new scheduler has been
+implemented or performance-measured.
+
+`dodsched` should be a `$21/$80` reentrant/read-only `Sbrtn+Objct` module.  It should
+contain the source queue operations: batched logical-clock advancement, QUESCN-style
+promotion, FIFO selection, task dispatch order, and the scheduler-side state transition
+for `LUKNEW`, `HSLOW`, `BURNER`, `CREGEN`, and CCB `CMOVE`.  It should not own GFX2,
+CoWin buffers, VIRQ work, input paths, audio client state, or authoritative game data.
+Those remain resident and are reached only through an explicit caller-provided context
+and callback table.
+
+The direct resident prototype provides a measured 1,448-byte code floor.  A callable
+module also needs a module header, dispatch shim, error path, and any CMOC arithmetic
+helpers that its final link actually pulls.  The existing 77-byte CMOC leaf proof shows
+that CMOC itself is viable; the current `dodcmd` shows that helper duplication is real.
+Before implementation, reserve a conservative **2–4 KiB one-block budget** for
+`dodsched`; a real independent link, not this estimate, must establish its final size.
+The module should have no BSS/data request beyond stack-local call state.
+
+Proposed ABI v1, intentionally parallel to `DagOverlayContextV1`:
+
+```text
+register entry: A = 1, B = operation, X = DagSchedulerContextV1 *
+
+DagSchedulerContextV1:
+  abiVersion, contextSize, operation, result
+  Game *game
+  GameTiming *timing
+  CreatureScheduler *creatures
+  DagSchedulerState *state
+  logicalJiffies
+  DagSchedulerServices *services
+```
+
+`DagSchedulerServices` supplies only resident operations that the scheduler cannot
+perform itself, such as the source-mode presentation callback and bounded real renderer
+progress.  A presentation callback receives the source operation/mode and returns the
+already measured logical jiffy cost; it must not report elapsed GFX2 time.  The callback
+pointer is valid only during the linked call and must never be retained by `dodsched`.
+The exact structure packing, operation IDs, and assembly shim remain an implementation
+task.
+
+The mapping contract is deliberately non-nested:
+
+```text
+normal:       4 dodgame + 2 data + 1 CoWin + 1 free = 7/8
+command:      4 dodgame + 2 data + 1 CoWin + 1 dodcmd = 8/8
+scheduler:    4 dodgame + 2 data + 1 CoWin + 1 dodsched = 8/8
+```
+
+If an overlay-backed command causes work to become due, source order is:
+
+```text
+PLAYER invokes dodcmd
+  -> dodcmd returns its authoritative command result
+  -> host F$UnLink dodcmd
+  -> PLAYER reaches the source foreground scheduler boundary
+  -> host F$Link dodsched
+  -> dodsched services the whole eligible SCHED boundary
+  -> host F$UnLink dodsched
+  -> PLAYER continues
+```
+
+Thus `dodcmd` and `dodsched` are never mapped together.  This agrees with the original
+order: command execution returns to `PLAYER`, then `SCHED` chooses later work.  A task
+that needs a presentation callback is completed while `dodsched` is mapped; the callback
+uses resident graphics ownership.  It must not attempt a nested command-overlay call.
+
+`F$Link`/`F$UnLink` are not assumed free.  A scheduler call must service an entire
+eligible foreground boundary, not one TCB, and should not be linked from VIRQ context or
+once per graphics primitive.  The resident loop can collect ticks and invoke it at an
+explicit source boundary: a completed PLAYER word wait, an already due scheduler pass,
+or the completion of a source presentation operation.  Whether ordinary interactive
+play requires an additional small resident clock-promotion front end is an implementation
+measurement; the first implementation must measure Link/UnLink cost under EOU rather
+than assume it is acceptable at a 60 Hz cadence.
+
+### C. Extend `dodcmd`
+
+This would combine unrelated lifetime classes.  `dodcmd` is 6,908 bytes and has only
+1,284 bytes before the 8,192-byte one-block limit.  The measured resident scheduler
+code alone is 1,448 bytes before a module dispatcher or new callback ABI, so it cannot
+fit the existing one-block command module.  Even if it did, scheduler calls are normal
+engine behavior, unlike low-frequency command parsing, combat, bag operations, and
+EXAMINE.  It would either require mapping `dodcmd` for frequent scheduler work or create
+the same command/scheduler nesting conflict described above.  This option is rejected.
+
+### Recommendation and next implementation boundary
+
+**DEDICATED SCHEDULER MODULE RECOMMENDED.**  It preserves the four-block resident-core
+policy, keeps all mutable and source-derived state in the game process, uses the one
+free map slot without nested mappings, and leaves future command/creature/presentation
+growth with an explicit Level II ownership boundary.  It is more sustainable than
+resident code golf and avoids turning the command overlay into a high-frequency engine
+module.
+
+The next implementation must begin with a disposable ABI/link-size proof for
+`dodsched`, then validate retained residency and Link/UnLink cost under the verified EOU
+target.  Only after that proof should it add the compact resident scheduler state and
+source-order behavior.  This study does not authorize another overlay, alter the
+30,720-byte regression, or claim command-10 integration.
+
+## `dodsched` implementation checkpoint — 2026-09-29
+
+The approved first implementation now exists as a real Level II callable module. It is
+intentionally a checkpoint before switching the normal graphical `main` loop to it: the
+cartridge evidence establishes variable source logical time for `VIEWER`, but has not yet
+mapped every one of those windows to the port's source-mode state. Activating a partial
+scheduler in normal gameplay before that mapping would replace one known approximation
+with another.
+
+### Artifact and ABI
+
+Two clean builds produced byte-identical artifacts:
+
+| module | bytes | CRC | SHA-256 | type/language | mapping |
+| --- | ---: | --- | --- | --- | --- |
+| `dodgame` | 30,183 (`$75E7`) | `330AD2` | `19a8bdebab9be065aab2f53bbf79554c3c8bc97590fa6ba62be239d4e77654cc` | `$11/$81`, reentrant/read-only 6809 program | 4 program blocks |
+| `dodcmd` | 6,908 (`$1AFC`) | `A3254F` | `5717c54815458568303b3d7b243af98aa91fe5d0cbb4ab2ad67b356cac34fb44` | `$21/$80`, reentrant/read-only `Sbrtn+Objct` | 1 temporary block |
+| `dodsched` | 1,608 (`$648`) | `D89786` | `ba588d600ee7cab6131a240eee302bd734987a3ec54c95c405919f5784e83ab6` | `$21/$80`, reentrant/read-only `Sbrtn+Objct` | 1 temporary block |
+
+`dodgame` has a 10,872-byte (`$2A78`) data request, so it remains in two 8 KiB
+process-data blocks. It is 537 bytes below the enforced 30,720-byte resident policy;
+`dodsched` has 6,584 bytes of room in its one temporary block, and `dodcmd` has 1,284.
+ToolShed `ident` accepted all three modules with good CRCs.
+
+ABI v1 is explicit: `A=1`, `B=operation`, and `X=DagSchedulerContextV1 *`. The entry
+shim rejects a mismatched register/context operation with `E$IllArg` 187 before entering
+CMOC. The context owns every pointer and all persistent state. `DagSchedulerState` is
+exactly 52 bytes in the target/host-compatible layout: a 36-entry foreground FIFO,
+head/tail/count, queued-system bits, `LUKNEW` state, source clock fields, and `LUKNEW`/
+`CREGEN` countdowns. It holds no module-global pointer, so the caller can retain it
+across `F$UnLink` and later relink it safely.
+
+The module implements `CLOCK`/`QUESCN` promotion, the initial system queue ordering
+(`LUKNEW`, `HSLOW`, `BURNER`, `CREGEN`), `PLAYER`'s 81-jiffy word wait, `Q.TEN` CCB
+promotion, FIFO boundary drain, `CREGEN`, and `CMOVE` dispatch. The resident side owns
+the narrow one-CCB mutation primitive, packed state, RNG, graphics, and presentation.
+After a successful source walk, that primitive reports the `CWLK90` `NEWLUK` request;
+the scheduler does not infer visibility from it.
+
+### Retained lifecycle and one-slot ordering
+
+`scheduler-host-shim.asm` follows the already-verified command-overlay pattern:
+
+```text
+startup / phase initialization: F$NMLoad /d1/dodsched
+one complete foreground boundary: F$Link -> ABI call -> F$UnLink
+final phase cleanup: F$UnLoad dodsched
+```
+
+The host treats every load, link, call, unlink, and final unload error as mandatory; it
+does not adopt the optional-audio fallback policy. Its unit tests cover no-retained-link,
+load failure, temporary link/call/unlink order, and release. A separate one-slot test
+records the required non-nested order:
+
+```text
+F$NMLoad dodcmd -> F$NMLoad dodsched
+F$Link dodcmd -> call -> F$UnLink dodcmd
+F$Link dodsched -> call -> F$UnLink dodsched
+F$UnLoad dodsched -> F$UnLoad dodcmd
+```
+
+Thus normal gameplay remains `4 program + 2 data + 1 CoWin = 7/8`; either temporary
+module raises that to `8/8`, and the two are never mapped together. This is a host
+ABI/lifecycle proof. A live EOU measurement of retained `F$Link -> call -> F$UnLink`
+overhead and a live `dodsched` load/relink/no-disk-read proof have **not** been made in
+this checkpoint, so neither is claimed here.
+
+### Source-boundary evidence and remaining dependency
+
+The scheduler-driven AUTTAB regression invokes the real production command-overlay body
+and the exact `dodsched` C body. At the first autonomous boundary it reaches `A5B1C9`
+after `EXAMINE`. The recovered cartridge trace records the next `CMD` at that same seed.
+This also exposed that the older aggregate helper reaches `B1C9AD` there, one `RANDOM`
+transition early; the module ordering is therefore a source-fidelity improvement, not a
+wrapper around the previous aggregate approximation.
+
+The same regression retains the natural command-9 state: player `(9,22)`, direction 0,
+power 6048, damage 16, active torch, shield/sword state, and CCB 18 at `(9,22)` with
+power 704 and damage 0. With presentation callbacks deliberately returning zero, the
+current mechanical baseline ends at 185 `RANDOM` transitions / `$F2A74C`; it is not a
+source target. The trace proves `PUPDAT`/`VIEWER` windows from 17 to 40 source jiffies;
+there is no defensible one-value mapping from the current port's state to every such
+source window. Supplying zero or a fixed value after later `LUKNEW` calls would be
+fabricated timing and changes queued CMOVE/RNG order.
+
+The previously proposed per-path `PUPDAT`/`VIEWER` mapping is superseded by the portable
+policy below.  It does not attempt to manufacture the renderer-latency-dependent
+`$F194D4` checkpoint; no state or RNG padding is used.
+
+### Portable scheduler policy and activation boundary
+
+The requested per-path presentation-duration model was intentionally rejected after
+the source-cartridge measurement.  The cartridge's `F1 94 D4` command-10 seed is a
+valid **reference**, but it depends on 60 Hz `CLOCK` IRQs which happen while the
+bare-metal `VIEWER`/`PUPDAT` vector renderer consumes a variable number of 6809 cycles.
+That incidental renderer duration has no portable equivalent in CoWin/GFX2.  A fixed
+value, a command-index table, GFX2 wall time, RNG padding, or forced creature work
+would each change gameplay for a presentation artifact.
+
+`dodsched` therefore has this production policy:
+
+| fidelity class | policy |
+| --- | --- |
+| Source gameplay rules and queue ordering | Required: preserve `PLAYER` waits, `CLOCK`/`QUESCN`, FIFO `SCHED`, `HSLOW`, `BURNER`, `CREGEN`, and `CMOVE` semantics. |
+| Explicit source logical waits | Required: apply their documented jiffies independently of host render speed. |
+| Bare-metal `VIEWER`/`PUPDAT` execution latency | Measured/reference-only: do not emulate it in NitrOS-9. |
+| RNG checkpoints dependent only on that latency | Reference-only in portable execution; do not target them by mutation or timing tables. |
+| Independent exact fixtures | Required: retain their captured input state and results, including Combat M1's `F1 94 D4` fixture. |
+
+The module's presentation callback consequently returns only an explicitly modeled
+source delay; the normal portable policy returns zero for incidental visual work.  This
+keeps scheduling deterministic and independent of CoWin/GFX2/host speed while retaining
+the source queue semantics.
+
+The new AUTTAB 1--9 regression invokes the actual scheduler body and production command
+overlay under that policy.  It naturally reaches the required level-2 player/equipment
+and CCB-18 state with 185 transitions / `F2 A7 4C`, rather than 203 / `F1 94 D4`.
+CCB 18 is then due in the player's cell, so its source CMOV20 attack runs before
+command 10.  The exact portable ordering and resulting command-10 fixture are
+documented in the CMOV20 checkpoint below.  The separate Combat M1 regression remains
+unchanged and exact at `F1 94 D4`.
+
+The allocation design is ready for a later production activation: current verified
+artifacts are `dodgame` 30,183 bytes (below the 30,720 policy), `dodsched` 1,608 bytes,
+and `dodcmd` 6,908 bytes.  `dodgame` requests 10,872 data bytes, so it remains two
+Level II data blocks.  Normal graphics use `4 program + 2 data + 1 CoWin = 7/8`; either
+temporary callable module uses the eighth block, and the host's mandatory retained
+`F$NMLoad -> F$Link -> call -> F$UnLink -> F$UnLoad` lifecycle keeps `dodcmd` and
+`dodsched` non-nested.
+
+At this checkpoint activation was deferred pending `CRETUR.ASM:CMOV20` creature combat.
+That source-semantic dependency is resolved by the following CMOV20 callable operation;
+the broader move from the normal-loop clocking to fully module-owned `CLOCK`/`SCHED`
+remains a separate review.
+
+### CMOV20 callable scheduler operation — 2026-09-29
+
+`dodsched` now also owns the low-frequency source operation
+`CRETUR.ASM:CMOV20..30`.  A same-cell CCB is first made due by resident
+creature movement.  The normal foreground owner invokes
+`DOD_SCHED_CREATURE_ATTACK` through the existing mandatory retained lifecycle:
+
+```text
+retained F$NMLoad dodsched
+  -> temporary F$Link
+  -> CMOV20/SHIELD/ATTACK/DAMAGE/CMOV30-HUPDAT
+  -> F$UnLink
+final F$UnLoad during process cleanup
+```
+
+The operation has no mutable module-global state.  The caller retains `Game`,
+CCB/OCB storage, RNG, scheduler queue state, presentation state and the
+bounded semantic audio batch.  Its only resident service callback is mandatory
+`HUPDAT`; the optional `dodaudio` presentation client is reached only after
+combat state and the native heartbeat rate have been propagated.  `dodcmd`
+unlinks before this temporary scheduler link, so the command and scheduler
+modules still alternate in the single free DAT slot.
+
+Two reproducible current builds establish the resulting layout:
+
+| module | bytes | CRC | SHA-256 | mapping |
+| --- | ---: | --- | --- | --- |
+| `dodgame` | 30,640 (`$77B0`) | `81BF46` | `e77e0bdf456e9759b69343fe8b87e452517c37401fdab8fe8aa6f4a1b93e4a6d` | 4 program blocks |
+| `dodcmd` | 6,908 (`$1AFC`) | `A3254F` | `5717c54815458568303b3d7b243af98aa91fe5d0cbb4ab2ad67b356cac34fb44` | 1 temporary block |
+| `dodsched` | 2,881 (`$0B41`) | `EB0D72` | `14ab733c4f3716ea771168dc4929fdf9700c200eb123b4fe9cd054b604f5dc35` | 1 temporary block |
+
+`dodgame` requests 11,047 bytes (`$2B27`) of data, remaining within two 8 KiB
+data blocks.  It is 80 bytes below the 30,720-byte resident policy boundary.
+The graphics map is still `4 program + 2 data + 1 CoWin = 7/8`; either
+`dodcmd` or `dodsched` makes it `8/8`, never both together.  The scheduler
+module remains well within one 8 KiB mapping block.
+
+### Resident-headroom placement pass — 2026-09-29
+
+The accepted CMOV20 integration leaves `dodgame` at 30,640 bytes, only 80 bytes
+below the fixed 30,720-byte resident policy.  A linker/listing attribution pass
+was performed before attempting any movement.  The current resident code is:
+
+| object | code bytes | ownership conclusion |
+| --- | ---: | --- |
+| `main.o` | 3,645 | core process, graphics, input, heartbeat propagation, and temporary-module orchestration |
+| `game.o` | 7,203 | authoritative state, initialization, health, rendering, and core logical primitives |
+| `creature.o` | 2,978 | normal-loop creature clocking and packed CCB/OCB mutation |
+| `scheduler-host-opt.o` + shim | 276 | required resident `F$NMLoad`/`F$Link`/`F$UnLink`/`F$UnLoad` lifecycle |
+
+The genuinely scheduler-only resident pieces are small:
+
+| component | current bytes | decision |
+| --- | ---: | --- |
+| `game_creature_regenerate()` | 98 | scheduler-owned, but extraction alone is insufficient |
+| CMOV20 `scheduler_task()` callback | 39 | only delegates mandatory HUPDAT |
+| CMOV20 context/call wrapper | 52 | required while the resident loop dispatches the temporary operation |
+
+Even an aggressive removal of those 189 bytes would leave approximately 269
+bytes of policy headroom, far short of the required practical 1 KiB margin.
+The 183-byte `game_creature_service_one()` callback deliberately remains
+resident: it owns packed CCB mutation in the established ABI.  The mandatory
+scheduler host is likewise not movable because it owns process-local module
+lifecycle and error handling.
+
+The only measured extraction large enough to restore useful headroom is the
+normal-loop creature scheduling group: `creature_clock_advance` (254 bytes),
+`creature_service` (154), `move_one` (698), and its state/placement helpers
+(1,034), for about 2.1 KiB before callers.  That code is not dead duplication:
+`main` currently calls it through `game_creature_advance_progress()` for normal
+gameplay. Moving it into `dodsched` would require handing normal gameplay's
+CLOCK/QUESCN/CMOVE execution to the module, which is precisely the production
+activation deferred by the milestone scope. It would also revisit the accepted
+resident ownership of packed CCB mutation.
+
+No production code was moved in this pass. The fixed policy was not weakened,
+and no size-oriented assembly rewrite or `dodcmd` expansion was attempted.
+The next valid step is a production-activation/memory-policy review that can
+decide whether normal CMOVE ownership should move as one coherent scheduler
+operation; isolated callback extraction cannot establish the requested margin.
+
+### Production `dodsched` activation — 2026-09-29
+
+That coherent placement has now been activated.  `dodgame` retains the
+authoritative `Game` allocation, packed OCB/CCB/RNG state, window/CoWin and
+heartbeat hardware lifecycle, input, rendering, and optional audio client.
+`dodsched` owns the normal source scheduler boundary: CLOCK, ready-queue
+promotion, `LUKNEW`, `HSLOW`, `BURNER`, `CREGEN`, `CMOVE`, and CMOV20's
+source-order creature attack.  HUPDAT remains the deliberately narrow resident
+callback because it is the shared authoritative player health/rate primitive.
+
+`main` retains `/d1/dodsched` with `F$NMLoad`, then maps it only for a complete
+foreground boundary using `F$Link -> ABI call -> F$UnLink`; final cleanup uses
+`F$UnLoad`.  The command host finishes and unlinks `dodcmd` before this call,
+so command and scheduler overlays never coexist in the eighth DAT slot:
+
+```text
+normal gameplay:       4 dodgame + 2 data + 1 CoWin = 7/8
+command boundary:      4 dodgame + 2 data + 1 CoWin + 1 dodcmd = 8/8
+scheduler boundary:    4 dodgame + 2 data + 1 CoWin + 1 dodsched = 8/8
+```
+
+The caller-owned `DagSchedulerState` remains 52 bytes.  It carries queue,
+clock and presentation state across each unlink/relink.  `dodsched` retains no
+process pointer or mutable module-global state.  Its one foreground call
+services the complete eligible FIFO boundary rather than one task per link.
+The portable policy remains source-semantic: it models explicit waits and queue
+ordering, never incidental bare-metal renderer duration or RNG padding.
+
+Two reproducible activation builds produced:
+
+| module | bytes | CRC | SHA-256 | mapping |
+| --- | ---: | --- | --- | --- |
+| `dodgame` | 24,752 (`$60B0`) | `03699C` | `625c9fc26c6869bc7e2f55c43e57cea08f63be35d290974a8f03ef5e3750d58f` | 4 program blocks |
+| `dodsched` | 8,192 (`$2000`) | `DA8721` | `82deac540cd172f9fdd99d26b2a6989c3d8193265ad60b8b2ded35d594bff6b0` | 1 temporary block |
+| `dodcmd` | 6,908 (`$1AFC`) | `A3254F` | `5717c54815458568303b3d7b243af98aa91fe5d0cbb4ab2ad67b356cac34fb44` | 1 temporary block |
+
+`dodgame` requests 11,048 bytes (`$2B28`), still two 8 KiB data blocks.  It
+has 5,968 bytes below the fixed 30,720-byte resident policy limit.  `dodsched`
+fits exactly in its required single temporary block; new scheduler features
+must therefore be placed or split deliberately rather than silently growing
+this module.  The old timing helpers remain compiled for host-only direct unit
+tests; CMOC production builds exclude them, so the activated runtime has one
+normal scheduler owner.
+
+Focused scheduler ABI, creature-combat, AUTTAB and lifecycle checks, followed
+by all 29 Daggorath test scripts, passed against this placement.  The full
+live private-`/w` overlay-cycle observation remains separately documented as
+pending; production activation does not claim to resolve that instrumentation
+limitation.

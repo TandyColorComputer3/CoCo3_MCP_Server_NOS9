@@ -23,8 +23,8 @@ Byte game_random(Game *g){Byte n,i,b,carry,next;
  return g->seed[0];}
 static Byte cell(Game *g,int r,int c){return r<0||r>31||c<0||c>31?255:g->maze[(Word)r*32+c];}
 static void random_cell(Game *g,Byte *r,Byte *c){*c=game_random(g)&31;*r=game_random(g)&31;}
-static void maze(Game *g,Byte second){Byte r,c,dir,dist,n[9],x,y,kind;int nr,nc;Word left,i;
- memset(g->maze,255,1024);g->seed[0]=0x73;g->seed[1]=0xc7;g->seed[2]=0x5d;
+static void maze(Game *g,Byte level,Byte second){Byte r,c,dir,dist,n[9],x,y,kind;int nr,nc;Word left,i;
+ memset(g->maze,255,1024);g->seed[0]=level_seeds[level];g->seed[1]=level_seeds[level+1];g->seed[2]=level_seeds[level+2];
  random_cell(g,&r,&c);left=500;
  while(left){dir=game_random(g)&3;dist=(game_random(g)&7)+1;
   while(dist){nr=r+dr[dir];nc=c+dc[dir];if(nr<0||nr>31||nc<0||nc>31)break;
@@ -62,21 +62,29 @@ Byte game_population(const Game *g,Byte type){Byte i,n=0;
  return n;
 }
 #endif
-void game_init(Game *g,Byte second){Byte type,level,n,r,c,i;int t;Word p,tail;Byte *o,*cr;
- memset(g,0,sizeof(*g));g->row=16;g->col=11;g->power=160;g->weight=35;
- for(type=0;type<sizeof(omx);type++){level=omx[type]>>4;n=omx[type]&15;while(n--){p=birth(g,type,level);ocb(g,p)[5]=255;if(++level>5)level=omx[type]>>4;}}
- maze(g,second);
- for(t=11;t>=0;t--)for(n=0;n<cmt[t];n++){
+/* ONCE:GAME20/GAME30/GAME40 then NEWLVL.  The normal and demo paths share
+ * packed OCB/CCB construction; only source-selected LEVEL/player data differ. */
+static void init_level(Game *g,Byte level,Byte second,const Byte *initial,
+                       Byte initialLevel,Byte row,Byte col,Word power){Byte type,objectLevel,n,r,c,i;int t;Word p,tail;Byte *o,*cr;
+ memset(g,0,sizeof(*g));g->level=level;g->row=row;g->col=col;g->power=power;g->weight=35;
+ for(type=0;type<sizeof(omx);type++){objectLevel=omx[type]>>4;n=omx[type]&15;while(n--){p=birth(g,type,objectLevel);ocb(g,p)[5]=255;if(++objectLevel>5)objectLevel=omx[type]>>4;}}
+ maze(g,level,second);
+ for(t=11;t>=0;t--)for(n=0;n<level_cmt[(Word)level*12+t];n++){
   do{random_cell(g,&r,&c);}while(cell(g,r,c)==255||creature(g,r,c)>=0);
   cr=g->creatures[g->creatureCount++];memcpy(cr,cdb+t*8,8);cr[12]=255;cr[13]=t;cr[15]=r;cr[16]=c;
  }
- i=0;for(n=0;n<g->count;n++){o=g->objects[n];if(o[4]||o[5]!=255)continue;
+ i=0;for(n=0;n<g->count;n++){o=g->objects[n];if(o[4]!=level||o[5]!=255)continue;
   cr=g->creatures[i];putword(o,getword(cr+8));putword(cr+8,OBASE+(Word)n*14);if(++i==g->creatureCount)i=0;}
- tail=0;for(i=0;i<2;i++){/* GAME10 leaves B=11; SWI preserves it through NEWLVX/GAME30. */
- p=birth(g,i?15:17,11);o=ocb(g,p);o[5]=1;fill(o,i?15:17);o[11]=0;
+ tail=0;for(i=0;initial[i]!=255;i++){/* GAME10 leaves B=11; SWI preserves it through NEWLVX/GAME30. */
+ p=birth(g,initial[i],initialLevel);o=ocb(g,p);o[5]=1;fill(o,initial[i]);o[11]=0;
   if(tail)putword(ocb(g,tail),p);else g->bag=p;tail=p;}
  game_health(g);g->recovery=g->rate;g->burn=3600;
 }
+void game_init(Game *g,Byte second){static const Byte gamdat[]={17,15,255};init_level(g,0,second,gamdat,11,16,11,160);}
+/* GAME30 leaves the original's B register at $3C after the level-two NEWLVL
+ * path; OBIRTH stores that byte in each DEMDAT OCB's level field.  Keep it as
+ * captured source state rather than normalizing it to the logical LEVEL. */
+void game_init_demo(Game *g,Byte second){static const Byte demdat[]={13,15,16,255};init_level(g,2,second,demdat,0x3c,12,22,6048);}
 /* COMCRE:OFIND/FNDOBJ: this helper remains resident because the ordinary
  * dungeon renderer uses it on every visible object pass.  The command overlay
  * receives it through its v1 host-services table rather than duplicating a
@@ -108,7 +116,7 @@ static Byte bag_command(Game *g,const char *s){Byte t[33],specific=0;int cmd,dir
  if(dir==PAR_LT)hand=&g->hand;else if(dir==PAR_RT)hand=&g->rightHand;else return GAME_INVALID;
  /* PGET:PDROP/WUPDAT leaves next link/fuel/reveal untouched. No floor chain. */
  if(cmd==PAR_DROP){if(!*hand)return GAME_INVALID;o=ocb(g,*hand);*hand=0;
-  o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=0;
+  o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=g->level;
   g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));game_health(g);return GAME_OK;}
  if(cmd==PAR_STOW){if(!*hand)return GAME_INVALID;
   putword(ocb(g,*hand),g->bag);g->bag=*hand;*hand=0;return GAME_OK;}
@@ -206,10 +214,45 @@ const char *game_message(const char *s,Byte result){Byte t[33];int cmd;
  return result==GAME_BLOCKED?"BLOCKED":result==GAME_INVALID?"UNKNOWN COMMAND":result==GAME_FAINT?"FAINT":"OK";
 }
 #endif
-void game_tick(Game *g,Word ticks){Byte *o;while(ticks--){
- if(!--g->recovery){g->damage=g->damage-(g->damage+63)/64;game_health(g);g->recovery=g->rate?g->rate:256;}
- if(!--g->burn){g->burn=3600;if(g->torch){o=ocb(g,g->torch);if(o[6]){--o[6];if(o[6]<=5){o[9]=24;o[11]=0;}if(o[6]<o[7])o[7]=o[6];if(o[6]<o[8])o[8]=o[6];}}}
-}}
+/* COMMON.ASM:CLOCK first moves due TCBs from a clock queue to SCDQUE;
+ * COMPLR.ASM:HSLOW/BURNER run only when the foreground scheduler gets a turn.
+ * Keeping those operations separate prevents a long PLAYER:WAITX command from
+ * executing HSLOW repeatedly while it still owns the source scheduler. */
+#ifndef _CMOC_VERSION_
+/* Host-only compatibility helpers retain direct unit-test coverage. Production
+ * CMOC builds execute this source timing state solely through dodsched. */
+void game_timing_init(Game *g,GameTiming *timing){
+ memset(timing,0,sizeof(*timing));
+ if(!g->recovery)g->recovery=g->rate?g->rate:256;
+ if(!g->burn)g->burn=3600;
+}
+void game_timing_advance(Game *g,GameTiming *timing,Word jiffies){
+ while(jiffies--){
+  if(!timing->recoveryPending&&! --g->recovery)timing->recoveryPending=1;
+  if(!timing->burnPending&&! --g->burn)timing->burnPending=1;
+ }
+}
+void game_timing_service_task(Game *g,GameTiming *timing,Byte task){Byte *o;
+ if(task==GAME_TIMING_HSLOW&&timing->recoveryPending){
+  /* COMPLR.ASM:HSLOW is PDAM - ceil(PDAM/64), then HUPDAT and requeue. */
+  g->damage=g->damage-(g->damage+63)/64;game_health(g);
+  g->recovery=g->rate?g->rate:256;timing->recoveryPending=0;
+ }
+ if(task==GAME_TIMING_BURNER&&timing->burnPending){
+  g->burn=3600;timing->burnPending=0;
+  if(g->torch){o=ocb(g,g->torch);if(o[6]){--o[6];if(o[6]<=5){o[9]=24;o[11]=0;}if(o[6]<o[7])o[7]=o[6];if(o[6]<o[8])o[8]=o[6];}}
+ }
+}
+void game_timing_service(Game *g,GameTiming *timing){
+ game_timing_service_task(g,timing,GAME_TIMING_HSLOW);
+ game_timing_service_task(g,timing,GAME_TIMING_BURNER);
+}
+/* Compatibility helper for direct host callers: one foreground scheduling
+ * boundary per jiffy.  Production uses the explicit advance/service split. */
+void game_tick(Game *g,Word ticks){GameTiming timing;game_timing_init(g,&timing);
+ while(ticks--){game_timing_advance(g,&timing,1);game_timing_service(g,&timing);}
+}
+#endif
 /* VIEWER/VCTLST: absolute endpoint scaling about (128,76), signed arithmetic
  * shift by seven; VECTOR retains original fade sampling and clipping. */
 #include "logical.h"

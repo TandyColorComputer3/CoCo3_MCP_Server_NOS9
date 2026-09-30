@@ -12,7 +12,7 @@ class Floor(unittest.TestCase):
   cls.lib=ctypes.CDLL(str(cls.out/'game.so'));cls.lib.game_message.restype=ctypes.c_char_p
  @classmethod
  def tearDownClass(cls):cls.tmp.cleanup()
- def setUp(self):self.g=ctypes.create_string_buffer(2606);self.lib.game_init(self.g,0)
+ def setUp(self):self.g=ctypes.create_string_buffer(2608);self.lib.game_init(self.g,0)
  def word(self,o):return int.from_bytes(self.g.raw[o:o+2],'little')
  def cmd(self,s,status=0):self.assertEqual(self.lib.game_command(self.g,s.encode()),status)
  def obj(self,n):return self.g.raw[1024+n*14:1024+(n+1)*14]
@@ -89,7 +89,7 @@ class Floor(unittest.TestCase):
    if state['command']:self.cmd(state['command'])
    # Copy independently observed original world for rendering only. This does
    # not implement or simulate original autonomous creature movement in M4.
-   model=ctypes.create_string_buffer(self.g.raw,2606)
+   model=ctypes.create_string_buffer(self.g.raw,2608)
    world=bytes.fromhex(r['blobs'][state['world']]);self.assertEqual(len(world),2576)
    ctypes.memmove(model,world,2576);frame=ctypes.create_string_buffer(6144)
    self.lib.game_render(model,frame,b'',b'');self.lib.game_render_status(model,frame,state['heartPhase'])

@@ -8,11 +8,16 @@ p=argparse.ArgumentParser();p.add_argument('--out',required=True);p.add_argument
 provenance=generate(out)
 host_source=app/'src'/'gameplay'/'overlay-host.c'
 host_object=out/'overlay-host-opt.o'
+scheduler_host_source=app/'src'/'gameplay'/'scheduler-host.c'
+scheduler_host_object=out/'scheduler-host-opt.o'
 host_cmd=['cmoc','--os9','-O2','--compile','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(out),'-o',str(host_object),str(host_source)]
 r=subprocess.run(host_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'overlay-host-build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
-sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/creature.c','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/event.c']]
-cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodgame']+list(map(str,sources+[host_object]))
+scheduler_host_cmd=['cmoc','--os9','-O2','--compile','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(out),'-o',str(scheduler_host_object),str(scheduler_host_source)]
+r=subprocess.run(scheduler_host_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'scheduler-host-build.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/scheduler-host-shim.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/event.c']]
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodgame']+list(map(str,sources+[host_object,scheduler_host_object]))
 r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 ident=subprocess.check_output([a.os9,'ident',str(out/'dodgame')],text=True);assert '(Good)' in ident
@@ -37,6 +42,22 @@ run(overlay_link)
 overlay_module=out/'dodcmd'
 run(['lwasm','--format=os9','--pragma=forwardrefmax','-o',str(overlay_module),'-I'+str(out),str(app/'src/gameplay/command-overlay-pack.asm')])
 overlay_ident=subprocess.check_output([a.os9,'ident',str(overlay_module)],text=True);assert '(Good)' in overlay_ident
-overlay_parts=[overlay_source,host_source,app/'src'/'gameplay'/'command-overlay-module.asm',app/'src'/'gameplay'/'command-overlay-pack.asm']
-record={'command':cmd,'hostCommand':host_cmd,'cwd':str(out),'ident':ident,'sources':{str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in sources+overlay_parts},'data':provenance,'tools':{t:subprocess.check_output([t,'--version'],text=True) for t in ['cmoc','lwasm','lwlink']},'sha256':hashlib.sha256((out/'dodgame').read_bytes()).hexdigest(),'overlay':{'command':overlay_cmd+overlay_link,'ident':overlay_ident,'sha256':hashlib.sha256(overlay_module.read_bytes()).hexdigest()}}
+scheduler_source=app/'src/gameplay/scheduler.c'
+scheduler_asm=out/'scheduler.s'
+scheduler_cmd=['cmoc','--os9','-O2','--function-stack=0','-S','-I'+str(app/'src'),'-I'+str(out),str(scheduler_source)]
+r=subprocess.run(scheduler_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'scheduler-build.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+run(['lwasm','-fobj','--pragma=forwardrefmax','-DOS9','-o','scheduler.o','scheduler.s'])
+run(['lwasm','-fobj','--pragma=forwardrefmax','-DOS9','-o','scheduler-module.o',str(app/'src/gameplay/scheduler-module.asm')])
+# scheduler.c's source-faithful CMOV20 attack arithmetic needs CMOC's
+# unsigned 16-bit multiply/divide helpers in addition to the existing shift.
+run(['lwar','--extract',str(crt),'MUL16.os9_o','DIV16.os9_o','shiftLeft.os9_o'])
+scheduler_link=['lwlink','--format=raw','--output=scheduler-code.bin','scheduler-module.o','scheduler.o','MUL16.os9_o','DIV16.os9_o','shiftLeft.os9_o']
+run(scheduler_link)
+scheduler_module=out/'dodsched'
+run(['lwasm','--format=os9','--pragma=forwardrefmax','-o',str(scheduler_module),'-I'+str(out),str(app/'src/gameplay/scheduler-pack.asm')])
+scheduler_ident=subprocess.check_output([a.os9,'ident',str(scheduler_module)],text=True);assert '(Good)' in scheduler_ident
+overlay_parts=[overlay_source,host_source,scheduler_host_source,app/'src'/'gameplay'/'command-overlay-module.asm',app/'src'/'gameplay'/'command-overlay-pack.asm']
+scheduler_parts=[scheduler_source,app/'src'/'gameplay'/'scheduler-api.h',app/'src'/'gameplay'/'scheduler-module.asm',app/'src'/'gameplay'/'scheduler-pack.asm']
+record={'command':cmd,'hostCommand':host_cmd,'schedulerHostCommand':scheduler_host_cmd,'cwd':str(out),'ident':ident,'sources':{str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in sources+overlay_parts+scheduler_parts},'data':provenance,'tools':{t:subprocess.check_output([t,'--version'],text=True) for t in ['cmoc','lwasm','lwlink']},'sha256':hashlib.sha256((out/'dodgame').read_bytes()).hexdigest(),'overlay':{'command':overlay_cmd+overlay_link,'ident':overlay_ident,'sha256':hashlib.sha256(overlay_module.read_bytes()).hexdigest()},'scheduler':{'command':scheduler_cmd+scheduler_link,'ident':scheduler_ident,'sha256':hashlib.sha256(scheduler_module.read_bytes()).hexdigest()}}
 (out/'build.json').write_text(json.dumps(record,indent=2)+'\n');print(ident)

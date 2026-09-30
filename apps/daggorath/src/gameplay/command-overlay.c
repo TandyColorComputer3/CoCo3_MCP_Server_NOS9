@@ -58,7 +58,7 @@ static Byte bag_command(Game *g,const char *s,const DagOverlayServices *services
  s=token(s,t);dir=classify(t,parser_directions,sizeof(parser_directions)/16);
  if(dir==PAR_LT)hand=&g->hand;else if(dir==PAR_RT)hand=&g->rightHand;else return GAME_INVALID;
  if(cmd==PAR_DROP){if(!*hand)return GAME_INVALID;o=ocb(g,*hand);*hand=0;
-  o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=0;
+  o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=g->level;
   g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));services->health(g);return GAME_OK;}
  if(cmd==PAR_STOW){if(!*hand)return GAME_INVALID;
   putword(ocb(g,*hand),g->bag);g->bag=*hand;*hand=0;return GAME_OK;}

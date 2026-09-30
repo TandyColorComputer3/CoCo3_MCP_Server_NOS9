@@ -7,9 +7,15 @@
 #ifdef DOD_COMMAND_OVERLAY
 #include "overlay-api.h"
 #endif
+#include "scheduler-api.h"
 Byte game_input(Byte path,Byte *key);
 static Game game;
+static GameTiming gameTiming;
 static CreatureScheduler creatureScheduler;
+static DagSchedulerState schedulerState;
+/* The scheduler ABI context is process-owned state.  Its stable pointers are
+ * initialized once; each temporary F$Link only changes operation/ccb/result. */
+static DagSchedulerContextV1 schedulerContext;
 static Byte frame[FRAME_BYTES],signalFlag;
 static Byte inputUnderlay[GAME_INPUT_BYTES];
 static NativeHeartbeat heartbeat={255,0};
@@ -25,6 +31,18 @@ static Byte combatAudioState;
 typedef struct { Byte *shownPhase; } RenderProgressContext;
 static Byte render_heart_progress(Game *g,Byte *partial,void *context);
 static Byte creature_heart_progress(void *context);
+/* dodsched is mandatory normal foreground infrastructure. Its state remains
+ * resident, while each complete source scheduling boundary maps the one-block
+ * Sbrtn+Objct briefly. HUPDAT remains a shared authoritative Game primitive. */
+static Byte scheduler_task(void *opaque,Game *g,GameTiming *timing,CreatureScheduler *creatures,
+                           Byte task,Byte ccb,Byte *dirty){
+ (void)opaque;(void)timing;(void)creatures;(void)ccb;*dirty=0;
+ if(task==DOD_TASK_HEALTH){game_health(g);return 0;}
+ /* Non-health calls are observability notifications after dodsched has
+  * already performed the source mutation. */
+ return 0;
+}
+static DagSchedulerServices schedulerServices={DOD_SCHEDULER_ABI_V1,sizeof(DagSchedulerServices),0,scheduler_task,0,0};
 /* Original COMMON.ASM:CLK30 and the native DHeartbeat VIRQ both toggle PIA
  * $FF22 bit 1 at the authoritative edge. Foreground code may cheaply notice
  * that transition, but it never derives phase/generation from the bit: a
@@ -99,7 +117,7 @@ static Byte creature_heart_progress(void *context){
 }
 /* PULL/STOW/GET/DROP use original token rules; other commands retain M1 adapters.
  * EXIT remains an isolated OS-9-only lifecycle command. */
-int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,framePhase,view=GAME_VIEW_DUNGEON,nextView,secondPhase=0,frameRemainder,drained,inputEmpty,heartPatterns[28];Word previous,videoTicks,seconds;unsigned long frameGeneration;char input[32];RenderProgressContext renderContext;GameCombat combat;const char *message="TURN LEFT RIGHT AROUND  MOVE";
+int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,framePhase,view=GAME_VIEW_DUNGEON,nextView,drained,inputEmpty,heartPatterns[28],creatureEventCount;Word previous,videoTicks;unsigned long frameGeneration;char input[32];RenderProgressContext renderContext;GameCombat combat;const char *message="TURN LEFT RIGHT AROUND  MOVE";
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
  presentedGeneration=maximumPresentationLag=heartPresentations=0;phaseRefreshNeeded=audioBitValid=0;
  memset(&heartbeatState,0,sizeof(heartbeatState));
@@ -107,17 +125,23 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
  e=os_clock(&previous,1);if(e)return e;
  /* Production retains the original post-maze time perturbation. seed0 is
   * an explicit deterministic test mode; neither changes LVLTAB maze seeds. */
- game_init(&game,argc==2?0:previous/60);game_creature_init(&game,&creatureScheduler);input[0]=0;renderContext.shownPhase=&shownPhase;
+ game_init(&game,argc==2?0:previous/60);input[0]=0;renderContext.shownPhase=&shownPhase;
+ schedulerContext.abiVersion=DOD_SCHEDULER_ABI_V1;schedulerContext.contextSize=sizeof(schedulerContext);
+ schedulerContext.game=&game;schedulerContext.timing=&gameTiming;schedulerContext.creatures=&creatureScheduler;
+ schedulerContext.state=&schedulerState;schedulerContext.services=&schedulerServices;
  game_heart_patterns(heartPatterns);screen_set_heart_patterns(heartPatterns);e=screen_open();if(e)goto done;
 #ifdef DOD_COMMAND_OVERLAY
  /* Retain the module before the heartbeat-critical interval.  Its non-mapped
   * reference leaves the eighth DAT slot free until a command actually links. */
  (void)game_overlay_open();
 #endif
+ e=game_scheduler_open();if(e)goto done;
+ schedulerContext.operation=DOD_SCHED_INIT;e=game_scheduler_call(&schedulerContext);if(e)goto done;
  /* INIVUX: rate already computed; activation starts with remaining=1.
   * All module loads and graphics allocation precede the native claim. */
  e=os_clock(&previous,1);if(e)goto done;e=native_heartbeat_open(&heartbeat);if(e)goto done;
  e=native_heartbeat_rate(&heartbeat,game.rate);if(e)goto done;e=native_heartbeat_enable(&heartbeat);if(e)goto done;
+ schedulerServices.progress=creature_heart_progress;
  /* Begin a fresh simulation epoch after initialization and the existing
   * video-tick service is active; discard setup frames before this point. */
  e=native_heartbeat_take_ticks(&heartbeat,&videoTicks);if(e)goto done;
@@ -125,13 +149,18 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   e=os_signal_value(&signalFlag);if(e)break;
   oldrate=game.rate;oldfaint=game.faint;oldlight=game.torch?game.objects[(game.torch-0x0b15)/14][7]:0;
   e=native_heartbeat_take_ticks(&heartbeat,&videoTicks);if(e)break;
-  seconds=videoTicks/60;frameRemainder=videoTicks%60;secondPhase+=frameRemainder;
-  if(secondPhase>=60){++seconds;secondPhase-=60;}
-  if(seconds)game_tick(&game,seconds);
-  e=game_creature_advance_progress(&game,&creatureScheduler,videoTicks,
-                                   creature_heart_progress,&renderContext,&result);
-  if(e)break;if(result)dirty=1;
+  schedulerContext.operation=DOD_SCHED_NORMAL_TICKS;schedulerContext.logicalJiffies=videoTicks;
+  e=game_scheduler_call(&schedulerContext);if(e)break;
+  if(schedulerContext.dirty)dirty=1;
   if(game.rate!=oldrate){e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;}
+#ifdef _CMOC_VERSION_
+  /* CMOV20 commits player damage and HUPDAT before its SOUNDS/ISOUND events
+   * reach optional dodaudio. A missing or failed service therefore cannot
+   * alter combat, RNG, heartbeat cadence or the next scheduler boundary. */
+  creatureEventCount=creatureScheduler.audioCount;creatureScheduler.audioCount=0;
+  if(creatureEventCount)audio_present_optional(&combatAudio,&combatAudioState,
+    creatureScheduler.audio,creatureEventCount,"/d1/dodaudio","ssc-mame-fast");
+#endif
   if(oldfaint!=game.faint||oldlight!=(game.torch?game.objects[(game.torch-0x0b15)/14][7]:0))dirty=1;
   if(game.dead){message="PLAYER DIED  EXITING";dirty=1;}
   /* Present simulation/scene changes before accepting another text byte, so
@@ -238,6 +267,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
 #ifdef DOD_COMMAND_OVERLAY
  r=game_overlay_close();if(!e)e=r;
 #endif
+ r=game_scheduler_close();if(!e)e=r;
  r=native_heartbeat_close(&heartbeat);if(!e)e=r;r=screen_close();if(!e)e=r;
  printf("DODGAME HEARTBEAT EDGE %lu PRESENTED %lu MAX_PHASE_LAG %lu HEART_PRESENTS %lu\r",heartbeatState.edgeGeneration,presentedGeneration,maximumPresentationLag,heartPresentations);
  printf("DODGAME TERM RESTORED ROW %u COL %u DIR %u RATE %u STATUS %u\r",game.row,game.col,game.dir,game.rate,e);

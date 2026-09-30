@@ -16,7 +16,7 @@ static void blank_game(void){memset(&g,0,sizeof(g));memset(g.maze,0,sizeof(g.maz
  game_creature_init(&g,&s);
 }
 int main(void){Byte *c;Word damage;Byte changed;
- assert(sizeof(Game)==2606); /* M5 state ABI and callers remain unchanged. */
+ assert(sizeof(Game)==2608); /* M1B adds appended port-owned logical LEVEL. */
  blank_game();assert(g.creatures[0][15]==16&&g.creatures[0][16]==18);
  assert(!game_creature_advance(&g,&s,5));assert(g.creatures[0][16]==18);
  changed=game_creature_advance(&g,&s,1);c=g.creatures[0];
@@ -25,7 +25,7 @@ int main(void){Byte *c;Word damage;Byte changed;
  assert(s.countdown[0]==1&&!s.combatPending[0]);
  damage=g.damage;assert(game_creature_advance(&g,&s,6));
  assert(c[15]==16&&c[16]==16&&s.combatPending[0]);
- assert(s.countdown[0]==3&&g.damage==damage); /* CMOV20 is not entered. */
+ assert(s.countdown[0]==3&&g.damage==damage); /* CMOV20 is deferred to dodsched. */
 
  /* Diagonal, blocked paths select the source MOVTAB and consume one RNG. */
  blank_game();c=g.creatures[0];c[15]=8;c[16]=8;g.row=16;g.col=16;
@@ -47,6 +47,7 @@ int main(void){Byte *c;Word damage;Byte changed;
  /* Inactive CCB slots neither schedule nor render. */
  blank_game();c=g.creatures[0];c[12]=0;game_creature_init(&g,&s);
  assert(!s.countdown[0]&&!game_creature_advance(&g,&s,600));
+
  blank_game();g.row=16;g.col=11;g.dir=0;g.torch=0x0b15;
  g.objects[0][7]=31;g.creatures[0][13]=7;g.creatures[0][15]=15;g.creatures[0][16]=11;
  game_render(&g,frame1,"","");g.creatures[0][12]=0;game_render(&g,frame2,"","");

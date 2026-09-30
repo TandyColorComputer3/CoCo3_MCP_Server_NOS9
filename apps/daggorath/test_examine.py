@@ -16,7 +16,7 @@ class Examine(unittest.TestCase):
   cls.font=bytes(map(int,re.search(r'font\[\]=\{([^}]+)',(cls.out/'game_data.h').read_text())[1].split(',')))
  @classmethod
  def tearDownClass(cls):cls.tmp.cleanup()
- def setUp(self):self.g=ctypes.create_string_buffer(2606);self.lib.game_init(self.g,0)
+ def setUp(self):self.g=ctypes.create_string_buffer(2608);self.lib.game_init(self.g,0)
  def cmd(self,s):self.assertEqual(self.lib.game_command(self.g,s.encode()),0)
  def frame(self):
   f=ctypes.create_string_buffer(6144);self.lib.game_render_examine(self.g,f,b'',b'');return f.raw

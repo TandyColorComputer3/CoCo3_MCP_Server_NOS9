@@ -12,7 +12,7 @@ class Bag(unittest.TestCase):
   cls.lib=ctypes.CDLL(str(cls.out/'game.so'))
  @classmethod
  def tearDownClass(cls):cls.tmp.cleanup()
- def setUp(self):self.g=ctypes.create_string_buffer(2606);self.lib.game_init(self.g,0)
+ def setUp(self):self.g=ctypes.create_string_buffer(2608);self.lib.game_init(self.g,0)
  def word(self,offset):return int.from_bytes(self.g.raw[offset:offset+2],'little')
  def cmd(self,s,result=0):self.assertEqual(self.lib.game_command(self.g,s.encode()),result)
  def hands(self,l,r):self.assertEqual((self.word(2596),self.word(2604)),(l,r))

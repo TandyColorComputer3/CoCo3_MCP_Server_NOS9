@@ -53,6 +53,11 @@ def generate(out):
   array(name,[b(symbols[label]+i) for i in range(size)])
   if name=='object_weights': lines.append('#endif')
   if name in ['object_weights','font']:overlay_array(name,[b(symbols[label]+i) for i in range(size)])
+ # NEWLVL indexes the five 12-byte creature matrix rows by LEVEL.  DGNGEN
+ # likewise indexes its rolling seed table by LEVEL.  These are resident-only
+ # initialization data; command-overlay code does not need to map them.
+ array('level_cmt',[b(symbols['CMTTAB']+i) for i in range(60)])
+ array('level_seeds',[b(symbols['LVLTAB']+i) for i in range(7)])
  # STATUS:COPY$ skips the first expanded byte (token class; PARSER:PARS20).
  # Retain the original 5-bit alphabet, not a hand-transcribed name catalog.
  for name,label in [('status_adjectives','ADJTAB'),('status_generics','GENTAB'),('parser_commands','CMDTAB'),('parser_directions','DIRTAB')]:
