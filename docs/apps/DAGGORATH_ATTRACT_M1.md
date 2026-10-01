@@ -650,6 +650,60 @@ deliberately zero-presentation baseline ends at 185 transitions / `$F2A74C`, not
 source target. No fixed delay, seed adjustment, forced movement, or command-10 execution
 has been used.
 
+## Monochrome Sizzle Demo acceptance
+
+`doddemo` is a bounded, autonomous production runner.  It calls the same
+`game_init_demo`, retained `dodcmd`, retained `dodsched`, renderer, native heartbeat,
+and optional `dodaudio` presentation interfaces used by the game; it does not paint a
+visual simulation.  Its command stream is exactly AUTTAB entries 1--10, ending at the
+already implemented Combat M1 boundary.  Entries 11--17 remain deliberately out of
+scope.
+
+The runner begins with the four-row source-derived attract text and `PREPARE!`, then
+enters level two, enables the native heartbeat after the first dungeon presentation,
+and executes ordinary overlay commands and scheduler boundaries.  It keeps the portable
+scheduler policy: explicit source waits and queue order advance logical time; CoWin/GFX2
+wall time does not.  A short visual dwell makes each completed state observable without
+changing `Game`, scheduler state, or RNG.
+
+The accepted live run used the verified EOU configuration (`coco3h`, 2 MiB, RGB,
+restored `nos9_ready_v2`) and a byte-verified disposable staged module.  It completed in
+79.438 seconds with guest status `000`.  Because `demo.c` returns immediately on any
+command or scheduler error, that status proves that all ten commands completed, including
+command 5's source-permitted `MOVE` and command 10's ordinary `ATTACK RIGHT`.  The
+post-combat frame is produced only after that Combat M1 call and its ordinary state
+mutation.  The runner passes queued creature/Combat semantic events to the existing
+optional audio service; this visual acceptance did not claim a separate audio recording.
+
+Two clean builds were byte-identical.  ToolShed `ident` validated each module header and
+CRC:
+
+| Module | Bytes | Data request | CRC | SHA-256 |
+| --- | ---: | ---: | --- | --- |
+| `dodgame` | 25,151 | 11,056 | `AB7C35` | `6edff1ad866f92c81452224ebf0f871750730c8fb8b3ab4e1d69a3762d411e20` |
+| `dodcmd` | 7,004 | — | `C3B942` | `fbf2424f991afe7610a815113b1084372afa495272587be187b9a1872726b946` |
+| `dodsched` | 8,192 | — | `DA8721` | `82deac540cd172f9fdd99d26b2a6989c3d8193265ad60b8b2ded35d594bff6b0` |
+| `doddemo` | 21,631 | 10,843 | `A357EA` | `019116f3191d629088c5daa73c47f5cb9a278df9ab205ba280aaf8030371914b` |
+
+`dodgame` remains a four-program-block/two-data-block process.  `dodcmd` and
+`dodsched` are each one 8 KiB temporary module and continue to alternate in the sole
+free graphical DAT slot.
+
+| Phase | Captured elapsed time | Curated frame |
+| --- | ---: | --- |
+| Four-row attract text | 26.520 s | ![Attract text](assets/daggorath-sizzle-demo/attract.png) |
+| `PREPARE!` | 28.506 s | ![Preparation](assets/daggorath-sizzle-demo/prepare.png) |
+| Initial level-two dungeon | 37.017 s | ![Initial dungeon](assets/daggorath-sizzle-demo/initial-dungeon.png) |
+| AUTTAB autoplay | 50.018 s | ![Autoplay](assets/daggorath-sizzle-demo/autoplay.png) |
+| Combat M1 post-kill state | 72.013 s | ![Stone Giant defeated](assets/daggorath-sizzle-demo/post-combat.png) |
+
+The current production display remains CoWin type 5, `640x200x2`, with the canonical
+`512x192` game viewport and 64-pixel side regions.  Type 7/four-color work is deferred;
+see [DAGGORATH_PRESENTATION_COLOR_RESEARCH.md](DAGGORATH_PRESENTATION_COLOR_RESEARCH.md).
+The five frames above are the curated acceptance evidence.  The dense private capture
+sequence, MAME scripts, debugger traces, temporary disks, and generated modules are not
+repository artifacts.
+
 ### AUTTAB 1--9 presentation-timing mapping boundary
 
 The recovered original-cartridge trace has now been reduced to its complete chronological

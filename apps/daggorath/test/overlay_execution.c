@@ -5,8 +5,12 @@
 #include "gameplay/overlay-api.h"
 
 extern Byte dod_overlay_execute(DagOverlayContextV1 *);
+static Byte opaque;
+static void health(void *context,Game *g){(void)context;game_health(g);}
+static Byte object_name(void *context,Game *g,Word token,Byte *name){(void)context;return game_object_name(g,token,name);}
+static void render_status(void *context,Game *g,Byte *frame,Byte phase){(void)context;game_render_status(g,frame,phase);}
 static DagOverlayServices services={DOD_OVERLAY_ABI_V1,sizeof(DagOverlayServices),
- game_health,game_object_name,game_render_status};
+ &opaque,health,object_name,render_status};
 
 static Byte run(Game *g,const char *text,GameCombat *combat,Byte *view,const char **message){
  DagOverlayContextV1 c;

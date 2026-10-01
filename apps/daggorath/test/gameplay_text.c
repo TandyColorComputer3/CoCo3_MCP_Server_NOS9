@@ -4,6 +4,7 @@
 #include "platform.h"
 #include "audio/native_heartbeat.h"
 #include "gameplay/scheduler-api.h"
+#include "gameplay/scheduler-callbacks.h"
 int gameplay_main(int argc,char **argv);
 static const char keys[]="MOVE\rEXIT\r";
 static unsigned readAt,uiPresents,fullPrepares,sleeps,schedulerOpens,schedulerCloses,schedulerCalls;
@@ -47,6 +48,16 @@ Byte native_heartbeat_close(NativeHeartbeat *h){h->opened=0;return 0;}
 Byte game_scheduler_open(void){assert(!schedulerLive);schedulerLive=1;++schedulerOpens;return 0;}
 Byte game_scheduler_call(DagSchedulerContextV1 *context){assert(schedulerLive&&context);++schedulerCalls;return 0;}
 Byte game_scheduler_close(void){assert(schedulerLive);schedulerLive=0;++schedulerCloses;return 0;}
+/* The production gateway is 6809 assembly.  This direct-main host fixture
+ * supplies deterministic equivalents solely for linkage. */
+void scheduler_callback_init(DagSchedulerCallbackContext *c,void *opaque){
+ assert(c);(void)opaque;c->dataY=0;c->userOpaque=0;
+}
+Byte scheduler_task_gateway(void *opaque,Game *g,GameTiming *t,CreatureScheduler *q,Byte task,Byte ccb,Byte *dirty){
+ (void)opaque;(void)g;(void)t;(void)q;(void)task;(void)ccb;*dirty=0;return 0;
+}
+Word scheduler_present_gateway(void *opaque,Game *g,Byte mode){(void)opaque;(void)g;(void)mode;return 0;}
+Byte scheduler_progress_gateway(void *opaque){(void)opaque;return 0;}
 int main(void){char *argv[]={"dodgame","seed0",0};
  assert(gameplay_main(2,argv)==0);
  /* Four guest characters are presented before MOVE's CR; the later EXIT

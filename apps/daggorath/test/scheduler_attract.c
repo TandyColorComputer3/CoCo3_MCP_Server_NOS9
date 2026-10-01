@@ -13,8 +13,12 @@
 extern Byte dod_overlay_execute(DagOverlayContextV1 *);
 extern Byte dodsched_execute(DagSchedulerContextV1 *);
 
+static Byte overlayOpaque;
+static void overlay_health(void *opaque,Game *g){(void)opaque;game_health(g);}
+static Byte overlay_object_name(void *opaque,Game *g,Word token,Byte *name){(void)opaque;return game_object_name(g,token,name);}
+static void overlay_render_status(void *opaque,Game *g,Byte *frame,Byte phase){(void)opaque;game_render_status(g,frame,phase);}
 static DagOverlayServices overlayServices={DOD_OVERLAY_ABI_V1,sizeof(DagOverlayServices),
- game_health,game_object_name,game_render_status};
+ &overlayOpaque,overlay_health,overlay_object_name,overlay_render_status};
 
 static Byte command(Game *g,const char *text,GameCombat *combat){DagOverlayContextV1 c;
  memset(&c,0,sizeof(c));c.abiVersion=DOD_OVERLAY_ABI_V1;c.contextSize=sizeof(c);

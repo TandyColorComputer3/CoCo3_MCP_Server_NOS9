@@ -8,11 +8,13 @@
 #include "overlay-api.h"
 #endif
 #include "scheduler-api.h"
+#include "scheduler-callbacks.h"
 Byte game_input(Byte path,Byte *key);
 static Game game;
 static GameTiming gameTiming;
 static CreatureScheduler creatureScheduler;
 static DagSchedulerState schedulerState;
+static DagSchedulerCallbackContext schedulerCallbacks;
 /* The scheduler ABI context is process-owned state.  Its stable pointers are
  * initialized once; each temporary F$Link only changes operation/ccb/result. */
 static DagSchedulerContextV1 schedulerContext;
@@ -34,7 +36,7 @@ static Byte creature_heart_progress(void *context);
 /* dodsched is mandatory normal foreground infrastructure. Its state remains
  * resident, while each complete source scheduling boundary maps the one-block
  * Sbrtn+Objct briefly. HUPDAT remains a shared authoritative Game primitive. */
-static Byte scheduler_task(void *opaque,Game *g,GameTiming *timing,CreatureScheduler *creatures,
+Byte scheduler_task_resident(void *opaque,Game *g,GameTiming *timing,CreatureScheduler *creatures,
                            Byte task,Byte ccb,Byte *dirty){
  (void)opaque;(void)timing;(void)creatures;(void)ccb;*dirty=0;
  if(task==DOD_TASK_HEALTH){game_health(g);return 0;}
@@ -42,7 +44,8 @@ static Byte scheduler_task(void *opaque,Game *g,GameTiming *timing,CreatureSched
   * already performed the source mutation. */
  return 0;
 }
-static DagSchedulerServices schedulerServices={DOD_SCHEDULER_ABI_V1,sizeof(DagSchedulerServices),0,scheduler_task,0,0};
+Word scheduler_present_resident(void *opaque,Game *g,Byte mode){(void)opaque;(void)g;(void)mode;return 0;}
+static DagSchedulerServices schedulerServices={DOD_SCHEDULER_ABI_V1,sizeof(DagSchedulerServices),0,scheduler_task_gateway,0,0};
 /* Original COMMON.ASM:CLK30 and the native DHeartbeat VIRQ both toggle PIA
  * $FF22 bit 1 at the authoritative edge. Foreground code may cheaply notice
  * that transition, but it never derives phase/generation from the bit: a
@@ -111,10 +114,11 @@ static Byte render_heart_progress(Game *g,Byte *partial,void *context){
  e=present_latest_heart(partial,p->shownPhase);if(e)return e;
  return presentation_lag(*p->shownPhase);
 }
-static Byte creature_heart_progress(void *context){
+Byte scheduler_progress_resident(void *context){
  RenderProgressContext *p=(RenderProgressContext *)context;
  return render_heart_progress(&game,frame,p);
 }
+static Byte creature_heart_progress(void *context){return scheduler_progress_resident(context);}
 /* PULL/STOW/GET/DROP use original token rules; other commands retain M1 adapters.
  * EXIT remains an isolated OS-9-only lifecycle command. */
 int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,framePhase,view=GAME_VIEW_DUNGEON,nextView,drained,inputEmpty,heartPatterns[28],creatureEventCount;Word previous,videoTicks;unsigned long frameGeneration;char input[32];RenderProgressContext renderContext;GameCombat combat;const char *message="TURN LEFT RIGHT AROUND  MOVE";
@@ -129,6 +133,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
  schedulerContext.abiVersion=DOD_SCHEDULER_ABI_V1;schedulerContext.contextSize=sizeof(schedulerContext);
  schedulerContext.game=&game;schedulerContext.timing=&gameTiming;schedulerContext.creatures=&creatureScheduler;
  schedulerContext.state=&schedulerState;schedulerContext.services=&schedulerServices;
+ scheduler_callback_init(&schedulerCallbacks,0);schedulerServices.opaque=&schedulerCallbacks;
  game_heart_patterns(heartPatterns);screen_set_heart_patterns(heartPatterns);e=screen_open();if(e)goto done;
 #ifdef DOD_COMMAND_OVERLAY
  /* Retain the module before the heartbeat-critical interval.  Its non-mapped
@@ -141,7 +146,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   * All module loads and graphics allocation precede the native claim. */
  e=os_clock(&previous,1);if(e)goto done;e=native_heartbeat_open(&heartbeat);if(e)goto done;
  e=native_heartbeat_rate(&heartbeat,game.rate);if(e)goto done;e=native_heartbeat_enable(&heartbeat);if(e)goto done;
- schedulerServices.progress=creature_heart_progress;
+ scheduler_callback_init(&schedulerCallbacks,&renderContext);schedulerServices.progress=scheduler_progress_gateway;
  /* Begin a fresh simulation epoch after initialization and the existing
   * video-tick service is active; discard setup frames before this point. */
  e=native_heartbeat_take_ticks(&heartbeat,&videoTicks);if(e)goto done;

@@ -1474,3 +1474,207 @@ by all 29 Daggorath test scripts, passed against this placement.  The full
 live private-`/w` overlay-cycle observation remains separately documented as
 pending; production activation does not claim to resolve that instrumentation
 limitation.
+
+### Reverse callable-module callback ABI — 2026-09-30
+
+`dodsched` can call resident services through `DagSchedulerServices`.  This is
+the reverse direction of the ordinary resident host → mapped module ABI and it
+has a separate CMOC requirement.  A default CMOC resident C function begins by
+calling `_stkcheck`; that CRT helper addresses the resident process stack-limit
+metadata through `Y`.  The scheduler host shim deliberately sets `Y` to the
+temporary `F$Link` entry before calling mapped `dodsched`.  A direct `JSR ,X`
+from the module into resident C therefore made `_stkcheck` treat the mapped
+module address as the resident data base.  The consequence was a misleading
+clean return during the first queued `HSLOW → HUPDAT` callback.
+
+This does not affect normal resident-to-resident C calls, where `Y` already
+names the resident data area.  It also does not affect `dodsched` entry: the
+callable module intentionally uses `--function-stack=0` because it has no
+resident CMOC data segment.  A private all-resident `--function-stack=0`
+diagnostic proved the cause, but is not a production policy.
+
+`scheduler-callback-gateway.asm` is the explicit production boundary.  At
+scheduler setup the resident caller saves its CMOC data-base `Y` in the
+caller-owned `DagSchedulerCallbackContext`.  Each mapped-module service
+pointer targets a tiny assembly gateway, which restores that `Y` and tail-jumps
+to ordinary stack-checked resident C.  The original scheduler `JSR` return
+frame and C arguments remain intact, so the C function returns directly to
+`dodsched`.  The module's callback continuations use context/X/U only and have
+no `Y`-relative data access after the call.
+
+All service forms now cross this boundary: task (including mandatory
+`DOD_TASK_HEALTH`), presentation, and bounded progress.  No callback is made
+optional.  The retained `F$NMLoad → F$Link → call → F$UnLink → F$UnLoad`
+lifecycle and one-slot `dodcmd`/`dodsched` alternation are unchanged.
+
+The focused ABI test confirms the resident production command retains default
+CMOC stack checking, the scheduler alone retains `--function-stack=0`, and the
+production gateway is included in the build.  It also exercises repeated
+task/presentation/progress calls, persistent queue state, and task-result
+propagation.  In the private EOU `coco3h`/2 MiB/RGB run, the unmodified staged
+`doddemo` passed its former post-`PREPARE!` failure boundary and remained a
+graphics-owning foreground program beyond the 60-second old-failure window;
+the matching durable tracer remained live beyond 120 seconds.  This proves the
+callback return path advances into the later demo sequence.  Extended visual
+demo acceptance remains a separate run and is not inferred from the timeout.
+
+The corrected production build is `dodgame` 24,977 bytes (`$6191`), CRC
+`AAF554`, with a 11,052-byte (`$2B2C`) data request.  It remains four program
+and two data blocks, well below the 30,720-byte resident policy.  The gateway
+does not change the one-block `dodsched` or `dodcmd` mapping contract.
+
+### Live Level II relocation and reverse-callback correction — 2026-09-30
+
+The previous gateway fixed CMOC's resident `Y` data-base requirement, but its
+tail `JMP` operands remained a second, independent Level II defect.  The
+linked `doddemo` symbol for `_scheduler_task_resident` is `$06EB`: that is a
+module-relative link address, not a CPU address.  In a live `coco3h` / 2 MiB /
+RGB EOU run, a private parent observer used `F$GPrDsc` (`P$DATImg` at `$40`) and
+`F$CpyMem` with the observed image.  The graphics child was PID 4, with
+`P$PModul=$A000`, task 2, and 43 256-byte data pages.  Its first eight DAT
+words were:
+
+| logical range | DAT word | observed role |
+| --- | ---: | --- |
+| `$0000-$1FFF` | `$001B` | process data |
+| `$2000-$3FFF` | `$001C` | process data |
+| `$4000-$5FFF` | `$333E` | free |
+| `$6000-$7FFF` | `$333E` before `F$Link` | free / temporary `dodsched` slot |
+| `$8000-$9FFF` | `$333E` | free |
+| `$A000-$BFFF` | `$000D` | resident program |
+| `$C000-$DFFF` | `$0010` | resident program |
+| `$E000-$FFFF` | `$0019` | resident program |
+
+Thus the observable resident target was `$A6EB`, while the old gateway at
+`$C898` restored `Y` and then executed `JMP $06EB`.  `$06EB` belongs to the
+process-data mapping.  The debugger trace showed the resulting invalid data
+execution and never reached the scheduler continuation at `$AC0E`; rendering,
+heartbeat startup and AUTTAB were consequently unreachable.
+
+The correction is position independent: every reverse gateway now preserves
+the established resident `Y`, uses `LEAX resident_target,PCR`, then executes
+`JMP ,X`.  PC-relative displacement is invariant under Level II module
+placement, so no observed `$A000` base is embedded.  This applies to task,
+presentation and progress callbacks.  The linked task gateway now has bytes
+`AE 62 10 AE 84 30 8D DE 4A 6E 84`; at runtime its `LEAX` resolves from `$C89D`
+to `$A6EB`.
+
+`test_scheduler_callback_abi.py` now builds the final linked `doddemo` and
+checks each gateway's `LEAX ...,PCR` instruction and signed displacement using
+a deliberate `$A000` simulated program base.  It therefore fails if a future
+gateway regresses to an imported absolute/link-relative `JMP`.  The test also
+retains the default resident CMOC stack-check and repeated task/presentation/
+progress callback checks.
+
+Fresh live evidence used the corrected, byte-verified `doddemo` SHA-256
+`34051d52ec170efaa9546ccf18b7a394aa65ff9be89e5f1a140ad58123b553b7`.
+`F$CpyMem` validated live bytes for `render_dungeon`, `game_scheduler_call`,
+`native_heartbeat_open`, the gateway, and `_scheduler_task_resident` against
+that artifact.  MAME's built-in debugger then observed:
+
+```
+post-PREPARE scheduler $AC0B
+  -> mapped dodsched entry $6016
+  -> task gateway $C898
+  -> resolved resident callback $A6EB
+  -> scheduler continuation $AC0E
+  -> render_dungeon $A803 -> $AC20
+  -> heartbeat open $DAE3 -> $AC32
+  -> heartbeat rate $DB48 -> $AC4B
+  -> heartbeat enable $DB73 -> $AC5D
+  -> first AUTTAB command entry $A906
+```
+
+The fixed run returned guest status `000`; it is evidence that the former
+post-`PREPARE!` callback boundary is repaired, not a substitute for the
+separate curated visual sizzle-demo acceptance.  Current rebuilt module sizes
+are `dodgame` 24,986 bytes (`$619A`, CRC `170EED`, data `$2B2C`), `dodsched`
+8,192 bytes (`$2000`, CRC `DA8721`), `dodcmd` 6,908 bytes (`$1AFC`, CRC
+`A3254F`), and `doddemo` 21,466 bytes (`$53DA`, CRC `69F571`, data `$2A57`).
+The callback correction adds nine resident bytes, retains four resident
+program blocks and two data blocks, and leaves both temporary callable modules
+within one 8 KiB block.
+
+### Command-overlay resident callback ABI — 2026-09-30
+
+`dodcmd` has the same reverse-CMOC boundary as `dodsched`.  A live command-1
+investigation reached the correctly loader-relocated resident
+`game_object_name` target, but entered it with mapped-`dodcmd` `Y`.  Default
+resident CMOC C uses `Y` for its data base and stack-check metadata, so a
+mapped callable module must never call such a resident function directly.
+
+`DagOverlayServices` now carries a caller-owned opaque callback context and
+exports only three resident gateways: health, object name, and status render.
+At `game_overlay_open` the host records resident `Y`; each gateway restores it
+and reaches a small stack-checked resident wrapper through `LEAX target,PCR`.
+The latter is position independent: it does not embed the observed live
+resident base or an imported link-relative target.  The command module keeps
+its ordinary arguments and return frame, so a wrapper returns directly to
+`dodcmd`.
+
+This generalizes the rule for every dynamically mapped CMOC module:
+
+> A mapped CMOC module that calls resident stack-checked CMOC C must cross a
+> resident-context-safe ABI boundary.
+
+The two live-proven variants differ only in target handling.  `dodsched`
+requires both resident-`Y` restoration and PC-relative target resolution
+because its prior imported target was link-relative.  `dodcmd` already receives
+loader-relocated service pointers, but still requires resident-`Y` restoration
+before entering C.  The `DagOverlayServices.size` check rejects a stale
+callback-table layout before command work begins.
+
+`test_overlay_callback_abi.py` verifies the three PC-relative gateways,
+default resident function-stack checking, a simulated nonzero resident module
+base, and repeated representative health/object-name/status callbacks.  The
+existing autoplay, scheduler-attract, and overlay-execution fixtures model the
+new opaque gateway ABI while retaining their gameplay, RNG, command-order and
+Combat assertions.
+
+The rebuilt modules remain within the established limits: `dodgame` is 25,130
+bytes (`$622A`, data `$2B30`, CRC `1068DB`), `dodcmd` is 7,004 bytes (`$1B5C`,
+CRC `C3B942`), and `doddemo` is 21,610 bytes (`$546A`, data `$2A5B`, CRC
+`38CADF`).  `dodsched` remains one 8 KiB block.  The gateway itself is a
+small resident assembly layer; no function-stack setting was relaxed.
+
+The first corrected graphical run still returns `187` before a `dodcmd` entry
+breakpoint fires.  The exact staged artifacts were independently extracted
+from the disposable floppy and matched the host SHA-256 values.  This is
+therefore not evidence of a stale module or of a callback-gateway failure.
+The next live boundary is the host-to-overlay link/call mapping path; it must
+be diagnosed independently before changing the overlay lifecycle.
+
+### AUTTAB demo completion and target-only CMT code-generation finding — 2026-09-30
+
+The completed bounded `doddemo` acceptance subsequently proved the host-to-overlay path
+and the gateway layer through AUTTAB commands 1--10.  Its 79.438-second EOU run returned
+guest status `000`; command 10 used the ordinary Combat M1 overlay path and the runner
+then displayed its ordinary post-kill state.  The curated visual evidence and the
+autonomous-runner contract are recorded in [DAGGORATH_ATTRACT_M1.md](DAGGORATH_ATTRACT_M1.md).
+
+The final command-5 `MOVE` diagnosis also exposed a separate target-only issue in the
+level-two creature-birth loop.  The source data is correct: the twelve level-two CMT
+entries sum to 23 births.  A disposable CMOC 0.1.90 OS-9 `-O2` probe that directly summed
+those entries returned 23, but the original nested expression:
+
+```c
+for (n = 0; n < level_cmt[(Word) level * 12 + t]; n++)
+```
+
+returned 36 on the target.  Generated assembly computed the indexed address in `D`, then
+loaded the byte loop counter into `B` before issuing `CMPB D,X`; loading `B` changed the
+low byte of `D`, so the comparison no longer addressed the computed CMT entry.  The
+result was a 33rd CCB write that overwrote the packed `Game.row` byte before the first
+presentation or AUTTAB command.
+
+`init_level()` now computes the bounded source-equivalent `level * 12` offset once and
+caches each `level_cmt[offset + t]` value in a byte before comparing the byte loop
+counter.  A second disposable target `game_init_demo()` probe returned the source-required
+23 creatures, while the existing exact GAME40 maze/OCB/CCB hash regression remained
+unchanged.  This is evidence for this generated instruction sequence in CMOC 0.1.90
+under this build, not a general claim about all CMOC array indexing or compilers.
+
+The source fix preserves the direct source order: type indices descend from 11 to 0 and
+each cached count runs that many `random_cell`/CCB births.  It neither inserts RANDOM
+calls nor patches player state.  Rendering was independently guarded with a complete
+2,608-byte `Game` before/after comparison and did not mutate authoritative state.

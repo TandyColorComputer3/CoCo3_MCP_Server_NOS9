@@ -14,9 +14,13 @@
 typedef struct {
  Byte version;
  Byte size;
- void (*health)(Game *);
- Byte (*object_name)(Game *,Word,Byte *);
- void (*render_status)(Game *,Byte *,Byte);
+ /* Mapped callable modules cannot call stack-checked resident CMOC C
+  * directly: Y names the mapped module's data base.  opaque identifies the
+  * resident callback context used by the three gateway functions below. */
+ void *opaque;
+ void (*health)(void *,Game *);
+ Byte (*object_name)(void *,Game *,Word,Byte *);
+ void (*render_status)(void *,Game *,Byte *,Byte);
 } DagOverlayServices;
 
 typedef struct {

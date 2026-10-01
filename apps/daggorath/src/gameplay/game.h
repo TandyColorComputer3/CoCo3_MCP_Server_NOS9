@@ -66,6 +66,10 @@ void game_timing_service(Game *g,GameTiming *timing);
  * COMPLR:HSLOW/BURNER foreground boundary, never interrupt-context work. */
 void game_timing_service_task(Game *g,GameTiming *timing,Byte task);
 void game_render(Game *g,Byte *frame,const char *input,const char *message);
+/* ONCE.ASM/COMTXT text area: four 32-column rows at logical y=160..184.
+ * This is presentation-only; it does not modify packed game state. */
+void game_render_attract(Byte *frame,const char *row0,const char *row1,
+                         const char *row2,const char *row3);
 /* Optional foreground progress hook; the unfinished logical frame must not be
  * presented as a scene. A nonzero hook result aborts rendering. */
 typedef Byte (*GameRenderProgress)(Game *g,Byte *frame,void *context);

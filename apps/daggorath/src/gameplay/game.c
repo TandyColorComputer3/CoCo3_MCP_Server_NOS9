@@ -65,14 +65,18 @@ Byte game_population(const Game *g,Byte type){Byte i,n=0;
 /* ONCE:GAME20/GAME30/GAME40 then NEWLVL.  The normal and demo paths share
  * packed OCB/CCB construction; only source-selected LEVEL/player data differ. */
 static void init_level(Game *g,Byte level,Byte second,const Byte *initial,
-                       Byte initialLevel,Byte row,Byte col,Word power){Byte type,objectLevel,n,r,c,i;int t;Word p,tail;Byte *o,*cr;
+                       Byte initialLevel,Byte row,Byte col,Word power){Byte type,objectLevel,n,r,c,i,cmtOffset,births;int t;Word p,tail;Byte *o,*cr;
  memset(g,0,sizeof(*g));g->level=level;g->row=row;g->col=col;g->power=power;g->weight=35;
  for(type=0;type<sizeof(omx);type++){objectLevel=omx[type]>>4;n=omx[type]&15;while(n--){p=birth(g,type,objectLevel);ocb(g,p)[5]=255;if(++objectLevel>5)objectLevel=omx[type]>>4;}}
  maze(g,level,second);
- for(t=11;t>=0;t--)for(n=0;n<level_cmt[(Word)level*12+t];n++){
+ /* CMTTAB has twelve entries per supported source level.  Cache each count
+  * before comparing the byte loop counter so the table index is evaluated
+  * once for this creature type. */
+ cmtOffset=(Byte)((level<<3)+(level<<2));
+ for(t=11;t>=0;t--){births=level_cmt[cmtOffset+t];for(n=0;n<births;n++){
   do{random_cell(g,&r,&c);}while(cell(g,r,c)==255||creature(g,r,c)>=0);
   cr=g->creatures[g->creatureCount++];memcpy(cr,cdb+t*8,8);cr[12]=255;cr[13]=t;cr[15]=r;cr[16]=c;
- }
+ }}
  i=0;for(n=0;n<g->count;n++){o=g->objects[n];if(o[4]!=level||o[5]!=255)continue;
   cr=g->creatures[i];putword(o,getword(cr+8));putword(cr+8,OBASE+(Word)n*14);if(++i==g->creatureCount)i=0;}
  tail=0;for(i=0;initial[i]!=255;i++){/* GAME10 leaves B=11; SWI preserves it through NEWLVX/GAME30. */
@@ -289,6 +293,14 @@ static Byte text_progress(Byte *frame,const char *s,Byte row,DrawProgress *progr
  ++col;if(progress&&progress->progress&&!(col&1)){e=draw_checkpoint(progress);if(e)return progress->error;}
  }return 0;}
 static void text(Byte *frame,const char *s,Byte row){(void)text_progress(frame,s,row,0);}
+/* ONCE.ASM's OUTSTI text area is 32 columns by four 8-pixel rows.  Keep this
+ * outside Game: the message is a source-derived presentation phase, not
+ * object/creature/RNG state. */
+void game_render_attract(Byte *frame,const char *row0,const char *row1,
+                         const char *row2,const char *row3){
+ memset(frame,0,FRAME_BYTES);
+ text(frame,row0,160);text(frame,row1,168);text(frame,row2,176);text(frame,row3,184);
+}
 /* HUMAN:M$CURS writes original I.BAR ($1C, underline) then I.BS, leaving
  * the cursor position in place. The original-derived font's code 28 is used. */
 static void input_line(Byte *frame,const char *input){Byte n=0,y;while(input[n]&&n<31)n++;text(frame,input,184);

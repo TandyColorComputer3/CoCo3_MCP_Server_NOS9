@@ -59,7 +59,7 @@ static Byte bag_command(Game *g,const char *s,const DagOverlayServices *services
  if(dir==PAR_LT)hand=&g->hand;else if(dir==PAR_RT)hand=&g->rightHand;else return GAME_INVALID;
  if(cmd==PAR_DROP){if(!*hand)return GAME_INVALID;o=ocb(g,*hand);*hand=0;
   o[5]=0;o[2]=g->row;o[3]=g->col;o[4]=g->level;
-  g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));services->health(g);return GAME_OK;}
+  g->weight=(Word)(g->weight+(signed char)(Byte)(0-object_weights[o[10]]));services->health(services->opaque,g);return GAME_OK;}
  if(cmd==PAR_STOW){if(!*hand)return GAME_INVALID;
   putword(ocb(g,*hand),g->bag);g->bag=*hand;*hand=0;return GAME_OK;}
  if(*hand)return GAME_INVALID;
@@ -70,7 +70,7 @@ static Byte bag_command(Game *g,const char *s,const DagOverlayServices *services
   if(dir<0||status_generics_classes[dir]!=cls)return GAME_INVALID;}
  if(cmd==PAR_GET){for(i=0;i<g->count;i++){o=g->objects[i];
    if(on_floor(o,g->row,g->col)&&(specific?o[9]==kind:o[10]==cls)){
-    *hand=OBASE+(Word)i*14;++o[5];g->weight=(Word)(g->weight+object_weights[o[10]]);services->health(g);return GAME_OK;}}
+    *hand=OBASE+(Word)i*14;++o[5];g->weight=(Word)(g->weight+object_weights[o[10]]);services->health(services->opaque,g);return GAME_OK;}}
   return GAME_INVALID;}
  previous=0;p=g->bag;
  while(p&&(specific?ocb(g,p)[9]!=kind:ocb(g,p)[10]!=cls)){previous=p;p=getword(ocb(g,p));}
@@ -99,27 +99,27 @@ static Byte attack(Game *g,const char *s,GameCombat *combat,const DagOverlayServ
  if(combat)combat->energy=energy;combat_event(combat,(Byte)(AUDIO_GLUGLG+cls));
  if(weapon&&kind>=19&&kind<=21){ring=1;if(--weapon[6]==0)weapon[9]=22;}
  for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][15]==g->row&&g->creatures[i][16]==g->col){creature=g->creatures[i];break;}
- if(!creature){services->health(g);return GAME_OK;}if(combat)combat->target=i;
+ if(!creature){services->health(services->opaque,g);return GAME_OK;}if(combat)combat->target=i;
  if(!ring){
   remaining=(Word)(getword(creature)-getword(creature+10));value=(Word)(remaining<<2);
   do{Word old=value;value=(Word)(value-g->power);if(old<g->power)break;--index;}while(index);
   adjustment=index>=3?(index-3)*10:-(3-index)*25;
   random=random_byte(g);if(combat)++combat->rngCalls;score=(int)random+adjustment-127;
   if(combat)combat->hitValue=(Word)score;
-  if(score<0){services->health(g);return GAME_OK;}
-  if(!g->torch||!valid_ocb(g,g->torch)||ocb(g,g->torch)[9]==24){random=random_byte(g);if(combat)++combat->rngCalls;if(random&3){services->health(g);return GAME_OK;}}
+  if(score<0){services->health(services->opaque,g);return GAME_OK;}
+  if(!g->torch||!valid_ocb(g,g->torch)||ocb(g,g->torch)[9]==24){random=random_byte(g);if(combat)++combat->rngCalls;if(random&3){services->health(services->opaque,g);return GAME_OK;}}
  }
  if(combat)combat->hit=1;combat_event(combat,AUDIO_KLINK);
  power=g->power;magic=scale16(scale16(power,mgo),creature[3]);physical=scale16(scale16(power,pho),creature[5]);
  value=(Word)(getword(creature+10)+magic+physical);putword(creature+10,value);
  if(combat)combat->damage=(Word)(magic+physical);
- if(value<getword(creature)){services->health(g);return GAME_OK;}
+ if(value<getword(creature)){services->health(services->opaque,g);return GAME_OK;}
  if(combat)combat->killed=1;next=getword(creature+8);for(i=0;next&&i<72;i++){
   if(!valid_ocb(g,next))break;weapon=ocb(g,next);weapon[5]=0;weapon[2]=creature[15];weapon[3]=creature[16];next=getword(weapon);
  }
  creature[12]=0;combat_event(combat,AUDIO_BANG);
  next=(Word)(g->power+(getword(creature)>>3));g->power=(next&0x8000)?(Word)(0x7f00|(next&255)):next;
- services->health(g);return GAME_OK;
+ services->health(services->opaque,g);return GAME_OK;
 }
 static Byte command(Game *g,const char *s,GameCombat *combat,const DagOverlayServices *services){Word *hand;Byte *o,attackResult;int r,c;Byte result=GAME_OK;
  clear_combat(combat);if(g->faint||g->dead)return GAME_FAINT;
@@ -128,7 +128,7 @@ static Byte command(Game *g,const char *s,GameCombat *combat,const DagOverlaySer
  else if(equal(s,"TURN RIGHT"))g->dir=(g->dir+1)&3;
  else if(equal(s,"TURN AROUND"))g->dir=(g->dir+2)&3;
  else if(equal(s,"MOVE")){r=g->row+dr[g->dir];c=g->col+dc[g->dir];if(cell(g,r,c)==255)result=GAME_BLOCKED;else {g->row=r;g->col=c;}
-  g->damage=(Word)(g->damage+(g->weight>>3)+3);services->health(g);
+  g->damage=(Word)(g->damage+(g->weight>>3)+3);services->health(services->opaque,g);
  }else if(equal(s,"USE LEFT")||equal(s,"USE RIGHT")){hand=equal(s,"USE LEFT")?&g->hand:&g->rightHand;if(!*hand||ocb(g,*hand)[10]!=5)return GAME_INVALID;
   g->torch=*hand;o=ocb(g,*hand);putword(o,g->bag);g->bag=*hand;*hand=0;
  }else if(!display_command(s)){if(bag_command(g,s,services)!=GAME_OK)return GAME_INVALID;}
@@ -144,7 +144,7 @@ static void examine_char(ExamineText *t,Byte c){Byte y;Word at,i;
 }
 static void examine_string(ExamineText *t,const char *s){Byte c;while(*s){c=*s++;examine_char(t,c=='^'?31:c=='!'?27:c==' '?0:c-'A'+1);}}
 static void examine_object(Game *g,ExamineText *t,Word p,const DagOverlayServices *services){Byte name[32],n,i;
- n=services->object_name(g,p,name);for(i=0;i<n;i++)examine_char(t,name[i]);t->inverse=0;t->pair=!t->pair;if(t->pair)t->cursor=(t->cursor+16)&0xfff0;else examine_char(t,31);
+ n=services->object_name(services->opaque,g,p,name);for(i=0;i<n;i++)examine_char(t,name[i]);t->inverse=0;t->pair=!t->pair;if(t->pair)t->cursor=(t->cursor+16)&0xfff0;else examine_char(t,31);
 }
 static void text(Byte *frame,const char *s,Byte row,const Byte *font){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;++col;}}
 static void input_line(Byte *frame,const char *input,const Byte *font){Byte n=0,y;text(frame,input,184,font);while(input[n]&&n<31)n++;if(n<32)for(y=0;y<7;y++)frame[(184+(Word)y)*32+n]=five(font+28*5,5+y*5)<<2;}
@@ -155,13 +155,13 @@ static void examine(Game *g,Byte *frame,const char *input,const char *message,co
  for(i=0;i<g->count;i++)if(on_floor(g->objects[i],g->row,g->col))examine_object(g,&t,OBASE+(Word)i*14,services);
  if(t.pair){examine_char(&t,31);t.pair=0;}for(i=0;i<32;i++)examine_char(&t,27);t.cursor+=12;examine_string(&t,"BACKPACK^");
  for(p=g->bag;p;p=getword(ocb(g,p))){if(p==g->torch)t.inverse=255;examine_object(g,&t,p,services);}
- services->render_status(g,frame,0);text(frame,message,168,font);input_line(frame,input,font);
+ services->render_status(services->opaque,g,frame,0);text(frame,message,168,font);input_line(frame,input,font);
 }
 
 /* Called only by the module entry shim.  An ABI failure occurs before command
  * execution, so the resident Game cannot be partially mutated by setup. */
 Byte dod_overlay_execute(DagOverlayContextV1 *ctx){
- if(!ctx||ctx->abiVersion!=DOD_OVERLAY_ABI_V1||ctx->contextSize!=sizeof(*ctx)||!ctx->game||!ctx->services||ctx->services->version!=DOD_OVERLAY_ABI_V1||ctx->services->size!=sizeof(DagOverlayServices))return 187;
+ if(!ctx||ctx->abiVersion!=DOD_OVERLAY_ABI_V1||ctx->contextSize!=sizeof(*ctx)||!ctx->game||!ctx->services||ctx->services->version!=DOD_OVERLAY_ABI_V1||ctx->services->size!=sizeof(DagOverlayServices)||!ctx->services->opaque||!ctx->services->health||!ctx->services->object_name||!ctx->services->render_status)return 187;
  if(ctx->operation==DOD_OVERLAY_COMMAND){ctx->result=command(ctx->game,ctx->command,ctx->combat,ctx->services);ctx->view=display_command(ctx->command);ctx->outputMessage=message_for(ctx->command,ctx->result);return 0;}
  if(ctx->operation==DOD_OVERLAY_EXAMINE){examine(ctx->game,ctx->frame,ctx->input,ctx->message,ctx->services);return 0;}
  return 187;

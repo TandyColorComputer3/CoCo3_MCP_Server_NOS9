@@ -16,7 +16,7 @@ if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 scheduler_host_cmd=['cmoc','--os9','-O2','--compile','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(out),'-o',str(scheduler_host_object),str(scheduler_host_source)]
 r=subprocess.run(scheduler_host_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'scheduler-host-build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
-sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/scheduler-host-shim.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/event.c']]
+sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/overlay-callback-gateway.asm','gameplay/scheduler-host-shim.asm','gameplay/scheduler-callback-gateway.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/event.c']]
 cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodgame']+list(map(str,sources+[host_object,scheduler_host_object]))
 r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
@@ -57,7 +57,7 @@ run(scheduler_link)
 scheduler_module=out/'dodsched'
 run(['lwasm','--format=os9','--pragma=forwardrefmax','-o',str(scheduler_module),'-I'+str(out),str(app/'src/gameplay/scheduler-pack.asm')])
 scheduler_ident=subprocess.check_output([a.os9,'ident',str(scheduler_module)],text=True);assert '(Good)' in scheduler_ident
-overlay_parts=[overlay_source,host_source,scheduler_host_source,app/'src'/'gameplay'/'command-overlay-module.asm',app/'src'/'gameplay'/'command-overlay-pack.asm']
+overlay_parts=[overlay_source,host_source,scheduler_host_source,app/'src'/'gameplay'/'overlay-callback-gateway.asm',app/'src'/'gameplay'/'command-overlay-module.asm',app/'src'/'gameplay'/'command-overlay-pack.asm']
 scheduler_parts=[scheduler_source,app/'src'/'gameplay'/'scheduler-api.h',app/'src'/'gameplay'/'scheduler-module.asm',app/'src'/'gameplay'/'scheduler-pack.asm']
 record={'command':cmd,'hostCommand':host_cmd,'schedulerHostCommand':scheduler_host_cmd,'cwd':str(out),'ident':ident,'sources':{str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in sources+overlay_parts+scheduler_parts},'data':provenance,'tools':{t:subprocess.check_output([t,'--version'],text=True) for t in ['cmoc','lwasm','lwlink']},'sha256':hashlib.sha256((out/'dodgame').read_bytes()).hexdigest(),'overlay':{'command':overlay_cmd+overlay_link,'ident':overlay_ident,'sha256':hashlib.sha256(overlay_module.read_bytes()).hexdigest()},'scheduler':{'command':scheduler_cmd+scheduler_link,'ident':scheduler_ident,'sha256':hashlib.sha256(scheduler_module.read_bytes()).hexdigest()}}
 (out/'build.json').write_text(json.dumps(record,indent=2)+'\n');print(ident)

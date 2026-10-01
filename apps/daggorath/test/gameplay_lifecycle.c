@@ -4,6 +4,7 @@
 #include "platform.h"
 #include "audio/native_heartbeat.h"
 #include "gameplay/scheduler-api.h"
+#include "gameplay/scheduler-callbacks.h"
 int gameplay_main(int argc,char **argv);
 static int mode,opened,closed,enabled,removed,presented,readcount,clockcount;
 static int schedulerOpened,schedulerClosed,schedulerCalls,schedulerLive;
@@ -49,6 +50,16 @@ Byte native_heartbeat_close(NativeHeartbeat *h){if(h->opened){removed++;h->opene
 Byte game_scheduler_open(void){assert(opened==1&&!schedulerLive);schedulerOpened++;schedulerLive=1;return 0;}
 Byte game_scheduler_call(DagSchedulerContextV1 *context){assert(schedulerLive&&context);schedulerCalls++;return 0;}
 Byte game_scheduler_close(void){if(schedulerLive){schedulerClosed++;schedulerLive=0;}return 0;}
+/* Host tests link main.c directly.  These deterministic stand-ins supply the
+ * 6809 gateway symbols; scheduler lifecycle assertions remain unchanged. */
+void scheduler_callback_init(DagSchedulerCallbackContext *c,void *opaque){
+ assert(c);(void)opaque;c->dataY=0;c->userOpaque=0;
+}
+Byte scheduler_task_gateway(void *opaque,Game *g,GameTiming *t,CreatureScheduler *q,Byte task,Byte ccb,Byte *dirty){
+ (void)opaque;(void)g;(void)t;(void)q;(void)task;(void)ccb;*dirty=0;return 0;
+}
+Word scheduler_present_gateway(void *opaque,Game *g,Byte mode){(void)opaque;(void)g;(void)mode;return 0;}
+Byte scheduler_progress_gateway(void *opaque){(void)opaque;return 0;}
 int main(void){char *argv[]={"dodgame","seed0",0};int expected[]={0,3,245,250},calls[]={2,2,2,0};
  for(mode=0;mode<4;mode++){opened=closed=enabled=removed=presented=readcount=clockcount=0;
   schedulerOpened=schedulerClosed=schedulerCalls=schedulerLive=0;

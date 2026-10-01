@@ -4,6 +4,21 @@
  * See upstream ioman.asm:FNMLoad and funload.asm, cited in the architecture
  * report. */
 #include "overlay-api.h"
+#include "overlay-callbacks.h"
+
+/* Host lifecycle tests exercise retained/link/unlink ordering without an
+ * OS-9 CMOC Y register.  The semantic overlay tests provide direct service
+ * implementations; production CMOC builds use the assembly gateways. */
+#ifndef _CMOC_VERSION_
+void overlay_callback_init(DagOverlayCallbackContext *context){context->dataY=0;}
+void overlay_health_gateway(void *opaque,Game *game){(void)opaque;(void)game;}
+Byte overlay_object_name_gateway(void *opaque,Game *game,Word token,Byte *name){
+ (void)opaque;(void)game;(void)token;(void)name;return 0;
+}
+void overlay_render_status_gateway(void *opaque,Game *game,Byte *frame,Byte phase){
+ (void)opaque;(void)game;(void)frame;(void)phase;
+}
+#endif
 
 typedef struct { Word header,entry;Byte retained,disabled; } OverlayLink;
 extern Byte overlay_preload(void);
@@ -13,11 +28,22 @@ extern Byte overlay_call(OverlayLink *,DagOverlayContextV1 *);
 extern Byte overlay_unlink(OverlayLink *);
 
 static OverlayLink linkState;
+static DagOverlayCallbackContext callbackContext;
 static DagOverlayServices services={DOD_OVERLAY_ABI_V1,sizeof(DagOverlayServices),
- game_health,game_object_name,game_render_status};
+ &callbackContext,overlay_health_gateway,overlay_object_name_gateway,
+ overlay_render_status_gateway};
+
+void overlay_health_resident(void *opaque,Game *game){(void)opaque;game_health(game);}
+Byte overlay_object_name_resident(void *opaque,Game *game,Word token,Byte *name){
+ (void)opaque;return game_object_name(game,token,name);
+}
+void overlay_render_status_resident(void *opaque,Game *game,Byte *frame,Byte phase){
+ (void)opaque;game_render_status(game,frame,phase);
+}
 
 Byte game_overlay_open(void){Byte e;
  if(linkState.retained||linkState.disabled)return linkState.disabled?221:0;
+ overlay_callback_init(&callbackContext);
  e=overlay_preload();
  if(e){linkState.disabled=1;return e;}
  linkState.retained=1;return 0;
