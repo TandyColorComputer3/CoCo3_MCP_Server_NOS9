@@ -29,6 +29,9 @@ extern Byte overlay_unlink(OverlayLink *);
 
 static OverlayLink linkState;
 static DagOverlayCallbackContext callbackContext;
+/* dodcmd's result text resides in its temporary mapping.  Keep the completed
+ * command result in resident storage before F$UnLink releases that mapping. */
+static char commandMessage[32];
 static DagOverlayServices services={DOD_OVERLAY_ABI_V1,sizeof(DagOverlayServices),
  &callbackContext,overlay_health_gateway,overlay_object_name_gateway,
  overlay_render_status_gateway};
@@ -54,10 +57,18 @@ Byte game_overlay_close(void){Byte e;
  if(!e)linkState.retained=0;
  return e;
 }
-static Byte invoke(DagOverlayContextV1 *context){Byte e,u;
+static void copy_message(const char *source){Byte i;
+ if(!source){commandMessage[0]=0;return;}
+ for(i=0;i<sizeof(commandMessage)-1&&source[i];i++)commandMessage[i]=source[i];
+ commandMessage[i]=0;
+}
+static Byte invoke(DagOverlayContextV1 *context,Byte retainMessage){Byte e,u;
  if(!linkState.retained)return 221;
  e=overlay_link(&linkState);if(e)return e;
  e=overlay_call(&linkState,context);
+ /* The overlay owns outputMessage. Copy it while the mapped module remains
+  * valid; callers must never retain pointers into an F$Link mapping. */
+ if(!e&&retainMessage)copy_message(context->outputMessage);
  u=overlay_unlink(&linkState);
  /* An unlink error means the mapping lifetime is uncertain; disable future
  * commands rather than pretending the eighth slot was released. */
@@ -71,8 +82,9 @@ Byte game_overlay_command(Game *game,const char *command,GameCombat *combat,
  context.abiVersion=DOD_OVERLAY_ABI_V1;context.contextSize=sizeof(context);
  context.game=game;context.services=&services;context.command=command;
  context.combat=combat;context.operation=DOD_OVERLAY_COMMAND;
- e=invoke(&context);if(e)return e;
- *result=context.result;*view=context.view;*message=context.outputMessage;return 0;
+ e=invoke(&context,1);if(e)return e;
+ *result=context.result;*view=context.view;
+ *message=commandMessage;return 0;
 }
 Byte game_overlay_examine(Game *game,Byte *frame,const char *input,const char *message){
  DagOverlayContextV1 context;Byte *p=(Byte *)&context;Byte i;
@@ -80,5 +92,5 @@ Byte game_overlay_examine(Game *game,Byte *frame,const char *input,const char *m
  context.abiVersion=DOD_OVERLAY_ABI_V1;context.contextSize=sizeof(context);
  context.game=game;context.services=&services;context.frame=frame;
  context.input=input;context.message=message;context.operation=DOD_OVERLAY_EXAMINE;
- return invoke(&context);
+ return invoke(&context,0);
 }

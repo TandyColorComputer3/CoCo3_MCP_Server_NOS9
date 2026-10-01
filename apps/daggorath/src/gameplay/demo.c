@@ -115,10 +115,13 @@ int main(void){Byte e=0,r;Byte heartPatterns[28];
  e=game_scheduler_open();if(e)goto done;
  e=scheduler(DOD_SCHED_INIT,0);if(e)goto done;
  /* ONCE.ASM: GAME30 -> PREPAR, then GAME40 demo initialization/map boundary.
-  * These source strings preserve the four-row area and MISC:PROMPX's CR-dot
-  * convention without redefining input parsing. */
- e=attract_text("I DARE YE ENTER...","","THE DUNGEONS OF DAGGORATH","",90);if(e)goto done;
- e=attract_text("","","            PREPARE!","",60);if(e)goto done;
+  * These source strings occupy the source primary-text rows. MISC:PROMPX's
+  * CR-dot is the separate interactive command prompt, not an intro prefix. */
+ /* ONCE:DEMO10's first expanded message begins with CR, so it occupies
+  * TXTPRI row 1.  The second continues on row 2; punctuation is SWCHAR data. */
+ e=attract_text("","I DARE YE ENTER...","...THE DUNGEONS OF DAGGORATH!!!","",90);if(e)goto done;
+ /* MISC:PREPAX writes TXTEXA cell (12,9), not the primary text area. */
+ game_render_prepare(frame);e=screen_present(frame);if(e)goto done;e=dwell(60);if(e)goto done;
  e=scheduler(DOD_SCHED_BOUNDARY,0);if(e)goto done;
  e=render_dungeon(".");if(e)goto done;
  /* PLOOK:INIVUX enables the source heartbeat only after the first complete

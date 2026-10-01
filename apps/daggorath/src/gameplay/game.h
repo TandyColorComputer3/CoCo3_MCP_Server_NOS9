@@ -70,6 +70,9 @@ void game_render(Game *g,Byte *frame,const char *input,const char *message);
  * This is presentation-only; it does not modify packed game state. */
 void game_render_attract(Byte *frame,const char *row0,const char *row1,
                          const char *row2,const char *row3);
+/* MISC.ASM:PREPAX clears TXTEXA then writes PREPARE! at character (12,9).
+ * It is deliberately separate from the four-row primary-text renderer. */
+void game_render_prepare(Byte *frame);
 /* Optional foreground progress hook; the unfinished logical frame must not be
  * presented as a scene. A nonzero hook result aborts rendering. */
 typedef Byte (*GameRenderProgress)(Game *g,Byte *frame,void *context);

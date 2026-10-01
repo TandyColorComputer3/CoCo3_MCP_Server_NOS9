@@ -43,6 +43,7 @@ void game_init_demo(Game *g,Byte second){memset(g,0,sizeof(*g));assert(second==2
 void game_health(Game *g){(void)g;}
 void game_heart_patterns(Byte patterns[28]){memset(patterns,0,28);}
 void game_render_attract(Byte *frame,const char *a,const char *b,const char *c,const char *d){(void)frame;(void)a;(void)b;(void)c;(void)d;}
+void game_render_prepare(Byte *frame){(void)frame;}
 Byte game_render_with_progress(Game *g,Byte *frame,const char *input,const char *message,GameRenderProgress progress,void *context){
  (void)g;(void)frame;(void)input;(void)message;(void)progress;(void)context;++dungeonRenders;return 0;
 }

@@ -287,12 +287,22 @@ static Byte draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range,DrawPro
   }else wizard_line(frame,x0,y0,x1,y1,fade);
  }return 0;}
 static Byte five(const Byte *p,Word bit){Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
-static Byte text_progress(Byte *frame,const char *s,Byte row,DrawProgress *progress){Byte col=0,c,y,e;while(*s&&col<32){
- c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;
- for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;
- ++col;if(progress&&progress->progress&&!(col&1)){e=draw_checkpoint(progress);if(e)return progress->error;}
- }return 0;}
-static void text(Byte *frame,const char *s,Byte row){(void)text_progress(frame,s,row,0);}
+/* SWCHAR.ASM:SWCTAB codes: A..Z=$01..$1A, !=$1B, ?=$1D, .=$1E.
+ * Keep the original 8-pixel character-cell advance even though its glyph is
+ * five pixels wide and centred within that cell by COMTXT.ASM:TXTDPB. */
+static Byte text_code(Byte c){
+ if(c>='A'&&c<='Z')return c-'A'+1;
+ if(c=='!')return 27;if(c=='?')return 29;if(c=='.')return 30;
+ return 0;
+}
+static Byte text_at_progress(Byte *frame,const char *s,Byte row,Byte col,DrawProgress *progress){Byte c,y,e;
+ while(*s&&col<32){
+  c=text_code(*s++);
+  for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;
+  ++col;if(progress&&progress->progress&&!(col&1)){e=draw_checkpoint(progress);if(e)return progress->error;}
+ }return 0;
+}
+static void text(Byte *frame,const char *s,Byte row){(void)text_at_progress(frame,s,row,0,0);}
 /* ONCE.ASM's OUTSTI text area is 32 columns by four 8-pixel rows.  Keep this
  * outside Game: the message is a source-derived presentation phase, not
  * object/creature/RNG state. */
@@ -300,6 +310,11 @@ void game_render_attract(Byte *frame,const char *row0,const char *row1,
                          const char *row2,const char *row3){
  memset(frame,0,FRAME_BYTES);
  text(frame,row0,160);text(frame,row1,168);text(frame,row2,176);text(frame,row3,184);
+}
+void game_render_prepare(Byte *frame){
+ /* MISC.ASM:PREPAX: EXAMIO/ZFLOP then P.TXCUR = 32*9+12. */
+ memset(frame,0,FRAME_BYTES);
+ (void)text_at_progress(frame,"PREPARE!",72,12,0);
 }
 /* HUMAN:M$CURS writes original I.BAR ($1C, underline) then I.BS, leaving
  * the cursor position in place. The original-derived font's code 28 is used. */
@@ -351,7 +366,7 @@ Byte game_render_input_progress(Game *g,Byte *frame,const char *input,const Byte
   memcpy(frame+GAME_INPUT_OFFSET+(Word)row*32,underlay+(Word)row*32,32);
   if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
  }
- e=text_progress(frame,input,184,&drawProgress);if(e)return e;
+ e=text_at_progress(frame,input,184,0,&drawProgress);if(e)return e;
  /* HUMAN:M$CURS underline after the final character. */
  {Byte n=0,y;while(input[n]&&n<31)n++;
   if(n<32)for(y=0;y<7;y++)frame[(184+(Word)y)*32+n]=five(font+28*5,5+y*5)<<2;}
@@ -395,7 +410,7 @@ Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
  }
  e=game_render_status_progress(g,frame,0,progress,context);if(e)return e;
  if(progress){e=progress(g,frame,context);if(e)return e;}
- e=text_progress(frame,message,168,&drawProgress);if(e)return e;
+ e=text_at_progress(frame,message,168,0,&drawProgress);if(e)return e;
  input_line(frame,input);
  if(progress){e=progress(g,frame,context);if(e)return e;}
  /* Progress may temporarily paint the authoritative live heart into this
