@@ -1,0 +1,235 @@
+{
+  "capture": "source-built original ROM; MAME coco3h 2M RGB; 190.028-second AVI; 11387 frames",
+  "rom_sha256": "35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571",
+  "frames": [
+    {
+      "file": "001-reset-first-visible.png",
+      "sha256": "107a40fdae4ebfd07a395ab97cec0feb9dae85076857b35f5e179f1ef067b7dc",
+      "bytes": 1284,
+      "video_seconds": 0.3
+    },
+    {
+      "file": "002-copyright-wizard-first-strokes.png",
+      "sha256": "f2491c7ea83754511dec44360be7c6d2b8bcf69cf91ce9b82bf8656854846533",
+      "bytes": 2065,
+      "video_seconds": 2.1
+    },
+    {
+      "file": "003-wizard-emerging.png",
+      "sha256": "ef897a7923a5e6d580bf1c436269f2462291ab9c868799c6aa6be1bef051ed0f",
+      "bytes": 2069,
+      "video_seconds": 4.1
+    },
+    {
+      "file": "004-wizard-complete.png",
+      "sha256": "55a2387570141701cc5bfc058b1f95194bb201775cbcc2f61151f255d1bb2348",
+      "bytes": 3553,
+      "video_seconds": 6.7
+    },
+    {
+      "file": "005-welcome-two-lines.png",
+      "sha256": "87c45a086c061c395347c1fb89228f2626eb5f2ccd2c696b33962f5415ec87f7",
+      "bytes": 4086,
+      "video_seconds": 8.4
+    },
+    {
+      "file": "006-welcome-cleared.png",
+      "sha256": "55a2387570141701cc5bfc058b1f95194bb201775cbcc2f61151f255d1bb2348",
+      "bytes": 3553,
+      "video_seconds": 10.9
+    },
+    {
+      "file": "007-wizard-fade-out.png",
+      "sha256": "01d8a4dbe5a95e4fa0b3ef9e04f1618d85682e505ee36ae7eefcac1dbceebe52",
+      "bytes": 2290,
+      "video_seconds": 13.4
+    },
+    {
+      "file": "008-black-transition.png",
+      "sha256": "acd269ee5cacb881a3b809c5951ca7d3d91acb0ff5b9f4cf78b85e6129761541",
+      "bytes": 2061,
+      "video_seconds": 16.6
+    },
+    {
+      "file": "009-prepare.png",
+      "sha256": "1ee96868c7b429b369c5ea03790fb97a0633f20e3a6bdf7083383c5c003d511f",
+      "bytes": 2135,
+      "video_seconds": 17.4
+    },
+    {
+      "file": "010-autoplay-map.png",
+      "sha256": "c6e1bca700369f18350785694cbd3c05cff48f61037cedec789d1e87a5102ed7",
+      "bytes": 3748,
+      "video_seconds": 24.0
+    },
+    {
+      "file": "011-black-before-dungeon.png",
+      "sha256": "c6e1bca700369f18350785694cbd3c05cff48f61037cedec789d1e87a5102ed7",
+      "bytes": 3748,
+      "video_seconds": 26.1
+    },
+    {
+      "file": "012-four-row-dot-prompt.png",
+      "sha256": "65c25f65853be6e147c56a1162e906072114f9d9bb34e523c89ffd83dd9eab9f",
+      "bytes": 1707,
+      "video_seconds": 26.6
+    },
+    {
+      "file": "013-examine.png",
+      "sha256": "035d4954ac00f9159ffec51ba13f630078c3bcc7c4512ae39e0e89ea39b8cfd5",
+      "bytes": 2662,
+      "video_seconds": 28.3
+    },
+    {
+      "file": "014-pull-torch.png",
+      "sha256": "3386f2893bbc214dbf007b800894acce4d0c686cc66ab51f2aa758abb6ff5018",
+      "bytes": 2863,
+      "video_seconds": 32.9
+    },
+    {
+      "file": "015-torch-use.png",
+      "sha256": "5078d83effd1748bfe27403152bbfb27f101b01b264734bdcbb3ec035dd43463",
+      "bytes": 2993,
+      "video_seconds": 36.7
+    },
+    {
+      "file": "016-lit-look.png",
+      "sha256": "4c0662a94190fb2f9526bda04d7f1a4d7ff78648d16acc10809dda4ee837d7fb",
+      "bytes": 3412,
+      "video_seconds": 39.5
+    },
+    {
+      "file": "017-first-move.png",
+      "sha256": "2b092a1a28f40861ae6c63c65e247d6e3b776750fe62b755ab3088e0a47ec1a3",
+      "bytes": 3115,
+      "video_seconds": 41.7
+    },
+    {
+      "file": "018-shield.png",
+      "sha256": "9e8a518c5c0df791773f01d8bb061f9ec29db66f03d578f8ad1302f2243f76c8",
+      "bytes": 3429,
+      "video_seconds": 48.9
+    },
+    {
+      "file": "018b-before-first-giant-pixels.png",
+      "sha256": "6e53f7e93f56d3efd1813238bb517012d1e70efda6192d8562b5dd3960cc40c2",
+      "bytes": 3701,
+      "video_seconds": 57.1
+    },
+    {
+      "file": "019-sword-and-first-giant-pixels.png",
+      "sha256": "7f4807c65ca704217921bf0a88168602b44f015de462eadb2becc4b520eb80ce",
+      "bytes": 3659,
+      "video_seconds": 57.5
+    },
+    {
+      "file": "020-giant-recognizable.png",
+      "sha256": "8e483a044b3cd44bcddba7963b64264b9d9bc113be750b53e1e1b76f9e3714a9",
+      "bytes": 3654,
+      "video_seconds": 61.4
+    },
+    {
+      "file": "021-giant-nearer.png",
+      "sha256": "a7dc5bb440b17e024f3ebc6e86716eebe790a5739cf92f97e9f9f2bcbc76c352",
+      "bytes": 4021,
+      "video_seconds": 61.8
+    },
+    {
+      "file": "022-giant-large.png",
+      "sha256": "4e38f2e8dab31831845001a442a762f8e5b4a03527fcb1b19d49d39ccb27a755",
+      "bytes": 4817,
+      "video_seconds": 67.7
+    },
+    {
+      "file": "023-giant-occlusion.png",
+      "sha256": "c4e2a5d6c703d9f38e4c4440b8540143b178ff2fb701e9fc6607012144d8a3ed",
+      "bytes": 2798,
+      "video_seconds": 69.9
+    },
+    {
+      "file": "024-giant-reappearance.png",
+      "sha256": "fafcbee49b462e32ef7926df40d2e40f92bbc4539b1a4c00db8fd0242a30ab37",
+      "bytes": 4281,
+      "video_seconds": 72.7
+    },
+    {
+      "file": "025-attack-command-giant.png",
+      "sha256": "d962e800a96ab23fae3b0f804e56ca6db4c2fbe7605aaff5e12fd3dd434ad7ec",
+      "bytes": 4472,
+      "video_seconds": 75.8
+    },
+    {
+      "file": "026-post-kill.png",
+      "sha256": "c78344b624f5a12924ba099e2f998fb1f6e55039ddd0fd98c01d567eca86498c",
+      "bytes": 2799,
+      "video_seconds": 77.4
+    },
+    {
+      "file": "027-turn-right.png",
+      "sha256": "d5a7b7cf72fe522d65b714985045d686c1578799ff3ac11c6a5c7a5313865c49",
+      "bytes": 3627,
+      "video_seconds": 82.9
+    },
+    {
+      "file": "028-east-move-one.png",
+      "sha256": "b1548810b8a4323f33823917b01bfd8db254e311eb364200b4f78cbef253224d",
+      "bytes": 3635,
+      "video_seconds": 87.5
+    },
+    {
+      "file": "029-east-move-two.png",
+      "sha256": "5f055e5aff2daf565179daa8079fd3e39909bb7aa8b46031ff2586ca2bcec565",
+      "bytes": 3225,
+      "video_seconds": 91.5
+    },
+    {
+      "file": "030-east-move-three.png",
+      "sha256": "39f3a455b77fb9811f549587166c29d7abecb3d5b271d1535e894a5a75652f5b",
+      "bytes": 2625,
+      "video_seconds": 95.4
+    },
+    {
+      "file": "031-turn-south.png",
+      "sha256": "687a1ac79e7b92f081e01f61793f02c2fa4900c0a6ea0139c4a77317d8214e12",
+      "bytes": 3521,
+      "video_seconds": 100.9
+    },
+    {
+      "file": "032-south-move-one.png",
+      "sha256": "929f293514f5839d5977d319b42587ee79eebe88114412800f68b5872fdad006",
+      "bytes": 3562,
+      "video_seconds": 105.3
+    },
+    {
+      "file": "033-later-giant-first.png",
+      "sha256": "08b059859b567dd8b81d2b458028985d92836c8083c4747b789efe670d89760f",
+      "bytes": 3915,
+      "video_seconds": 111.2
+    },
+    {
+      "file": "034-later-giant-near.png",
+      "sha256": "c8b57ce2a73461d35d4ef73b2180aa602060cb63bde355e7f9e3b67420889db5",
+      "bytes": 4844,
+      "video_seconds": 116.5
+    },
+    {
+      "file": "035-repeat-black.png",
+      "sha256": "cf417707c1c23dcf167deea0270487285f0cf364a8952457c51b0b705540ef6c",
+      "bytes": 1485,
+      "video_seconds": 118.5
+    },
+    {
+      "file": "036-repeat-wizard.png",
+      "sha256": "1c64375994e8d345e8eb83469f4c6d42297593d38c3cbd11a8fc60c322986702",
+      "bytes": 2122,
+      "video_seconds": 122.2
+    }
+  ],
+  "audio_excerpt": {
+    "file": "giant-approach-combat-original.mp3",
+    "video_start_seconds": 55.0,
+    "duration_seconds": 25.0,
+    "sha256": "f7ea87d78d9c0dde1d1b240bdfb6ec821dcaa1b07ba7dc28fa8f0c77cfd761e2",
+    "bytes": 300717
+  }
+}
