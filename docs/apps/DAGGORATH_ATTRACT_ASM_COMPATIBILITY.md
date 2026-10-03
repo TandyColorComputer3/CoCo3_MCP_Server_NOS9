@@ -1,6 +1,7 @@
 # Daggorath cartridge-compatible attract architecture
 
-**Status: ARCHITECTURE SELECTED, implementation not started, 2026-10-02.**
+**Status: ARCHITECTURE SELECTED; Giant P1 and production foundation C1
+validated, 2026-10-03.**
 
 This audit selects **Architecture B: an original attract execution core with a
 small EOU adaptation layer**.  The modern NitrOS-9 game remains the product
@@ -464,14 +465,44 @@ range and occlusion, exact vector raster, screen conversion, presentation
 boundaries, stock-6809 performance and the current beat-020 failure.  A Wizard
 prototype would test vector drawing but not the scheduler/CCB/perspective
 coupling that distinguishes Architecture B from A.  The prototype is identified
-only; it was not implemented in this task.
+here as the decision experiment; its implementation and productionized C1
+result are recorded below.
+
+## P1/C1 evidence now established
+
+The P1 slice and [production C1 foundation](DAGGORATH_ATTRACT_COMPAT_C1.md)
+converted the highest-risk rendering assumptions into target evidence:
+
+- one original-derived PIC renderer produces all 6,144 logical bytes exactly
+  for beats 019, 020, and 021, including 4-, 118-, and 251-pixel Giant
+  contributions at the committed cartridge bounds;
+- the caller-owned `$0200..$0F04` compatibility image works as a 3,333-byte,
+  256-byte-aligned state ABI; CCB `$03D4..$05F3` and `NEIBOR $09F4` retain
+  their original relative layout;
+- PCR-relative tables and vector lists work in a relocatable OS-9 module;
+  `SETFAD` requires the original dispatcher's `X` preservation, and source
+  `HLFSCL/BAKSCL` adjacency is intentional;
+- a stock-6809 nibble-table expander reduces full-frame 256-to-512 conversion
+  from 25–26 ticks to 8–10 ticks, with all 12,288 expanded bytes checked on
+  target;
+- the complete render/convert/CoWin pipelines take 12, 18, and 16 ticks for
+  beats 019–021.  Those fit the cartridge runtime intervals, including the
+  approximately 24-tick 020-to-021 interval;
+- the largest self-contained fixture uses two program blocks, two data blocks,
+  and one CoWin mapping.  Thus the projected `2 + 2 + 1 = 5/8` Level II map is
+  demonstrated rather than estimated.
+
+C1 remains a deterministic fixture path and is not connected to the public
+attract lifecycle.  It proves Architecture B's original-domain renderer and
+EOU adapter boundary; it does not yet prove text, Wizard, scheduler, audio,
+input interruption, repeat lifecycle, or the remaining storyboard beats.
 
 ## Migration order
 
-1. Specify and test generated state/table offsets, PIC rules and the five-call
-   adapter ABI.
-2. Implement the disposable Giant slice and require exact beat 019–021 rasters
-   and acceptable 6809 time before production migration.
+1. **C1 complete:** specify and test state/table offsets, PIC rules and the
+   bounded renderer/presenter ABI.
+2. **P1/C1 complete:** implement the Giant slice and require exact beat
+   019–021 rasters and acceptable stock-6809 time before broader migration.
 3. Establish the one-buffer presenter and vector interpreter/raster core.
 4. Move original text/glyph/cursor/scroll behavior onto that screen model.
 5. Move Wizard/opening vectors, sound events and PREPARE ordering.
@@ -490,8 +521,8 @@ porting the Wizard merely because it is the first visible beat.
 
 ## Risks and open questions
 
-- Exact PIC expansion and program-block count are unmeasured until a real slice
-  links as an OS-9 module.
+- PIC expansion and the bounded Giant slice are now measured by C1.  Program
+  growth for the remaining attract call graph remains a future budget risk.
 - Vector-list embedded addresses and inline-dispatch/frame conventions are the
   largest relocation risks.
 - One-buffer emulation must prove text updates, clear/erase and alternate-screen
@@ -505,8 +536,9 @@ porting the Wizard merely because it is the first visible beat.
   synchronous duration; human audio comparison is required.
 - The interrupting key's disposition at modern-game handoff is unresolved.
 - Reconstructed-source/data distribution provenance needs review.
-- Real 6809 CoWin conversion/upload time and repeated-loop reference stability
-  remain to be measured.
+- Repeated-loop lifecycle/reference stability remains to be measured when the
+  compatibility phase is integrated.  C1 measured one full-frame stock-6809
+  conversion and six CoWin puts for each accepted Giant state.
 
 ## Modern-engine debt retained deliberately
 

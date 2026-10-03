@@ -1,0 +1,44 @@
+{
+  "environment": {
+    "target": "coco3h",
+    "ram": "2M",
+    "display": "RGB type-5 640x200x2",
+    "state": "nos9_ready_v2"
+  },
+  "captureCrop": {
+    "top": 2,
+    "left": 0,
+    "width": 640,
+    "height": 236,
+    "reason": "common emulator capture border"
+  },
+  "beats": {
+    "019": {
+      "target": "019-compat-eou-target.png",
+      "targetSha256": "6bb032f436443608c2968ce9352fc8fd9b873de2053c5e87d30eadd1001bfd63",
+      "pair": "019-original-compat.png",
+      "croppedTargetVsPairRightDifferingPixels": 0,
+      "renderTicks": 0,
+      "conversionTicks": 8,
+      "transferTicks": 4
+    },
+    "020": {
+      "target": "020-compat-eou-target.png",
+      "targetSha256": "5e3e810ab640cf96655b06f7541347e32a263eade5a0c5ea71e0045743bb8256",
+      "pair": "020-original-compat.png",
+      "croppedTargetVsPairRightDifferingPixels": 0,
+      "renderTicks": 4,
+      "conversionTicks": 10,
+      "transferTicks": 4
+    },
+    "021": {
+      "target": "021-compat-eou-target.png",
+      "targetSha256": "900c7e0cfce00eb807ea6c195c3f6e72340515c2a6715e90adecb7377c44e33a",
+      "pair": "021-original-compat.png",
+      "croppedTargetVsPairRightDifferingPixels": 0,
+      "renderTicks": 4,
+      "conversionTicks": 8,
+      "transferTicks": 4
+    }
+  }
+}

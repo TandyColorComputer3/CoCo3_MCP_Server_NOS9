@@ -1,0 +1,41 @@
+{
+  "baselineCommit": "d910ee4",
+  "p1Provenance": "Accepted Stone Giant P1 cartridge-state and framebuffer captures; retained here as immutable repository fixtures",
+  "logicalFrame": {
+    "width": 256,
+    "height": 192,
+    "stride": 32,
+    "bytes": 6144
+  },
+  "compatibilityState": {
+    "originalRange": "$0200..$0F04",
+    "bytes": 3333,
+    "alignment": 256
+  },
+  "beats": {
+    "019": {
+      "mode": "right-peek",
+      "stateSha256": "41e3ff24bedd2a921e4a9154d638d775df35c2642f2e603fde4b66c37ca78d56",
+      "baselineFrameSha256": "8b61e472f68fcb438fb3ad8ca72438619160dcb3c4254cde34fbbb4875b62ea6",
+      "oracleFrameSha256": "747af69974b46b059231b1086da174d1afc565d3a7067e9886a9550a35b6641b",
+      "giantPixels": 4,
+      "giantBounds": [187, 93, 188, 105]
+    },
+    "020": {
+      "mode": "forward",
+      "stateSha256": "0b6777628fbcf5162243b0f878df70a92b6a0daa5256d807baec745d295526d0",
+      "baselineFrameSha256": "b70d84efed762cdab978732c4bc312fe5055c57a8827c0fb93921f098cb258ab",
+      "oracleFrameSha256": "7b62fd1f25f531e7b83de18a7f5872973c076896b7924b7ebf19f94886d233fa",
+      "giantPixels": 118,
+      "giantBounds": [85, 69, 162, 114]
+    },
+    "021": {
+      "mode": "forward",
+      "stateSha256": "0a3ea23c66fbb41e5d795ff91165d4d06dcce2db18ab3463b1c11cb221b78de0",
+      "baselineFrameSha256": "a53ed0e353483f436c3305df6135a6c2c2b0eca2630bd9f6c33acaf12de61c1e",
+      "oracleFrameSha256": "cec2c7feef26f57f05c6580c3a3adc555ef309ac7b413ee5f4ca0ab06e66a976",
+      "giantPixels": 251,
+      "giantBounds": [74, 67, 173, 126]
+    }
+  }
+}
