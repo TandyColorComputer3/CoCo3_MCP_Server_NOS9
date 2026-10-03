@@ -1,5 +1,6 @@
         section code
         export  _dag_compat_render_giant
+        export  _dag_compat_vector_core
 
 * Disposable Architecture-B P1 slice. Original provenance:
 * VIEWER.ASM SETSCL/PDRAW/CMRDRW/VIEW30; COMCRE.ASM CFIND;
@@ -342,6 +343,7 @@ incr10  bsr     divide
 incr90  std     ,s
         puls    a,b,x,pc
 
+_dag_compat_vector_core
 vector  pshs    a,b,x,y,u
         inc     <VCTFAD
         lbeq    vect99

@@ -1,0 +1,16 @@
+tick,logical_edge,pb1,heart_phase,render_state
+0,0,0,0,initial-full
+46,1,1,1,vector-edge
+46,1,1,1,vector-heart-put
+92,2,0,0,vector-edge
+92,2,0,0,vector-heart-put
+138,3,1,1,vector-edge
+138,3,1,1,vector-heart-put
+138,4,0,0,vector-during-put-edge
+138,4,0,0,vector-heart-put
+184,5,1,1,vector-edge
+184,5,1,1,vector-heart-put
+230,6,0,0,vector-edge
+230,6,0,0,vector-heart-put
+276,7,1,1,vector-edge
+276,7,1,1,vector-heart-put

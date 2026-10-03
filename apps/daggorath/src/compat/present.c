@@ -7,7 +7,11 @@ Byte os_write(Byte path,const void *buffer,Word size);
 Byte os_map_buffer(Byte path,Word groupBuffer,Byte map,Byte **buffer,Word *length);
 Byte os_clock(Word *ticks,Byte validate);
 
+#ifdef DAG_COMPAT_HEARTBEAT
+static Byte fd=255,defined,mapped,heartOwned,heartValid,heartsConfigured;
+#else
 static Byte fd=255,defined,mapped;
+#endif
 static Byte *physicalStrip;
 static Word physicalLength;
 static const Byte setup[]={27,0x20,5,0,0,80,25,1,0,0,27,0x35,0,
@@ -17,6 +21,13 @@ static const Byte capture[]={27,0x2c,196,1,0,0,0,0,2,0,0,32};
 static const Byte selectWindow[]={27,0x21};
 static const Byte kill[]={27,0x2a,196,1};
 static Byte put[]={27,0x2d,196,1,0,64,0,4};
+#ifdef DAG_COMPAT_HEARTBEAT
+static Byte heartDefine[]={27,0x29,196,2,0,32};
+static Byte heartLoad[]={27,0x2b,196,2,5,0,32,0,7,0,28,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static Byte heartPut[]={27,0x2d,196,2,1,48,0,156};
+static Byte configuredHearts[28],heartCache[2][28];
+#endif
 static const Byte doubled[]={0,3,12,15,48,51,60,63,192,195,204,207,240,243,252,255};
 
 static Word elapsed(Word before,Word after)
@@ -30,26 +41,57 @@ static Byte open_failed(Byte error)
     return error;
 }
 
+#ifdef DAG_COMPAT_HEARTBEAT
+static Byte preload_heart(Byte slot,const Byte *heart)
+{
+    Byte row,*target,e;heartLoad[3]=(Byte)(2+slot);
+    for(row=0;row<7;row++){
+        target=heartLoad+11+(Word)row*4;
+        *target++=doubled[heart[row]>>4];*target++=doubled[heart[row]&15];
+        *target++=doubled[heart[7+row]>>4];*target=doubled[heart[7+row]&15];
+    }
+    e=os_write(fd,heartLoad,sizeof(heartLoad));if(e)return e;
+    memcpy(heartCache[slot],heartLoad+11,28);heartValid|=(Byte)(1<<slot);return 0;
+}
+
+void dag_compat_present_set_hearts(const Byte heartPatterns[28])
+{memcpy(configuredHearts,heartPatterns,28);heartsConfigured=1;}
+#endif
+
 Byte dag_compat_present_open(void)
 {
+#ifdef DAG_COMPAT_HEARTBEAT
+    Byte e;fd=255;defined=mapped=heartOwned=heartValid=0;physicalStrip=0;physicalLength=0;
+#else
     Byte e;fd=255;defined=mapped=0;physicalStrip=0;physicalLength=0;
+#endif
     e=window_open(&fd);if(e)return e;
     e=os_write(fd,setup,sizeof(setup));if(e)return open_failed(e);
     e=os_write(fd,define,sizeof(define));if(e)return open_failed(e);defined=1;
     e=os_write(fd,capture,sizeof(capture));if(e)return open_failed(e);
     e=os_map_buffer(fd,0xc401,1,&physicalStrip,&physicalLength);if(e)return open_failed(e);mapped=1;
     if(physicalLength!=DAG_COMPAT_STRIP_TARGET_BYTES)return open_failed(ERR_ARGUMENT);
+#ifdef DAG_COMPAT_HEARTBEAT
+    if(heartsConfigured){
+        heartDefine[3]=2;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return open_failed(e);heartOwned=1;
+        e=preload_heart(0,configuredHearts);if(e)return open_failed(e);
+        heartDefine[3]=3;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return open_failed(e);heartOwned|=2;
+        e=preload_heart(1,configuredHearts+14);if(e)return open_failed(e);
+    }
+#endif
     e=os_write(fd,selectWindow,sizeof(selectWindow));return e?open_failed(e):0;
 }
 
-Byte dag_compat_present(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
-                        DagCompatPresentTiming *timing)
+Byte dag_compat_present_progress(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
+                                 DagCompatPresentTiming *timing,
+                                 Byte (*progress)(void *),void *context)
 {
     Byte strip,e;Word before,after;
     if(fd==255||!mapped||!logicalFrame||!timing)return ERR_ARGUMENT;
     timing->conversionTicks=timing->transferTicks=0;
     timing->mappedLength=physicalLength;
     for(strip=0;strip<6;strip++){
+        if(progress){e=progress(context);if(e)return e;}
         e=os_clock(&before,0);if(e)return e;
         dag_compat_expand_strip(logicalFrame+(Word)strip*DAG_COMPAT_STRIP_SOURCE_BYTES,
                                 physicalStrip);
@@ -62,17 +104,24 @@ Byte dag_compat_present(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
             Byte clockError=os_clock(&after,0);if(clockError)return clockError;
         }
         timing->transferTicks+=elapsed(before,after);
+        if(progress){e=progress(context);if(e)return e;}
     }
     return 0;
 }
 
-Byte dag_compat_present_primary(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
-                                DagCompatPresentTiming *timing)
+Byte dag_compat_present(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
+                        DagCompatPresentTiming *timing)
+{return dag_compat_present_progress(logicalFrame,timing,0,0);}
+
+Byte dag_compat_present_primary_progress(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
+                                         DagCompatPresentTiming *timing,
+                                         Byte (*progress)(void *),void *context)
 {
     Byte e;Word before,after;
     if(fd==255||!mapped||!logicalFrame||!timing)return ERR_ARGUMENT;
     timing->conversionTicks=timing->transferTicks=0;
     timing->mappedLength=physicalLength;
+    if(progress){e=progress(context);if(e)return e;}
     e=os_clock(&before,0);if(e)return e;
     dag_compat_expand_strip(logicalFrame+160*DAG_COMPAT_STRIDE,physicalStrip);
     e=os_clock(&after,0);if(e)return e;
@@ -82,8 +131,34 @@ Byte dag_compat_present_primary(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
     e=os_write(fd,put,sizeof(put));if(e)return e;
     e=os_clock(&after,0);if(e)return e;
     timing->transferTicks=elapsed(before,after);
-    return 0;
+    return progress?progress(context):0;
 }
+
+Byte dag_compat_present_primary(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
+                                DagCompatPresentTiming *timing)
+{return dag_compat_present_primary_progress(logicalFrame,timing,0,0);}
+
+#ifdef DAG_COMPAT_HEARTBEAT
+Byte dag_compat_present_heart(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES])
+{
+    Byte row,col,b,*target,slot=0,e;
+    if(fd==255||!mapped||!logicalFrame||!heartOwned)return ERR_ARGUMENT;
+    for(row=152;row<159;row++){
+        target=heartLoad+11+(Word)(row-152)*4;
+        for(col=15;col<17;col++){
+            b=logicalFrame[(Word)row*32+col];*target++=doubled[b>>4];*target++=doubled[b&15];
+        }
+    }
+    if((heartValid&1)&&!memcmp(heartCache[0],heartLoad+11,28))slot=0;
+    else if((heartValid&2)&&!memcmp(heartCache[1],heartLoad+11,28))slot=1;
+    else {
+        slot=(heartValid&1)?1:0;heartLoad[3]=(Byte)(2+slot);
+        e=os_write(fd,heartLoad,sizeof(heartLoad));if(e)return e;
+        memcpy(heartCache[slot],heartLoad+11,28);heartValid|=(Byte)(1<<slot);
+    }
+    heartPut[3]=(Byte)(2+slot);return os_write(fd,heartPut,sizeof(heartPut));
+}
+#endif
 
 Byte dag_compat_present_cell(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
                              Word cursor, DagCompatPresentTiming *timing)
@@ -112,7 +187,13 @@ Byte dag_compat_present_close(void)
     Byte e=0,x;
     if(fd==255)return 0;
     if(mapped){x=os_map_buffer(fd,0xc401,0,&physicalStrip,&physicalLength);if(!e)e=x;mapped=0;}
+#ifdef DAG_COMPAT_HEARTBEAT
+    if(heartOwned&2){Byte kill3[4]={27,0x2a,196,3};x=os_write(1,kill3,sizeof(kill3));if(!e)e=x;}
+    if(heartOwned&1){Byte heartKill[4]={27,0x2a,196,2};x=os_write(1,heartKill,sizeof(heartKill));if(!e)e=x;}
+    heartOwned=heartValid=0;
+#endif
     if(defined){x=os_write(1,kill,sizeof(kill));if(!e)e=x;defined=0;}
     x=window_close(fd);if(!e)e=x;
     fd=255;physicalStrip=0;physicalLength=0;return e;
 }
+Byte dag_compat_present_path(void){return fd;}

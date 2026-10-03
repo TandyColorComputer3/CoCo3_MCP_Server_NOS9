@@ -78,6 +78,11 @@ void game_render_prepare(Byte *frame);
 typedef Byte (*GameRenderProgress)(Game *g,Byte *frame,void *context);
 Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
                               const char *message,GameRenderProgress progress,void *context);
+/* C5 Architecture-B adapter: identical scene semantics, with original VECTOR
+ * scratch and DDA execution in the caller-owned compatibility state. */
+Byte game_render_compat_with_progress(Game *g,Byte *frame,const char *input,
+                              const char *message,GameRenderProgress progress,void *context,
+                              Byte *compatibilityState);
 /* STATUS/COMTXT in logical coordinates. phase: COMMON:HEARTS, 0 small. */
 void game_render_status(Game *g,Byte *frame,Byte phase);
 Byte game_render_status_progress(Game *g,Byte *frame,Byte phase,

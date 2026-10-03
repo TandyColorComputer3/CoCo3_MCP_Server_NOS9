@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Build the bounded C1 Giant fixtures and C2 text demonstration."""
 from pathlib import Path
-import argparse,subprocess,json,hashlib
+import argparse,subprocess,json,hashlib,shutil
+from import_gameplay import generate
 
 app=Path(__file__).resolve().parent
 p=argparse.ArgumentParser();p.add_argument('--out',required=True);p.add_argument('--os9',default='/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9');a=p.parse_args()
 out=Path(a.out).resolve();out.mkdir(parents=True,exist_ok=True)
+game_data=generate(out)
 common=[app/'test/compat_c1_target.c',app/'src/compat/giant-render.asm',app/'src/compat/expand.asm',app/'src/compat/present.c',app/'src/window-path.c',app/'src/os9.c']
 fixtures=app/'test/fixtures/compat-c1'
 
@@ -57,5 +59,35 @@ if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 ident=subprocess.check_output([a.os9,'ident',str(out/'dodcopen')],text=True);assert '(Good)' in ident
 record['opening']={'module':'dodcopen','ident':ident,'sha256':hashlib.sha256((out/'dodcopen').read_bytes()).hexdigest(),
   'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in c3_sources}}
+c4_sources=[app/'test/compat_c4_target.c',app/'src/compat/opening.c',app/'src/compat/c4.c',app/'src/compat/wizard-render.asm',
+    app/'src/compat/text.asm',app/'src/compat/expand.asm',app/'src/compat/present.c',app/'src/gameplay/maze-random.asm',app/'src/window-path.c',app/'src/os9.c']
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','--intdir='+str(out),
+     '-I'+str(app/'src'),'-I'+str(app/'src/compat'),'-I'+str(out),'-o','dodcinit']+list(map(str,c4_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodcinit.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodcinit')],text=True);assert '(Good)' in ident
+record['initial']={'module':'dodcinit','ident':ident,'sha256':hashlib.sha256((out/'dodcinit').read_bytes()).hexdigest(),
+  'data':game_data,'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in c4_sources}}
+c5_sources=[app/'test/compat_c5_target.c',app/'src/compat/c4.c',app/'src/compat/c5.c',
+    app/'src/compat/giant-render.asm',app/'src/compat/vector-line.asm',app/'src/compat/text.asm',app/'src/compat/expand.asm',app/'src/compat/present.c',
+    app/'src/gameplay/game.c',app/'src/gameplay/maze-random.asm',app/'src/gameplay/overlay-host.c',
+    app/'src/gameplay/overlay-host-shim.asm',app/'src/gameplay/overlay-callback-gateway.asm',
+    app/'src/gameplay/scheduler-host.c',app/'src/gameplay/scheduler-host-shim.asm',
+    app/'src/gameplay/scheduler-callback-gateway.asm',app/'src/gameplay/opening-heartbeat.c',
+    app/'src/audio/native_heartbeat.c',app/'src/original/logical.c',app/'src/window-path.c',app/'src/os9.c']
+c5_sources.insert(-3,app/'src/gameplay/input.c');c5_sources.insert(-3,app/'src/audio/ipc.c')
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','-DDAG_COMPAT_VIEWER_16','-DDAG_COMPAT_HEARTBEAT',
+     '--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/compat'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodcplay']+list(map(str,c5_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodcplay.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodcplay')],text=True);assert '(Good)' in ident
+record['play']={'module':'dodcplay','ident':ident,'sha256':hashlib.sha256((out/'dodcplay').read_bytes()).hexdigest(),
+  'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in c5_sources}}
+heartbeat_out=out/'heartbeat';heartbeat_out.mkdir(exist_ok=True)
+subprocess.run(['python3',str(app/'build_heartbeat.py'),'--out',str(heartbeat_out),'--os9',a.os9],check=True,
+               stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+shutil.copyfile(heartbeat_out/'dhbpack',out/'dhbpack')
+record['play']['heartbeatPack']={'size':(out/'dhbpack').stat().st_size,
+  'sha256':hashlib.sha256((out/'dhbpack').read_bytes()).hexdigest()}
 (out/'build.json').write_text(json.dumps(record,indent=2)+'\n')
 for beat in records:print(records[beat]['ident'])

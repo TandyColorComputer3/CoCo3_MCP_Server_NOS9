@@ -591,3 +591,43 @@ This audit performs no such refactor.
 The architecture decision is ready for human review.  Do not begin the Giant
 prototype, port Wizard or text, create the private state block, change current
 attract behavior, or delete modern reference code as part of this checkpoint.
+# C4 established boundary
+
+The C4 review candidate extends the continuous compatibility machine from the
+accepted PREPARE frame through `NEWLVX/DGNGEN/CBIRTH`, DEMDAT creation,
+`MAPPER`, two exact 81-jiffy waits, the black transition and
+`INIVUX/PROMPX`.  Its 2,608-byte packed semantic state and 6,144-byte map are
+byte exact against independent source-derived oracles.  The initial viewport
+is correctly black because both source light values are zero; status and the
+lone dot use the C2 glyph/clear machine.  See
+[DAGGORATH_ATTRACT_COMPAT_C4.md](DAGGORATH_ATTRACT_COMPAT_C4.md).
+
+# C5 established boundary
+
+C5 reconnects the C4 state to the source-shaped `PLAYER/HUMAN/AUTTAB` character
+path, production command parser, foreground queue, creature movement and
+presentation requests.  Eight AUTTAB commands move CCB 18 naturally into the
+forward view; the C1 PIC vectors produce recognizable successive Giant poses.
+The same target then accepts a real lowercase `look` from its private `/w`,
+dispatches it through the mapped command module, schedules and redraws before a
+clean return.  Exact RNG/player/CCB checkpoints make this an execution-graph
+test rather than a frame script.  See
+[DAGGORATH_ATTRACT_COMPAT_C5.md](DAGGORATH_ATTRACT_COMPAT_C5.md).
+
+The connected leaves currently make `dodcplay` a four-program-block module,
+while data remains two blocks.  With one CoWin block, normal occupancy is 7/8;
+the alternating `dodcmd`/`dodsched` slot raises it to 8/8 temporarily.  This is
+a valid Level II map but exceeds the earlier two-program-block research target,
+so later placement work should recover headroom without changing C5 semantics.
+
+The accepted C5 heartbeat uses one native VIRQ edge as the authority for both
+PIA PB1 sound and the latched visual phase. A monotonic generation counter and
+post-PutBlk retry prevent an edge during presentation from becoming lasting
+phase drift. VECTOR, scheduler, overlay, strip-transfer and sleep checkpoints
+service that same state; none owns an independent heart timer. Heart-only
+presentation is gated until the complete initial status strip exists and uses
+a 32-by-7 preloaded buffer, so it cannot expose the former isolated heart or
+white rectangle. This synchronization is a protected compatibility invariant
+for every later checkpoint. Exact control flow, the deterministic diagnostic
+trace, accepted artifact identity and bounded platform differences are recorded
+in [C5](DAGGORATH_ATTRACT_COMPAT_C5.md).

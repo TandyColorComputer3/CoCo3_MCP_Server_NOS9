@@ -1,0 +1,26 @@
+{
+  "referenceCommit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "second": 21,
+  "files": {
+    "game.bin": {
+      "bytes": 2608,
+      "sha256": "d8f29331f6383203e5a5cc6b2e0b0498f962a9d73ef6c34c6d0df6aca50d9b33"
+    },
+    "initial.frame": {
+      "bytes": 6144,
+      "sha256": "458f0d9799e59e04143d3a532b2f9589b4e6accc88caf280e68b0a9ee046e157"
+    },
+    "map.frame": {
+      "bytes": 6144,
+      "sha256": "3646378c9ee7d845f2cd1a3489b1570cc7f5b7e550eb3f6ceef3704c65a5ec68"
+    },
+    "prompt.frame": {
+      "bytes": 6144,
+      "sha256": "d8c0d60b1b6cf2f0bbbc6cf5152d161ed5b52f49316eca5be5d72e139cf89a8d"
+    },
+    "state.bin": {
+      "bytes": 3333,
+      "sha256": "6c9531c3c0d888785e5204b17e4b168e365a78f395cafe6fb4031bec5fec01e6"
+    }
+  }
+}

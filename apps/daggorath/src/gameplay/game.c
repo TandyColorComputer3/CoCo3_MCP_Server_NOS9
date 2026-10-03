@@ -265,8 +265,21 @@ void game_tick(Game *g,Word ticks){GameTiming timing;game_timing_init(g,&timing)
 /* VIEWER/VCTLST: absolute endpoint scaling about (128,76), signed arithmetic
  * shift by seven; VECTOR retains original fade sampling and clipping. */
 #include "logical.h"
-static int scale(Byte x,int centre,Byte factor){int d=(int)x-centre;long v=(long)d*factor;return centre+(int)(v>=0?v/128:-((-v+127)/128));}
-typedef struct {Game *game;Byte *frame;GameRenderProgress progress;void *context;Byte error;} DrawProgress;
+#ifdef DAG_COMPAT_VIEWER_16
+#include "compat/compat.h"
+#endif
+static int scale(Byte x,int centre,Byte factor){int d=(int)x-centre;
+#ifdef DAG_COMPAT_VIEWER_16
+ /* The imported VIEWER vector oracle is bounded to x=27..229, y=16..136;
+  * its largest scale is 200.  The largest centred product is therefore
+  * 20,200, so the source-equivalent signed result fits in 16 bits.  Avoid
+  * CMOC's materially slower 32-bit helpers only in the compatibility target. */
+ int v=d*(int)factor;
+#else
+ long v=(long)d*factor;
+#endif
+ return centre+(int)(v>=0?v/128:-((-v+127)/128));}
+typedef struct {Game *game;Byte *frame;GameRenderProgress progress;void *context;Byte error;Byte *compatState;} DrawProgress;
 static unsigned char draw_checkpoint(void *context){DrawProgress *p=(DrawProgress *)context;
  p->error=p->progress(p->game,p->frame,p->context);return p->error!=0;
 }
@@ -288,6 +301,12 @@ static Byte draw(Byte *frame,Byte list,Byte factor,Byte light,Byte range,DrawPro
    * unfinished logical vector. */
   if(progress&&progress->progress&&draw_checkpoint(progress))return progress->error;
   if(progress&&progress->progress){
+#ifdef DAG_COMPAT_VIEWER_16
+   if(progress->compatState){DagCompatLineContext line={progress->compatState,frame,x0,y0,x1,y1,fade};
+    if(dag_compat_vector_line(&line))return 187;
+    if(draw_checkpoint(progress))return progress->error;
+   }else
+#endif
    if(wizard_line_progress(frame,x0,y0,x1,y1,fade,draw_checkpoint,progress))return progress->error;
   }else wizard_line(frame,x0,y0,x1,y1,fade);
  }return 0;}
@@ -349,7 +368,7 @@ void game_render_heart(Byte *frame,Byte phase){Byte y;const Byte *heart=status_h
 }
 Byte game_render_status_progress(Game *g,Byte *frame,Byte phase,
                                  GameRenderProgress progress,void *context){Byte name[32],n,e;
- DrawProgress drawProgress={g,frame,progress,context,0};
+ DrawProgress drawProgress={g,frame,progress,context,0,0};
  memset(frame+152*32,255,8*32);
  if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
  n=game_object_name(g,g->hand,name);e=status_name(frame,name,n,0,&drawProgress);if(e)return e;
@@ -366,7 +385,7 @@ void game_render_input(Byte *frame,const char *input,const Byte *underlay){
 }
 Byte game_render_input_progress(Game *g,Byte *frame,const char *input,const Byte *underlay,
                                 GameRenderProgress progress,void *context){Byte row,e;
- DrawProgress drawProgress={g,frame,progress,context,0};
+ DrawProgress drawProgress={g,frame,progress,context,0,0};
  for(row=0;row<7;row++){
   memcpy(frame+GAME_INPUT_OFFSET+(Word)row*32,underlay+(Word)row*32,32);
   if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
@@ -378,10 +397,11 @@ Byte game_render_input_progress(Game *g,Byte *frame,const char *input,const Byte
  if(progress){e=draw_checkpoint(&drawProgress);if(e)return drawProgress.error;}
  return 0;
 }
-Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
-                              const char *message,GameRenderProgress progress,void *context){
+static Byte game_render_core(Game *g,Byte *frame,const char *input,
+                              const char *message,GameRenderProgress progress,void *context,
+                              Byte *compatibilityState){
  static const Byte scales[]={200,128,80,50,31,20,12,8,4,2};
- Byte r=g->row,c=g->col,range,side,feature,relative,light=0,magic=0,i,which,e;int cr;DrawProgress drawProgress={g,frame,progress,context,0};
+ Byte r=g->row,c=g->col,range,side,feature,relative,light=0,magic=0,i,which,e;int cr;DrawProgress drawProgress={g,frame,progress,context,0,compatibilityState};
  if(progress){Word at;
   /* The original frame clear is semantically atomic only to the unfinished
    * logical image. Clear 256-byte pieces so the already displayed heart can
@@ -423,6 +443,15 @@ Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
   * status template; the presenter applies the latest phase before flipping. */
  game_render_heart(frame,0);
  return 0;
+}
+Byte game_render_with_progress(Game *g,Byte *frame,const char *input,
+                              const char *message,GameRenderProgress progress,void *context){
+ return game_render_core(g,frame,input,message,progress,context,0);
+}
+Byte game_render_compat_with_progress(Game *g,Byte *frame,const char *input,
+                              const char *message,GameRenderProgress progress,void *context,
+                              Byte *compatibilityState){
+ return game_render_core(g,frame,input,message,progress,context,compatibilityState);
 }
 void game_render(Game *g,Byte *frame,const char *input,const char *message){
  (void)game_render_with_progress(g,frame,input,message,0,0);

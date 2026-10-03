@@ -31,6 +31,15 @@ typedef struct {
     Byte mode;
 } DagCompatRenderContext;
 
+/* Reentrant adapter for the original VECTOR DDA. Coordinates are already
+ * transformed by VCTLST; all mutable VECTOR scratch remains caller-owned. */
+typedef struct {
+    Byte *state;
+    Byte *logicalFrame;
+    int x0,y0,x1,y1;
+    Byte fade;
+} DagCompatLineContext;
+
 /* COMDAT.ASM TXTPRI / COMTXT.ASM text state, adapted to one caller-owned
  * logical framebuffer. Cursor is the original 0..127 character index. */
 typedef struct {
@@ -72,6 +81,7 @@ enum {
 };
 
 Byte dag_compat_render_giant(DagCompatRenderContext *context);
+Byte dag_compat_vector_line(DagCompatLineContext *context);
 void dag_compat_expand_strip(const Byte *source, Byte *target);
 Byte dag_compat_text_apply(DagCompatTextContext *context);
 Byte dag_compat_text_cell(DagCompatCellContext *context);
