@@ -67,11 +67,15 @@ static void text(unsigned char *frame,const unsigned char *s,unsigned int size,
         ++cursor;
     }
 }
+void wizard_copyright(unsigned char *frame)
+{
+    memset(frame+152*32,255,8*32);
+    text(frame,status_text,sizeof(status_text),152*32,255);
+}
 void wizard_frame(unsigned char *frame,unsigned char fade,unsigned char messages)
 {
     unsigned int i;
-    memset(frame,0,FRAME_BYTES);memset(frame+152*32,255,8*32);
-    text(frame,status_text,sizeof(status_text),152*32,255);
+    memset(frame,0,FRAME_BYTES);wizard_copyright(frame);
     for(i=0;i<sizeof(wizard_segments)/sizeof(wizard_segments[0]);++i){
         const unsigned char *p=wizard_segments[i];wizard_line(frame,p[0],p[1],p[2],p[3],fade);
     }

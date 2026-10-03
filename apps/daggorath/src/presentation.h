@@ -1,6 +1,10 @@
 #include "platform.h"
 void screen_set_heart_patterns(const Byte heartPatterns[28]);
 Byte screen_open(void);
+/* A chain phase inherits the owned path and GP storage, then remaps it in its
+ * new Level II DAT image. The old phase drops only its process-local mapping. */
+Byte screen_handoff(void);
+Byte screen_adopt(Byte inheritedPath);
 Byte screen_prepare(const Byte *frame);
 /* Queue the full frame for six 512x32 strips. screen_flip expands each strip
  * in bounded eight-row units and services the callback between units/writes. */

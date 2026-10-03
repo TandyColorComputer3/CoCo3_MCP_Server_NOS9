@@ -95,8 +95,41 @@ Byte screen_open(void)
     /* Both immutable COMDAT:SPCTAB phases are resident before INIVUX enables
      * heartbeat delivery. Initialization performs no PutBlk and cannot invent
      * or consume a heartbeat generation. */
-    heartDefine[3]=2;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return e;heartOwned=1;
     if(heartsConfigured){
+        heartDefine[3]=2;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return e;heartOwned=1;
+        e=preload_heart(0,configuredHearts);if(e)return e;
+        heartDefine[3]=3;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return e;heartOwned|=2;
+        e=preload_heart(1,configuredHearts+14);if(e)return e;
+    }
+    return os_write(fd,selectWindow,sizeof(selectWindow));
+}
+/* F$Chain preserves path ownership and CoWin GP storage, but not SS.MpGPB's
+ * process-local DAT mapping. See the live proba/probeb chain proof in
+ * DAGGORATH_ATTRACT_M1.md and EOU CoWin SS.MpGPB. */
+Byte screen_handoff(void)
+{
+    Byte e;
+    if(fd==255||!mapped||!owned)return ERR_ARGUMENT;
+    e=os_map_buffer(fd,0xc401,0,&pixels,&mappedLength);
+    if(e)return e;
+    mapped=0;pixels=0;pendingFrame=0;pendingStrips=0;
+    return 0;
+}
+Byte screen_adopt(Byte inheritedPath)
+{
+    Registers r;Byte e;
+    fd=255;owned=mapped=heartOwned=heartValid=0;returnPath=255;
+    pendingFrame=0;pendingStrips=0;pendingProgress=0;pendingContext=0;
+    e=invocation_window();if(e)return e;
+    memset(&r,0,sizeof(r));e=os_getstat(inheritedPath,SS_SCTYP,&r);if(e)return e;
+    if(r.a!=5)return ERR_ARGUMENT;
+    memset(&r,0,sizeof(r));e=os_getstat(inheritedPath,SS_SCSIZ,&r);if(e)return e;
+    if(r.x!=80||r.y!=25)return ERR_ARGUMENT;
+    fd=inheritedPath;owned=1;
+    e=os_map_buffer(fd,0xc401,1,&pixels,&mappedLength);if(e)return e;
+    mapped=1;if(mappedLength!=2048)return ERR_ARGUMENT;
+    if(heartsConfigured){
+        heartDefine[3]=2;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return e;heartOwned=1;
         e=preload_heart(0,configuredHearts);if(e)return e;
         heartDefine[3]=3;e=os_write(fd,heartDefine,sizeof(heartDefine));if(e)return e;heartOwned|=2;
         e=preload_heart(1,configuredHearts+14);if(e)return e;

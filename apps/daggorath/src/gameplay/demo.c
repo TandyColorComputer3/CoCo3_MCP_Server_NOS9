@@ -13,6 +13,12 @@
 #include "logical.h"
 #include "native_heartbeat.h"
 #include "audio.h"
+#ifdef DOD_OPENING_PHASE
+#include "primary-text.h"
+#include "opening-map.h"
+#include "opening-heartbeat.h"
+#include "phase-chain.h"
+#endif
 
 static Game game;
 static GameTiming timing;
@@ -25,7 +31,7 @@ static Byte frame[FRAME_BYTES],signalBytes[2];
 static NativeHeartbeat heartbeat={255,0};
 static NativeHeartbeatState heartbeatState;
 static unsigned long shownGeneration;
-#ifdef _CMOC_VERSION_
+#if defined(_CMOC_VERSION_) && !defined(DOD_OPENING_PHASE)
 static AudioQueue audioQueue;
 #endif
 static Byte heartbeatActive;
@@ -38,6 +44,7 @@ static Byte refresh_heart(void);
 static Byte render_heart_progress(Game *g,Byte *partial,void *context);
 static Byte flip_heart_progress(void *context);
 
+#ifndef DOD_OPENING_PHASE
 Byte scheduler_task_resident(void *opaque,Game *g,GameTiming *t,CreatureScheduler *q,
                            Byte task,Byte ccb,Byte *dirty){
  (void)opaque;(void)t;(void)q;(void)ccb;*dirty=0;
@@ -54,6 +61,7 @@ Word scheduler_present_resident(void *opaque,Game *g,Byte mode){
  * VIRQ-owned generation through the same resident gateway on each scheduler
  * jiffy once the native heart is active. */
 Byte scheduler_progress_resident(void *opaque){(void)opaque;return refresh_heart();}
+#endif
 static Byte refresh_heart(void){
  Byte e;if(!heartbeatActive)return 0;
  e=native_heartbeat_snapshot(&heartbeat,&heartbeatState);
@@ -63,7 +71,7 @@ static Byte refresh_heart(void){
   e=screen_present_heart(frame);if(e)return e;
   shownGeneration=heartbeatState.edgeGeneration;
  }
-#ifdef _CMOC_VERSION_
+#if defined(_CMOC_VERSION_) && !defined(DOD_OPENING_PHASE)
  audio_queue_progress(&audioQueue,os_signal_value(signalBytes+1));
 #endif
  return 0;
@@ -72,6 +80,7 @@ static Byte render_heart_progress(Game *g,Byte *partial,void *context){
  (void)g;(void)partial;(void)context;
  return refresh_heart();
 }
+#ifndef DOD_OPENING_PHASE
 static Byte flip_heart_progress(void *context){(void)context;return refresh_heart();}
 /* A completed logical scene has phase zero in its template.  Before a full
  * flip, overwrite its status cells from the authoritative driver snapshot;
@@ -89,6 +98,7 @@ static Byte present_scene(void){
  if(shownGeneration<generation)shownGeneration=generation;
  return refresh_heart();
 }
+#endif
 /* Source logical waits are already represented by DOD_SCHED_PLAYER_WAIT. This
  * short visual dwell is only to make each completed state observable; it never
  * advances Game, scheduler or RNG state. */
@@ -97,6 +107,7 @@ static Byte dwell(Word ticks){Byte e;
   e=refresh_heart();if(e)return e;}
  return 0;
 }
+#ifndef DOD_OPENING_PHASE
 static Byte render_dungeon(const char *message){
  Byte e=game_render_with_progress(&game,frame,"",message,render_heart_progress,0);
  if(e)return e;
@@ -136,6 +147,59 @@ static Byte command(const char *text,Byte words){
 static Byte attract_text(const char *a,const char *b,const char *c,const char *d,Word ticks){
  Byte e;game_render_attract(frame,a,b,c,d);e=screen_present(frame);if(e)return e;return dwell(ticks);
 }
+#endif
+#ifdef DOD_OPENING_PHASE
+/* This bounded phase begins after dodwiz has presented ZFLOP and chained
+ * without closing its graphics path. F$Chain rebuilds all process data, so
+ * accept only a scalar inherited path number and remap the owned GP buffer. */
+int main(int argc,char **argv){
+ static DagPrimaryText primary;
+ Word path=0;const char *p;Byte e=0,r,heartPatterns[28];
+ if(argc!=2||!argv[1]||!*argv[1])return ERR_ARGUMENT;
+ for(p=argv[1];*p;p++){
+  if(*p<'0'||*p>'9')return ERR_ARGUMENT;
+  path=path*10+*p-'0';if(path>255)return ERR_ARGUMENT;
+ }
+ e=os_intercept_audio(signalBytes);if(e)return e;
+ game_heart_patterns(heartPatterns);screen_set_heart_patterns(heartPatterns);
+ e=screen_adopt((Byte)path);if(e)goto opening_done;
+ /* ONCE.ASM:GAME20/PREPAR: PREPARE occupies TXTEXA cell (12,9).
+  * NEWLVL/DEMDAT work follows while this frame remains presented. */
+ game_render_prepare(frame);
+ /* ONCE.ASM:PREPAR writes the EXAMINE field; the earlier copyright status
+  * VDB survives unchanged until GAME40 replaces it with the map. */
+ wizard_copyright(frame);
+ e=screen_present(frame);if(e)goto opening_done;
+ /* The public launch is one command; the phase owns its native heartbeat
+  * driver dependency rather than requiring an undocumented shell preload. */
+ e=opening_heartbeat_modules_open();if(e)goto opening_done;
+ game_init_demo(&game,21);
+ /* ONCE.ASM:GAME40/MAPPER: all objects and creatures are visible on the
+  * six-scanline-per-cell source map; scheduler is asleep for two WAITX. */
+ opening_render_map(&game,frame);e=screen_present(frame);if(e)goto opening_done;
+ e=dwell(162);if(e)goto opening_done;
+ /* GAME40's two SYNCs expose a genuinely cleared frame before INIVUX. */
+ memset(frame,0,FRAME_BYTES);e=screen_present(frame);if(e)goto opening_done;
+ e=dwell(2);if(e)goto opening_done;
+ primary_clear(&primary);primary_prompt(&primary);
+ e=game_render_with_progress(&game,frame,"","",render_heart_progress,0);
+ if(e)goto opening_done;
+ primary_render(&primary,frame);
+ e=screen_present(frame);if(e)goto opening_done;
+ e=native_heartbeat_open(&heartbeat);if(e)goto opening_done;
+ e=native_heartbeat_rate(&heartbeat,game.rate);if(e)goto opening_done;
+ e=native_heartbeat_enable(&heartbeat);if(e)goto opening_done;
+ heartbeatActive=1;e=refresh_heart();if(e)goto opening_done;
+ /* The M4 acceptance boundary is the first prompt. This hold exposes beat
+  * 012 to the observer but never dispatches AUTTAB 1 (beat 013). */
+ e=dwell(180);
+opening_done:
+ heartbeatActive=0;r=native_heartbeat_close(&heartbeat);if(!e)e=r;
+ if(!heartbeat.opened){r=opening_heartbeat_modules_close();if(!e)e=r;}
+ r=screen_close();if(!e)e=r;
+ return e;
+}
+#else
 int main(void){Byte e=0,r;Byte heartPatterns[28];
  static const char *commands[]={
   "EXAMINE","PULL RIGHT TORCH","USE RIGHT","LOOK","MOVE",
@@ -195,3 +259,4 @@ done:
 #endif
  return e;
 }
+#endif

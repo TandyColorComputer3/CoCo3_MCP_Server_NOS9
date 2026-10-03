@@ -36,7 +36,7 @@ for name in ('cmoc', 'lwasm', 'lwlink', 'os9'):
 tools['host_cc'] = dict(fingerprint(shutil.which('cc')), version=execute(['cc', '--version']))
 from prepare_frames import generate
 cache = generate(app, out)
-sources = [app/'src'/n for n in ('main.c', 'presentation.c', 'playback.c', 'original/logical.c', 'os9.c', 'window-path.c', 'module.asm')]
+sources = [app/'src'/n for n in ('main.c', 'phase-chain.c', 'presentation.c', 'playback.c', 'original/logical.c', 'os9.c', 'window-path.c', 'module.asm')]
 command = [tools['cmoc']['path'], '--os9', '-O0', '--intermediate', '--verbose',
            '--add-os9-stack-space=1536', '--intdir=' + str(out),
            '--lwasm=' + tools['lwasm']['path'], '--lwlink=' + tools['lwlink']['path'],

@@ -50,7 +50,7 @@ Row notation is `160 / 168 / 176 / 184`; `—` means blank. `P` is player `(row,
 | 005 / 8.4 | `DEMO10:OUTSTI` twice | Wizard stays; two welcome lines appear in lower area. | — / `I DARE YE ENTER...` / `...THE DUNGEONS OF DAGGORATH!!!` / — | Wizard | off | Wizard/audio continues | Two source waits follow; [frame](assets/daggorath-cartridge-storyboard/005-welcome-two-lines.png). |
 | 006 / 10.9 | `WIZOUT` begins | Welcome clears while Wizard/copyright remain. | — / — / — / — | Wizard | off | second `KABOOM` near counter 9.3 s | [frame](assets/daggorath-cartridge-storyboard/006-welcome-cleared.png). |
 | 007 / 13.4 | `WIZOUT` | Wizard fades to sparse strokes; copyright still present. | — / — / — / — | `WIZ1` | off | fade buzz | [frame](assets/daggorath-cartridge-storyboard/007-wizard-fade-out.png). |
-| 008 / 16.6 | `ZFLOP`, `SYNC` | Black transition; no Wizard, copyright or primary text. | — / — / — / — | — | off | — | [frame](assets/daggorath-cartridge-storyboard/008-black-transition.png); blank interval precedes PREPARE. |
+| 008 / 16.6 | `ZFLOP`, `SYNC` | The main viewport goes nearly black; the copyright/status strip remains visible, with a few fading Wizard pixels in this captured frame. Primary text is clear. | — / — / — / — | fading `WIZ1` pixels | off | — | [frame](assets/daggorath-cartridge-storyboard/008-black-transition.png); the transition precedes PREPARE. |
 | 009 / 17.4 | `GAME20 → PREPAR/PREPAX` | `PREPARE!` alone near logical cell `(12,9)`, copyright/status line below. | — / — / — / — | — | off | — | [frame](assets/daggorath-cartridge-storyboard/009-prepare.png); `PREPAX` uses EXAMINE text space, not primary rows. |
 | 010 / 24.0 | `NEWLVL`, `GAME40 → MAPPER/PUPDAT` | Source level-2 map fills upper field; player still P `(12,22;N)`. | — / — / — / — | Maze/map, demo objects | off | — | Two `WAITX`; [frame](assets/daggorath-cartridge-storyboard/010-autoplay-map.png). |
 | 011 / 26.1 | `GAME40` final `SYNC`, `GAME50/INIVUX` | Map clears through black; status region reappears. | — / — / — / — | — | becoming active | — | [frame](assets/daggorath-cartridge-storyboard/011-black-before-dungeon.png). |
@@ -112,7 +112,7 @@ The current EOU M3 [isolated renderer test](DAGGORATH_DYNAMIC_PRESENTATION_M3.md
 
 | Beat(s) | Cartridge | Current EOU | Status |
 | --- | --- | --- | --- |
-| 001 | Reset transient | EOU Shell+/graphics launch differs by platform; no equivalent cartridge-reset frame. | NOT YET IMPLEMENTED |
+| 001 | Reset transient | EOU starts at the NitrOS-9 Shell+ launch boundary; cartridge reset-video behavior does not apply. Original evidence is retained. | INTENTIONAL PLATFORM DIFFERENCE — NitrOS-9 launch boundary |
 | 002–004 | Copyright and Wizard fade/complete | `dodwiz` exists separately; `doddemo` starts at text. | MISSING |
 | 005 | Wizard behind two exact welcome lines | Lines/glyphs are source-derived, but Wizard/copyright backdrop absent. | PARTIAL |
 | 006–007 | Message clear and Wizard fade out | No Wizard phase in `doddemo`. | MISSING |
