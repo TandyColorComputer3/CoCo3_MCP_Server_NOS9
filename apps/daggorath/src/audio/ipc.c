@@ -79,3 +79,14 @@ Byte ipc_signal(Byte pid,Byte signal){Byte e;asm{
 @bad
  stb :e
  }return e;}
+/* NitrOS-9 fid.asm: F$ID ($0c) returns this process ID in A. */
+Byte ipc_self_pid(Byte *pid){Byte e,n;asm{
+ pshs y
+ os9 $0c
+ bcs @bad
+ sta :n
+ clrb
+@bad
+ puls y
+ stb :e
+ }if(!e)*pid=n;return e;}

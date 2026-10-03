@@ -3,11 +3,20 @@
 /* One outstanding request keeps both pipes well below their verified 256-byte
  * capacity. submit queues; receive is an explicit synchronization point.
  * Client owns a direct child; caller must not concurrently reap that child. */
-Byte audio_start(AudioClient *c,const char *service,const char *profile){
- Byte saved0=255,saved1=255,n,e=0,r;char args[40];Byte hello[8];
+static Byte audio_start_mode(AudioClient *c,const char *service,const char *profile,Byte credited){
+ Byte saved0=255,saved1=255,n,e=0,r,pid=0;char args[40];Byte hello[8];
  memset(c,0,sizeof(*c));c->command=c->reply=255;
  if(strlen(profile)>30)return AUDIO_BAD;
- strcpy(args,profile);strcat(args,"\r");
+ strcpy(args,profile);
+ if(credited){
+  char digits[4];Byte i=0,j;
+  e=ipc_self_pid(&pid);if(e)return e;
+  if(pid>=100)digits[i++]=(char)('0'+pid/100);
+  if(pid>=10)digits[i++]=(char)('0'+(pid/10)%10);
+  digits[i++]=(char)('0'+pid%10);digits[i]=0;
+  j=(Byte)strlen(args);args[j++]=' ';strcpy(args+j,digits);
+ }
+ strcat(args,"\r");
  e=ipc_open("/pipe",&c->command);if(e)goto fail;
  e=ipc_open("/pipe",&c->reply);if(e)goto fail;
  e=ipc_dup(0,&saved0);if(e)goto fail;e=ipc_dup(1,&saved1);if(e)goto fail;
@@ -31,14 +40,27 @@ fail:
  if(c->command!=255)ipc_close(c->command);if(c->reply!=255)ipc_close(c->reply);
  c->opened=0;return e;
 }
+Byte audio_start(AudioClient *c,const char *service,const char *profile){
+ return audio_start_mode(c,service,profile,0);
+}
+Byte audio_start_credited(AudioClient *c,const char *service,const char *profile){
+ return audio_start_mode(c,service,profile,1);
+}
 Byte audio_submit(AudioClient *c,Byte op,Byte sound,Byte gain){Byte f[8],e;
  if(!c->opened)return AUDIO_BAD;if(c->pending)return AUDIO_BUSY;
  audio_frame(f,op,sound,gain,++c->sequence);e=audio_validate(f);if(e)return e;
  e=os_write(c->command,f,8);if(!e)c->pending=op;return e;
 }
+Byte audio_submit_credited(AudioClient *c,Byte sound){Byte f[8],e;
+ if(!c->opened)return AUDIO_BAD;if(c->pending)return AUDIO_BUSY;
+ audio_frame(f,AUDIO_CREDIT_PLAY,sound,255,++c->sequence);
+ f[1]=AUDIO_CREDIT_VERSION;e=audio_validate(f);if(e)return e;
+ e=os_write(c->command,f,8);if(!e)c->pending=AUDIO_CREDIT_PLAY;return e;
+}
 Byte audio_receive(AudioClient *c){Byte f[8],e;if(!c->pending)return AUDIO_BAD;
  e=ipc_read(c->reply,f,8);if(e)return e;
- if(f[0]!=AUDIO_MAGIC||f[1]!=AUDIO_VERSION||f[2]!=c->pending||f[5]!=c->sequence||f[6]||f[7])return AUDIO_BAD;
+ if(f[0]!=AUDIO_MAGIC||f[1]!=(c->pending==AUDIO_CREDIT_PLAY?AUDIO_CREDIT_VERSION:AUDIO_VERSION)||
+    f[2]!=c->pending||f[5]!=c->sequence||f[6]||f[7])return AUDIO_BAD;
  c->pending=0;return f[4];
 }
 Byte audio_finish(AudioClient *c){Byte e=0,r,pid,status;

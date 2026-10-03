@@ -18,7 +18,7 @@ static DagSchedulerCallbackContext schedulerCallbacks;
 /* The scheduler ABI context is process-owned state.  Its stable pointers are
  * initialized once; each temporary F$Link only changes operation/ccb/result. */
 static DagSchedulerContextV1 schedulerContext;
-static Byte frame[FRAME_BYTES],signalFlag;
+static Byte frame[FRAME_BYTES],signalBytes[2];
 static Byte inputUnderlay[GAME_INPUT_BYTES];
 static NativeHeartbeat heartbeat={255,0};
 static NativeHeartbeatState heartbeatState;
@@ -27,8 +27,7 @@ static unsigned long maximumPresentationLag;
 static unsigned long heartPresentations;
 static Byte phaseRefreshNeeded,audioBitValid,observedAudioBit;
 #ifdef _CMOC_VERSION_
-static AudioClient combatAudio;
-static Byte combatAudioState;
+static AudioQueue combatAudio;
 #endif
 typedef struct { Byte *shownPhase; } RenderProgressContext;
 static Byte render_heart_progress(Game *g,Byte *partial,void *context);
@@ -110,9 +109,13 @@ static Byte present_ui(Byte *frame,const char *input,const Byte *underlay,Byte *
 static Byte render_heart_progress(Game *g,Byte *partial,void *context){
  RenderProgressContext *p=(RenderProgressContext *)context;Byte e;
  (void)g;
- e=os_signal_value(&signalFlag);if(e)return e;
+ e=os_signal_value(signalBytes);if(e)return e;
  e=present_latest_heart(partial,p->shownPhase);if(e)return e;
- return presentation_lag(*p->shownPhase);
+ e=presentation_lag(*p->shownPhase);if(e)return e;
+#ifdef _CMOC_VERSION_
+ audio_queue_progress(&combatAudio,os_signal_value(signalBytes+1));
+#endif
+ return 0;
 }
 Byte scheduler_progress_resident(void *context){
  RenderProgressContext *p=(RenderProgressContext *)context;
@@ -125,7 +128,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
  if(argc>2||(argc==2&&strcmp(argv[1],"seed0")))return ERR_ARGUMENT;
  presentedGeneration=maximumPresentationLag=heartPresentations=0;phaseRefreshNeeded=audioBitValid=0;
  memset(&heartbeatState,0,sizeof(heartbeatState));
- e=os_intercept(&signalFlag);if(e)return e;
+ e=os_intercept_audio(signalBytes);if(e)return e;
  e=os_clock(&previous,1);if(e)return e;
  /* Production retains the original post-maze time perturbation. seed0 is
   * an explicit deterministic test mode; neither changes LVLTAB maze seeds. */
@@ -142,6 +145,11 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
 #endif
  e=game_scheduler_open();if(e)goto done;
  schedulerContext.operation=DOD_SCHED_INIT;e=game_scheduler_call(&schedulerContext);if(e)goto done;
+#ifdef _CMOC_VERSION_
+ /* Fork/greeting can wait; complete optional audio startup before VIRQ
+  * activation so it cannot delay any visible heartbeat generation. */
+ audio_queue_open(&combatAudio,"/d1/dodaudio","ssc-mame-fast");
+#endif
  /* INIVUX: rate already computed; activation starts with remaining=1.
   * All module loads and graphics allocation precede the native claim. */
  e=os_clock(&previous,1);if(e)goto done;e=native_heartbeat_open(&heartbeat);if(e)goto done;
@@ -151,7 +159,10 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   * video-tick service is active; discard setup frames before this point. */
  e=native_heartbeat_take_ticks(&heartbeat,&videoTicks);if(e)goto done;
  for(;;){
-  e=os_signal_value(&signalFlag);if(e)break;
+  e=os_signal_value(signalBytes);if(e)break;
+#ifdef _CMOC_VERSION_
+  audio_queue_progress(&combatAudio,os_signal_value(signalBytes+1));
+#endif
   oldrate=game.rate;oldfaint=game.faint;oldlight=game.torch?game.objects[(game.torch-0x0b15)/14][7]:0;
   e=native_heartbeat_take_ticks(&heartbeat,&videoTicks);if(e)break;
   schedulerContext.operation=DOD_SCHED_NORMAL_TICKS;schedulerContext.logicalJiffies=videoTicks;
@@ -163,8 +174,8 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
    * reach optional dodaudio. A missing or failed service therefore cannot
    * alter combat, RNG, heartbeat cadence or the next scheduler boundary. */
   creatureEventCount=creatureScheduler.audioCount;creatureScheduler.audioCount=0;
-  if(creatureEventCount)audio_present_optional(&combatAudio,&combatAudioState,
-    creatureScheduler.audio,creatureEventCount,"/d1/dodaudio","ssc-mame-fast");
+  if(creatureEventCount){audio_queue_admit(&combatAudio,creatureScheduler.audio,creatureEventCount);
+    audio_queue_progress(&combatAudio,os_signal_value(signalBytes+1));}
 #endif
   if(oldfaint!=game.faint||oldlight!=(game.torch?game.objects[(game.torch-0x0b15)/14][7]:0))dirty=1;
   if(game.dead){message="PLAYER DIED  EXITING";dirty=1;}
@@ -202,7 +213,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
    * the host's entire MCP key burst before making text visible. */
   inputEmpty=0;
   for(drained=0;drained<32;drained++){
-   e=os_signal_value(&signalFlag);if(e)break;
+   e=os_signal_value(signalBytes);if(e)break;
    e=game_input(screen_path(),&key);if(e||!key){inputEmpty=1;break;}
    if(key==13){input[n]=0;if(!strcmp(input,"EXIT"))break;
 #ifdef DOD_COMMAND_OVERLAY
@@ -214,8 +225,8 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
     if(result==GAME_OK&&nextView)view=nextView;
     e=native_heartbeat_rate(&heartbeat,game.rate);if(e)break;
 #ifdef _CMOC_VERSION_
-    if(result==GAME_OK)audio_present_optional(&combatAudio,&combatAudioState,
-      combat.events,combat.eventCount,"/d1/dodaudio","ssc-mame-fast");
+    if(result==GAME_OK){audio_queue_admit(&combatAudio,combat.events,combat.eventCount);
+      audio_queue_progress(&combatAudio,os_signal_value(signalBytes+1));}
 #endif
     n=0;input[0]=0;
    }else if(key==8){if(n)input[--n]=0;}
@@ -266,14 +277,14 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
   if(inputEmpty){e=os_sleep(1);if(e)break;}
  }
  done:
-#ifdef _CMOC_VERSION_
- if(combatAudioState==AUDIO_OPTIONAL_READY){audio_finish(&combatAudio);combatAudioState=AUDIO_OPTIONAL_DISABLED;}
-#endif
 #ifdef DOD_COMMAND_OVERLAY
  r=game_overlay_close();if(!e)e=r;
 #endif
  r=game_scheduler_close();if(!e)e=r;
  r=native_heartbeat_close(&heartbeat);if(!e)e=r;r=screen_close();if(!e)e=r;
+#ifdef _CMOC_VERSION_
+ audio_queue_close(&combatAudio);
+#endif
  printf("DODGAME HEARTBEAT EDGE %lu PRESENTED %lu MAX_PHASE_LAG %lu HEART_PRESENTS %lu\r",heartbeatState.edgeGeneration,presentedGeneration,maximumPresentationLag,heartPresentations);
  printf("DODGAME TERM RESTORED ROW %u COL %u DIR %u RATE %u STATUS %u\r",game.row,game.col,game.dir,game.rate,e);
  return e;

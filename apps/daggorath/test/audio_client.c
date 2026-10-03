@@ -2,17 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 #include "ipc.h"
-static Byte paths[16],queue[128],qsize,qpos,last[8],writes[64],writeCount,forkerror,waitstatus,signalno,writeerror,forkCount;
-static void reset(void){memset(paths,0,16);paths[0]=10;paths[1]=11;paths[2]=12;qsize=qpos=writeCount=forkerror=waitstatus=signalno=writeerror=forkCount=0;}
+static Byte paths[16],queue[128],qsize,qpos,last[8],writes[64],writeCount,forkerror,waitstatus,signalno,writeerror,forkCount,creditedStart;
+static void reset(void){memset(paths,0,16);paths[0]=10;paths[1]=11;paths[2]=12;qsize=qpos=writeCount=forkerror=waitstatus=signalno=writeerror=forkCount=creditedStart=0;}
 static void reply(Byte op,Byte seq,Byte status){Byte f[8];audio_frame(f,op,0,status,seq);memcpy(queue+qsize,f,8);qsize+=8;}
+static void credited_reply(Byte seq,Byte status){Byte f[8];audio_frame(f,AUDIO_CREDIT_PLAY,0,status,seq);f[1]=AUDIO_CREDIT_VERSION;memcpy(queue+qsize,f,8);qsize+=8;}
 Byte ipc_open(const char *s,Byte *p){assert(!strcmp(s,"/pipe"));for(Byte i=3;i<16;i++)if(!paths[i]){paths[i]=20+i;*p=i;return 0;}return 200;}
 Byte ipc_dup(Byte p,Byte *q){assert(paths[p]);for(Byte i=0;i<16;i++)if(!paths[i]){paths[i]=paths[p];*q=i;return 0;}return 200;}
 Byte ipc_close(Byte p){assert(p<16);paths[p]=0;return 0;}
-Byte ipc_fork(const char *s,const char *a,Byte *pid){assert(!strcmp(s,"/d1/dodaudio"));assert(!strcmp(a,"ssc-mame-fast\r"));assert(paths[0]==23&&paths[1]==24&&paths[2]==12);++forkCount;if(forkerror)return forkerror;*pid=7;return 0;}
+Byte ipc_fork(const char *s,const char *a,Byte *pid){assert(!strcmp(s,"/d1/dodaudio"));assert(!strcmp(a,creditedStart?"ssc-mame-fast 5\r":"ssc-mame-fast\r"));assert(paths[0]==23&&paths[1]==24&&paths[2]==12);++forkCount;if(forkerror)return forkerror;*pid=7;return 0;}
 Byte ipc_read(Byte p,Byte *d,Word n){assert(p==4&&n==8);if(qpos==qsize)return AUDIO_EOF;memcpy(d,queue+qpos,8);qpos+=8;return 0;}
 Byte os_write(Byte p,const void *d,Word n){assert(p==3&&n==8);memcpy(last,d,8);memcpy(writes+(Word)writeCount*8,d,8);++writeCount;return writeerror;}
 Byte ipc_wait(Byte *p,Byte *s){*p=7;*s=waitstatus;return 0;}
 Byte ipc_signal(Byte p,Byte s){assert(p==7);signalno=s;return 0;}
+Byte ipc_self_pid(Byte *pid){*pid=5;return 0;}
 int main(void){AudioClient c;Byte state,events[]={AUDIO_WHOOSH,AUDIO_KLINK,AUDIO_BANG};int n=0;
  reset();reply(0,0,0);assert(!audio_start(&c,"/d1/dodaudio","ssc-mame-fast"));assert(paths[0]==10&&paths[1]==11);++n;
  assert(!audio_submit(&c,AUDIO_PLAY,0,255));assert(last[2]==AUDIO_PLAY&&last[5]==1);++n;
@@ -45,4 +47,14 @@ int main(void){AudioClient c;Byte state,events[]={AUDIO_WHOOSH,AUDIO_KLINK,AUDIO
  reset();state=AUDIO_OPTIONAL_NEW;reply(0,0,0);writeerror=AUDIO_IO;
  audio_present_optional(&c,&state,events,3,"/d1/dodaudio","ssc-mame-fast");
  assert(state==AUDIO_OPTIONAL_DISABLED&&!c.opened&&signalno==3&&forkCount==1);++n;
+ /* v2 one-credit frame preserves the greeting, uses the notified worker
+  * arguments, and rejects a duplicate send before the matching reply. */
+ reset();creditedStart=1;reply(0,0,0);
+ assert(!audio_start_credited(&c,"/d1/dodaudio","ssc-mame-fast"));
+ assert(!audio_submit_credited(&c,AUDIO_WHOOSH));
+ assert(last[1]==AUDIO_CREDIT_VERSION&&last[2]==AUDIO_CREDIT_PLAY&&last[3]==AUDIO_WHOOSH&&last[5]==1);
+ assert(audio_submit_credited(&c,AUDIO_KLINK)==AUDIO_BUSY);
+ credited_reply(1,0);assert(!audio_receive(&c));
+ assert(!audio_submit_credited(&c,AUDIO_KLINK));credited_reply(99,0);
+ assert(audio_receive(&c)==AUDIO_BAD);waitstatus=3;assert(audio_cancel(&c)==3);++n;
  printf("%d audio client/IPC lifecycle checks passed\n",n);return 0;}

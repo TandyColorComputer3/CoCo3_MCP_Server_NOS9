@@ -9,7 +9,7 @@ generate(out)
 for name,source in [('overlay-host-opt.o','overlay-host.c'),('scheduler-host-opt.o','scheduler-host.c')]:
  cmd=['cmoc','--os9','-O2','--compile','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(out),'-o',str(out/name),str(app/'src'/'gameplay'/source)]
  subprocess.run(cmd,cwd=out,check=True)
-sources=['gameplay/demo.c','gameplay/game.c','gameplay/overlay-host-shim.asm','gameplay/overlay-callback-gateway.asm','gameplay/scheduler-host-shim.asm','gameplay/scheduler-callback-gateway.asm','gameplay/demo-module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/event.c']
+sources=['gameplay/demo.c','gameplay/game.c','gameplay/overlay-host-shim.asm','gameplay/overlay-callback-gateway.asm','gameplay/scheduler-host-shim.asm','gameplay/scheduler-callback-gateway.asm','gameplay/demo-module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/queue.c','audio/event.c']
 cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src'/'audio'),'-I'+str(out),'-o','doddemo']+[str(app/'src'/x) for x in sources]+[str(out/'overlay-host-opt.o'),str(out/'scheduler-host-opt.o')]
 r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'build.log').write_text(r.stdout)
 if r.returncode: print(r.stdout);raise SystemExit(r.returncode)

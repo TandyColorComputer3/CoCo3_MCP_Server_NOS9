@@ -15,6 +15,7 @@ Byte os_getstat(Byte path, Byte function, Registers *r);
 Byte os_devname(Byte path, char *buffer);
 Byte os_write(Byte path, const void *buffer, Word size);
 Byte os_intercept(Byte *signal);
+Byte os_intercept_audio(Byte *cancelAndNotice);
 Byte os_signal_value(Byte *signal);
 Byte os_sleep(Word ticks);
 Byte os_cancel_self(void);

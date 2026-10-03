@@ -10,6 +10,7 @@ static const char keys[]="MOVE\rEXIT\r";
 static unsigned readAt,uiPresents,fullPrepares,sleeps,schedulerOpens,schedulerCloses,schedulerCalls;
 static Byte schedulerLive;
 Byte os_intercept(Byte *s){*s=0;return 0;}
+Byte os_intercept_audio(Byte *s){s[0]=s[1]=0;return 0;}
 Byte os_signal_value(Byte *s){(void)s;return 0;}
 Byte os_clock(Word *ticks,Byte validate){(void)validate;*ticks=0;return 0;}
 Byte os_sleep(Word ticks){assert(ticks==1);assert(readAt>=sizeof(keys)-1);++sleeps;return 0;}

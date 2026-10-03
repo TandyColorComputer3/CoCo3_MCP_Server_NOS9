@@ -38,6 +38,13 @@
 /* Version-1 compatibility: PLAY retains its M1/M2 three-sound allowlist.
  * CATALOG_PLAY explicitly opts into the full SOUNDS.ASM dispatch range. */
 #define AUDIO_CATALOG_PLAY 5
+#define AUDIO_CREDIT_PLAY 6 /* v2: worker plays and drains before its reply */
+#define AUDIO_CREDIT_VERSION 2
+#define AUDIO_CREDIT_SIGNAL 128
+#define AUDIO_QUEUE_CAPACITY 8
+/* backend_play has an 18-tick startup fence; backend_drain bounds itself at
+ * 180 ticks. Leave margin for IPC/SSC scheduling before declaring death. */
+#define AUDIO_CREDIT_DEADLINE_TICKS 240
 #define AUDIO_BAD 187
 #define AUDIO_UNSUPPORTED 208
 #define AUDIO_BUSY 209
@@ -50,11 +57,26 @@ typedef struct { Byte command, reply, pid, sequence, pending, opened; } AudioCli
 Byte audio_validate(const Byte *frame);
 void audio_frame(Byte *frame, Byte op, Byte sound, Byte gain, Byte sequence);
 Byte audio_start(AudioClient *client, const char *service, const char *profile);
+Byte audio_start_credited(AudioClient *client, const char *service, const char *profile);
 Byte audio_submit(AudioClient *client, Byte op, Byte sound, Byte gain);
+Byte audio_submit_credited(AudioClient *client,Byte sound);
 Byte audio_receive(AudioClient *client);
 Byte audio_finish(AudioClient *client);
 Byte audio_cancel(AudioClient *client);
 void audio_present_optional(AudioClient *client, Byte *state,
                             const Byte *events, Byte eventCount,
                             const char *service, const char *profile);
+/* Only foreground code owns these fields. The OS-9 signal handler increments
+ * the separate notification byte; it never accesses this queue. */
+typedef struct {
+ AudioClient client;
+ Byte state,credit,head,count,highWater,rejectedGroups,transportFailures;
+ Byte noticeSeen,inflight,sequence,played,slots[AUDIO_QUEUE_CAPACITY];
+ Word issuedTick;
+} AudioQueue;
+void audio_queue_open(AudioQueue *q,const char *service,const char *profile);
+void audio_queue_admit(AudioQueue *q,const Byte *events,Byte count);
+void audio_queue_progress(AudioQueue *q,Byte notice);
+void audio_queue_cancel(AudioQueue *q);
+void audio_queue_close(AudioQueue *q);
 #endif

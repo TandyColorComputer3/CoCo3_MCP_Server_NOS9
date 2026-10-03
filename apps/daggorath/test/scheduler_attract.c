@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include "logical.h"
 #include "gameplay/game.h"
 #include "gameplay/overlay-api.h"
 #include "gameplay/scheduler-api.h"
@@ -45,7 +46,18 @@ static void player(Game *g,DagSchedulerContextV1 *c,const char *text,Byte words)
  while(words--){assert(scheduler(c,DOD_SCHED_PLAYER_WAIT,0)==0);}
  assert(scheduler(c,DOD_SCHED_BOUNDARY,0)==0);
 }
+/* VIEWER's forward/lateral queries may legitimately occlude a live CCB.
+ * Count only pixels contributed by CCB 18, keeping the AUTTAB approach
+ * visually observable without inventing a demo-only creature drawing path. */
+static unsigned ccb18_pixels(const Game *g){
+ Byte with[FRAME_BYTES],without[FRAME_BYTES];Game copy=*g;Word i;unsigned n=0;
+ game_render((Game *)g,with,"","");
+ copy.creatures[18][12]=0;game_render(&copy,without,"","");
+ for(i=0;i<FRAME_BYTES;i++)if(with[i]!=without[i])++n;
+ return n;
+}
 int main(void){Game g,reference;GameTiming t;CreatureScheduler q;DagSchedulerState s;
+ Game visibility6,visibility7,visibility8,visibility9;
  DagSchedulerServices services={DOD_SCHEDULER_ABI_V1,sizeof(DagSchedulerServices),0,primitive,present,0};
  DagSchedulerContextV1 c;GameCombat combat;Byte i;
  memset(&c,0,sizeof(c));c.abiVersion=DOD_SCHEDULER_ABI_V1;c.contextSize=sizeof(c);
@@ -61,10 +73,10 @@ int main(void){Game g,reference;GameTiming t;CreatureScheduler q;DagSchedulerSta
  player(&g,&c,"USE RIGHT",2);
  player(&g,&c,"LOOK",1);
  player(&g,&c,"MOVE",1);assert(g.damage==6);
- player(&g,&c,"PULL LEFT SHIELD",3);assert(g.damage==5);
- player(&g,&c,"PULL RIGHT SWORD",3);assert(g.damage==4);
- player(&g,&c,"MOVE",1);assert(g.damage==10);
- player(&g,&c,"MOVE",1);
+ player(&g,&c,"PULL LEFT SHIELD",3);visibility6=g;assert(g.damage==5);
+ player(&g,&c,"PULL RIGHT SWORD",3);visibility7=g;assert(g.damage==4);
+ player(&g,&c,"MOVE",1);visibility8=g;assert(g.damage==10);
+ player(&g,&c,"MOVE",1);visibility9=g;
  assert(g.level==2&&g.row==9&&g.col==22&&g.dir==0);
  assert(g.power==6048&&g.damage==16&&g.hand==0x0ea3&&g.rightHand==0x0e87&&g.torch==0x0e95);
  assert(g.creatures[18][12]&&g.creatures[18][13]==5&&g.creatures[18][15]==9&&g.creatures[18][16]==22);
@@ -83,6 +95,10 @@ int main(void){Game g,reference;GameTiming t;CreatureScheduler q;DagSchedulerSta
  assert(g.seed[0]==0xb4&&g.seed[1]==0xf2&&g.seed[2]==0xa7);
  assert(q.combatPending[18]&&!q.attackDue[18]&&q.countdown[18]==13&&
         q.audioCount==1&&q.audio[0]==AUDIO_GRAWL);
+ /* CCB 18 first enters the source perspective at command 6, is occluded on
+  * command 7, then returns at command 8 and the same-cell attack boundary. */
+ assert(ccb18_pixels(&visibility6)==4&&ccb18_pixels(&visibility7)==0);
+ assert(ccb18_pixels(&visibility8)==2&&ccb18_pixels(&visibility9)==6);
  assert(command(&g,"ATTACK RIGHT",&combat)==GAME_OK);
  assert(g.seed[0]==0x8e&&g.seed[1]==0xb4&&g.seed[2]==0xf2);
  assert(g.damage==252&&g.power==6136&&!g.creatures[18][12]);

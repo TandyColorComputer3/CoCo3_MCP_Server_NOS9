@@ -7,7 +7,7 @@ app=Path(__file__).resolve().parent
 main=(app/'src/gameplay/main.c').read_text()
 combat=main.index('result=game_command_combat')
 heartbeat=main.index('native_heartbeat_rate',combat)
-optional=main.index('audio_present_optional',heartbeat)
+optional=main.index('audio_queue_admit',heartbeat)
 assert combat < heartbeat < optional
 with tempfile.TemporaryDirectory(prefix='dod-combat-') as tmp:
  out=Path(tmp);generate(out)

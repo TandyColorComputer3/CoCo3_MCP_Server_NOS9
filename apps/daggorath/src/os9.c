@@ -84,6 +84,47 @@ Byte os_intercept(Byte *signal)
     return error;
 }
 
+/* Installed EOU F$Icpt passes the registered data pointer in U. Keep the
+ * existing cancellation byte at offset zero; completion signal 128 only
+ * increments offset one. No C, Y-data access, pipe I/O or graphics in the
+ * signal handler. The producer never clears the notice counter. */
+asm void audio_signal_handler(void)
+{
+    asm {
+        cmpb #128
+        beq @notice
+        cmpb #2
+        beq @cancel
+        cmpb #3
+        bne @done
+@cancel
+        stb ,u
+        bra @done
+@notice
+        inc 1,u
+@done
+        rti
+    }
+}
+
+Byte os_intercept_audio(Byte *cancelAndNotice)
+{
+    Byte error;
+    void (*handler)(void) = audio_signal_handler;
+    asm {
+        ldx :handler
+        pshs u
+        ldu :cancelAndNotice
+        os9 $09
+        bcs @failed
+        clrb
+@failed
+        puls u
+        stb :error
+    }
+    return error;
+}
+
 Byte os_sleep(Word ticks)
 {
     Byte error;

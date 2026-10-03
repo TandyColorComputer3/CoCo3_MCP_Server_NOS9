@@ -1,0 +1,122 @@
+{
+  "schema": "daggorath-m3-av-observation-v1",
+  "artifact": {
+    "doddemo_sha256": "7cac0a13bd15b761a00fd9999f765c8e1ab0f5a3a79bf3031f81f7a05515bc7e",
+    "dodaudio_sha256": "f6a87a81b692ed92a44be1f9431895e3259c173bf96dace006092514c89d5ca5"
+  },
+  "method": "private read-only MAME Lua: native PB1 toggle at PC 0x2293; resident shownGeneration low-byte write at PC 0xA1D6 after heart PutBlk; initial generation 1 is presented before the first counted PB1 edge; final teardown PB1 toggle excluded",
+  "gate_ms": 33.34,
+  "runs": [
+    {
+      "condition": "audio_service_available_and_not_preloaded",
+      "native_edges": 92,
+      "presented_generations": 93,
+      "matched_edges": 92,
+      "unmatched_native_edges": [],
+      "median_ms": 12.651,
+      "p95_ms": 20.818,
+      "max_ms": 420.265,
+      "over_33_34_ms": [
+        {
+          "generation": 2,
+          "ms": 420.265,
+          "foreground_pc_samples": null
+        },
+        {
+          "generation": 5,
+          "ms": 126.482,
+          "foreground_pc_samples": null
+        },
+        {
+          "generation": 69,
+          "ms": 58.853,
+          "foreground_pc_samples": null
+        },
+        {
+          "generation": 70,
+          "ms": 260.727,
+          "foreground_pc_samples": null
+        }
+      ],
+      "queue_at_last_presentation": {
+        "state": 1,
+        "credit": 1,
+        "count": 0,
+        "high_water": 3,
+        "rejected_groups": 0,
+        "transport_failures": 0
+      }
+    },
+    {
+      "condition": "audio_service_absent",
+      "native_edges": 89,
+      "presented_generations": 90,
+      "matched_edges": 89,
+      "unmatched_native_edges": [],
+      "median_ms": 12.357,
+      "p95_ms": 91.579,
+      "max_ms": 425.928,
+      "over_33_34_ms": [
+        {
+          "generation": 2,
+          "ms": 425.928,
+          "foreground_pc_samples": {
+            "kernel_or_system": 12,
+            "mapped_6000_7fff": 9,
+            "resident": 3
+          }
+        },
+        {
+          "generation": 5,
+          "ms": 114.194,
+          "foreground_pc_samples": {
+            "kernel_or_system": 2,
+            "mapped_6000_7fff": 2,
+            "resident": 1
+          }
+        },
+        {
+          "generation": 16,
+          "ms": 229.39,
+          "foreground_pc_samples": {
+            "kernel_or_system": 6,
+            "mapped_6000_7fff": 4,
+            "resident": 2
+          }
+        },
+        {
+          "generation": 51,
+          "ms": 146.726,
+          "foreground_pc_samples": {
+            "kernel_or_system": 4,
+            "mapped_6000_7fff": 3
+          }
+        },
+        {
+          "generation": 59,
+          "ms": 91.579,
+          "foreground_pc_samples": {
+            "mapped_6000_7fff": 2,
+            "kernel_or_system": 2
+          }
+        },
+        {
+          "generation": 69,
+          "ms": 80.661,
+          "foreground_pc_samples": {
+            "kernel_or_system": 2,
+            "mapped_6000_7fff": 1
+          }
+        }
+      ],
+      "queue_at_last_presentation": {
+        "state": 2,
+        "credit": 0,
+        "count": 0,
+        "high_water": 0,
+        "rejected_groups": 0,
+        "transport_failures": 1
+      }
+    }
+  ]
+}

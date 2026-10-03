@@ -9,6 +9,7 @@ int gameplay_main(int argc,char **argv);
 static int mode,opened,closed,enabled,removed,presented,readcount,clockcount;
 static int schedulerOpened,schedulerClosed,schedulerCalls,schedulerLive;
 Byte os_intercept(Byte *s){*s=0;return 0;}
+Byte os_intercept_audio(Byte *s){s[0]=s[1]=0;return 0;}
 Byte os_signal_value(Byte *s){(void)s;return mode==1&&readcount>=2?3:0;}
 Byte os_clock(Word *ticks,Byte validate){(void)validate;*ticks=clockcount++;return 0;}
 Byte os_sleep(Word n){assert(n==1);return 0;}
