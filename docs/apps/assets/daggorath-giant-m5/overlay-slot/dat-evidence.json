@@ -1,0 +1,199 @@
+{
+  "method": "Private target F$ID/F$GPrDsc snapshots, printed only after cleanup. Separate production run byte-validates resident instruction addresses.",
+  "pid": 3,
+  "primary_module": "8000",
+  "free_marker": "333E",
+  "before": {
+    "entry": [
+      "000C",
+      "001B",
+      "333E",
+      "333E",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "prepare": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "map": [
+      "000C",
+      "001B",
+      "001C",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "before_link": [
+      "000C",
+      "001B",
+      "001C",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "failed_link_207": [
+      "000C",
+      "001B",
+      "001C",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "returned_pack_pointer": "4000"
+  },
+  "after": {
+    "entry": [
+      "000C",
+      "001B",
+      "333E",
+      "333E",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "prepare": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "pack_loaded": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "map": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "before_link": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "scheduler_linked": [
+      "000C",
+      "001B",
+      "001E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "scheduler_returned": [
+      "000C",
+      "001B",
+      "001E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "scheduler_unlinked": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "command_linked": [
+      "000C",
+      "001B",
+      "001D",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "command_returned": [
+      "000C",
+      "001B",
+      "001D",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "command_unlinked": [
+      "000C",
+      "001B",
+      "333E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "resident_callback_entry": [
+      "000C",
+      "001B",
+      "001E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "resident_callback_return": [
+      "000C",
+      "001B",
+      "001E",
+      "0019",
+      "0007",
+      "000D",
+      "0010",
+      "001A"
+    ],
+    "final_status": 0
+  },
+  "scheduler": {
+    "header": "4000",
+    "entry": "4016",
+    "entry_bytes": "81012617e102261334103460ae643410",
+    "crc": "DA8721"
+  },
+  "warning": "Physical block numbers apply to these observed runs; no runtime addresses are hard-coded into production."
+}

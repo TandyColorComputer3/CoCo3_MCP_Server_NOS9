@@ -1,8 +1,13 @@
 /* The opening is one public command. The restored EOU shell has no /dhb,
  * so load the existing driver/descriptor pack before opening that path.
- * Installed EOU accepts the concatenated pack through F$Load; loading its
- * members separately left I$Open failing with E$RAMFull (237).
- * See level1/cmds/load.asm and level2/modules/kernel/funload.asm. */
+ * Keep the concatenated pack: loading its members separately previously
+ * left installed EOU I$Open failing with E$RAMFull (237).
+ * Acquire a nonmapping reference, not a caller DAT slot. IOMan's FNMLoad
+ * loads the same pack but omits FLoad's F$ELink (nitros9-reference
+ * f470fa52, level1/modules/ioman.asm:1591-1657). IAttach links the device
+ * into the system process; the application never executes its driver.
+ * The owned reference survives until native I$Close, then F$UnLoad below.
+ * A retained F$Load mapping exhausted the live M5 gameplay overlay slot. */
 #include <cmoc.h>
 #include "opening-heartbeat.h"
 
@@ -34,7 +39,7 @@ Byte opening_heartbeat_modules_open(void)
     asm {
         pshs y,u
         leax :path
-        os9 $01
+        os9 $22
         puls u,y
         bcs @failed
         sta :type
