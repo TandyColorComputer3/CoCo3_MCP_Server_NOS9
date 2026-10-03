@@ -23,12 +23,22 @@ targets={
              'gameplay/opening-map.c','gameplay/opening-heartbeat.c',
              'gameplay/opening-phase-module.asm',
              'presentation.c','window-path.c','phase-chain.c','os9.c','original/logical.c',
-             'audio/native_heartbeat.c','audio/ipc.c'],
+             'audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/queue.c','audio/event.c',
+             'gameplay/overlay-host-shim.asm','gameplay/overlay-callback-gateway.asm',
+             'gameplay/scheduler-host-shim.asm','gameplay/scheduler-callback-gateway.asm'],
 }
+# The public continuation uses the same host optimization/ABI as dodgame.
+hosts=[]
+for source in ('overlay-host','scheduler-host'):
+ obj=out/(source+'-opt.o')
+ subprocess.run(['cmoc','--os9','-O2','--compile','-DDOD_COMMAND_OVERLAY',
+                 '--intdir='+str(out)]+include+['-o',str(obj),
+                 str(app/'src/gameplay'/(source+'.c'))],cwd=out,check=True)
+ hosts.append(str(obj))
 records={}
 for name,sources in targets.items():
  command=common+(['-DDOD_COMMAND_OVERLAY','-DDOD_OPENING_PHASE'] if name=='dodintro' else [])
- command+=['-o',name]+[str(app/'src'/s) for s in sources]
+ command+=['-o',name]+[str(app/'src'/s) for s in sources]+(hosts if name=='dodintro' else [])
  result=subprocess.run(command,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
  (out/(name+'.build.log')).write_text(result.stdout)
  if result.returncode:raise RuntimeError(f'{name}: {result.stdout}')

@@ -30,6 +30,7 @@ static Byte phaseRefreshNeeded,audioBitValid,observedAudioBit;
 static AudioQueue combatAudio;
 #endif
 typedef struct { Byte *shownPhase; } RenderProgressContext;
+static RenderProgressContext overlayRenderContext;
 static Byte render_heart_progress(Game *g,Byte *partial,void *context);
 static Byte creature_heart_progress(void *context);
 /* dodsched is mandatory normal foreground infrastructure. Its state remains
@@ -122,6 +123,7 @@ Byte scheduler_progress_resident(void *context){
  return render_heart_progress(&game,frame,p);
 }
 static Byte creature_heart_progress(void *context){return scheduler_progress_resident(context);}
+Byte gameplay_overlay_progress(void){return creature_heart_progress(&overlayRenderContext);}
 /* PULL/STOW/GET/DROP use original token rules; other commands retain M1 adapters.
  * EXIT remains an isolated OS-9-only lifecycle command. */
 int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfaint,oldlight,shownPhase=255,framePhase,view=GAME_VIEW_DUNGEON,nextView,drained,inputEmpty,heartPatterns[28],creatureEventCount;Word previous,videoTicks;unsigned long frameGeneration;char input[32];RenderProgressContext renderContext;GameCombat combat;const char *message="TURN LEFT RIGHT AROUND  MOVE";
@@ -133,6 +135,7 @@ int main(int argc,char **argv){Byte e=0,r,key,n=0,dirty=1,result,oldrate,oldfain
  /* Production retains the original post-maze time perturbation. seed0 is
   * an explicit deterministic test mode; neither changes LVLTAB maze seeds. */
  game_init(&game,argc==2?0:previous/60);input[0]=0;renderContext.shownPhase=&shownPhase;
+ overlayRenderContext.shownPhase=&shownPhase;
  schedulerContext.abiVersion=DOD_SCHEDULER_ABI_V1;schedulerContext.contextSize=sizeof(schedulerContext);
  schedulerContext.game=&game;schedulerContext.timing=&gameTiming;schedulerContext.creatures=&creatureScheduler;
  schedulerContext.state=&schedulerState;schedulerContext.services=&schedulerServices;

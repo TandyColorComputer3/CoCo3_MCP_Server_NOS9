@@ -1,0 +1,14 @@
+{
+  "fps": 59.92274803714184,
+  "frames": 8538,
+  "map_first_frame": 4367,
+  "map_last_frame": 5044,
+  "term_return_frame": 5045,
+  "map_first_seconds": 72.87716506748336,
+  "map_last_seconds": 84.17504479056241,
+  "term_return_seconds": 84.19173294377228,
+  "error_evidence_frame": 5393,
+  "error_evidence_seconds": 89.99921026080553,
+  "time_origin": "AVI recording start, before public launch; frame indices zero-based",
+  "selection": "Map/Term raster detection restricted to after 60 seconds; error frame separately selected after terminal output completed."
+}

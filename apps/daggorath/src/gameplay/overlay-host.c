@@ -18,6 +18,7 @@ Byte overlay_object_name_gateway(void *opaque,Game *game,Word token,Byte *name){
 void overlay_render_status_gateway(void *opaque,Game *game,Byte *frame,Byte phase){
  (void)opaque;(void)game;(void)frame;(void)phase;
 }
+Byte overlay_progress_gateway(void *opaque){(void)opaque;return 0;}
 #endif
 
 typedef struct { Word header,entry;Byte retained,disabled; } OverlayLink;
@@ -43,6 +44,12 @@ Byte overlay_object_name_resident(void *opaque,Game *game,Word token,Byte *name)
 void overlay_render_status_resident(void *opaque,Game *game,Byte *frame,Byte phase){
  (void)opaque;game_render_status(game,frame,phase);
 }
+#ifdef _CMOC_VERSION_
+extern Byte gameplay_overlay_progress(void);
+Byte overlay_progress_resident(void *opaque){(void)opaque;return gameplay_overlay_progress();}
+#else
+Byte overlay_progress_resident(void *opaque){(void)opaque;return 0;}
+#endif
 
 Byte game_overlay_open(void){Byte e;
  if(linkState.retained||linkState.disabled)return linkState.disabled?221:0;
@@ -92,5 +99,6 @@ Byte game_overlay_examine(Game *game,Byte *frame,const char *input,const char *m
  context.abiVersion=DOD_OVERLAY_ABI_V1;context.contextSize=sizeof(context);
  context.game=game;context.services=&services;context.frame=frame;
  context.input=input;context.message=message;context.operation=DOD_OVERLAY_EXAMINE;
+ context.progress=overlay_progress_gateway;context.progressContext=&callbackContext;
  return invoke(&context,0);
 }

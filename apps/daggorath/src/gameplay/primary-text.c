@@ -20,6 +20,13 @@ void primary_character(DagPrimaryText *text,Byte code)
         memset(text->cells+96,0,32);text->cursor=96;
     }
 }
+/* ASCII adaptation to SWCHAR codes; cursor/scroll remain TXTXXX-owned. */
+void primary_write(DagPrimaryText *text,const char *ascii)
+{
+    Byte c;
+    while((c=*ascii++))primary_character(text,c>='A'&&c<='Z'?c-'A'+1:
+        c=='!'?27:c=='.'?30:c=='\r'?31:0);
+}
 void primary_prompt(DagPrimaryText *text)
 {
     /* MISC.ASM:PROMPX uses CR, DOT, BAR, BS. BAR is an underline at the
@@ -29,13 +36,18 @@ void primary_prompt(DagPrimaryText *text)
 }
 static Byte five(const Byte *p,Word bit)
 {Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
-void primary_render(const DagPrimaryText *text,Byte *frame)
+Byte primary_render_progress(const DagPrimaryText *text,Byte *frame,
+                            Byte (*progress)(void *),void *context)
 {
-    Byte row,col,y,code;
+    Byte row,col,y,code,e;
     memset(frame+160*32,0,32*32);
     for(row=0;row<4;row++)for(col=0;col<32;col++){
         code=text->cells[(Word)row*32+col];
-        if(code>=31)continue;
-        for(y=0;y<7;y++)frame[(Word)(160+row*8+y)*32+col]=five(font+(Word)code*5,5+y*5)<<2;
+        if(code<31)for(y=0;y<7;y++)
+            frame[(Word)(160+row*8+y)*32+col]=five(font+(Word)code*5,5+y*5)<<2;
+        if(progress&&!(col&3)){e=progress(context);if(e)return e;}
     }
+    return 0;
 }
+void primary_render(const DagPrimaryText *text,Byte *frame)
+{(void)primary_render_progress(text,frame,0,0);}

@@ -135,12 +135,14 @@ static Byte command(Game *g,const char *s,GameCombat *combat,const DagOverlaySer
  g->lit=g->torch!=0;return result;
 }
 
-typedef struct { Byte *frame;Word cursor;Byte inverse,pair;const Byte *font; } ExamineText;
+typedef struct { Byte *frame;Word cursor;Byte inverse,pair;const Byte *font;
+ Byte (*progress)(void *);void *progressContext;Byte progressError; } ExamineText;
 static Byte five(const Byte *p,Word bit){Byte n=0,i;for(i=0;i<5;i++,bit++)n=(n<<1)|((p[bit/8]>>(7-bit%8))&1);return n;}
 static void examine_char(ExamineText *t,Byte c){Byte y;Word at,i;
  if(c==31)t->cursor=(t->cursor+32)&0xffe0;
  else {at=(t->cursor/32)*256+(t->cursor&31);for(y=0;y<7;y++)t->frame[at+(Word)y*32]=(five(t->font+c*5,5+y*5)<<2)^t->inverse;++t->cursor;}
  if(t->cursor>=608){for(i=0;i<18*256;i++)t->frame[i]=t->frame[i+256];for(i=18*256;i<19*256;i++)t->frame[i]=t->inverse;t->cursor=576;}
+ if(!t->progressError&&t->progress)t->progressError=t->progress(t->progressContext);
 }
 static void examine_string(ExamineText *t,const char *s){Byte c;while(*s){c=*s++;examine_char(t,c=='^'?31:c=='!'?27:c==' '?0:c-'A'+1);}}
 static void examine_object(Game *g,ExamineText *t,Word p,const DagOverlayServices *services){Byte name[32],n,i;
@@ -148,14 +150,17 @@ static void examine_object(Game *g,ExamineText *t,Word p,const DagOverlayService
 }
 static void text(Byte *frame,const char *s,Byte row,const Byte *font){Byte col=0,c,y;while(*s&&col<32){c=*s++;c=c>='A'&&c<='Z'?c-'A'+1:c=='?'?29:0;for(y=0;y<7;y++)frame[((Word)row+y)*32+col]=five(font+c*5,5+y*5)<<2;++col;}}
 static void input_line(Byte *frame,const char *input,const Byte *font){Byte n=0,y;text(frame,input,184,font);while(input[n]&&n<31)n++;if(n<32)for(y=0;y<7;y++)frame[(184+(Word)y)*32+n]=five(font+28*5,5+y*5)<<2;}
-static void examine(Game *g,Byte *frame,const char *input,const char *message,const DagOverlayServices *services){ExamineText t;Byte i;Word p;
+static Byte examine(Game *g,Byte *frame,const char *input,const char *message,const DagOverlayServices *services,
+ Byte (*progress)(void *),void *progressContext){ExamineText t;Byte i;Word p;
  for(p=0;p<FRAME_BYTES;p++)frame[p]=0;t.frame=frame;t.cursor=10;t.inverse=0;t.pair=0;t.font=font;
+ t.progress=progress;t.progressContext=progressContext;t.progressError=0;
  examine_string(&t,"IN THIS ROOM^");
  for(i=0;i<32;i++)if(g->creatures[i][12]&&g->creatures[i][15]==g->row&&g->creatures[i][16]==g->col){t.cursor+=11;examine_string(&t,"!CREATURE!^");break;}
  for(i=0;i<g->count;i++)if(on_floor(g->objects[i],g->row,g->col))examine_object(g,&t,OBASE+(Word)i*14,services);
  if(t.pair){examine_char(&t,31);t.pair=0;}for(i=0;i<32;i++)examine_char(&t,27);t.cursor+=12;examine_string(&t,"BACKPACK^");
  for(p=g->bag;p;p=getword(ocb(g,p))){if(p==g->torch)t.inverse=255;examine_object(g,&t,p,services);}
  services->render_status(services->opaque,g,frame,0);text(frame,message,168,font);input_line(frame,input,font);
+ return t.progressError;
 }
 
 /* Called only by the module entry shim.  An ABI failure occurs before command
@@ -163,6 +168,7 @@ static void examine(Game *g,Byte *frame,const char *input,const char *message,co
 Byte dod_overlay_execute(DagOverlayContextV1 *ctx){
  if(!ctx||ctx->abiVersion!=DOD_OVERLAY_ABI_V1||ctx->contextSize!=sizeof(*ctx)||!ctx->game||!ctx->services||ctx->services->version!=DOD_OVERLAY_ABI_V1||ctx->services->size!=sizeof(DagOverlayServices)||!ctx->services->opaque||!ctx->services->health||!ctx->services->object_name||!ctx->services->render_status)return 187;
  if(ctx->operation==DOD_OVERLAY_COMMAND){ctx->result=command(ctx->game,ctx->command,ctx->combat,ctx->services);ctx->view=display_command(ctx->command);ctx->outputMessage=message_for(ctx->command,ctx->result);return 0;}
- if(ctx->operation==DOD_OVERLAY_EXAMINE){examine(ctx->game,ctx->frame,ctx->input,ctx->message,ctx->services);return 0;}
+ if(ctx->operation==DOD_OVERLAY_EXAMINE)return examine(ctx->game,ctx->frame,ctx->input,ctx->message,
+   ctx->services,ctx->progress,ctx->progressContext);
  return 187;
 }

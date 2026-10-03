@@ -37,6 +37,10 @@ typedef struct {
  Byte result;
  Byte view;
  const char *outputMessage;
+ /* Optional resident-context-safe service point for long mapped rendering.
+  * The host supplies a gateway, never a direct stack-checked CMOC target. */
+ Byte (*progress)(void *);
+ void *progressContext;
 } DagOverlayContextV1;
 
 /* These host calls retain no overlay mapping between invocations. */

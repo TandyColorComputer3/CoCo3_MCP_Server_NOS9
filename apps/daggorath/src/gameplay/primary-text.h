@@ -6,6 +6,9 @@
 typedef struct { Byte cells[128];Word cursor; } DagPrimaryText;
 void primary_clear(DagPrimaryText *text);
 void primary_character(DagPrimaryText *text,Byte code);
+void primary_write(DagPrimaryText *text,const char *ascii);
 void primary_prompt(DagPrimaryText *text);
 void primary_render(const DagPrimaryText *text,Byte *frame);
+Byte primary_render_progress(const DagPrimaryText *text,Byte *frame,
+                            Byte (*progress)(void *),void *context);
 #endif

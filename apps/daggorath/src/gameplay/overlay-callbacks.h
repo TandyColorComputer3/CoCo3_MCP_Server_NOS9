@@ -10,10 +10,12 @@ void overlay_callback_init(DagOverlayCallbackContext *);
 void overlay_health_gateway(void *,Game *);
 Byte overlay_object_name_gateway(void *,Game *,Word,Byte *);
 void overlay_render_status_gateway(void *,Game *,Byte *,Byte);
+Byte overlay_progress_gateway(void *);
 
 /* Gateway targets retain normal resident CMOC stack checks. */
 void overlay_health_resident(void *,Game *);
 Byte overlay_object_name_resident(void *,Game *,Word,Byte *);
 void overlay_render_status_resident(void *,Game *,Byte *,Byte);
+Byte overlay_progress_resident(void *);
 
 #endif

@@ -31,10 +31,15 @@ static Byte frame[FRAME_BYTES],signalBytes[2];
 static NativeHeartbeat heartbeat={255,0};
 static NativeHeartbeatState heartbeatState;
 static unsigned long shownGeneration;
-#if defined(_CMOC_VERSION_) && !defined(DOD_OPENING_PHASE)
+#ifdef _CMOC_VERSION_
 static AudioQueue audioQueue;
 #endif
 static Byte heartbeatActive;
+static Byte schedulerPresentationError;
+#ifdef DOD_OPENING_PHASE
+static DagPrimaryText primary;
+static Byte primaryView=GAME_VIEW_DUNGEON;
+#endif
 
 /* doddemo uses the same native-edge reconciliation as dodgame.  Rendering
  * and strip expansion are foreground work, so a progress point may replace
@@ -43,8 +48,9 @@ static Byte heartbeatActive;
 static Byte refresh_heart(void);
 static Byte render_heart_progress(Game *g,Byte *partial,void *context);
 static Byte flip_heart_progress(void *context);
+static Byte present_scene(void);
+static Byte render_scheduler_dungeon(void);
 
-#ifndef DOD_OPENING_PHASE
 Byte scheduler_task_resident(void *opaque,Game *g,GameTiming *t,CreatureScheduler *q,
                            Byte task,Byte ccb,Byte *dirty){
  (void)opaque;(void)t;(void)q;(void)ccb;*dirty=0;
@@ -53,7 +59,16 @@ Byte scheduler_task_resident(void *opaque,Game *g,GameTiming *t,CreatureSchedule
 }
 Word scheduler_present_resident(void *opaque,Game *g,Byte mode){
  (void)opaque;(void)g;(void)mode;
- /* The portable scheduler intentionally does not charge CoWin wall time. */
+ /* CRETUR:CWLK90 marks NEWLUK; the subsequent source LUKNEW/PUPDAT task
+  * presents that authoritative creature position.  Rendering stays resident
+  * while dodsched owns the eighth DAT block, so this never nests dodcmd.
+  * CoWin wall time still contributes no portable logical jiffies. */
+#ifdef DOD_OPENING_PHASE
+ if(primaryView==GAME_VIEW_DUNGEON&&!schedulerPresentationError)
+#else
+ if(!schedulerPresentationError)
+#endif
+  schedulerPresentationError=render_scheduler_dungeon();
  return 0;
 }
 /* DOD_SCHED_PLAYER_WAIT advances the recovered 81 CLOCK jiffies for each
@@ -61,7 +76,6 @@ Word scheduler_present_resident(void *opaque,Game *g,Byte mode){
  * VIRQ-owned generation through the same resident gateway on each scheduler
  * jiffy once the native heart is active. */
 Byte scheduler_progress_resident(void *opaque){(void)opaque;return refresh_heart();}
-#endif
 static Byte refresh_heart(void){
  Byte e;if(!heartbeatActive)return 0;
  e=native_heartbeat_snapshot(&heartbeat,&heartbeatState);
@@ -71,7 +85,7 @@ static Byte refresh_heart(void){
   e=screen_present_heart(frame);if(e)return e;
   shownGeneration=heartbeatState.edgeGeneration;
  }
-#if defined(_CMOC_VERSION_) && !defined(DOD_OPENING_PHASE)
+#ifdef _CMOC_VERSION_
  audio_queue_progress(&audioQueue,os_signal_value(signalBytes+1));
 #endif
  return 0;
@@ -80,8 +94,8 @@ static Byte render_heart_progress(Game *g,Byte *partial,void *context){
  (void)g;(void)partial;(void)context;
  return refresh_heart();
 }
-#ifndef DOD_OPENING_PHASE
 static Byte flip_heart_progress(void *context){(void)context;return refresh_heart();}
+Byte gameplay_overlay_progress(void){return refresh_heart();}
 /* A completed logical scene has phase zero in its template.  Before a full
  * flip, overwrite its status cells from the authoritative driver snapshot;
  * then service new generations between the bounded strips and once after the
@@ -98,7 +112,13 @@ static Byte present_scene(void){
  if(shownGeneration<generation)shownGeneration=generation;
  return refresh_heart();
 }
+static Byte render_scheduler_dungeon(void){Byte e;
+ e=game_render_with_progress(&game,frame,"","",render_heart_progress,0);if(e)return e;
+#ifdef DOD_OPENING_PHASE
+ e=primary_render_progress(&primary,frame,flip_heart_progress,0);if(e)return e;
 #endif
+ return present_scene();
+}
 /* Source logical waits are already represented by DOD_SCHED_PLAYER_WAIT. This
  * short visual dwell is only to make each completed state observable; it never
  * advances Game, scheduler or RNG state. */
@@ -107,15 +127,20 @@ static Byte dwell(Word ticks){Byte e;
   e=refresh_heart();if(e)return e;}
  return 0;
 }
-#ifndef DOD_OPENING_PHASE
 static Byte render_dungeon(const char *message){
  Byte e=game_render_with_progress(&game,frame,"",message,render_heart_progress,0);
  if(e)return e;
+#ifdef DOD_OPENING_PHASE
+ e=primary_render_progress(&primary,frame,flip_heart_progress,0);if(e)return e;
+#endif
  return present_scene();
 }
 static Byte render_examine(const char *message){
  Byte e=game_overlay_examine(&game,frame,"",message);
  if(e)return e;
+#ifdef DOD_OPENING_PHASE
+ e=primary_render_progress(&primary,frame,flip_heart_progress,0);if(e)return e;
+#endif
  return present_scene();
 }
 static void present_audio(const Byte *events,Byte count){
@@ -127,13 +152,25 @@ static void present_audio(const Byte *events,Byte count){
 #endif
 }
 static Byte scheduler(Byte operation,Word jiffies){
+ Byte e;
  schedulerContext.operation=operation;schedulerContext.logicalJiffies=jiffies;
- return game_scheduler_call(&schedulerContext);
+ e=game_scheduler_call(&schedulerContext);if(e)return e;
+ e=schedulerPresentationError;schedulerPresentationError=0;return e;
 }
 static Byte command(const char *text,Byte words){
  GameCombat combat;Byte e,result,view;const char *message;Byte i;
+#ifdef DOD_OPENING_PHASE
+ /* HUMAN:PLAY40/HMAN30 echoes words, token space, then erases the cursor
+  * before dispatch. PROMPX appends CR/dot/cursor only after command return. */
+ primary_write(&primary,text);primary_character(&primary,0);primary_character(&primary,0);
+#endif
  e=game_overlay_command(&game,text,&combat,&result,&view,&message);if(e)return e;
  if(result!=GAME_OK)return ERR_ARGUMENT;
+#ifdef DOD_OPENING_PHASE
+ /* DSPMOD is command state.  A source LUKNEW serviced during the following
+  * PLAYER waits must see the newly selected view, not the previous command's. */
+ if(view)primaryView=view;
+#endif
  /* TOKEN.ASM:HUMAN waits once per completed word before the next source
   * scheduler boundary. This is the real portable AUTTAB contract. */
  for(i=0;i<words;i++){e=scheduler(DOD_SCHED_PLAYER_WAIT,0);if(e)return e;}
@@ -141,9 +178,17 @@ static Byte command(const char *text,Byte words){
  if(creatures.audioCount){present_audio(creatures.audio,creatures.audioCount);creatures.audioCount=0;}
  if(combat.eventCount)present_audio(combat.events,combat.eventCount);
  e=native_heartbeat_rate(&heartbeat,game.rate);if(e)return e;
+#ifdef DOD_OPENING_PHASE
+ if(combat.hit)primary_write(&primary,"!!!"); /* PATTK:PATT24 */
+ primary_prompt(&primary);
+ e=primaryView==GAME_VIEW_EXAMINE?render_examine(""):render_dungeon("");
+ return e;
+#else
  e=view==GAME_VIEW_EXAMINE?render_examine(message):render_dungeon(message);if(e)return e;
  return dwell(36);
+#endif
 }
+#ifndef DOD_OPENING_PHASE
 static Byte attract_text(const char *a,const char *b,const char *c,const char *d,Word ticks){
  Byte e;game_render_attract(frame,a,b,c,d);e=screen_present(frame);if(e)return e;return dwell(ticks);
 }
@@ -153,8 +198,11 @@ static Byte attract_text(const char *a,const char *b,const char *c,const char *d
  * without closing its graphics path. F$Chain rebuilds all process data, so
  * accept only a scalar inherited path number and remap the owned GP buffer. */
 int main(int argc,char **argv){
- static DagPrimaryText primary;
- Word path=0;const char *p;Byte e=0,r,heartPatterns[28];
+ static const char *commands[]={
+  "EXAMINE","PULL RIGHT TORCH","USE RIGHT","LOOK","MOVE",
+  "PULL LEFT SHIELD","PULL RIGHT SWORD","MOVE","MOVE","ATTACK RIGHT"};
+ static const Byte words[]={1,3,2,1,1,3,3,1,1,2};
+ Word path=0;const char *p;Byte e=0,r,i,heartPatterns[28];
  if(argc!=2||!argv[1]||!*argv[1])return ERR_ARGUMENT;
  for(p=argv[1];*p;p++){
   if(*p<'0'||*p>'9')return ERR_ARGUMENT;
@@ -178,25 +226,52 @@ int main(int argc,char **argv){
   * six-scanline-per-cell source map; scheduler is asleep for two WAITX. */
  opening_render_map(&game,frame);e=screen_present(frame);if(e)goto opening_done;
  e=dwell(162);if(e)goto opening_done;
+ /* Public continuation uses the same retained modules and resident-context
+  * gateways as doddemo. Complete startup before the native heartbeat claim;
+  * no mapped command module is held while dodsched executes. */
+ schedulerServices.version=DOD_SCHEDULER_ABI_V1;schedulerServices.size=sizeof(schedulerServices);
+ scheduler_callback_init(&schedulerCallbacks,0);schedulerServices.opaque=&schedulerCallbacks;
+ schedulerServices.task=scheduler_task_gateway;schedulerServices.present=scheduler_present_gateway;
+ schedulerContext.abiVersion=DOD_SCHEDULER_ABI_V1;schedulerContext.contextSize=sizeof(schedulerContext);
+ schedulerContext.game=&game;schedulerContext.timing=&timing;schedulerContext.creatures=&creatures;
+ schedulerContext.state=&schedulerState;schedulerContext.services=&schedulerServices;
+ e=game_overlay_open();if(e)goto opening_done;
+ e=game_scheduler_open();if(e)goto opening_done;
+ e=scheduler(DOD_SCHED_INIT,0);if(e)goto opening_done;
+ e=scheduler(DOD_SCHED_BOUNDARY,0);if(e)goto opening_done;
+#ifdef _CMOC_VERSION_
+ audio_queue_open(&audioQueue,"/d1/dodaudio","ssc-mame-fast");
+#endif
  /* GAME40's two SYNCs expose a genuinely cleared frame before INIVUX. */
  memset(frame,0,FRAME_BYTES);e=screen_present(frame);if(e)goto opening_done;
  e=dwell(2);if(e)goto opening_done;
  primary_clear(&primary);primary_prompt(&primary);
  e=game_render_with_progress(&game,frame,"","",render_heart_progress,0);
  if(e)goto opening_done;
- primary_render(&primary,frame);
+ e=primary_render_progress(&primary,frame,flip_heart_progress,0);
+ if(e)goto opening_done;
  e=screen_present(frame);if(e)goto opening_done;
  e=native_heartbeat_open(&heartbeat);if(e)goto opening_done;
  e=native_heartbeat_rate(&heartbeat,game.rate);if(e)goto opening_done;
  e=native_heartbeat_enable(&heartbeat);if(e)goto opening_done;
  heartbeatActive=1;e=refresh_heart();if(e)goto opening_done;
- /* The M4 acceptance boundary is the first prompt. This hold exposes beat
-  * 012 to the observer but never dispatches AUTTAB 1 (beat 013). */
+ schedulerServices.progress=scheduler_progress_gateway;
+ /* M5 ends at AUTTAB 10. The standalone demo's 36-tick review dwell is not
+  * a source wait and is not added to this public continuation. */
+ for(i=0;i<sizeof(commands)/sizeof(commands[0]);i++){
+  e=command(commands[i],words[i]);if(e)goto opening_done;
+ }
+ /* Preserve the existing bounded review hold at the last completed frame. */
  e=dwell(180);
 opening_done:
+ r=game_scheduler_close();if(!e)e=r;
+ r=game_overlay_close();if(!e)e=r;
  heartbeatActive=0;r=native_heartbeat_close(&heartbeat);if(!e)e=r;
  if(!heartbeat.opened){r=opening_heartbeat_modules_close();if(!e)e=r;}
  r=screen_close();if(!e)e=r;
+#ifdef _CMOC_VERSION_
+ audio_queue_close(&audioQueue);
+#endif
  return e;
 }
 #else
