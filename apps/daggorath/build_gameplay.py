@@ -16,7 +16,7 @@ if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 scheduler_host_cmd=['cmoc','--os9','-O2','--compile','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(out),'-o',str(scheduler_host_object),str(scheduler_host_source)]
 r=subprocess.run(scheduler_host_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'scheduler-host-build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
-sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/overlay-callback-gateway.asm','gameplay/scheduler-host-shim.asm','gameplay/scheduler-callback-gateway.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/queue.c','audio/event.c']]
+sources=[app/'src'/s for s in ['gameplay/main.c','gameplay/game.c','gameplay/maze-random.asm','gameplay/input.c','gameplay/overlay-host-shim.asm','gameplay/overlay-callback-gateway.asm','gameplay/scheduler-host-shim.asm','gameplay/scheduler-callback-gateway.asm','gameplay/module.asm','presentation.c','window-path.c','os9.c','original/logical.c','audio/native_heartbeat.c','audio/ipc.c','audio/client.c','audio/queue.c','audio/event.c']]
 cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-I'+str(out),'-o','dodgame']+list(map(str,sources+[host_object,scheduler_host_object]))
 r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'build.log').write_text(r.stdout)
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)

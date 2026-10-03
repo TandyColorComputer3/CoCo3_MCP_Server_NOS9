@@ -17,10 +17,15 @@ static Byte *ocb(Game *g,Word p){return g->objects[(p-OBASE)/14];}
 #ifndef DOD_COMMAND_OVERLAY
 static Byte valid_ocb(const Game *g,Word p){return p>=OBASE&&p<OBASE+(Word)g->count*14&&((p-OBASE)%14)==0;}
 #endif
+/* Host tests retain this source-equivalent reference. Production 6809 modules
+ * link maze-random.asm, adapted from RANDOM.ASM:RANDOX; both consume exactly
+ * one source RANDOM transition per call and mutate only Game.seed. */
+#ifndef _CMOC_VERSION_
 Byte game_random(Game *g){Byte n,i,b,carry,next;
  for(n=0;n<8;n++){b=g->seed[2]&0xe1;carry=0;for(i=0;i<8;i++){carry^=b&1;b>>=1;}
   for(i=0;i<3;i++){next=g->seed[i]>>7;g->seed[i]=(g->seed[i]<<1)|carry;carry=next;}}
  return g->seed[0];}
+#endif
 static Byte cell(Game *g,int r,int c){return r<0||r>31||c<0||c>31?255:g->maze[(Word)r*32+c];}
 static void random_cell(Game *g,Byte *r,Byte *c){*c=game_random(g)&31;*r=game_random(g)&31;}
 static void maze(Game *g,Byte level,Byte second){Byte r,c,dir,dist,n[9],x,y,kind;int nr,nc;Word left,i;

@@ -19,7 +19,7 @@ common=['cmoc','--os9','-O2','--intermediate','--verbose',
         '--add-os9-stack-space=1536','--intdir='+str(out)]+include
 targets={
  'daggorath':['opening-launch.c','phase-chain.c','opening-module.asm'],
- 'dodintro':['gameplay/demo.c','gameplay/game.c','gameplay/primary-text.c',
+ 'dodintro':['gameplay/demo.c','gameplay/game.c','gameplay/maze-random.asm','gameplay/primary-text.c',
              'gameplay/opening-map.c','gameplay/opening-heartbeat.c',
              'gameplay/opening-phase-module.asm',
              'presentation.c','window-path.c','phase-chain.c','os9.c','original/logical.c',
