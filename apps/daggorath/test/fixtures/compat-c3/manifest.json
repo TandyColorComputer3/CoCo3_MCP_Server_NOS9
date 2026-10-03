@@ -1,0 +1,406 @@
+{
+  "referenceCommit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "segmentCount": 84,
+  "locations": [
+    {
+      "label": "WIZ1",
+      "line": 157
+    },
+    {
+      "label": "WIZ1",
+      "line": 158
+    },
+    {
+      "label": "WIZ1",
+      "line": 159
+    },
+    {
+      "label": "WIZ1",
+      "line": 160
+    },
+    {
+      "label": "WIZ1",
+      "line": 161
+    },
+    {
+      "label": "WIZ1",
+      "line": 162
+    },
+    {
+      "label": "WIZ1",
+      "line": 163
+    },
+    {
+      "label": "WIZ1",
+      "line": 164
+    },
+    {
+      "label": "WIZ1",
+      "line": 165
+    },
+    {
+      "label": "WIZ1",
+      "line": 166
+    },
+    {
+      "label": "WIZ1",
+      "line": 167
+    },
+    {
+      "label": "WIZ1",
+      "line": 168
+    },
+    {
+      "label": "WIZ1",
+      "line": 169
+    },
+    {
+      "label": "WIZ1",
+      "line": 170
+    },
+    {
+      "label": "WIZ1",
+      "line": 171
+    },
+    {
+      "label": "WIZ1",
+      "line": 177
+    },
+    {
+      "label": "WIZ1",
+      "line": 178
+    },
+    {
+      "label": "WIZ1",
+      "line": 179
+    },
+    {
+      "label": "WIZ1",
+      "line": 180
+    },
+    {
+      "label": "WIZ1",
+      "line": 181
+    },
+    {
+      "label": "WIZ1",
+      "line": 182
+    },
+    {
+      "label": "WIZ1",
+      "line": 183
+    },
+    {
+      "label": "WIZ1",
+      "line": 184
+    },
+    {
+      "label": "WIZ1",
+      "line": 185
+    },
+    {
+      "label": "WIZ1",
+      "line": 186
+    },
+    {
+      "label": "WIZ1",
+      "line": 187
+    },
+    {
+      "label": "WIZ1",
+      "line": 188
+    },
+    {
+      "label": "WIZ1",
+      "line": 189
+    },
+    {
+      "label": "WIZ1",
+      "line": 190
+    },
+    {
+      "label": "WIZ1",
+      "line": 191
+    },
+    {
+      "label": "WIZ0",
+      "line": 255
+    },
+    {
+      "label": "WIZ0",
+      "line": 256
+    },
+    {
+      "label": "WIZ0",
+      "line": 257
+    },
+    {
+      "label": "WIZ0",
+      "line": 258
+    },
+    {
+      "label": "WIZ0",
+      "line": 259
+    },
+    {
+      "label": "WIZ0",
+      "line": 260
+    },
+    {
+      "label": "WIZ0",
+      "line": 261
+    },
+    {
+      "label": "WIZ0",
+      "line": 262
+    },
+    {
+      "label": "WIZ0",
+      "line": 263
+    },
+    {
+      "label": "WIZ0",
+      "line": 264
+    },
+    {
+      "label": "WIZ0",
+      "line": 265
+    },
+    {
+      "label": "WIZ0",
+      "line": 266
+    },
+    {
+      "label": "WIZ0",
+      "line": 270
+    },
+    {
+      "label": "WIZ0",
+      "line": 271
+    },
+    {
+      "label": "WIZ0",
+      "line": 272
+    },
+    {
+      "label": "WIZ0",
+      "line": 273
+    },
+    {
+      "label": "WIZ0",
+      "line": 274
+    },
+    {
+      "label": "WIZ0",
+      "line": 275
+    },
+    {
+      "label": "WIZ0",
+      "line": 276
+    },
+    {
+      "label": "WIZ0",
+      "line": 280
+    },
+    {
+      "label": "WIZ0",
+      "line": 281
+    },
+    {
+      "label": "WIZ0",
+      "line": 282
+    },
+    {
+      "label": "WIZ0",
+      "line": 283
+    },
+    {
+      "label": "WIZ0",
+      "line": 284
+    },
+    {
+      "label": "WIZ0",
+      "line": 285
+    },
+    {
+      "label": "WIZ0",
+      "line": 286
+    },
+    {
+      "label": "WIZ0",
+      "line": 287
+    },
+    {
+      "label": "WIZ0",
+      "line": 291
+    },
+    {
+      "label": "WIZ0",
+      "line": 292
+    },
+    {
+      "label": "WIZ0",
+      "line": 293
+    },
+    {
+      "label": "WIZ0",
+      "line": 294
+    },
+    {
+      "label": "WIZ0",
+      "line": 298
+    },
+    {
+      "label": "WIZ0",
+      "line": 299
+    },
+    {
+      "label": "WIZ0",
+      "line": 300
+    },
+    {
+      "label": "WIZ0",
+      "line": 301
+    },
+    {
+      "label": "WIZ0",
+      "line": 308
+    },
+    {
+      "label": "WIZ0",
+      "line": 314
+    },
+    {
+      "label": "WIZ0",
+      "line": 315
+    },
+    {
+      "label": "WIZ0",
+      "line": 316
+    },
+    {
+      "label": "WIZ0",
+      "line": 317
+    },
+    {
+      "label": "WIZ0",
+      "line": 318
+    },
+    {
+      "label": "WIZ0",
+      "line": 319
+    },
+    {
+      "label": "WIZ0",
+      "line": 320
+    },
+    {
+      "label": "WIZ0",
+      "line": 321
+    },
+    {
+      "label": "WIZ0",
+      "line": 327
+    },
+    {
+      "label": "WIZ0",
+      "line": 328
+    },
+    {
+      "label": "WIZ0",
+      "line": 329
+    },
+    {
+      "label": "WIZ0",
+      "line": 330
+    },
+    {
+      "label": "WIZ0",
+      "line": 331
+    },
+    {
+      "label": "WIZ0",
+      "line": 332
+    },
+    {
+      "label": "WIZ0",
+      "line": 333
+    },
+    {
+      "label": "WIZ0",
+      "line": 334
+    },
+    {
+      "label": "WIZ0",
+      "line": 335
+    },
+    {
+      "label": "WIZ0",
+      "line": 336
+    }
+  ],
+  "status": [
+    3,
+    15,
+    16,
+    25,
+    18,
+    9,
+    7,
+    8,
+    20,
+    0,
+    0,
+    4,
+    25,
+    14,
+    1,
+    0,
+    13,
+    9,
+    3,
+    18,
+    15,
+    0,
+    0,
+    13,
+    3,
+    13,
+    12,
+    24,
+    24,
+    24,
+    9,
+    9
+  ],
+  "frames": [
+    {
+      "name": "00-first-strokes",
+      "sha256": "bf4403e52106969995c039898b7f0185d01a99892e4f60b6d37b076479a25430"
+    },
+    {
+      "name": "01-emerging",
+      "sha256": "b85cf1774510a4f02adf0f6b52b57751f4383c915ea743cf56689ec584d4477d"
+    },
+    {
+      "name": "02-complete",
+      "sha256": "c9b5fc4fa0201a15f32990c0dce3e272a4e5482afd8fe9f23fa13acb2e2dd335"
+    },
+    {
+      "name": "03-welcome",
+      "sha256": "e9d1cd67c58cfab97b6cf2c7e0080fd356c69e4833509326349cc5a4b1a009fc"
+    },
+    {
+      "name": "04-fade",
+      "sha256": "cba68452957f6481d104f8607a1b2368b6833748e3f48eef7f6c419fb6cc9886"
+    },
+    {
+      "name": "05-near-black",
+      "sha256": "20492a5e157839a6bcdc1c976e2af2644b30216b5278662cc840c0b1df690b3d"
+    },
+    {
+      "name": "06-prepare",
+      "sha256": "7a6dfc255175c18c27240a6c8e3e6f58569992051deaaef46306a04f4f07605b"
+    }
+  ]
+}

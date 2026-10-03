@@ -41,6 +41,22 @@ typedef struct {
     Byte value;
 } DagCompatTextContext;
 
+/* C3 uses the same source glyph table and seven-scanline deposit operation for
+ * the status row and PREPARE's EXAMINE cell space.  `cell` is a full-screen
+ * 32-column cell index (0..767), rather than the primary area's 0..127 cursor. */
+typedef struct {
+    Byte *logicalFrame;
+    Word cell;
+    Byte inverse;
+    Byte value;
+} DagCompatCellContext;
+
+typedef struct {
+    Byte *state;
+    Byte *logicalFrame;
+    Byte fade;
+} DagCompatWizardContext;
+
 enum {
     DAG_COMPAT_TEXT_CLEAR_PRIMARY = 0,
     DAG_COMPAT_TEXT_CLEAR_STATUS = 1,
@@ -58,5 +74,7 @@ enum {
 Byte dag_compat_render_giant(DagCompatRenderContext *context);
 void dag_compat_expand_strip(const Byte *source, Byte *target);
 Byte dag_compat_text_apply(DagCompatTextContext *context);
+Byte dag_compat_text_cell(DagCompatCellContext *context);
+Byte dag_compat_render_wizard(DagCompatWizardContext *context);
 
 #endif

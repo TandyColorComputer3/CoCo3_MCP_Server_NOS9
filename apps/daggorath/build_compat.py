@@ -48,5 +48,14 @@ r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.
 if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 ident=subprocess.check_output([a.os9,'ident',str(out/'dodctxt')],text=True);assert '(Good)' in ident
 record['text']={'module':'dodctxt','ident':ident,'sha256':hashlib.sha256((out/'dodctxt').read_bytes()).hexdigest(),'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in text_sources}}
+c3_sources=[app/'test/compat_c3_target.c',app/'src/compat/opening.c',app/'src/compat/wizard-render.asm',
+    app/'src/compat/text.asm',app/'src/compat/expand.asm',app/'src/compat/present.c',app/'src/window-path.c',app/'src/os9.c']
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','--intdir='+str(out),
+     '-I'+str(app/'src'),'-I'+str(app/'src/compat'),'-o','dodcopen']+list(map(str,c3_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodcopen.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodcopen')],text=True);assert '(Good)' in ident
+record['opening']={'module':'dodcopen','ident':ident,'sha256':hashlib.sha256((out/'dodcopen').read_bytes()).hexdigest(),
+  'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in c3_sources}}
 (out/'build.json').write_text(json.dumps(record,indent=2)+'\n')
 for beat in records:print(records[beat]['ident'])

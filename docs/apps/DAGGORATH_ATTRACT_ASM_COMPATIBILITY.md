@@ -493,9 +493,34 @@ converted the highest-risk rendering assumptions into target evidence:
   demonstrated rather than estimated.
 
 C1 remains a deterministic fixture path and is not connected to the public
-attract lifecycle.  It proves Architecture B's original-domain renderer and
-EOU adapter boundary; it does not yet prove text, Wizard, scheduler, audio,
-input interruption, repeat lifecycle, or the remaining storyboard beats.
+attract lifecycle.  C2 now proves original text/cursor/scroll/clear behavior,
+and C3 proves a continuous original-derived Wizard-through-PREPARE review
+sequence.  The compatibility path still does not prove map/init, scheduler,
+audio output, input interruption, repeat lifecycle, or the remaining
+storyboard beats.
+
+## C2/C3 evidence now established
+
+C2 retains eleven exact 6,144-byte text/clear states and source-visible
+character formation on the one-buffer presenter. C3 adds the 84 ordered
+`D4.ASM:WIZ1/WIZ0` segments, a PIC adaptation of `MISC.ASM:WIZZES` and the
+source `ONCE.ASM:DEMO10` sequence through `MISC.ASM:PREPAX`. Seven
+representative live C3 states have zero differing logical bytes, including
+three formation stages, welcome, fade, near-black and PREPARE.
+
+The original alternate-screen behavior does not require a second compatibility
+frame in this bounded path: each `WIZZES` boundary constructs the complete next
+visible viewport, while the copyright row persists independently. The exact
+presented states prove the one-buffer adaptation for this closure. C3 is 5,344
+bytes with an 11,324-byte data request, so its live map is
+`1 program + 2 data + 1 CoWin = 4/8`.
+
+The near-black-to-PREPARE transition contains no maze generation, heartbeat
+pack load, scheduler start or audio drain. The observed completed-frame bound
+is approximately 130 ms versus the cartridge's approximately 50 ms, with the
+difference bounded by the 100-130 ms image-observer interval. The prior
+multi-second modern opening gap is absent. Exact timing and review evidence are
+recorded in [C3](DAGGORATH_ATTRACT_COMPAT_C3.md).
 
 ## Migration order
 
@@ -505,9 +530,10 @@ input interruption, repeat lifecycle, or the remaining storyboard beats.
    019–021 rasters and acceptable stock-6809 time before broader migration.
 3. **C2 complete:** establish the one-buffer primary presenter and original
    text/glyph/cursor/scroll/clear behavior on that screen model.
-4. Extend the same presentation contract to the remaining Wizard/vector
+4. **C3 complete:** extend the same presentation contract to the Wizard/vector
    visibility boundaries.
-5. Move Wizard/opening vectors, sound events and PREPARE ordering.
+5. **C3 complete:** move Wizard/opening vectors, source audio-event boundaries
+   and PREPARE ordering. Actual audio backend integration remains deferred.
 6. Move source initialization, map and exact private state oracles.
 7. Move tick, queue, scheduler, `LUKNEW/PUPDAT`, creature movement and all
    original presentation boundaries.

@@ -1,5 +1,5 @@
         section code
-        export  _dag_compat_text_apply
+        export  _dag_compat_text_apply,_dag_compat_text_cell
 
 * PIC adaptation of TXTSER.ASM:TXTCHR and COMTXT.ASM:
 * TXTXXX/TXTBS/TXTCR/TXTSCR/TXTDPB. The original direct video base becomes
@@ -82,7 +82,7 @@ text_character
         beq     text_cr
         cmpa    #$24
         bhs     text_bad
-        bsr     deposit
+        lbsr    deposit
         ldd     CT_CURSOR,x
         addd    #1
         std     CT_CURSOR,x
@@ -104,7 +104,7 @@ text_cr
 scroll_test
         cmpd    #128
         blo     text_ok
-        bsr     scroll_primary
+        lbsr    scroll_primary
         ldd     #96
         std     CT_CURSOR,x
 text_ok
@@ -113,6 +113,60 @@ text_ok
 text_bad
         ldb     #187
 text_return
+        clra
+        puls    cc,dp,x,y,u,pc
+
+* C3 regional cell adapter. It deliberately shares C2's exact glyph table and
+* source-order seven-byte deposit, while allowing ONCE:PSTS and MISC:PREPAX to
+* select their original non-primary text regions. Context: frame, cell,
+* inverse, value. This is presentation state only; no new text semantics.
+_dag_compat_text_cell
+        pshs    cc,dp,x,y,u
+        ldx     10,s
+        ldu     ,x
+        ldd     2,x
+        cmpd    #32*24
+        bhs     text_bad
+        pshs    d
+        ldb     5,x
+        cmpb    #$24
+        bhs     text_bad_pop
+        lda     #7
+        mul
+        leay    compat_glyphs,pcr
+        leay    d,y
+        puls    d
+        pshs    b
+        lsra
+        rorb
+        lsra
+        rorb
+        lsra
+        rorb
+        lsra
+        rorb
+        lsra
+        rorb
+        tfr     b,a
+        clrb
+        leau    d,u
+        puls    b
+        andb    #31
+        leau    b,u
+        ldb     #7
+cell_loop
+        lda     ,y+
+        eora    4,x
+        sta     ,u
+        leau    32,u
+        decb
+        bne     cell_loop
+        clrb
+        clra
+        puls    cc,dp,x,y,u,pc
+text_bad_pop
+        leas    2,s
+        ldb     #187
         clra
         puls    cc,dp,x,y,u,pc
 
