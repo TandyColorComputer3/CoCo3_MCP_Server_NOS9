@@ -503,8 +503,10 @@ input interruption, repeat lifecycle, or the remaining storyboard beats.
    bounded renderer/presenter ABI.
 2. **P1/C1 complete:** implement the Giant slice and require exact beat
    019–021 rasters and acceptable stock-6809 time before broader migration.
-3. Establish the one-buffer presenter and vector interpreter/raster core.
-4. Move original text/glyph/cursor/scroll behavior onto that screen model.
+3. **C2 complete:** establish the one-buffer primary presenter and original
+   text/glyph/cursor/scroll/clear behavior on that screen model.
+4. Extend the same presentation contract to the remaining Wizard/vector
+   visibility boundaries.
 5. Move Wizard/opening vectors, sound events and PREPARE ordering.
 6. Move source initialization, map and exact private state oracles.
 7. Move tick, queue, scheduler, `LUKNEW/PUPDAT`, creature movement and all

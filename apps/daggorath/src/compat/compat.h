@@ -31,6 +31,25 @@ typedef struct {
     Byte mode;
 } DagCompatRenderContext;
 
+/* COMDAT.ASM TXTPRI / COMTXT.ASM text state, adapted to one caller-owned
+ * logical framebuffer. Cursor is the original 0..127 character index. */
+typedef struct {
+    Byte *logicalFrame;
+    Word cursor;
+    Byte inverse;
+    Byte operation;
+    Byte value;
+} DagCompatTextContext;
+
+enum {
+    DAG_COMPAT_TEXT_CLEAR_PRIMARY = 0,
+    DAG_COMPAT_TEXT_CLEAR_STATUS = 1,
+    DAG_COMPAT_TEXT_CLEAR_VIEWPORT = 2,
+    DAG_COMPAT_TEXT_CLEAR_SCREEN = 3,
+    DAG_COMPAT_TEXT_CHARACTER = 4,
+    DAG_COMPAT_TEXT_ERASE_CHARACTER = 5
+};
+
 enum {
     DAG_COMPAT_GIANT_FORWARD = 0,
     DAG_COMPAT_GIANT_RIGHT_PEEK = 1
@@ -38,5 +57,6 @@ enum {
 
 Byte dag_compat_render_giant(DagCompatRenderContext *context);
 void dag_compat_expand_strip(const Byte *source, Byte *target);
+Byte dag_compat_text_apply(DagCompatTextContext *context);
 
 #endif

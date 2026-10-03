@@ -1,0 +1,12 @@
+state	frame	seconds
+00-blank	1295	21.611158
+01-lone-dot	1393	23.246597
+01b-dot-cursor	1471	24.548273
+01c-erased-cursor	1550	25.866637
+02-welcome-first-prefix	1671	27.885904
+03-welcome-first-line	1695	28.286420
+04-welcome-second-prefix	1718	28.670247
+05-welcome-complete	1749	29.187580
+06-four-row-fill	1911	31.891061
+07-scroll	1993	33.259489
+08-clear	2091	34.894928

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the three bounded C1 original-domain Giant compatibility fixtures."""
+"""Build the bounded C1 Giant fixtures and C2 text demonstration."""
 from pathlib import Path
 import argparse,subprocess,json,hashlib
 
@@ -42,5 +42,11 @@ for beat in ('019','020','021'):
     ident=subprocess.check_output([a.os9,'ident',str(out/name)],text=True);assert '(Good)' in ident
     records[beat]={'module':name,'changedBytes':changed,'ident':ident,'sha256':hashlib.sha256((out/name).read_bytes()).hexdigest()}
 record={'commandTemplate':['cmoc','--os9','-O2','--add-os9-stack-space=1536'],'fixtures':records,'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in common},'tools':{t:subprocess.check_output([t,'--version'],text=True) for t in ['cmoc','lwasm','lwlink']}}
+text_sources=[app/'test/compat_c2_target.c',app/'src/compat/text.asm',app/'src/compat/expand.asm',app/'src/compat/present.c',app/'src/window-path.c',app/'src/os9.c']
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'test'),'-o','dodctxt']+list(map(str,text_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodctxt.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodctxt')],text=True);assert '(Good)' in ident
+record['text']={'module':'dodctxt','ident':ident,'sha256':hashlib.sha256((out/'dodctxt').read_bytes()).hexdigest(),'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in text_sources}}
 (out/'build.json').write_text(json.dumps(record,indent=2)+'\n')
 for beat in records:print(records[beat]['ident'])

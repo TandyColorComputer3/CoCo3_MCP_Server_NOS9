@@ -1,0 +1,125 @@
+{
+  "referenceCommit": "a94326f00ebb16a106b540c58bc2ccf5f7b66dac",
+  "sources": {
+    "COMTXT.ASM": "8c91ef6018fd27995f76d185079c0647673792293c48063a0b20029986c35a12",
+    "TXTSER.ASM": "245b178091be902af59c488ad7100727cbad6518b99ffdf46f95694664c34c75",
+    "CLEAR.ASM": "3afa78eb15fa408ea7c568b4713552475e5a41fe2c16d7ba5bd50d2f455593a5",
+    "SWCHAR.ASM": "74dd2609442a438c696b3c87a34ff72b7ea9431ff6be1f86d20d3e260831325f",
+    "COMDAT.ASM": "90efe81bbfc084e2792c949625c33b628b6721ae5c2cbc16163d629ee0f82bed",
+    "MISC.ASM": "4940b3cd058d8640424fb35a8fac2202ca6c5b3ff7640342d4a7c3309ef838cd",
+    "ONCE.ASM": "d4420634a38b087965b409b511d8b4ebd8b122340aa2189f9defb1444fd6c19e",
+    "EXPAND.ASM": "92a5fa9665b8903aca31999a2088823df0fed565ce7a8d409f24d4e7be9249a4"
+  },
+  "intro1": [
+    31,
+    9,
+    0,
+    4,
+    1,
+    18,
+    5,
+    0,
+    25,
+    5,
+    0,
+    5,
+    14,
+    20,
+    5,
+    18,
+    30,
+    30,
+    30,
+    31
+  ],
+  "intro2": [
+    30,
+    30,
+    30,
+    20,
+    8,
+    5,
+    0,
+    4,
+    21,
+    14,
+    7,
+    5,
+    15,
+    14,
+    19,
+    0,
+    15,
+    6,
+    0,
+    4,
+    1,
+    7,
+    7,
+    15,
+    18,
+    1,
+    20,
+    8,
+    27,
+    27,
+    27
+  ],
+  "frames": [
+    {
+      "name": "00-blank",
+      "cursor": 0,
+      "sha256": "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+    },
+    {
+      "name": "01-lone-dot",
+      "cursor": 33,
+      "sha256": "5340e627c6d619d2d7be262d585cb8cd70977c62a07fd53aa783c65d7b7e1835"
+    },
+    {
+      "name": "01b-dot-cursor",
+      "cursor": 33,
+      "sha256": "bcaa9a6360e3859e3ff752189ba07a21c07878610b5648981c1f897e5387e274"
+    },
+    {
+      "name": "01c-erased-cursor",
+      "cursor": 34,
+      "sha256": "5340e627c6d619d2d7be262d585cb8cd70977c62a07fd53aa783c65d7b7e1835"
+    },
+    {
+      "name": "02-welcome-first-prefix",
+      "cursor": 40,
+      "sha256": "862b428c58f185739e6eaa576f22dcacc4712261db8c0312822eb5d06f0dcf50"
+    },
+    {
+      "name": "03-welcome-first-line",
+      "cursor": 64,
+      "sha256": "dfe93235d4fe43ea116dd9e687479e2219d03022fab223207ae9a912e0096c2d"
+    },
+    {
+      "name": "04-welcome-second-prefix",
+      "cursor": 72,
+      "sha256": "d0a2b8441698f78cbb4446fcb961d28bda5ee6c812207fbbc16fb641149c6f5f"
+    },
+    {
+      "name": "05-welcome-complete",
+      "cursor": 95,
+      "sha256": "a49cd89b583c54ab7a05445dbe22f1902c74e4448523d6a5ef39c98914ef0eb1"
+    },
+    {
+      "name": "06-four-row-fill",
+      "cursor": 127,
+      "sha256": "f8a31ba45f556c396b90864d03f82139fa31be8fd120bd025bd78acc0bac1026"
+    },
+    {
+      "name": "07-scroll",
+      "cursor": 96,
+      "sha256": "a743912089e40544844a62250546fc9dac7b3cbb44cfc703c6dc4ab8b3370ab2"
+    },
+    {
+      "name": "08-clear",
+      "cursor": 0,
+      "sha256": "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+    }
+  ]
+}

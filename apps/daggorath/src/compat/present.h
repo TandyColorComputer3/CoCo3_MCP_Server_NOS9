@@ -11,6 +11,10 @@ typedef struct {
 Byte dag_compat_present_open(void);
 Byte dag_compat_present(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
                         DagCompatPresentTiming *timing);
+Byte dag_compat_present_primary(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
+                                DagCompatPresentTiming *timing);
+Byte dag_compat_present_cell(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
+                             Word cursor, DagCompatPresentTiming *timing);
 Byte dag_compat_present_close(void);
 
 #endif
