@@ -1,0 +1,5 @@
+Level equ 2
+H6309 equ 1
+ use /Volumes/SEDONA/Projects/nitros9-reference/defs/os9.d
+ use /Volumes/SEDONA/Projects/nitros9-reference/defs/scf.d
+ use /Volumes/SEDONA/Projects/nitros9-reference/defs/coco.d
