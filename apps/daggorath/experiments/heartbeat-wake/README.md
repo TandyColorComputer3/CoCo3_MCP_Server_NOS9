@@ -1,8 +1,16 @@
 # Daggorath heartbeat wake experiments
 
-These modules preserve two private Level II experiments that validated an
+These modules preserve three private Level II experiments that validated an
 independent heartbeat wake mechanism. They are deliberately outside the
 production build and are inactive unless built and installed by hand.
+
+Current status:
+
+- `arm-wake`: **ACCEPTED**
+- `arm-kick`: **ACCEPTED**
+- `pipeman`: **ACCEPTED**
+- CoWin visual presentation: **NOT YET ACCEPTED**
+- production C6: **NOT YET ACCEPTED**
 
 ## Accepted results
 
@@ -65,9 +73,19 @@ Installed EOU Level II behavior observed by these experiments:
   checked in emitted assembly; one earlier inline `F$Sleep` attempt emitted no
   bytes.
 
-## Installed EOU PipeMan and incomplete transport work
+## Installed EOU PipeMan transport
 
-`pipeman-wip` preserves the unaccepted follow-on experiment. Installed EOU
+`pipeman` preserves the accepted follow-on transport experiment. It observed
+221 native generations, 221 PB1 transitions, and 221 foreground generations,
+with maximum generation delta one. All 27 fixed-size PipeMan requests were
+ACKed exactly once, including fragmented 5+11-byte request and 7+9-byte ACK
+transfers. The exact 81-tick request-free gate and atomic freeze/final
+reconciliation shutdown passed. See `pipeman/README.md` and its retained
+results.
+
+## Historical incomplete transport work
+
+`pipeman-wip` preserves the earlier unaccepted lineage. Installed EOU
 PipeMan edition 5 has stub GetStt/SetStt entry points: `SS.Ready` succeeds
 without reporting queued-byte readiness. It cannot be used to establish that
 a complete 16-byte request is available.
@@ -78,8 +96,8 @@ heartbeat first. It is **not accepted**. Its mandatory 81-tick request-free
 gate never ran correctly because private driver operation `$95` returns and
 clears elapsed 60 Hz ticks; the harness incorrectly treated successive values
 as absolute timestamps and released its sender after eight ticks. No PipeMan
-220-generation acceptance result exists. This checkpoint intentionally leaves
-that defect unchanged.
+220-generation acceptance result exists in that historical directory. Its
+defect remains unchanged; the corrected accepted lineage is `pipeman`.
 
 ## Reproduction
 
