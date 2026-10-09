@@ -1,0 +1,256 @@
+--- /private/tmp/c6-cowin-diagnostic-baseline/daggorath-heartbeat-cowin-rebuild/wakekick.s	2026-10-09 14:14:44
++++ /private/tmp/c6-cowin-shutdown-build4/daggorath-heartbeat-cowin-rebuild/wakekick.s	2026-10-09 14:08:59
+@@ -3135,16 +3135,25 @@
+ L00434	EQU	*		else clause of if() started at wakekick.c:105
+ * Useless label L00435 removed
+ * Line wakekick.c:106: assignment: =
+-* Line wakekick.c:106: function call: reconcile_final()
++	CLR	-16,U		variable kind
++* Line wakekick.c:106: assignment: =
++* Line wakekick.c:106: function call: reconcile()
++	LEAX	-13,U		variable `done', declared at wakekick.c:90
++	PSHS	X		C function argument 6 of reconcile(): unsigned char *
++	LEAX	-16,U		variable `kind', declared at wakekick.c:90
++	PSHS	X		C function argument 5 of reconcile(): unsigned char *
++	CLRA
++	CLRB
++	PSHS	B,A		C function argument 4 of reconcile(): int
+ 	LEAX	-20,U		variable `phase', declared at wakekick.c:90
+-	PSHS	X		C function argument 3 of reconcile_final(): unsigned char *
++	PSHS	X		C function argument 3 of reconcile(): unsigned char *
+ 	LEAX	-6,U		variable `generation', declared at wakekick.c:90
+-	PSHS	X		C function argument 2 of reconcile_final(): unsigned long *
++	PSHS	X		C function argument 2 of reconcile(): unsigned long *
+ 	LDB	-22,U		variable `path', declared at wakekick.c:90
+-	CLRA			promoting byte argument to word
+-	PSHS	B,A		C function argument 1 of reconcile_final(): unsigned char
+-	LBSR	_reconcile_final
+-	LEAS	6,S
++* optim: stripExtraClrA_B
++	PSHS	B,A		C function argument 1 of reconcile(): unsigned char
++	LBSR	_reconcile
++	LEAS	12,S
+ 	STB	-21,U
+ * Line wakekick.c:106: if
+ * optim: storeLoad
+@@ -3160,24 +3169,16 @@
+ L00437	EQU	*		else clause of if() started at wakekick.c:106
+ * Useless label L00438 removed
+ * Line wakekick.c:107: assignment: =
+-	CLRA
+-	CLRB
+-	STD	-12,U
+-* Line wakekick.c:107: assignment: =
+-* Line wakekick.c:107: function call: set()
+-* optim: stripExtraClrA_B
+-* optim: stripExtraClrA_B
+-	PSHS	B,A		C function argument 4 of set(): int
+-	LEAX	-12,U		variable `x', declared at wakekick.c:90
+-* optim: mergePushXPushD
+-* optim: stripExtraClrA_B
+-	LDB	#$99		decimal 153 signed
+-	PSHS	X,B,A		optim: mergePushXPushD
++* Line wakekick.c:107: function call: reconcile_final()
++	LEAX	-20,U		variable `phase', declared at wakekick.c:90
++	PSHS	X		C function argument 3 of reconcile_final(): unsigned char *
++	LEAX	-6,U		variable `generation', declared at wakekick.c:90
++	PSHS	X		C function argument 2 of reconcile_final(): unsigned long *
+ 	LDB	-22,U		variable `path', declared at wakekick.c:90
+-* optim: stripExtraClrA_B
+-	PSHS	B,A		C function argument 1 of set(): unsigned char
+-	LBSR	_set
+-	LEAS	8,S
++	CLRA			promoting byte argument to word
++	PSHS	B,A		C function argument 1 of reconcile_final(): unsigned char
++	LBSR	_reconcile_final
++	LEAS	6,S
+ 	STB	-21,U
+ * Line wakekick.c:107: if
+ * optim: storeLoad
+@@ -3193,12 +3194,24 @@
+ L00440	EQU	*		else clause of if() started at wakekick.c:107
+ * Useless label L00441 removed
+ * Line wakekick.c:108: assignment: =
+-* Line wakekick.c:108: function call: os_sleep()
+ 	CLRA
+-	LDB	#$01		decimal 1 signed
+-	PSHS	B,A		C function argument 1 of os_sleep(): int
+-	LBSR	_os_sleep
+-	LEAS	2,S
++	CLRB
++	STD	-12,U
++* Line wakekick.c:108: assignment: =
++* Line wakekick.c:108: function call: set()
++* optim: stripExtraClrA_B
++* optim: stripExtraClrA_B
++	PSHS	B,A		C function argument 4 of set(): int
++	LEAX	-12,U		variable `x', declared at wakekick.c:90
++* optim: mergePushXPushD
++* optim: stripExtraClrA_B
++	LDB	#$99		decimal 153 signed
++	PSHS	X,B,A		optim: mergePushXPushD
++	LDB	-22,U		variable `path', declared at wakekick.c:90
++* optim: stripExtraClrA_B
++	PSHS	B,A		C function argument 1 of set(): unsigned char
++	LBSR	_set
++	LEAS	8,S
+ 	STB	-21,U
+ * Line wakekick.c:108: if
+ * optim: storeLoad
+@@ -3214,11 +3227,32 @@
+ L00443	EQU	*		else clause of if() started at wakekick.c:108
+ * Useless label L00444 removed
+ * Line wakekick.c:109: assignment: =
++* Line wakekick.c:109: function call: os_sleep()
++	CLRA
++	LDB	#$01		decimal 1 signed
++	PSHS	B,A		C function argument 1 of os_sleep(): int
++	LBSR	_os_sleep
++	LEAS	2,S
++	STB	-21,U
++* Line wakekick.c:109: if
++* optim: storeLoad
++* optim: loadCmpZeroBeqOrBne
++	BEQ	L00446		 (optim: condBranchOverUncondBranch)
++* optim: condBranchOverUncondBranch
++* Useless label L00445 removed
++* Line wakekick.c:109
++* Line wakekick.c:109: return with value
++	LDB	-21,U		variable `e', declared at wakekick.c:90
++	CLRA			cast from byte
++	LBRA	L00112		return (wakekick.c:109)
++L00446	EQU	*		else clause of if() started at wakekick.c:109
++* Useless label L00447 removed
++* Line wakekick.c:110: assignment: =
+ 	CLRA
+ 	CLRB
+ 	STD	-12,U
+-* Line wakekick.c:109: assignment: =
+-* Line wakekick.c:109: function call: set()
++* Line wakekick.c:110: assignment: =
++* Line wakekick.c:110: function call: set()
+ * optim: stripExtraClrA_B
+ * optim: stripExtraClrA_B
+ 	PSHS	B,A		C function argument 4 of set(): int
+@@ -3233,27 +3267,6 @@
+ 	LBSR	_set
+ 	LEAS	8,S
+ 	STB	-21,U
+-* Line wakekick.c:109: if
+-* optim: storeLoad
+-* optim: loadCmpZeroBeqOrBne
+-	BEQ	L00446		 (optim: condBranchOverUncondBranch)
+-* optim: condBranchOverUncondBranch
+-* Useless label L00445 removed
+-* Line wakekick.c:109
+-* Line wakekick.c:109: return with value
+-	LDB	-21,U		variable `e', declared at wakekick.c:90
+-	CLRA			cast from byte
+-	LBRA	L00112		return (wakekick.c:109)
+-L00446	EQU	*		else clause of if() started at wakekick.c:109
+-* Useless label L00447 removed
+-* Line wakekick.c:110: assignment: =
+-* Line wakekick.c:110: function call: ipc_close()
+-	LDB	_cmdPath+0,Y	variable `cmdPath', declared at wakekick.c:11
+-	CLRA			promoting byte argument to word
+-	PSHS	B,A		C function argument 1 of ipc_close(): unsigned char
+-	LBSR	_ipc_close
+-	LEAS	2,S
+-	STB	-21,U
+ * Line wakekick.c:110: if
+ * optim: storeLoad
+ * optim: loadCmpZeroBeqOrBne
+@@ -3264,53 +3277,74 @@
+ * Line wakekick.c:110: return with value
+ 	LDB	-21,U		variable `e', declared at wakekick.c:90
+ 	CLRA			cast from byte
+-	BRA	L00112		return (wakekick.c:110)
++	LBRA	L00112		return (wakekick.c:110)
+ L00449	EQU	*		else clause of if() started at wakekick.c:110
+ * Useless label L00450 removed
+-* Line wakekick.c:110: assignment: =
+-* Line wakekick.c:110: function call: ipc_close()
+-	LDB	_replyPath+0,Y	variable `replyPath', declared at wakekick.c:11
++* Line wakekick.c:111: assignment: =
++* Line wakekick.c:111: function call: ipc_close()
++	LDB	_cmdPath+0,Y	variable `cmdPath', declared at wakekick.c:11
+ 	CLRA			promoting byte argument to word
+ 	PSHS	B,A		C function argument 1 of ipc_close(): unsigned char
+ 	LBSR	_ipc_close
+ 	LEAS	2,S
+ 	STB	-21,U
+-* Line wakekick.c:110: if
++* Line wakekick.c:111: if
+ * optim: storeLoad
+ * optim: loadCmpZeroBeqOrBne
+ 	BEQ	L00452		 (optim: condBranchOverUncondBranch)
+ * optim: condBranchOverUncondBranch
+ * Useless label L00451 removed
+-* Line wakekick.c:110
+-* Line wakekick.c:110: return with value
++* Line wakekick.c:111
++* Line wakekick.c:111: return with value
+ 	LDB	-21,U		variable `e', declared at wakekick.c:90
+ 	CLRA			cast from byte
+-	BRA	L00112		return (wakekick.c:110)
+-L00452	EQU	*		else clause of if() started at wakekick.c:110
++	BRA	L00112		return (wakekick.c:111)
++L00452	EQU	*		else clause of if() started at wakekick.c:111
+ * Useless label L00453 removed
+-* Line wakekick.c:110: assignment: =
+-* Line wakekick.c:110: function call: ipc_close()
+-	LDB	-22,U		variable `path', declared at wakekick.c:90
++* Line wakekick.c:111: assignment: =
++* Line wakekick.c:111: function call: ipc_close()
++	LDB	_replyPath+0,Y	variable `replyPath', declared at wakekick.c:11
+ 	CLRA			promoting byte argument to word
+ 	PSHS	B,A		C function argument 1 of ipc_close(): unsigned char
+ 	LBSR	_ipc_close
+ 	LEAS	2,S
+ 	STB	-21,U
+-* Line wakekick.c:110: if
++* Line wakekick.c:111: if
+ * optim: storeLoad
+ * optim: loadCmpZeroBeqOrBne
+ 	BEQ	L00455		 (optim: condBranchOverUncondBranch)
+ * optim: condBranchOverUncondBranch
+ * Useless label L00454 removed
+-* Line wakekick.c:110
+-* Line wakekick.c:110: return with value
++* Line wakekick.c:111
++* Line wakekick.c:111: return with value
+ 	LDB	-21,U		variable `e', declared at wakekick.c:90
+ 	CLRA			cast from byte
+-	BRA	L00112		return (wakekick.c:110)
+-L00455	EQU	*		else clause of if() started at wakekick.c:110
++	BRA	L00112		return (wakekick.c:111)
++L00455	EQU	*		else clause of if() started at wakekick.c:111
+ * Useless label L00456 removed
+-* Line wakekick.c:110: return with value
+-* Line wakekick.c:110: function call: graphics_close()
++* Line wakekick.c:111: assignment: =
++* Line wakekick.c:111: function call: ipc_close()
++	LDB	-22,U		variable `path', declared at wakekick.c:90
++	CLRA			promoting byte argument to word
++	PSHS	B,A		C function argument 1 of ipc_close(): unsigned char
++	LBSR	_ipc_close
++	LEAS	2,S
++	STB	-21,U
++* Line wakekick.c:111: if
++* optim: storeLoad
++* optim: loadCmpZeroBeqOrBne
++	BEQ	L00458		 (optim: condBranchOverUncondBranch)
++* optim: condBranchOverUncondBranch
++* Useless label L00457 removed
++* Line wakekick.c:111
++* Line wakekick.c:111: return with value
++	LDB	-21,U		variable `e', declared at wakekick.c:90
++	CLRA			cast from byte
++	BRA	L00112		return (wakekick.c:111)
++L00458	EQU	*		else clause of if() started at wakekick.c:111
++* Useless label L00459 removed
++* Line wakekick.c:111: return with value
++* Line wakekick.c:111: function call: graphics_close()
+ 	LDB	_graphicsPath+0,Y	variable `graphicsPath', declared at wakekick.c:12
+ 	CLRA			promoting byte argument to word
+ 	PSHS	B,A		C function argument 1 of graphics_close(): unsigned char

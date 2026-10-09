@@ -1,0 +1,34 @@
+Header for : DArm63
+Module size: $563  #1379
+Module CRC : $39AA22 (Good)
+Data size  : $007F  #127
+Device Driver mod, 6809 Obj, re-ent, R/O
+
+Header for : da63
+Module size: $24  #36
+Module CRC : $7DB914 (Good)
+Device Descriptor mod, 6809 Obj, re-ent, R/O
+
+Header for : wcowin-map3 (accepted single-client POC)
+Module size: $1C82  #7298
+Module CRC : $56422B (Good)
+Data size  : $02BE  #702
+Prog mod, 6809 Obj, re-ent, R/O
+
+Header for : kickchild
+Module size: $C1F  #3103
+Module CRC : $4F8C58 (Good)
+Data size  : $0025  #37
+Prog mod, 6809 Obj, re-ent, R/O
+
+Header for : wcowin-map3 (heartbeat-only gate)
+Module size: $1C75  #7285
+Module CRC : $BC3990 (Good)
+Data size  : $02BE  #702
+Prog mod, 6809 Obj, re-ent, R/O
+
+Header for : wcowin-map3-diag
+Module size: $1CF3  #7411
+Module CRC : $EF1ECC (Good)
+Data size  : $02BE  #702
+Prog mod, 6809 Obj, re-ent, R/O
