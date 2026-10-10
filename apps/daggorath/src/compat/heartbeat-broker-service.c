@@ -51,6 +51,15 @@ static Byte service_heart(void)
  record_trace(done,pb1,state.phase,wake,heart,latency,currentScene);
  lastPollTick=done;return snapshot();
 }
+/* A status scene includes the heart cells.  If no native edge arrived while
+ * the scene was in flight, restore the already-accounted phase without
+ * advancing shownGeneration.  If an edge did arrive, service_heart() performs
+ * the one authoritative transition instead. */
+static Byte restore_status_heart(void)
+{Byte e;unsigned long before=shownGeneration;
+ e=service_heart();if(e||shownGeneration!=before)return e;
+ putHeart[3]=(Byte)(2+state.phase);return os_write(2,putHeart,sizeof(putHeart));
+}
 static Byte reply(Byte op,Byte sequence,Byte error,Byte status)
 {Byte frame[DAG_BROKER_FRAME];memset(frame,0,sizeof(frame));
  frame[0]=DAG_BROKER_MAGIC;frame[1]=DAG_BROKER_VERSION;frame[2]=op;frame[3]=sequence;
@@ -69,7 +78,8 @@ static Byte reply(Byte op,Byte sequence,Byte error,Byte status)
  return ipc_write(1,frame,sizeof(frame));}
 
 int main(void)
-{Byte request[DAG_BROKER_FRAME],pending,e=0,r,pid,done=0,status=0;unsigned long requested;
+{Byte request[DAG_BROKER_FRAME],pending,claimed=0,armResult,e=0,r,pid,done=0,status=0;
+ unsigned long requested,age,beforeArm;
  memset(&state,0,sizeof(state));r=ipc_self_pid(&pid);if(!e)e=r;
  if(!e)e=ipc_priority(pid,DAG_BROKER_PRIORITY);
  if(!e)e=native_heartbeat_open(&heartbeat);
@@ -78,34 +88,53 @@ int main(void)
  r=reply(DAG_BROKER_HELLO,0,e,0);if(!e)e=r;if(e)goto done;
  while(!done){
   e=service_heart();if(e)break;
-  e=native_heartbeat_claim_request(&heartbeat,&pending);if(e)break;
-  if(!pending){e=os_sleep(1);if(e)break;continue;}
-  e=ipc_read(0,request,sizeof(request));if(e)break;
-  if(request[0]!=DAG_BROKER_MAGIC||request[1]!=DAG_BROKER_VERSION){e=ERR_ARGUMENT;break;}
-  status=0;
-  switch(request[2]){
-  case DAG_BROKER_RATE:e=native_heartbeat_rate(&heartbeat,request[5]);break;
-  case DAG_BROKER_ENABLE:e=native_heartbeat_enable(&heartbeat);if(!e)e=snapshot();
-   if(!e)e=os_clock(&lastPollTick,0);if(!e)state.enabled=1;shownGeneration=state.edgeGeneration;break;
-  case DAG_BROKER_DISABLE:e=native_heartbeat_disable(&heartbeat);if(!e)state.enabled=0;break;
-  case DAG_BROKER_SNAPSHOT:e=snapshot();break;
-  case DAG_BROKER_STATS:e=snapshot();status=(Byte)((collapsed||duplicated)?1:0);break;
-  case DAG_BROKER_TRACE:e=snapshot();status=(Byte)(traceCount?0:1);break;
-  case DAG_BROKER_SCENE:
-   e=service_heart();if(e)break;requested=get32(request+6);
-   if((request[4]&DAG_BROKER_STATUS)&&
-      (requested!=state.edgeGeneration||request[10]!=state.phase)){
-     staleRejected++;status=DAG_BROKER_STALE;break;
+  if(claimed){pending=1;claimed=0;}
+  else {e=native_heartbeat_claim_request(&heartbeat,&pending);if(e)break;}
+  if(!pending)goto idle;
+  if(pending){
+   e=ipc_read(0,request,sizeof(request));if(e)break;
+   if(request[0]!=DAG_BROKER_MAGIC||request[1]!=DAG_BROKER_VERSION){e=ERR_ARGUMENT;break;}
+   status=0;
+   switch(request[2]){
+   case DAG_BROKER_RATE:e=native_heartbeat_rate(&heartbeat,request[5]);break;
+   case DAG_BROKER_ENABLE:e=native_heartbeat_enable(&heartbeat);if(!e)e=snapshot();
+    if(!e)e=os_clock(&lastPollTick,0);if(!e)state.enabled=1;shownGeneration=state.edgeGeneration;break;
+   case DAG_BROKER_DISABLE:e=native_heartbeat_disable(&heartbeat);if(!e)state.enabled=0;break;
+   case DAG_BROKER_SNAPSHOT:e=snapshot();break;
+   case DAG_BROKER_STATS:e=snapshot();status=(Byte)((collapsed||duplicated)?1:0);break;
+   case DAG_BROKER_TRACE:e=snapshot();status=(Byte)(traceCount?0:1);break;
+   case DAG_BROKER_SCENE:
+    e=service_heart();if(e)break;requested=get32(request+6);
+    age=state.edgeGeneration-requested;
+    /* A legitimate snapshot remains valid after native heartbeat advancement:
+     * its phase must differ by the generation age parity.  A future snapshot
+     * or a generation/phase mismatch remains stale. */
+    if((request[4]&DAG_BROKER_STATUS)&&
+       ((age&0x80000000UL)||
+        ((Byte)(request[10]^state.phase)!=(Byte)(age&1)))){
+      staleRejected++;status=DAG_BROKER_STALE;break;
+    }
+    {Word before,after;currentScene=(Byte)((request[4]&DAG_BROKER_STATUS)?2:1);
+     putScene[7]=request[5];e=os_clock(&before,0);if(e)break;
+     e=os_write(2,putScene,sizeof(putScene));if(e)break;e=os_clock(&after,0);if(e)break;
+     if(clip(elapsed(before,after))>maxSceneTicks)maxSceneTicks=clip(elapsed(before,after));
+     sceneWrites++;e=(request[4]&DAG_BROKER_STATUS)?restore_status_heart():service_heart();
+     currentScene=0;break;}
+   case DAG_BROKER_SHUTDOWN:e=native_heartbeat_disable(&heartbeat);done=1;break;
+   default:e=ERR_ARGUMENT;
    }
-   {Word before,after;currentScene=(Byte)((request[4]&DAG_BROKER_STATUS)?2:1);
-    putScene[7]=request[5];e=os_clock(&before,0);if(e)break;
-    e=os_write(2,putScene,sizeof(putScene));if(e)break;e=os_clock(&after,0);if(e)break;
-    if(clip(elapsed(before,after))>maxSceneTicks)maxSceneTicks=clip(elapsed(before,after));
-    sceneWrites++;e=service_heart();currentScene=0;break;}
-  case DAG_BROKER_SHUTDOWN:e=native_heartbeat_disable(&heartbeat);done=1;break;
-  default:e=ERR_ARGUMENT;
+   if(!e)e=service_heart();r=reply(request[2],request[3],e,status);if(!e)e=r;
+   if(!e)e=service_heart();if(e)break;if(done)continue;
   }
-  if(!e)e=service_heart();r=reply(request[2],request[3],e,status);if(!e)e=r;if(e)break;
+idle:
+  beforeArm=shownGeneration;
+  e=native_heartbeat_arm(&heartbeat,shownGeneration,&armResult);if(e)break;
+  if(armResult!=NATIVE_HEARTBEAT_ARMED){e=native_heartbeat_disarm(&heartbeat);if(e)break;continue;}
+  e=service_heart();if(e)break;
+  if(shownGeneration!=beforeArm){e=native_heartbeat_disarm(&heartbeat);if(e)break;continue;}
+  e=native_heartbeat_claim_request(&heartbeat,&pending);if(e)break;
+  if(pending){claimed=1;e=native_heartbeat_disarm(&heartbeat);if(e)break;continue;}
+  e=os_sleep(2);r=native_heartbeat_disarm(&heartbeat);if(!e)e=r;if(e)break;
  }
 done:r=native_heartbeat_close(&heartbeat);if(!e)e=r;return e;
 }
