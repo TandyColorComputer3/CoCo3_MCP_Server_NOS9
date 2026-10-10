@@ -84,6 +84,7 @@ Byte dag_compat_c5_type5_at(const Game *g,Byte range,Byte relative){
  return 0;
 }
 
+#ifndef DAG_COMPAT_C6
 void dag_compat_c5_prepare_view(const Game *g,Byte *s,Byte range){
  static const signed char rowStep[]={-1,0,1,0},colStep[]={0,1,0,-1};
  Byte row=(Byte)(g->row+rowStep[g->dir]*range);
@@ -97,3 +98,4 @@ void dag_compat_c5_prepare_view(const Game *g,Byte *s,Byte range){
  cell=g->maze[(Word)row*32+col];
  for(i=0;i<4;i++){s[0x7f4+i]=cell&3;s[0x7f4+4+i]=cell&3;cell>>=2;}
 }
+#endif

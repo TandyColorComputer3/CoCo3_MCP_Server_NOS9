@@ -91,6 +91,7 @@ void dag_compat_c4_prompt(Byte *f){DagCompatTextContext t;
  t.logicalFrame=f;t.cursor=0;t.inverse=0;t.operation=DAG_COMPAT_TEXT_CLEAR_PRIMARY;t.value=0;(void)dag_compat_text_apply(&t);
  t.operation=DAG_COMPAT_TEXT_CHARACTER;t.value=31;(void)dag_compat_text_apply(&t);t.value=30;(void)dag_compat_text_apply(&t);
 }
+#ifndef DAG_COMPAT_C6
 Byte dag_compat_c4_run(Game *g,Byte *state,Byte *frame){DagCompatPresentTiming timing;Byte e;
  dag_compat_c4_init(g,state,21);dag_compat_c4_map(g,frame);e=dag_compat_present(frame,&timing);if(e)return e;
  e=os_sleep(81);if(e)return e;e=os_sleep(81);if(e)return e;
@@ -100,3 +101,4 @@ Byte dag_compat_c4_run(Game *g,Byte *state,Byte *frame){DagCompatPresentTiming t
  e=os_sleep(1);if(e)return e;
  dag_compat_c4_prompt(frame);return dag_compat_present_cell(frame,32,&timing);
 }
+#endif
