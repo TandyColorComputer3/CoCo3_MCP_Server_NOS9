@@ -37,6 +37,29 @@ Byte native_heartbeat_take_ticks(NativeHeartbeat *h,Word *videoTicks){Registers 
  if(!h->opened)return ERR_ARGUMENT;r.x=0;r.y=0;e=os_getstat(h->path,0x95,&r);if(e)return e;
  *videoTicks=r.x;return 0;
 }
+#ifdef DAG_HEARTBEAT_CONTROL_PLANE
+Byte native_heartbeat_arm(NativeHeartbeat *h,unsigned long expectedGeneration,
+                          Byte *armResult){Registers r;Byte e;
+ if(!h->opened||!armResult)return ERR_ARGUMENT;
+ r.x=(Word)expectedGeneration;r.y=(Word)(expectedGeneration>>16);
+ e=os_setstat(h->path,0x97,&r);if(e)return e;
+ if(r.x>NATIVE_HEARTBEAT_REQUEST_PENDING)return ERR_ARGUMENT;
+ *armResult=(Byte)r.x;return 0;
+}
+Byte native_heartbeat_observe(NativeHeartbeat *h,unsigned long generation){Registers r;
+ if(!h->opened)return ERR_ARGUMENT;r.x=(Word)generation;r.y=(Word)(generation>>16);
+ return os_setstat(h->path,0x98,&r);
+}
+Byte native_heartbeat_disarm(NativeHeartbeat *h){return control(h,0x99,0);}
+Byte native_heartbeat_kick(Byte path){Registers r;
+ if(path==255)return ERR_ARGUMENT;r.x=r.y=0;return os_setstat(path,0x9a,&r);
+}
+Byte native_heartbeat_claim_request(NativeHeartbeat *h,Byte *pending){Registers r;Byte e;
+ if(!h->opened||!pending)return ERR_ARGUMENT;r.x=r.y=0;
+ e=os_setstat(h->path,0x9b,&r);if(e)return e;if(r.x>1)return ERR_ARGUMENT;
+ *pending=(Byte)r.x;return 0;
+}
+#endif
 Byte native_heartbeat_close(NativeHeartbeat *h){Byte e;
  if(!h->opened)return 0;
  /* Explicit release first: duplicated/inherited references cannot keep PB1

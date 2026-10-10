@@ -1,12 +1,12 @@
 #include <assert.h>
 #include <stdio.h>
 #include "native_heartbeat.h"
-static unsigned calls,closes;static Byte operation,fail,openfail,closefail,phaseValue,snapshotFault;static Word value,tickValue;static unsigned long edgeGeneration;
+static unsigned calls,closes;static Byte operation,fail,openfail,closefail,phaseValue,snapshotFault;static Word value,yvalue,tickValue,replyValue;static unsigned long edgeGeneration;
 Byte ipc_open(const char *name,Byte *p){assert(name[0]=='/');if(openfail)return openfail;*p=7;return 0;}
 Byte ipc_close(Byte p){assert(p==7);closes++;return closefail;}
-Byte os_setstat(Byte p,Byte op,Registers *r){assert(p==7);calls++;operation=op;value=r->x;return fail;}
+Byte os_setstat(Byte p,Byte op,Registers *r){assert(p==7);calls++;operation=op;value=r->x;yvalue=r->y;if(!fail&&(op==0x97||op==0x9b))r->x=replyValue;return fail;}
 Byte os_getstat(Byte p,Byte op,Registers *r){assert(p==7);if(fail)return fail;if(op==0x90){r->a=1;r->x=0x2e03;r->y=0x0100;return 0;}if(op==0x96){r->a=snapshotFault;r->x=edgeGeneration;r->y=edgeGeneration>>16;r->b=phaseValue;return 0;}assert(op==0x95);r->x=tickValue;tickValue=0;return 0;}
-int main(void){NativeHeartbeat h={255,0};NativeHeartbeatState s;unsigned n;Word ticks;
+int main(void){NativeHeartbeat h={255,0};NativeHeartbeatState s;unsigned n;Word ticks;Byte result;
  assert(native_heartbeat_enable(&h)==187);assert(calls==0);
  openfail=214;assert(native_heartbeat_open(&h)==214);assert(!h.opened);openfail=0;
  fail=250;assert(native_heartbeat_open(&h)==250);assert(!h.opened&&closes==1);fail=0;
@@ -25,11 +25,20 @@ int main(void){NativeHeartbeat h={255,0};NativeHeartbeatState s;unsigned n;Word 
  tickValue=0x1234;assert(!native_heartbeat_take_ticks(&h,&ticks)&&ticks==0x1234&&!tickValue);
  tickValue=2;assert(!native_heartbeat_take_ticks(&h,&ticks)&&ticks==2&&!tickValue);
  fail=187;assert(native_heartbeat_take_ticks(&h,&ticks)==187);fail=0;
+ replyValue=NATIVE_HEARTBEAT_ARMED;assert(!native_heartbeat_arm(&h,0x12345678UL,&result));
+ assert(operation==0x97&&value==0x5678&&yvalue==0x1234&&result==NATIVE_HEARTBEAT_ARMED);
+ replyValue=NATIVE_HEARTBEAT_REQUEST_PENDING;assert(!native_heartbeat_arm(&h,edgeGeneration,&result)&&result==NATIVE_HEARTBEAT_REQUEST_PENDING);
+ replyValue=3;assert(native_heartbeat_arm(&h,edgeGeneration,&result)==187);replyValue=0;
+ assert(!native_heartbeat_observe(&h,0x89abcdefUL)&&operation==0x98&&value==0xcdef&&yvalue==0x89ab);
+ assert(!native_heartbeat_disarm(&h)&&operation==0x99);
+ assert(native_heartbeat_kick(255)==187);assert(!native_heartbeat_kick(7)&&operation==0x9a);
+ replyValue=1;assert(!native_heartbeat_claim_request(&h,&result)&&operation==0x9b&&result==1);
+ replyValue=0;assert(!native_heartbeat_claim_request(&h,&result)&&result==0);
  fail=187;assert(native_heartbeat_disable(&h)==187&&h.opened);
  n=closes;assert(native_heartbeat_close(&h)==187&&h.opened&&closes==n);fail=0;
  assert(!native_heartbeat_close(&h)&&!h.opened&&operation==0x91);
  n=calls;assert(!native_heartbeat_close(&h)&&calls==n);
  assert(native_heartbeat_query(&h,&s)==187&&native_heartbeat_take_ticks(&h,&ticks)==187);
  assert(native_heartbeat_snapshot(&h,&s)==187);
- puts("20 native heartbeat client/ownership checks passed");return 0;
+ puts("31 native heartbeat client/control-plane checks passed");return 0;
 }
