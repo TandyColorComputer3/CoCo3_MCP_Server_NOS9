@@ -1,6 +1,9 @@
 #ifndef DAGGORATH_COMPAT_PRESENT_H
 #define DAGGORATH_COMPAT_PRESENT_H
 #include "compat.h"
+#ifdef DAG_COMPAT_C6
+#include "heartbeat-broker.h"
+#endif
 
 typedef struct {
     Word conversionTicks;
@@ -9,6 +12,9 @@ typedef struct {
 } DagCompatPresentTiming;
 
 Byte dag_compat_present_open(void);
+#ifdef DAG_COMPAT_C6
+void dag_compat_present_set_broker(DagHeartbeatBroker *broker);
+#endif
 Byte dag_compat_present(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],
                         DagCompatPresentTiming *timing);
 Byte dag_compat_present_progress(const Byte logicalFrame[DAG_COMPAT_FRAME_BYTES],

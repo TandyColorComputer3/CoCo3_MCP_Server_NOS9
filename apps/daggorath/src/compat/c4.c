@@ -62,6 +62,27 @@ void dag_compat_c4_sync(const Game *g,Byte *s){
  s[0x6b]=g->seed[0];s[0x6c]=g->seed[1];s[0x6d]=g->seed[2];s[0x77]=255;s[0x94]=255;
  memcpy(s+DAG_COMPAT_CCB_BASE,g->creatures,32*17);memcpy(s+0x03f4,g->maze,1024);memcpy(s+0x0915,g->objects,72*14);
 }
+#ifdef DAG_COMPAT_C6
+static Byte sync_bytes(Byte *target,const Byte *source,Word size,Byte clear,
+                       Byte (*progress)(void *),void *context){Byte e;Word n;
+ while(size){n=size>64?64:size;if(clear)memset(target,0,n);else memcpy(target,source,n);
+  target+=n;if(source)source+=n;size-=n;if(progress&&(e=progress(context)))return e;
+ }
+ return 0;
+}
+Byte dag_compat_c4_sync_progress(const Game *g,Byte *s,
+                                 Byte (*progress)(void *),void *context){Byte e;
+ e=sync_bytes(s,0,DAG_COMPAT_STATE_BYTES,1,progress,context);if(e)return e;
+ s[0x13]=g->row;s[0x14]=g->col;s[0x23]=g->dir;s[0x81]=g->level;
+ state_word(s,0x0f,OBASE+(Word)g->count*14);state_word(s,0x15,g->weight);state_word(s,0x17,g->power);
+ state_word(s,0x1d,g->hand);state_word(s,0x1f,g->rightHand);state_word(s,0x21,g->damage);
+ state_word(s,0x24,g->torch);s[0x26]=g->lit;state_word(s,0x29,g->bag);
+ s[0x6b]=g->seed[0];s[0x6c]=g->seed[1];s[0x6d]=g->seed[2];s[0x77]=255;s[0x94]=255;
+ e=sync_bytes(s+DAG_COMPAT_CCB_BASE,(const Byte *)g->creatures,32*17,0,progress,context);if(e)return e;
+ e=sync_bytes(s+0x03f4,g->maze,1024,0,progress,context);if(e)return e;
+ return sync_bytes(s+0x0915,(const Byte *)g->objects,72*14,0,progress,context);
+}
+#endif
 void dag_compat_c4_init(Game *g,Byte *state,Byte second){static const Byte demdat[]={13,15,16,255};Byte type,level=2,n,r,c,i,off,births;int t;Word p,tail;Byte *o,*cr;
 #ifdef DAG_COMPAT_TEST
  randomCalls=0;

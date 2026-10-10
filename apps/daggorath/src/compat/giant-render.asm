@@ -69,6 +69,13 @@ V_NEW equ $ff
 _dag_compat_render_giant
         pshs    cc,dp,x,y,u
         ldx     10,s
+        ifdef   DAG_COMPAT_C6
+* The original Giant renderer can span a native heartbeat edge.  Retain the
+* resident CMOC Y in the caller-owned context and service the callback between
+* complete VECTOR primitives; no unfinished logical frame is presented.
+        sty     9,x
+        clr     11,x
+        endc
         ldd     ,x
         tstb
         bne     pic_bad_align
@@ -104,7 +111,13 @@ viewer_front
         beq     pic_bad
         leax    d,x
         lbsr    cmrdrw
-pic_ok  clrb
+pic_ok
+        ifdef   DAG_COMPAT_C6
+        ldx     10,s
+        ldb     11,x
+        else
+        clrb
+        endc
         puls    cc,dp,x,y,u,pc
 pic_bad_align
 pic_bad ldb     #187
@@ -227,6 +240,11 @@ vctabs  tst     <DRWFLG
         bra     vctl10
 vabs00  bsr     vabs10
         lbsr    vector
+        ifdef   DAG_COMPAT_C6
+        lbsr    giant_progress
+        tstb
+        bne     vctend
+        endc
         bra     vctl10
 vabs10  bsr     newold
 vabs20  ldb     ,x+
@@ -277,10 +295,42 @@ vrel20  lslb
         addd    <VCNTRX
         std     <X1
         lbsr    vector
+        ifdef   DAG_COMPAT_C6
+        lbsr    giant_progress
+        tstb
+        bne     vctend
+        endc
         bra     vctrel
 vctnew_rel
         clr     <DRWFLG
+        ifdef   DAG_COMPAT_C6
+        lbra    vctl10
+        else
         bra     vctl10
+        endc
+        ifdef   DAG_COMPAT_C6
+* Called only at a complete VECTOR boundary.  At entry, the render context is
+* 18,S: 10 bytes above the outer saved register set plus the C argument and
+* the CMRDRW/VCTLST return frames.  Preserve the cartridge renderer state,
+* restore resident CMOC Y, and invoke the caller's progress callback.
+giant_progress
+        pshs    cc,dp,a,x,y,u
+        ldx     27,s
+        ldu     7,x
+        ldy     9,x
+        ldx     5,x
+        bne     giant_progress_call
+        clrb
+        bra     giant_progress_done
+giant_progress_call
+        pshs    u
+        jsr     ,x
+        leas    2,s
+        ldx     27,s
+        stb     11,x
+giant_progress_done
+        puls    cc,dp,a,x,y,u,pc
+        endc
 newold ldd     <Y1
         std     <Y0
         ldd     <X1

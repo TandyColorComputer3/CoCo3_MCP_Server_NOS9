@@ -45,6 +45,21 @@ Byte ipc_read(Byte path,Byte *data,Word count){Byte e;Word n;
  stb :e
  }if(e)return e;if(!n||n>count)return AUDIO_IO;data+=n;count-=n;}
  return 0;}
+Byte ipc_write(Byte path,const Byte *data,Word count){Byte e;Word n;
+ while(count){asm{
+ pshs y
+ lda :path
+ ldx :data
+ ldy :count
+ os9 $8a
+ sty :n
+ bcs @bad
+ clrb
+@bad
+ puls y
+ stb :e
+ }if(e)return e;if(!n||n>count)return AUDIO_IO;data+=n;count-=n;}
+ return 0;}
 Byte ipc_fork(const char *name,const char *args,Byte *pid){Word length=strlen(args);Byte e,n;
  asm{
  pshs y,u
@@ -90,3 +105,14 @@ Byte ipc_self_pid(Byte *pid){Byte e,n;asm{
  puls y
  stb :e
  }if(!e)*pid=n;return e;}
+/* NitrOS-9 f470fa52 level1/modules/kernel/fsprior.asm: F$SPrior ($0d)
+ * accepts the target PID in A and its new 0..255 priority in B. */
+Byte ipc_priority(Byte pid,Byte priority){Byte e;asm{
+ lda :pid
+ ldb :priority
+ os9 $0d
+ bcs @bad
+ clrb
+@bad
+ stb :e
+ }return e;}

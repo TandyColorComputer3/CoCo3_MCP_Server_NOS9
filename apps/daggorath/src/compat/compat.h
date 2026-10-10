@@ -11,6 +11,15 @@
 #define DAG_COMPAT_STRIP_ROWS 32
 #define DAG_COMPAT_STRIP_SOURCE_BYTES 1024
 #define DAG_COMPAT_STRIP_TARGET_BYTES 2048
+#ifdef DAG_COMPAT_C6
+#define DAG_COMPAT_PRESENT_ROWS 8
+#define DAG_COMPAT_PRESENT_SOURCE_BYTES 256
+#define DAG_COMPAT_PRESENT_TARGET_BYTES 512
+#else
+#define DAG_COMPAT_PRESENT_ROWS DAG_COMPAT_STRIP_ROWS
+#define DAG_COMPAT_PRESENT_SOURCE_BYTES DAG_COMPAT_STRIP_SOURCE_BYTES
+#define DAG_COMPAT_PRESENT_TARGET_BYTES DAG_COMPAT_STRIP_TARGET_BYTES
+#endif
 
 /* Original $0200..$0F04 state is based at compatibility offset zero. */
 #define DAG_COMPAT_ORIGINAL_BASE 0x0200
@@ -29,6 +38,12 @@ typedef struct {
     Byte *state;
     Byte *logicalFrame;
     Byte mode;
+#ifdef DAG_COMPAT_C6
+    Byte (*progress)(void *);
+    void *progressContext;
+    Word residentY;
+    Byte progressError;
+#endif
 } DagCompatRenderContext;
 
 /* Reentrant adapter for the original VECTOR DDA. Coordinates are already
@@ -83,6 +98,7 @@ enum {
 Byte dag_compat_render_giant(DagCompatRenderContext *context);
 Byte dag_compat_vector_line(DagCompatLineContext *context);
 void dag_compat_expand_strip(const Byte *source, Byte *target);
+void dag_compat_expand_slice(const Byte *source, Byte *target);
 Byte dag_compat_text_apply(DagCompatTextContext *context);
 Byte dag_compat_text_cell(DagCompatCellContext *context);
 Byte dag_compat_render_wizard(DagCompatWizardContext *context);

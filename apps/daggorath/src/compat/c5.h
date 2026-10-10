@@ -11,6 +11,10 @@ typedef struct {
  Byte (*command)(Game *,const char *,GameCombat *,Byte *,Byte *);
  Byte (*scheduler)(DagSchedulerContextV1 *,Byte,Word);
  Byte (*word)(Game *,Byte *,const char *,Byte);
+#ifdef DAG_COMPAT_C6
+ Byte (*progress)(void *);
+ void *progressContext;
+#endif
 } DagCompatC5Services;
 
 typedef struct {
@@ -29,6 +33,9 @@ void dag_compat_c5_init(DagCompatC5 *,Game *,Byte *,Byte *,DagSchedulerContextV1
 Byte dag_compat_c5_character(DagCompatC5 *,Byte character,Byte origin);
 Byte dag_compat_c5_autoplay(DagCompatC5 *,Byte commandIndex);
 void dag_compat_c5_prepare_view(const Game *,Byte *state,Byte range);
+#ifdef DAG_COMPAT_C6
+void dag_compat_c5_prepare_view_synced(const Game *,Byte *state,Byte range);
+#endif
 Byte dag_compat_c5_type5_at(const Game *,Byte range,Byte relativeDirection);
 
 #endif

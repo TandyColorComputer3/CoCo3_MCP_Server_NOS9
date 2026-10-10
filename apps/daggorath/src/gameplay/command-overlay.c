@@ -30,6 +30,17 @@ static void clear_combat(GameCombat *c){Byte i;
 }
 static void combat_event(GameCombat *c,Byte event){if(c&&c->eventCount<3)c->events[c->eventCount++]=event;}
 static Byte equal(const char *a,const char *b){while(*a&&*a==*b){++a;++b;}return *a==*b;}
+/* PTURN.ASM:PMOVE encodes FORWARD, RIGHT, BACKWARD, and LEFT as relative
+ * direction offsets 0, 1, 2, and 3 without changing the player's facing. */
+#ifdef DAG_COMPAT_C6
+static int move_relative(const char *s){
+ if(equal(s,"MOVE"))return 0;
+ if(equal(s,"MOVE RIGHT"))return 1;
+ if(equal(s,"MOVE BACKWARD"))return 2;
+ if(equal(s,"MOVE LEFT"))return 3;
+ return -1;
+}
+#endif
 
 /* PARSER.ASM GETTOK/PARSE0/PAROBJ/PARHND.  The byte tables are a deliberately
  * small generated subset: no broad game resource table is copied into this
@@ -122,12 +133,19 @@ static Byte attack(Game *g,const char *s,GameCombat *combat,const DagOverlayServ
  services->health(services->opaque,g);return GAME_OK;
 }
 static Byte command(Game *g,const char *s,GameCombat *combat,const DagOverlayServices *services){Word *hand;Byte *o,attackResult;int r,c;Byte result=GAME_OK;
+#ifdef DAG_COMPAT_C6
+ int relative;
+#endif
  clear_combat(combat);if(g->faint||g->dead)return GAME_FAINT;
  attackResult=attack(g,s,combat,services);if(attackResult!=255)return attackResult;
  if(equal(s,"TURN LEFT"))g->dir=(g->dir-1)&3;
  else if(equal(s,"TURN RIGHT"))g->dir=(g->dir+1)&3;
  else if(equal(s,"TURN AROUND"))g->dir=(g->dir+2)&3;
+#ifdef DAG_COMPAT_C6
+ else if((relative=move_relative(s))>=0){Byte direction=(Byte)((g->dir+relative)&3);r=g->row+dr[direction];c=g->col+dc[direction];if(cell(g,r,c)==255)result=GAME_BLOCKED;else {g->row=r;g->col=c;}
+#else
  else if(equal(s,"MOVE")){r=g->row+dr[g->dir];c=g->col+dc[g->dir];if(cell(g,r,c)==255)result=GAME_BLOCKED;else {g->row=r;g->col=c;}
+#endif
   g->damage=(Word)(g->damage+(g->weight>>3)+3);services->health(services->opaque,g);
  }else if(equal(s,"USE LEFT")||equal(s,"USE RIGHT")){hand=equal(s,"USE LEFT")?&g->hand:&g->rightHand;if(!*hand||ocb(g,*hand)[10]!=5)return GAME_INVALID;
   g->torch=*hand;o=ocb(g,*hand);putword(o,g->bag);g->bag=*hand;*hand=0;

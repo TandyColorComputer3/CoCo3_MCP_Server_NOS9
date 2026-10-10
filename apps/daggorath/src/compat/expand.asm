@@ -13,7 +13,7 @@ expand_one macro
         endm
 
         section code
-        export  _dag_compat_expand_strip
+        export  _dag_compat_expand_strip,_dag_compat_expand_slice
 
 * Expand one original 256x32x1-bpp strip (1024 bytes) into the mapped
 * 512x32 type-5 CoWin strip (2048 bytes). Each source bit becomes two adjacent
@@ -27,6 +27,17 @@ _dag_compat_expand_strip
         ldu     10,s
         leay    doubled,pcr
         lda     #128
+        bra     expand_enter
+* C6 uses eight-row PutBlk units so a completed display transfer cannot
+* queue more than one bounded piece ahead of a native heartbeat update.
+* The pixel transform and calling convention are identical to the C1 leaf.
+_dag_compat_expand_slice
+        pshs    x,y,u
+        ldx     8,s
+        ldu     10,s
+        leay    doubled,pcr
+        lda     #32
+expand_enter
         pshs    a
 expand_loop
         expand_one

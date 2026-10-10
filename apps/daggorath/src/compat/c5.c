@@ -34,11 +34,34 @@ static Byte dispatch(DagCompatC5 *c){GameCombat combat;Byte e,result,view,comman
  c->line[commandLength]=0;
  e=c->services->command(c->game,c->line,&combat,&result,&view);if(e)return e;
  c->lastResult=result;c->lastView=view;++c->commandCount;
+#ifdef DAG_COMPAT_C6
+ /* PATTK.ASM:PATT24 emits OUTSTI's "  !!!" hit indication before DAMAGE
+  * returns through HUPDAT. PLAY30 already left one separator blank after the
+  * final command word, so append the second blank and three exclamation
+  * glyphs here, after dodcmd has unmapped and while the resident presenter is
+  * safe to call. */
+ if(combat.hit&&c->length<=27){Byte i,blanks=0;
+  if(c->length&&c->line[c->length-1]==' ')blanks=1;
+  c->text.operation=DAG_COMPAT_TEXT_CHARACTER;
+  while(blanks++<2){c->line[c->length++]=' ';c->text.value=0;
+   e=dag_compat_text_apply(&c->text);if(e)return e;}
+  for(i=0;i<3;i++){c->line[c->length++]='!';c->text.value=27;
+   e=dag_compat_text_apply(&c->text);if(e)return e;}
+  c->line[c->length]=0;
+  if(c->services->word&&(e=c->services->word(c->game,c->logicalFrame,c->line,c->length)))return e;
+ }
+#endif
  /* HUMAN:PLAY99 returns PLAYER to Q.JIF. AUTTAB's WAIT calls have already
   * promoted source tasks; keyboard input advances the ordinary one jiffy. */
  if(c->origin==DAG_COMPAT_C5_HUMAN){e=c->services->scheduler(c->scheduler,DOD_SCHED_CLOCK,1);if(e)return e;}
  e=c->services->scheduler(c->scheduler,DOD_SCHED_BOUNDARY,0);if(e)return e;
- dag_compat_c4_sync(c->game,c->originalState);c->length=c->words=0;
+#ifdef DAG_COMPAT_C6
+ e=dag_compat_c4_sync_progress(c->game,c->originalState,c->services->progress,
+                               c->services->progressContext);if(e)return e;
+#else
+ dag_compat_c4_sync(c->game,c->originalState);
+#endif
+ c->length=c->words=0;
  /* HUMAN:HMAN70 invokes PROMPT: CR, DOT, BAR, BS.  The compatibility
   * framebuffer keeps the visible dot; cursor phase belongs to presentation. */
  c->text.operation=DAG_COMPAT_TEXT_CHARACTER;c->text.value=31;
@@ -90,6 +113,21 @@ void dag_compat_c5_prepare_view(const Game *g,Byte *s,Byte range){
  Byte row=(Byte)(g->row+rowStep[g->dir]*range);
  Byte col=(Byte)(g->col+colStep[g->dir]*range),cell,i,*o;
  dag_compat_c4_sync(g,s);s[0x05]=0;s[0x06]=128;s[0x07]=0;s[0x08]=76;
+ s[0x23]=g->dir;s[0x7c]=row;s[0x7d]=col;s[0x8b]=range;
+ s[0x6e]=s[0x6f]=0;
+ if(g->torch>=0x0b15&&g->torch<0x0b15+(Word)g->count*14){
+  o=(Byte *)g->objects[(g->torch-0x0b15)/14];s[0x6e]=o[7];s[0x6f]=o[8];
+ }
+ cell=g->maze[(Word)row*32+col];
+ for(i=0;i<4;i++){s[0x7f4+i]=cell&3;s[0x7f4+4+i]=cell&3;cell>>=2;}
+}
+#endif
+#ifdef DAG_COMPAT_C6
+void dag_compat_c5_prepare_view_synced(const Game *g,Byte *s,Byte range){
+ static const signed char rowStep[]={-1,0,1,0},colStep[]={0,1,0,-1};
+ Byte row=(Byte)(g->row+rowStep[g->dir]*range);
+ Byte col=(Byte)(g->col+colStep[g->dir]*range),cell,i,*o;
+ s[0x05]=0;s[0x06]=128;s[0x07]=0;s[0x08]=76;
  s[0x23]=g->dir;s[0x7c]=row;s[0x7d]=col;s[0x8b]=range;
  s[0x6e]=s[0x6f]=0;
  if(g->torch>=0x0b15&&g->torch<0x0b15+(Word)g->count*14){

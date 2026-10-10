@@ -83,6 +83,64 @@ if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
 ident=subprocess.check_output([a.os9,'ident',str(out/'dodcplay')],text=True);assert '(Good)' in ident
 record['play']={'module':'dodcplay','ident':ident,'sha256':hashlib.sha256((out/'dodcplay').read_bytes()).hexdigest(),
   'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in c5_sources}}
+c6_sources=[app/'test/compat_c6_target.c']+[
+    app/'src/compat/giant-render-c6.asm' if source==app/'src/compat/giant-render.asm' else source
+    for source in c5_sources[1:] if source!=app/'src/audio/native_heartbeat.c']
+c6_sources.insert(1,app/'src/compat/heartbeat-broker-client.asm')
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1536','-DDOD_COMMAND_OVERLAY','-DDAG_COMPAT_VIEWER_16','-DDAG_COMPAT_HEARTBEAT','-DDAG_COMPAT_C6',
+     '--intdir='+str(out),'-I'+str(app/'src'),'-I'+str(app/'src/compat'),'-I'+str(app/'src/audio'),'-I'+str(app/'test'),'-I'+str(out),'-o','dodcgame']+list(map(str,c6_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodcgame.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodcgame')],text=True);assert '(Good)' in ident
+record['interactive']={'module':'dodcgame','ident':ident,'sha256':hashlib.sha256((out/'dodcgame').read_bytes()).hexdigest(),
+  'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in c6_sources}}
+broker_sources=[app/'src/compat/heartbeat-broker-service.c',app/'src/audio/native_heartbeat.c',
+                app/'src/audio/ipc.c',app/'src/os9.c']
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=768','-DDAG_HEARTBEAT_CONTROL_PLANE','--intdir='+str(out),
+     '-I'+str(app/'src'),'-I'+str(app/'src/compat'),'-I'+str(app/'src/audio'),'-o','dodhbp']+list(map(str,broker_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodhbp.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodhbp')],text=True);assert '(Good)' in ident
+record['interactive']['broker']={'module':'dodhbp','ident':ident,
+  'sha256':hashlib.sha256((out/'dodhbp').read_bytes()).hexdigest(),
+  'sources':{str(f.relative_to(app)):hashlib.sha256(f.read_bytes()).hexdigest() for f in broker_sources}}
+stress_sources=[app/'test/compat_c6_broker_target.c',app/'test/compat_c6_trace_io.asm',app/'src/compat/heartbeat-broker-client.asm',
+                app/'src/compat/expand.asm',app/'src/compat/present.c',app/'src/gameplay/opening-heartbeat.c',
+                app/'src/audio/ipc.c',app/'src/window-path.c',app/'src/os9.c']
+cmd=['cmoc','--os9','-O2','--intermediate','--verbose','--add-os9-stack-space=1024',
+     '-DDAG_COMPAT_HEARTBEAT','-DDAG_COMPAT_C6','--intdir='+str(out),
+     '-I'+str(app/'src'),'-I'+str(app/'src/compat'),'-I'+str(app/'src/audio'),'-o','dodhbst']+list(map(str,stress_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodhbst.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+ident=subprocess.check_output([a.os9,'ident',str(out/'dodhbst')],text=True);assert '(Good)' in ident
+record['interactive']['stress']={'module':'dodhbst','ident':ident,
+  'sha256':hashlib.sha256((out/'dodhbst').read_bytes()).hexdigest()}
+show_sources=[app/'test/compat_c6_trace_show.c',app/'src/audio/ipc.c',app/'src/os9.c']
+cmd=['cmoc','--os9','-O2','--add-os9-stack-space=512','--intdir='+str(out),
+     '-I'+str(app/'src'),'-I'+str(app/'src/audio'),'-o','dodhbs']+list(map(str,show_sources))
+r=subprocess.run(cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodhbs.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+# C6 extends PTURN's connected command graph without replacing the accepted
+# C5 dodcmd artifact.  The output filename is distinct; its OS-9 module name
+# remains dodcmd because the resident ABI links that established name.
+c6_overlay=app/'src/gameplay/command-overlay.c'
+c6_overlay_cmd=['cmoc','--os9','-O2','--function-stack=0','-DDAG_COMPAT_C6','-S',
+                '-I'+str(app/'src'),'-I'+str(out),str(c6_overlay)]
+r=subprocess.run(c6_overlay_cmd,cwd=out,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);(out/'dodcmd6-build.log').write_text(r.stdout)
+if r.returncode:print(r.stdout);raise SystemExit(r.returncode)
+def run_c6(command):subprocess.run(command,cwd=out,check=True)
+run_c6(['lwasm','-fobj','--pragma=forwardrefmax','-DOS9','-o','command-overlay-c6.o','command-overlay.s'])
+run_c6(['lwasm','-fobj','--pragma=forwardrefmax','-DOS9','-o','command-overlay-module-c6.o',str(app/'src/gameplay/command-overlay-module.asm')])
+crt=Path('/usr/local/share/cmoc/lib/libcmoc-crt-os9.a');std=Path('/usr/local/share/cmoc/lib/libcmoc-std-os9.a')
+run_c6(['lwar','--extract',str(crt),'MUL16.os9_o','DIV16.os9_o','shiftByteRightUnsigned.os9_o','tfrZtoB.os9_o'])
+run_c6(['lwar','--extract',str(std),'MUL168.os9_o'])
+c6_overlay_link=['lwlink','--format=raw','--output=command-overlay-code.bin','command-overlay-module-c6.o','command-overlay-c6.o',
+                 'MUL16.os9_o','DIV16.os9_o','shiftByteRightUnsigned.os9_o','tfrZtoB.os9_o','MUL168.os9_o']
+run_c6(c6_overlay_link)
+run_c6(['lwasm','--format=os9','--pragma=forwardrefmax','-o','dodcmd6','-I'+str(out),str(app/'src/gameplay/command-overlay-pack.asm')])
+c6_overlay_ident=subprocess.check_output([a.os9,'ident',str(out/'dodcmd6')],text=True);assert '(Good)' in c6_overlay_ident
+record['interactive']['overlay']={'module':'dodcmd6','ident':c6_overlay_ident,
+  'sha256':hashlib.sha256((out/'dodcmd6').read_bytes()).hexdigest(),'command':c6_overlay_cmd+c6_overlay_link}
 heartbeat_out=out/'heartbeat';heartbeat_out.mkdir(exist_ok=True)
 subprocess.run(['python3',str(app/'build_heartbeat.py'),'--out',str(heartbeat_out),'--os9',a.os9],check=True,
                stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)

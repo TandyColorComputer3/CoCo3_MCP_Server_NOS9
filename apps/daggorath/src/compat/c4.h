@@ -9,6 +9,10 @@ void dag_compat_c4_init(Game *game,Byte *state,Byte second);
  * connected C5 semantic checkpoint.  This copies only established packed
  * source fields; presentation scratch is owned by the viewer. */
 void dag_compat_c4_sync(const Game *game,Byte *state);
+#ifdef DAG_COMPAT_C6
+Byte dag_compat_c4_sync_progress(const Game *game,Byte *state,
+                                Byte (*progress)(void *),void *context);
+#endif
 void dag_compat_c4_map(const Game *game,Byte *frame);
 void dag_compat_c4_initial(const Game *game,Byte *frame);
 void dag_compat_c4_prompt(Byte *frame);
