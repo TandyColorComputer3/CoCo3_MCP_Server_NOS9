@@ -184,3 +184,94 @@ human-review synchronization, or cartridge choreography.
 
 The general Level II findings and their evidence limits are recorded in
 [NITROS9_EOU_LEVEL2_LESSONS.md](../technical/NITROS9_EOU_LEVEL2_LESSONS.md).
+
+## 2026-10-11 — Option B: practical stock-EOU compatibility
+
+**Status: USER APPROVED DEVELOPMENT DIRECTION.** Daggorath C6 is to remain a
+practical application for an ordinary supported NitrOS-9 EOU installation.
+This decision selects a distribution constraint; it does not waive heartbeat,
+gameplay, resource, or presentation correctness.
+
+The required direction is:
+
+1. Daggorath runs on a stock supported NitrOS-9 EOU installation.
+2. No bootfile modification is mandatory.
+3. No replacement GrfDrv is mandatory.
+4. No replacement CoWin is mandatory.
+5. No custom kernel is mandatory.
+6. Native heartbeat timing remains authoritative and unchanged.
+7. PB1 phase and generation accounting remain correct.
+8. Audio and graphics derive from the authoritative game event.
+9. Heartbeat presentation must not accumulate drift.
+10. Heart animation must not remain permanently frozen.
+11. No logical heartbeat generation may be abandoned or duplicated.
+12. No obsolete status-heart phase may be presented.
+13. Cartridge gameplay behavior remains the behavioral reference.
+14. NitrOS-9 multitasking compatibility is preserved.
+15. Existing gameplay DAT limits remain binding.
+16. Speech/Sound Cartridge effects must be integrated and measured before
+    final audiovisual acceptance.
+17. Final acceptance includes human visual review.
+18. The cartridge remains the oracle when host presentation differs.
+
+### Proposed practical visual timing policy
+
+The following categories must remain distinct:
+
+- **Original-cartridge measurement:** the Stage 3E.0 reference measured a
+  typical completed-raster latency of approximately one MAME frame and no
+  missing, duplicate, obsolete, extra, or partial completed-heart transition
+  in 256 observed events. See
+  [DAGGORATH_CARTRIDGE_HEARTBEAT_TIMING.md](DAGGORATH_CARTRIDGE_HEARTBEAT_TIMING.md).
+- **Existing strict C6 engineering record:** maximum edge-to-complete-raster
+  latency remains two source ticks, approximately 33.34 ms. Existing tests and
+  historical results retain this threshold.
+- **Proposed practical candidates:** typical latency of one to two frames;
+  occasional three-frame latency subject to measurement and human review; a
+  four-frame latency treated as an exceptional warning rather than presumed
+  acceptable.
+- **Approved architecture:** stock-EOU compatibility may be investigated
+  within the above correctness constraints.
+- **Unapproved numerical change:** no new maximum has been approved, and no
+  acceptance test may be changed from these provisional candidates alone.
+
+No practical envelope permits accumulating drift, permanent stalls, lost or
+duplicated logical events, or obsolete-phase presentation. Tearing has not
+been declared acceptable and requires direct visual evaluation. The fastest
+three-tick heartbeat needs separate treatment because four frames exceed one
+native heartbeat period.
+
+### Speech/Sound Cartridge timing
+
+The original cartridge heartbeat changes PIA PB1. A planned Tandy
+Speech/Sound Cartridge uses a different audio subsystem, so its submission,
+acceptance, waveform onset, and completion latency must be measured rather
+than assumed equivalent.
+
+Future audiovisual validation must correlate the authoritative game event,
+sound-command submission, cartridge acceptance, actual audio onset where
+measurable, sound-effect completion, graphics presentation, and gameplay
+responsiveness. The visual broker must not become the authoritative audio
+clock.
+
+### Architectures rejected as mandatory dependencies
+
+The following may remain optional future EOU enhancement work, but are not
+acceptable mandatory dependencies for stock-EOU Daggorath distribution:
+
+- replacement GrfDrv;
+- modified EOU bootfile;
+- direct GIME register manipulation by the gameplay process;
+- unsupported scanline polling;
+- custom kernel scheduling changes;
+- mandatory full-screen page flipping.
+
+The decision is based on portability, ownership, multitasking, and verified
+installed-EOU behavior. It is not a claim that these approaches are
+universally impossible.
+
+Related evidence and constraints are recorded in
+[DAGGORATH_C6_HEARTBEAT_ARCHITECTURE.md](DAGGORATH_C6_HEARTBEAT_ARCHITECTURE.md),
+[DAGGORATH_CARTRIDGE_STORYBOARD.md](DAGGORATH_CARTRIDGE_STORYBOARD.md), the
+[accepted heartbeat experiments](../../apps/daggorath/experiments/heartbeat-wake/README.md),
+and [NITROS9_EOU_LEVEL2_LESSONS.md](../technical/NITROS9_EOU_LEVEL2_LESSONS.md).

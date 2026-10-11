@@ -1,0 +1,11 @@
+Stage 3E.0 source/oracle identity
+ROM: /private/tmp/c6-stage3a-build-a/original.rom
+ROM SHA-256: 35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571
+Source: /Volumes/SEDONA/Projects/daggorath-reference
+Source commit: a94326f00ebb16a106b540c58bc2ccf5f7b66dac
+Status: source-built byte-verified cartridge oracle; not independently authenticated retail dump.
+MAME: 0.289 (ample-289-u2), coco3h, 2 MiB, RGB screen_config=1, cartridge only.
+Original code: COMMON.ASM CLOCK/CLK30/CLK32; COMTXT.ASM TXTDPB/DPB10; PLOOK.ASM INIVUX.
+Symbols: CLOCK=C27D CLK30=C2A9 sound LDB=C2B5 PB1 STB=C2B9 CLK32=C2D1 TXTDPB=CA17 HEARTF=02AD HEARTC=02AE HEARTR=02AF HEARTS=02B0 HBEATF=02B1.
+Video: framebuffer pages 1000/2800, heart status bytes 230F/2310 and 3B0F/3B10 plus 32 bytes per row, seven rows.
+Completed output crop: x=304..335, y=177..183 in MAME 640x239 output.

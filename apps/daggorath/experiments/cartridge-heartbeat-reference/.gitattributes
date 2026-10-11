@@ -1,0 +1,2 @@
+# Measurement CSVs retain their original CRLF bytes as immutable evidence.
+evidence/**/*.csv binary

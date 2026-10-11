@@ -1,0 +1,4 @@
+mame=0.289 screen=sol.screen_device *: 0x10de0afd8 size=640x239 frame_period=0.016688153335 scan_period=0.000063695242 duration=125.000
+rom_sha256=35e6a77354dcf1a3048f276824b7a0f9f759115fdd40603664cebfb3a7da6571
+screen_mapping=x64+source_x*2,y24+source_y;heart=x304,y177,32x7 output pixels
+posted_space=20.007630858

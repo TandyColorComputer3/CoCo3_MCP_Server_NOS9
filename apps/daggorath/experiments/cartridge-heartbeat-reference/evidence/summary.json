@@ -1,0 +1,588 @@
+{
+  "visual_phase_hashes": {
+    "large": "see per-run PNG crop hashes e5750a0a9ca6/6218df7b8da8"
+  },
+  "frame_period_ms": 16.688153335,
+  "video_hz": 59.92274758781751,
+  "idle100": {
+    "label": "100 consecutive natural idle",
+    "events": 100,
+    "pb1_to_complete_visible": {
+      "n": 100,
+      "min_ms": 15.832942999999489,
+      "median_ms": 16.19377849999637,
+      "p95_ms": 16.197073650007354,
+      "max_ms": 16.197692999995184,
+      "stddev_ms": 0.035973381388706656
+    },
+    "logical_to_complete_visible": {
+      "n": 100,
+      "min_ms": 15.858645000001559,
+      "median_ms": 16.219479999996622,
+      "p95_ms": 16.222775599995742,
+      "max_ms": 16.223394999997254,
+      "stddev_ms": 0.03597333986195555
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 100,
+      "min_ms": 0.9889520000001539,
+      "median_ms": 0.9900700000002871,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0011175200764430597
+    },
+    "pb1_to_waveform": {
+      "n": 92,
+      "min_ms": 0.04054566667122117,
+      "median_ms": 0.05403250000668436,
+      "p95_ms": 0.06357701666139803,
+      "max_ms": 0.06673600000794977,
+      "stddev_ms": 0.006498544214132389
+    },
+    "waveform_to_complete_visible": {
+      "n": 92,
+      "min_ms": 15.786291333334646,
+      "median_ms": 16.1397141666626,
+      "p95_ms": 16.150784533331475,
+      "max_ms": 16.153682666669056,
+      "stddev_ms": 0.037291334138078586
+    },
+    "logical_to_pb1": {
+      "n": 100,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.025701999996741165,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.800002321696099e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 100,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.17655900000335123,
+      "p95_ms": 0.17767699999637898,
+      "max_ms": 0.1776770000034844,
+      "stddev_ms": 0.0011174100887345894
+    },
+    "framebuffer_write_span": {
+      "n": 100,
+      "min_ms": 0.7878089999948656,
+      "median_ms": 0.7878099999985011,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 3.570709535297729e-07
+    },
+    "heartbeat_intervals": {
+      "n": 99,
+      "min_ms": 767.2954989999994,
+      "median_ms": 767.6553209999995,
+      "p95_ms": 767.6597909999998,
+      "max_ms": 768.0162619999962,
+      "stddev_ms": 0.05127773500253254
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 92,
+    "audio_ambiguous": 8,
+    "busy_events": 5,
+    "max_busy_writes_pm1": 4864
+  },
+  "stress100": {
+    "label": "first 100 autoplay events",
+    "events": 100,
+    "pb1_to_complete_visible": {
+      "n": 100,
+      "min_ms": 16.188364000001343,
+      "median_ms": 16.19453800000059,
+      "p95_ms": 16.19621774999942,
+      "max_ms": 16.197159999990163,
+      "stddev_ms": 0.0016209079917504814
+    },
+    "logical_to_complete_visible": {
+      "n": 100,
+      "min_ms": 16.214064999999778,
+      "median_ms": 16.220239500000844,
+      "p95_ms": 16.221918749997855,
+      "max_ms": 16.222861999992233,
+      "stddev_ms": 0.0016208745669443149
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 100,
+      "min_ms": 0.9889519999930485,
+      "median_ms": 0.9900700000002871,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0011174900786469696
+    },
+    "pb1_to_waveform": {
+      "n": 91,
+      "min_ms": 0.013394333336691489,
+      "median_ms": 0.0526460000003226,
+      "p95_ms": 0.063856666663753,
+      "max_ms": 0.06682299999738461,
+      "stddev_ms": 0.008005838025306848
+    },
+    "waveform_to_complete_visible": {
+      "n": 91,
+      "min_ms": 16.126672333335534,
+      "median_ms": 16.141482666654383,
+      "p95_ms": 16.153392499994368,
+      "max_ms": 16.181080666669345,
+      "stddev_ms": 0.008196312635446555
+    },
+    "logical_to_pb1": {
+      "n": 100,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.025701999998517522,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.853859469219982e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 100,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.1765589999962458,
+      "p95_ms": 0.17767699999655662,
+      "max_ms": 0.17767700001058984,
+      "stddev_ms": 0.001117390090560277
+    },
+    "framebuffer_write_span": {
+      "n": 100,
+      "min_ms": 0.7878089999877602,
+      "median_ms": 0.7878099999985011,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 3.666064813492266e-07
+    },
+    "heartbeat_intervals": {
+      "n": 99,
+      "min_ms": 684.2089379999976,
+      "median_ms": 750.9660450000126,
+      "p95_ms": 767.6553219999998,
+      "max_ms": 767.6609079999963,
+      "stddev_ms": 33.95443464650382
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 91,
+    "audio_ambiguous": 9,
+    "busy_events": 23,
+    "max_busy_writes_pm1": 4873
+  },
+  "precombat": {
+    "label": "pre-combat",
+    "events": 10,
+    "pb1_to_complete_visible": {
+      "n": 10,
+      "min_ms": 16.19382600000563,
+      "median_ms": 16.195239500000014,
+      "p95_ms": 16.19576750000249,
+      "max_ms": 16.195799000001898,
+      "stddev_ms": 0.0005507486632777609
+    },
+    "logical_to_complete_visible": {
+      "n": 10,
+      "min_ms": 16.2195280000077,
+      "median_ms": 16.220941000000266,
+      "p95_ms": 16.22146895000256,
+      "max_ms": 16.221500000000333,
+      "stddev_ms": 0.0005506444929995661
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 10,
+      "min_ms": 0.9889520000001539,
+      "median_ms": 0.9900700000002871,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0011175000684829975
+    },
+    "pb1_to_waveform": {
+      "n": 10,
+      "min_ms": 0.043511000001217326,
+      "median_ms": 0.05560416666838819,
+      "p95_ms": 0.06328421667021188,
+      "max_ms": 0.06410066666262537,
+      "stddev_ms": 0.006240169822452897
+    },
+    "waveform_to_complete_visible": {
+      "n": 10,
+      "min_ms": 16.130648333344766,
+      "median_ms": 16.139897833333805,
+      "p95_ms": 16.148650000007336,
+      "max_ms": 16.15031500000441,
+      "stddev_ms": 0.006089472173628604
+    },
+    "logical_to_pb1": {
+      "n": 10,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.025701999994964808,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.5825737486375796e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 10,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.1765589999962458,
+      "p95_ms": 0.1776765500011379,
+      "max_ms": 0.17767699999637898,
+      "stddev_ms": 0.001117400091708514
+    },
+    "framebuffer_write_span": {
+      "n": 10,
+      "min_ms": 0.7878090000019711,
+      "median_ms": 0.7878100000056065,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 4.0000003313401374e-07
+    },
+    "heartbeat_intervals": {
+      "n": 9,
+      "min_ms": 750.9649269999983,
+      "median_ms": 750.9671620000091,
+      "p95_ms": 750.9678331999964,
+      "max_ms": 750.968279999995,
+      "stddev_ms": 0.0008780852906312174
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 10,
+    "audio_ambiguous": 0,
+    "busy_events": 3,
+    "max_busy_writes_pm1": 211
+  },
+  "combat": {
+    "label": "combat overlap",
+    "events": 5,
+    "pb1_to_complete_visible": {
+      "n": 5,
+      "min_ms": 16.19448699999282,
+      "median_ms": 16.195011999997178,
+      "p95_ms": 16.19618399999183,
+      "max_ms": 16.196459999989088,
+      "stddev_ms": 0.0006841235525187466
+    },
+    "logical_to_complete_visible": {
+      "n": 5,
+      "min_ms": 16.22018899999489,
+      "median_ms": 16.220712999995612,
+      "p95_ms": 16.221885199990993,
+      "max_ms": 16.222160999987523,
+      "stddev_ms": 0.0006837854586302612
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 5,
+      "min_ms": 0.9889520000001539,
+      "median_ms": 0.9911869999967848,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0010950036698738179
+    },
+    "pb1_to_waveform": {
+      "n": 3,
+      "min_ms": 0.05209700000818884,
+      "median_ms": 0.05527199999733057,
+      "p95_ms": 0.06321779999609589,
+      "max_ms": 0.06410066666262537,
+      "stddev_ms": 0.005078429253757385
+    },
+    "waveform_to_complete_visible": {
+      "n": 3,
+      "min_ms": 16.130648333344766,
+      "median_ms": 16.139214999995488,
+      "p95_ms": 16.14254499998964,
+      "max_ms": 16.14291499998899,
+      "stddev_ms": 0.0051375403541750065
+    },
+    "logical_to_pb1": {
+      "n": 5,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.025702000002070235,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.898997295581167e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 5,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.17767599999274353,
+      "p95_ms": 0.17767679999849406,
+      "max_ms": 0.17767699999637898,
+      "stddev_ms": 0.001094840372299614
+    },
+    "framebuffer_write_span": {
+      "n": 5,
+      "min_ms": 0.7878090000019711,
+      "median_ms": 0.7878099999913957,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 4.89897408962741e-07
+    },
+    "heartbeat_intervals": {
+      "n": 4,
+      "min_ms": 750.9649269999983,
+      "median_ms": 750.9671625000038,
+      "p95_ms": 750.9681124499956,
+      "max_ms": 750.968279999995,
+      "stddev_ms": 0.0012179681848428668
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 3,
+    "audio_ambiguous": 2,
+    "busy_events": 0,
+    "max_busy_writes_pm1": 0
+  },
+  "accelerated": {
+    "label": "post-attack HEARTR=41",
+    "events": 50,
+    "pb1_to_complete_visible": {
+      "n": 50,
+      "min_ms": 16.188699000011297,
+      "median_ms": 16.195691999996598,
+      "p95_ms": 16.19747739999653,
+      "max_ms": 16.197976000000835,
+      "stddev_ms": 0.0017462593464655461
+    },
+    "logical_to_complete_visible": {
+      "n": 50,
+      "min_ms": 16.214401000013368,
+      "median_ms": 16.221392999995032,
+      "p95_ms": 16.223178399994964,
+      "max_ms": 16.223678000002906,
+      "stddev_ms": 0.0017462572067927244
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 50,
+      "min_ms": 0.9889520000001539,
+      "median_ms": 0.9900700000002871,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0011174200784828312
+    },
+    "pb1_to_waveform": {
+      "n": 45,
+      "min_ms": 0.03928066665537244,
+      "median_ms": 0.05168633332175432,
+      "p95_ms": 0.06393080000748341,
+      "max_ms": 0.06575066666414386,
+      "stddev_ms": 0.0070023110727919745
+    },
+    "waveform_to_complete_visible": {
+      "n": 45,
+      "min_ms": 16.129575333337698,
+      "median_ms": 16.141517666667937,
+      "p95_ms": 16.153407199999492,
+      "max_ms": 16.15639733333296,
+      "stddev_ms": 0.007087561151181334
+    },
+    "logical_to_pb1": {
+      "n": 50,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.025701999994964808,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.983971793511247e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 50,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.1765589999962458,
+      "p95_ms": 0.17767700001058984,
+      "max_ms": 0.17767700001058984,
+      "stddev_ms": 0.0011174601036721297
+    },
+    "framebuffer_write_span": {
+      "n": 50,
+      "min_ms": 0.7878089999877602,
+      "median_ms": 0.7878099999913957,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 3.4698740835588114e-07
+    },
+    "heartbeat_intervals": {
+      "n": 49,
+      "min_ms": 684.2089379999976,
+      "median_ms": 684.2145250000016,
+      "p95_ms": 684.2174312000083,
+      "max_ms": 684.220112999995,
+      "stddev_ms": 0.0021463518394997634
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 45,
+    "audio_ambiguous": 5,
+    "busy_events": 12,
+    "max_busy_writes_pm1": 4873
+  },
+  "all_idle_valid": {
+    "label": "all idle valid",
+    "events": 128,
+    "pb1_to_complete_visible": {
+      "n": 128,
+      "min_ms": 15.832942999999489,
+      "median_ms": 16.194114000001036,
+      "p95_ms": 16.19717025000398,
+      "max_ms": 16.19774200000279,
+      "stddev_ms": 0.031870776950256356
+    },
+    "logical_to_complete_visible": {
+      "n": 128,
+      "min_ms": 15.858645000001559,
+      "median_ms": 16.219815000003024,
+      "p95_ms": 16.222871600003685,
+      "max_ms": 16.22344400000486,
+      "stddev_ms": 0.03187074024990609
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 128,
+      "min_ms": 0.9889520000001539,
+      "median_ms": 0.9900700000002871,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0011175235156666013
+    },
+    "pb1_to_waveform": {
+      "n": 117,
+      "min_ms": 0.039163666670560815,
+      "median_ms": 0.05352200000174889,
+      "p95_ms": 0.06427126666324057,
+      "max_ms": 0.06673600000794977,
+      "stddev_ms": 0.006775370952929701
+    },
+    "waveform_to_complete_visible": {
+      "n": 117,
+      "min_ms": 15.786291333334646,
+      "median_ms": 16.140105666664795,
+      "p95_ms": 16.152639133335356,
+      "max_ms": 16.157057333330727,
+      "stddev_ms": 0.03337425247637693
+    },
+    "logical_to_pb1": {
+      "n": 128,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.02570200000029388,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.841231733416047e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 128,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.17655900000335123,
+      "p95_ms": 0.17767699999637898,
+      "max_ms": 0.1776770000034844,
+      "stddev_ms": 0.0011174141538818135
+    },
+    "framebuffer_write_span": {
+      "n": 128,
+      "min_ms": 0.7878089999948656,
+      "median_ms": 0.7878099999985011,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 3.630918079109422e-07
+    },
+    "heartbeat_intervals": {
+      "n": 127,
+      "min_ms": 767.2954989999994,
+      "median_ms": 767.6553209999995,
+      "p95_ms": 767.6597909999998,
+      "max_ms": 768.0162619999962,
+      "stddev_ms": 0.04529565688210962
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 117,
+    "audio_ambiguous": 11,
+    "busy_events": 6,
+    "max_busy_writes_pm1": 4864
+  },
+  "all_stress_valid": {
+    "label": "all stress valid",
+    "events": 128,
+    "pb1_to_complete_visible": {
+      "n": 128,
+      "min_ms": 16.188364000001343,
+      "median_ms": 16.194862499997242,
+      "p95_ms": 16.197041599992446,
+      "max_ms": 16.197976000000835,
+      "stddev_ms": 0.001743422256589423
+    },
+    "logical_to_complete_visible": {
+      "n": 128,
+      "min_ms": 16.214064999999778,
+      "median_ms": 16.22056449999576,
+      "p95_ms": 16.22274260000509,
+      "max_ms": 16.223678000002906,
+      "stddev_ms": 0.0017433829238257348
+    },
+    "logical_to_framebuffer_complete": {
+      "n": 128,
+      "min_ms": 0.9889519999930485,
+      "median_ms": 0.9900700000002871,
+      "p95_ms": 0.9911880000004203,
+      "max_ms": 0.9911880000004203,
+      "stddev_ms": 0.0011174844545765192
+    },
+    "pb1_to_waveform": {
+      "n": 115,
+      "min_ms": 0.013394333336691489,
+      "median_ms": 0.05277600000397342,
+      "p95_ms": 0.06405563333800046,
+      "max_ms": 0.06682299999738461,
+      "stddev_ms": 0.007872039271054194
+    },
+    "waveform_to_complete_visible": {
+      "n": 115,
+      "min_ms": 16.126672333335534,
+      "median_ms": 16.1415106666567,
+      "p95_ms": 16.15341419999936,
+      "max_ms": 16.181080666669345,
+      "stddev_ms": 0.008005716564188317
+    },
+    "logical_to_pb1": {
+      "n": 128,
+      "min_ms": 0.02570099999843478,
+      "median_ms": 0.025701999998517522,
+      "p95_ms": 0.025702000002070235,
+      "max_ms": 0.025702000002070235,
+      "stddev_ms": 4.911320648085552e-07
+    },
+    "pb1_to_first_framebuffer_write": {
+      "n": 128,
+      "min_ms": 0.17544099999611262,
+      "median_ms": 0.1765589999962458,
+      "p95_ms": 0.17767699999637898,
+      "max_ms": 0.17767700001058984,
+      "stddev_ms": 0.0011174063452987003
+    },
+    "framebuffer_write_span": {
+      "n": 128,
+      "min_ms": 0.7878089999877602,
+      "median_ms": 0.7878099999985011,
+      "p95_ms": 0.7878100000056065,
+      "max_ms": 0.7878100000056065,
+      "stddev_ms": 3.630922140127943e-07
+    },
+    "heartbeat_intervals": {
+      "n": 127,
+      "min_ms": 684.2078210000011,
+      "median_ms": 750.9649279999949,
+      "p95_ms": 767.6553217000006,
+      "max_ms": 767.6609079999963,
+      "stddev_ms": 36.30377606069188
+    },
+    "partial_frame_events": 0,
+    "partial_frames": 0,
+    "missing_complete": 0,
+    "audio_measured": 115,
+    "audio_ambiguous": 13,
+    "busy_events": 30,
+    "max_busy_writes_pm1": 4873
+  }
+}
