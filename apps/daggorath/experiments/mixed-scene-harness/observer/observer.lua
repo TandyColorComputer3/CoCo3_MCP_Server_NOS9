@@ -5,7 +5,12 @@
 local m = manager.machine
 local cpu = assert(m.devices[':maincpu'], 'main CPU unavailable')
 local mem = assert(cpu.spaces.program, 'CPU program space unavailable')
-local ram = emu.item(assert(m.devices[':ram'].items['0/m_pointer'], 'RAM pointer unavailable'))
+local ramDevice = assert(m.devices[':ram'], 'RAM device unavailable')
+local ramName = assert(ramDevice.items['0/m_pointer'], 'RAM pointer unavailable')
+local sizeName = assert(ramDevice.items['0/m_size'], 'RAM size unavailable')
+local ram = emu.item(ramName)
+local ramSize = emu.item(sizeName):read(0)
+assert(ramSize == 0x200000, 'expected 2 MB physical RAM')
 assert(m.video and m.video.snapshot_pixels and m.video.snapshot_size,
        'video:snapshot_pixels API unavailable')
 assert(emu.add_machine_frame_notifier, 'machine frame notifier unavailable')
@@ -20,11 +25,14 @@ local overflow, failed = false, nil
 local edgeCount, age, static = 0, 0, nil
 local currentEdge, lastGeneration = nil, nil
 local newSeen, completeCount = {}, 0
-local tapInstalled, frameRegistered = false, false
+local tapInstalled, frameRegistered, frameCallbacks = false, false, 0
 
 local function pb(a)
+    assert(type(a) == 'number' and a == math.floor(a) and a >= 0 and a + 1 <= ramSize,
+           'physical RAM read out of range')
     local b = ram:read_block(a, 1)
-    return b and string.byte(b, 1) or -1
+    assert(b and #b == 1, 'physical RAM read failed')
+    return string.byte(b, 1)
 end
 local function pw(a) return pb(a) * 256 + pb(a + 1) end
 local function pdw(a) return pw(a) * 65536 + pw(a + 2) end
@@ -113,6 +121,7 @@ end
 
 commands.msh_observer_ready = function()
     return { ready = true, tapInstalled = tapInstalled, frameRegistered = frameRegistered,
+             frameCallbacks = frameCallbacks, ramSize = ramSize,
              classifierControls = controlsPassed, lifecycle = lifecycle,
              source = 'stage-3e10d/compare-observer.lua' }
 end
@@ -130,7 +139,8 @@ end
 
 commands.msh_observer_state = function()
     return { ready = tapInstalled and frameRegistered, tapInstalled = tapInstalled,
-             frameRegistered = frameRegistered, lifecycle = lifecycle,
+             frameRegistered = frameRegistered, frameCallbacks = frameCallbacks,
+             ramSize = ramSize, lifecycle = lifecycle,
              edgeCount = edgeCount, completeCount = completeCount,
              overflow = overflow, failure = failed, bufferedEvents = #events - drained }
 end
@@ -173,6 +183,7 @@ end)
 tapInstalled = true
 
 mixed_scene_frame_notifier = emu.add_machine_frame_notifier(function()
+    frameCallbacks = frameCallbacks + 1
     if failed or lifecycle ~= 'GRAPHICS_ACTIVE' or not currentEdge or age >= 4 then return end
     age = age + 1
     local generation = pdw(static + 0x2e)

@@ -128,7 +128,7 @@ const handlers = createToolHandlers({
 });
 const resultPath = path.join(runRoot, 'host-results.jsonl');
 const allow = new Set(['coco_start', 'coco_stop', 'coco_status', 'coco_mount_flop',
-  'os9_restore_ready', 'os9_run']);
+  'coco_snapshot', 'os9_restore_ready', 'os9_run']);
 
 async function drainObserver() {
   const response = await rawBridge.request('msh_observer_drain', { limit: 256 }, 3000);
