@@ -1,0 +1,148 @@
+{
+  "experiment": "Dungeons of Daggorath Stage 3E.13 reproducible mixed-scene harness",
+  "classification": "new experimental baseline; live mixed-scene acceptance not run",
+  "repository": {
+    "path": "CoCo3_MCP_Server_NOS9",
+    "expectedHead": "11ca734a9fbc91385f5bec7a6db550983cb87c31"
+  },
+  "acceptedInputs": [
+    {
+      "name": "dodhbp",
+      "source": "apps/daggorath/experiments/c6-stage3e-weekend-preservation/stage-3e10/variant/dodhbp",
+      "size": 7909,
+      "dataRequest": 3060,
+      "toolshedCRC": "8890F4",
+      "sha256": "d6e092562d7b2a69b55df428ae7acd03f5d8a8550576906c192ca7b08bf5a086"
+    },
+    {
+      "name": "dhbpack",
+      "source": "Stage 3E.12A recovered byte-identical pack (the private temporary recovery path is provenance only; supply any file matching this SHA-256)",
+      "sha256": "289e77066d9fe11da4528df3aac5e1b6730543cafc720d4fd6558ad92b50ab1e",
+      "size": 1421,
+      "containedModules": [
+        {
+          "name": "DHeartbeat",
+          "size": 1382,
+          "dataRequest": 64,
+          "toolshedCRC": "FBC38A",
+          "crcStatus": "Good",
+          "typeAttributes": "$E1/$80"
+        },
+        {
+          "name": "dhb",
+          "size": 39,
+          "toolshedCRC": "BF478C",
+          "crcStatus": "Good",
+          "typeAttributes": "$F1/$80",
+          "driverReference": "DHeartbeat"
+        }
+      ]
+    }
+  ],
+  "observerProvenance": {
+    "base": "apps/daggorath/experiments/c6-stage3e-weekend-preservation/stage-3e10d/compare-observer.lua",
+    "baseSha256": "1c8f5433ab2fffcbe1f0f50e3771bd71edbc1a7edb2c781fac72bcf2779c0e81",
+    "derivative": "observer/observer.lua",
+    "status": "source-level only; not loaded in MAME"
+  },
+  "toolchain": {
+    "cmoc": "0.1.90 (build/build-result.json records exact executable path/hash)",
+    "lwasm": "4.22 (build/build-result.json records exact executable path/hash)",
+    "lwlink": "4.22 (build/build-result.json records exact executable path/hash)",
+    "toolshed": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9"
+  },
+  "externalRuntime": {
+    "mame": "/Applications/Emulators/Ample.app/Contents/MacOS/mame64; expected 0.289, ample-289-u2; not launched by this preparation",
+    "romDirectory": "machine-specific local input; not archived",
+    "mediaAndReadyState": "operator-supplied disposable copies required; not archived"
+  },
+  "exclusions": [
+    "ROMs",
+    "MAME binaries",
+    "generated guest modules",
+    "disk images",
+    "VHDs",
+    "save states",
+    "credentials",
+    "machine-specific secrets"
+  ],
+  "candidateBuild": {
+    "configuration": {
+      "rate": 46,
+      "presentations": 8,
+      "moduleName": "msharness"
+    },
+    "size": 9892,
+    "dataRequest": 7397,
+    "programImageEnd": 9826,
+    "programDATBlocks": 2,
+    "dataDATBlocks": 1,
+    "toolshedCRC": "1590C2",
+    "sha256": "6dfeef3e75eb6622a4e104b4451dc24dccb74ba991ce892db2dc43db71bb106c",
+    "stackSpaceAdded": 1024,
+    "reentrantExecutable": true,
+    "reproductionRecord": "build/build-result.json (generated locally; intentionally not committed)"
+  },
+  "buildSourceDependencies": {
+    "apps/daggorath/experiments/mixed-scene-harness/workload/status-client.c": "a178932cf6f8f32ed21d3c65b27af4bc1c9fae3d5e4a2fc884a00536666b3d08",
+    "apps/daggorath/src/compat/heartbeat-broker-client.asm": "da250f96ca2a08a725df939d5542cd52cd4f6d2181221706ef66c0f70695499f",
+    "apps/daggorath/src/compat/expand.asm": "57b7057da713598cfe6115bac915677d1a73628a99470c413317716f86ffbeda",
+    "apps/daggorath/src/compat/present.c": "860f939a09891a61be455f2ec05ee9ca790e32ca3b51ebb5e0eccc11d0f22798",
+    "apps/daggorath/src/gameplay/opening-heartbeat.c": "38b548d45bbad9f9f61dfcdc49817ed75d4d5a161498d6818742c791fde3fda1",
+    "apps/daggorath/src/audio/ipc.c": "be5e435e37a9fde32d1b2fd73936348d86db6954f878a6e80fef573967f965b0",
+    "apps/daggorath/src/window-path.c": "f8e1c45289e9e47791ad8949ff8209393b3ba54423082405124d12fa4230b94b",
+    "apps/daggorath/src/os9.c": "8e0b90dada7c061895488a8b64e072ab12df87f46301ee55d3e64e7bb8cfab86",
+    "apps/daggorath/src/platform.h": "4223134864e56599d9921915fbf5e90fcddd18427fd78189743da1477ecad8eb",
+    "apps/daggorath/src/compat/compat.h": "6a02fe8b008ce8d3bd7544fa0aa20ce13e317139fbe7bb5f9438e48361c652de",
+    "apps/daggorath/src/compat/present.h": "83430f7d9d5b540f38b93b7a95f0a3bf23623f8bcac858f9d5e5baeeed6c0e62",
+    "apps/daggorath/src/compat/heartbeat-broker.h": "66ca4dc4323f3fde4e731946d119eae00a7a49fbcf705e0e386bbd431e8c0177",
+    "apps/daggorath/src/gameplay/opening-heartbeat.h": "420588d3cb2f8c6359417662ed27c2821e59e135ff14db35304c653ce155eab6",
+    "apps/daggorath/src/audio/audio.h": "4ad977236e63a6df3ed8a27d6603773c8f058f24635d824d99931935cbb3430b",
+    "apps/daggorath/src/audio/ipc.h": "e2a571263b9764d1ca22ad64e90f4c52345878b9e1e5cf7ac1777486bf622c68",
+    "/usr/local/share/cmoc/include/cmoc.h": "dcf1857741e31190fcfd0d830b5f866d6394d0dd692603192037c09100f45963",
+    "/usr/local/share/cmoc/include/stdarg.h": "45ddde55b4facaf89d65564470a8218bfc9949308645a6bab1a424de82e2efc9",
+    "/usr/local/share/cmoc/lib/libcmoc-crt-os9.a": "1f2f11ef5cb7de6818f4d9310b6af362b0317776245a06555f4029441fb7f563",
+    "/usr/local/share/cmoc/lib/libcmoc-std-os9.a": "eb7eaa88fabd56f428d897098e00d317132576fb9e559155db8ce1baeeeac047"
+  },
+  "buildToolIdentities": {
+    "cmoc": {
+      "path": "/usr/local/bin/cmoc",
+      "sha256": "76cf6c59de150c3ced93fe39a349223ef600fc3e3d74d0e7fa76aa9d637c35d4",
+      "version": "cmoc (cmoc 0.1.90)"
+    },
+    "cpp": {
+      "path": "/usr/bin/cpp",
+      "sha256": "36dab8797a308a8de401e91b9987354c52b2035495853bd2028ed50ee50b0228",
+      "version": "Apple clang version 17.0.0 (clang-1700.0.13.5)"
+    },
+    "lwasm": {
+      "path": "/usr/local/bin/lwasm",
+      "sha256": "174d0ef03732647cdb7f5c2b3d75762ed1190902601879961ab3be14635c865c",
+      "version": "lwasm from lwtools 4.22"
+    },
+    "lwlink": {
+      "path": "/usr/local/bin/lwlink",
+      "sha256": "0f834f21dc237b3fd8b9426b0aa23f5a6cfb4d090fb00b45396d2945835c1253",
+      "version": "lwlink from lwtools 4.22"
+    },
+    "toolshed": {
+      "path": "/Users/magneto-optimus/Documents/Coding/toolshed-2.2/build/unix/os9/os9",
+      "sha256": "ee9c3e3585640dfd28f4e3def75a09d14eddeaff464241f7ad94d5b6d51bb569",
+      "version": "ToolShed 2.2"
+    }
+  },
+  "launcherSourceDependencies": {
+    "MCP/src/config.ts": "940e82a371eaf43d65950ed64155907d5e2efdf14c10dccebd9930d75409b447",
+    "MCP/src/bridge-server.ts": "e398b7d7ed5f3e87f35bb14a7e5e670477d46ce941db0563b5e94d38df9643ba",
+    "MCP/src/protocol.ts": "2aa96e06e95fbb02dba2e0b59bfc4e904e12ac87fddcd9962b9e73d3ad925142",
+    "MCP/src/mame-process.ts": "63748f5cd28ee4e6dac2b52e643044b80c4e9cf68e6042ef16893d5d3a515b78",
+    "MCP/src/tools.ts": "ee25e70a87af7223d1ca5d6828f076a74d5e8dc864f1e998514b04c20c11a6b1",
+    "MCP/src/toolchain.ts": "41323e283519ed0fc3b7e4eb55aaadcfd965617450e4778661547ce2049e1865",
+    "MCP/src/os9-run.ts": "c490cbb8f50d05b8722ededf01a749be4c8c8f917a5ff397839fc854bd44e7ff",
+    "MCP/src/os9-ready.ts": "cc3ace7f298f4d12729de89a64a4decc27128b1fa280a58958f2e28de924acac",
+    "MCP/src/logger.ts": "1412ec418c2249281818c09717009d170b21c46c55cc75b85d29304a26c6a5f3",
+    "MCP/package.json": "aa68da216397f917219705c33096a548bd390d7b29245ff8b0f891c03585da1a",
+    "MCP/package-lock.json": "7b99d5a59e1ec8ad18a3a75a7973af0d21659bc90ca82ecfa97759d4c519d755",
+    "MCP/tsconfig.json": "652c3632eb9a58d95d5c1cb85a9d753460c09545fca00f4baa4daed042987050"
+  }
+}

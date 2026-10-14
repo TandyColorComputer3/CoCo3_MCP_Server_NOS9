@@ -1,0 +1,17 @@
+{
+  "mamePath": "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+  "romPath": "<existing Ample ROM directory>",
+  "mameBuild": "ample-289-u2",
+  "machine": "coco3h",
+  "cpu": "HD6309E",
+  "monitor": "rgb",
+  "screenConfig": 1,
+  "ram": "2M",
+  "bridgePort": 0,
+  "httpPort": 0,
+  "readyState": "nos9_ready_v2",
+  "bootFloppySource": "<read-only source image copied to private run root>",
+  "testFloppySource": "<disposable d1 image with msharness, dodhbp, and dhbpack staged>",
+  "vhdSource": "<read-only source VHD copied to private run root>",
+  "readyStateSource": "<known-good EOU ready-state file copied to private run root>"
+}
