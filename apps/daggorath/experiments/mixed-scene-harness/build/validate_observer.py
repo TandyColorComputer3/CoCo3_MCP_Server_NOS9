@@ -42,21 +42,21 @@ def classify(mask: str, phase: int) -> str:
         return "obsolete"
     if mask == "0" * 56:
         return "blank"
-    current_row = old_row = True
     saw_current = saw_other = False
-    for start in range(0, 56, 8):
-        row = mask[start:start + 8]
-        if row == current[start:start + 8]:
-            saw_current = True
-        elif row == old[start:start + 8] or row == "0" * 8:
+    for start in range(0, 56, 4):
+        half = mask[start:start + 4]
+        current_half = current[start:start + 4]
+        old_half = old[start:start + 4]
+        if half == current_half:
+            if current_half != old_half:
+                saw_current = True
+        elif half == old_half or half == "0" * 4:
             saw_other = True
         else:
-            current_row = False
-            old_row = False
-            break
-    return "partial-rows" if current_row and old_row and saw_current and saw_other else "other"
+            return "other"
+    return "partial-rows" if saw_current and saw_other else "other"
 
-partial = m0[:16] + m1[16:]
+partial = m0[:28] + m1[28:]
 cases = {
     "new phase 0": classify(m0, 0) == "new",
     "old phase 0": classify(m1, 0) == "obsolete",

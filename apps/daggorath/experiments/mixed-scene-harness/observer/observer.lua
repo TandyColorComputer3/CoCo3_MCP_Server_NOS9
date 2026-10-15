@@ -17,8 +17,10 @@ assert(emu.add_machine_frame_notifier, 'machine frame notifier unavailable')
 assert(mem.install_write_tap, 'write tap API unavailable')
 
 local MAX_EVENTS = 4096
-local m0 = 'FFFFFFFFFFFF33FFFFFC00FFFFFC00FFFFFF03FFFFFFCFFFFFFFFFFF'
-local m1 = 'FFFFFFFFFFFC30FFFFF0003FFFF0003FFFFC00FFFFFF03FFFFFFCFFF'
+-- Derived from status-client.c heartPatterns and present.c preload_heart():
+-- two source bytes per row, with each 1 bpp pixel doubled horizontally.
+local m0 = '0000000000000000000000000FF00FF0000000000000000000000000'
+local m1 = '0000000000000000000000003FFC3FFC000000000000000000000000'
 local lifecycle = 'WAITING_FOR_GRAPHICS'
 local events, drained = {}, 0
 local overflow, failed = false, nil
@@ -54,18 +56,22 @@ local function classify(mask, phase)
     if mask == old then return 'obsolete' end
     if mask == string.rep('0', 56) then return 'blank' end
     local mixed, seenCurrent, seenOther = true, false, false
-    for i = 1, 56, 8 do
-        local row = mask:sub(i, i + 7)
-        if row == current:sub(i, i + 7) then seenCurrent = true
-        elseif row == old:sub(i, i + 7) or row == '00000000' then seenOther = true
+    -- The control phases differ within one row. Compare its 16-pixel halves
+    -- so a partially published row remains distinguishable from either phase.
+    for i = 1, 56, 4 do
+        local row = mask:sub(i, i + 3)
+        local currentHalf, oldHalf = current:sub(i, i + 3), old:sub(i, i + 3)
+        if row == currentHalf then
+            if currentHalf ~= oldHalf then seenCurrent = true end
+        elseif row == oldHalf or row == '0000' then
+            seenOther = true
         else mixed = false; break end
     end
     return mixed and seenCurrent and seenOther and 'partial-rows' or 'other'
 end
 local function classifier_controls()
-    -- The first row is identical in both phase masks, so mix two rows to
-    -- guarantee this control differs from either complete phase.
-    local partial = m0:sub(1, 16) .. m1:sub(17)
+    -- Only row 3 differs; mix its left and right 16-pixel halves.
+    local partial = m0:sub(1, 28) .. m1:sub(29)
     local unknown = string.rep('A', 56)
     assert(classify(m0, 0) == 'new', 'phase-0 complete control failed')
     assert(classify(m1, 0) == 'obsolete', 'phase-0 old control failed')
