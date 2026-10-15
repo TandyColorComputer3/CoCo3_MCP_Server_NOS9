@@ -1,0 +1,145 @@
+{
+  "purpose": "Stage 3E.13C.4\u20133E.13D.4 generation-8 private timing evidence",
+  "gitBaseline": "9553290bd38288f95c1c76098fe6591ab19170aa",
+  "artifacts": [
+    {
+      "name": "msharness",
+      "sourcePath": "/private/tmp/c6-stage3e13b/modules/msharness",
+      "size": 9892,
+      "sha256": "6dfeef3e75eb6622a4e104b4451dc24dccb74ba991ce892db2dc43db71bb106c",
+      "archived": false
+    },
+    {
+      "name": "dodhbp",
+      "sourcePath": "/private/tmp/c6-stage3e13b/modules/dodhbp",
+      "size": 7909,
+      "sha256": "d6e092562d7b2a69b55df428ae7acd03f5d8a8550576906c192ca7b08bf5a086",
+      "archived": false
+    },
+    {
+      "name": "dhbpack",
+      "sourcePath": "/private/tmp/c6-stage3e13b/modules/dhbpack",
+      "size": 1421,
+      "sha256": "289e77066d9fe11da4528df3aac5e1b6730543cafc720d4fd6558ad92b50ab1e",
+      "archived": false
+    }
+  ],
+  "runtime": {
+    "mame": "0.289 ample-289-u2",
+    "machine": "coco3h",
+    "cpu": "HD6309E",
+    "ramBytes": 2097152,
+    "rgbScreenConfig": 1,
+    "verification": "Prior live run configuration and Stage 3E.13D.4 generated private config"
+  },
+  "sourceReferences": [
+    "apps/daggorath/experiments/mixed-scene-harness/README.md",
+    "apps/daggorath/experiments/mixed-scene-harness/observer/observer.lua",
+    "apps/daggorath/experiments/c6-stage3e-weekend-preservation/stage-3e10/src/broker-segmented.c",
+    "apps/daggorath/experiments/c6-stage3e-weekend-preservation/stage-3e10/variant/dodhbp.map"
+  ],
+  "preservedFiles": [
+    {
+      "path": "diagnostics/stage-3e13d1/diagnostic.lua",
+      "originalPath": "/private/tmp/c6-stage3e13d/diagnostic.lua",
+      "bytes": 7243,
+      "sha256": "b2919585e5ec759455d1a3ad3f9b80113fa101ea9e9acfdba9594d463ccabba0"
+    },
+    {
+      "path": "diagnostics/stage-3e13d1/linked-map.json",
+      "originalPath": "/private/tmp/c6-stage3e13d/linked-map.json",
+      "bytes": 2806,
+      "sha256": "dc32a9957c9260601901ab73129382eee8c8ebaec41b28d65633ca1888255ef6"
+    },
+    {
+      "path": "diagnostics/stage-3e13d1/raster-drain-d2.json",
+      "originalPath": "/private/tmp/c6-stage3e13d/drain-d2.json",
+      "bytes": 46288,
+      "sha256": "e3babb5b1b227d43ef2ffa5e3d5ccace41274ec7df2890fa9990bc214081f706"
+    },
+    {
+      "path": "diagnostics/stage-3e13d1/state-d2-final.json",
+      "originalPath": "/private/tmp/c6-stage3e13d/state-d2-final.json",
+      "bytes": 27244,
+      "sha256": "b3c061db09d7f6f9f1735832b59ae139f14f81600e71ef1c0efaf4b1fa48575b"
+    },
+    {
+      "path": "diagnostics/stage-3e13d2/diagnostic.lua",
+      "originalPath": "/private/tmp/c6-stage3e13d2/diagnostic.lua",
+      "bytes": 8412,
+      "sha256": "095ae3fda2b5b7510e06e2c5e06c3e574390836b03a82400754aa0e248f65fd7"
+    },
+    {
+      "path": "diagnostics/stage-3e13d2/state.json",
+      "originalPath": "/private/tmp/c6-stage3e13d2/state.json",
+      "bytes": 909,
+      "sha256": "2cf9ba9465c7679258e74a458cce588bf67b6968b72ce20f9ef4207b9242bd94"
+    },
+    {
+      "path": "diagnostics/stage-3e13d3/diagnostic.lua",
+      "originalPath": "/private/tmp/c6-stage3e13d3/diagnostic.lua",
+      "bytes": 8787,
+      "sha256": "4c021c2fa8d91853689b21e938e058ffc6ef71e7651e56952fb7f2d6629d5cb2"
+    },
+    {
+      "path": "diagnostics/stage-3e13d3/state.json",
+      "originalPath": "/private/tmp/c6-stage3e13d3/state.json",
+      "bytes": 964,
+      "sha256": "f0b6c0c868ca3061a9446b3226202a47ae9857dcea97554aae6347520226f5e1"
+    },
+    {
+      "path": "diagnostics/stage-3e13d4/diagnostic.lua",
+      "originalPath": "/private/tmp/c6-stage3e13d4b/diagnostic.lua",
+      "bytes": 9586,
+      "sha256": "a7436c12bece9637271d0ec447c38a871330c5fb81d55533efb8786824987101"
+    },
+    {
+      "path": "diagnostics/stage-3e13d4/state-final.json",
+      "originalPath": "/private/tmp/c6-stage3e13d4b/state-final.json",
+      "bytes": 60981,
+      "sha256": "7b8ee153ecf19996136d2add47537e919fa71cc80115bdcd47acc9a0faae28cb"
+    },
+    {
+      "path": "evidence/stage-3e13c4/session-1-observer-events.jsonl",
+      "originalPath": "/private/var/folders/jq/shg4yyb51p38nvm24s_sll740000gn/T/dag-mixed-scene-JtWs1B/observer-events.jsonl",
+      "bytes": 27731,
+      "sha256": "ccd08df100462c52ab89766a5fe1ce3f68bf1c53f93d2c31b0cb434c41cc7467"
+    },
+    {
+      "path": "evidence/stage-3e13c4/session-2-observer-events.jsonl",
+      "originalPath": "/private/var/folders/jq/shg4yyb51p38nvm24s_sll740000gn/T/dag-mixed-scene-6shQTL/observer-events.jsonl",
+      "bytes": 27733,
+      "sha256": "3b1deffe0a4b5165c30862960e7d2a7b4d698a5cdbf65c570a5136b14b3422ba"
+    },
+    {
+      "path": "evidence/stage-3e13c4/session-3-observer-events.jsonl",
+      "originalPath": "/private/var/folders/jq/shg4yyb51p38nvm24s_sll740000gn/T/dag-mixed-scene-ZklyY9/observer-events.jsonl",
+      "bytes": 26413,
+      "sha256": "b8d7fa980893e8549b889f48f17671efaa4afbfd4d0b24e0e37c0a3563896ce4"
+    },
+    {
+      "path": "evidence/stage-3e13d4/raster-drain.json",
+      "originalPath": "/private/tmp/c6-stage3e13d4b/drain.json",
+      "bytes": 50480,
+      "sha256": "eb5116a23e4a4054a76df34d4cf693144630b25588915eb9f0018f61aada6358"
+    },
+    {
+      "path": "reproduction/inject-d4.py",
+      "originalPath": "/private/tmp/c6-stage3e13d4b/inject.py",
+      "bytes": 1099,
+      "sha256": "6095a826605d3e10e168d3c93aea88689c4dcfc9d203d7dba345162219c9467a"
+    },
+    {
+      "path": "reproduction/inject-private-observer.py",
+      "originalPath": "/private/tmp/c6-stage3e13d/inject-private-observer.py",
+      "bytes": 942,
+      "sha256": "20a5eba5b2a43a78b88506921026abeb2a690dcafd7e9a700036b1ede806dc02"
+    }
+  ],
+  "knownMissing": [
+    "Stage 3E.13C.4 session-3 standalone workload result with a successful Shell return; its raster event log exists",
+    "A verified call-site trace for the two pre-service generation-8 os_clock calls",
+    "Clean guest shutdown evidence"
+  ],
+  "sharedLinkedMap": "diagnostics/stage-3e13d1/linked-map.json (byte-identical in original D.2, D.3, and D.4 private directories)"
+}

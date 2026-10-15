@@ -1,0 +1,215 @@
+{
+  "module": "dodhbp",
+  "sha256": "d6e092562d7b2a69b55df428ae7acd03f5d8a8550576906c192ca7b08bf5a086",
+  "size": 7909,
+  "data_request": 3060,
+  "module_header": [
+    135,
+    205,
+    30,
+    229,
+    30,
+    220,
+    17,
+    128,
+    29,
+    0,
+    13,
+    11,
+    244,
+    23,
+    0,
+    58
+  ],
+  "map_sha256": "361ec2bb85c51ed0abacc6d05cc39a6248aebbda4d554a1f5ef9bf11ebad9399",
+  "symbols": {
+    "mapStage": 358,
+    "mappingValid": 381,
+    "state": 384,
+    "shownGeneration": 394,
+    "heartWrites": 398,
+    "lastPollTick": 404,
+    "maxWakeTicks": 406,
+    "currentScene": 413,
+    "admissionQuery": 2577,
+    "admissionEnd": 2587,
+    "admissionDeferrals": 2597,
+    "admissionAccepts": 2603,
+    "service_heart": 2465,
+    "admit_status": 2919,
+    "present_status": 3195,
+    "native_heartbeat_snapshot": 5487,
+    "main": 3797
+  },
+  "marks": [
+    [
+      "service_in",
+      2465,
+      [
+        52,
+        64
+      ]
+    ],
+    [
+      "heart_put_in",
+      2710,
+      [
+        23,
+        16
+      ]
+    ],
+    [
+      "heart_put_out",
+      2713,
+      [
+        50,
+        102
+      ]
+    ],
+    [
+      "admit_in",
+      2919,
+      [
+        52,
+        64
+      ]
+    ],
+    [
+      "query_in",
+      2980,
+      [
+        23,
+        9
+      ]
+    ],
+    [
+      "query_return",
+      2983,
+      [
+        50,
+        100
+      ]
+    ],
+    [
+      "second_snapshot_return",
+      3009,
+      [
+        50,
+        100
+      ]
+    ],
+    [
+      "admit_decide",
+      3094,
+      [
+        230,
+        169
+      ]
+    ],
+    [
+      "admit_accept",
+      3133,
+      [
+        237,
+        132
+      ]
+    ],
+    [
+      "admit_defer",
+      3154,
+      [
+        237,
+        132
+      ]
+    ],
+    [
+      "admit_wait",
+      3175,
+      [
+        23,
+        11
+      ]
+    ],
+    [
+      "left_copy_in",
+      3229,
+      [
+        79,
+        198
+      ]
+    ],
+    [
+      "left_put_in",
+      3291,
+      [
+        23,
+        13
+      ]
+    ],
+    [
+      "left_put_out",
+      3294,
+      [
+        50,
+        102
+      ]
+    ],
+    [
+      "right_copy_in",
+      3329,
+      [
+        142,
+        0
+      ]
+    ],
+    [
+      "right_put_in",
+      3396,
+      [
+        23,
+        13
+      ]
+    ],
+    [
+      "right_put_out",
+      3399,
+      [
+        50,
+        102
+      ]
+    ],
+    [
+      "bottom_copy_in",
+      3427,
+      [
+        79,
+        198
+      ]
+    ],
+    [
+      "bottom_put_in",
+      3465,
+      [
+        23,
+        13
+      ]
+    ],
+    [
+      "bottom_put_out",
+      3468,
+      [
+        50,
+        102
+      ]
+    ]
+  ],
+  "instruction_offsets": {
+    "map_first": 1356,
+    "map_store": 1900,
+    "snapshot_call": 2444,
+    "heart_put": 2710,
+    "left_admit": 3210,
+    "right_admit": 3310,
+    "bottom_admit": 3414
+  }
+}
