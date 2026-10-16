@@ -1,0 +1,4 @@
+# Preserve source/listing bytes as extracted from the EOU VHD, including CRs
+# and assembler-generated trailing spaces. Treat as binary for diff checks.
+references/cowin_beta6.asm -text -diff
+references/cowin_beta6.listing -text -diff

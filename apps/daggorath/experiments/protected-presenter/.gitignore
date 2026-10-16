@@ -1,0 +1,14 @@
+# Keep recovered source and bounded text evidence; never commit generated media.
+*.dsk
+*.DSK
+*.vhd
+*.VHD
+*.sna
+*.wav
+*.png
+protpr
+protcl
+__pycache__/
+*.pyc
+out/
+run/
