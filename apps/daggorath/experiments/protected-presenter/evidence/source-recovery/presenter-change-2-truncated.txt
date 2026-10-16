@@ -1,0 +1,47 @@
+*** Begin Patch
+*** Update File: /private/tmp/c6-stage3e16b-protected/src/presenter.c
+@@
+ static Byte preload_heart(Byte phase)
+@@
+  e=os_write(graphicsPath,heartLoad,sizeof(heartLoad));return e;
+ }
++static Byte open_graphics(void)
++{Byte e;
++ e=window_open(&graphicsPath);if(e)return e;
++ e=os_write(graphicsPath,setup,sizeof(setup));if(e)return e;
++ e=os_write(graphicsPath,sceneDefine,sizeof(sceneDefine));if(e)return e;
++ sceneOwned=1;
++ e=os_write(graphicsPath,sceneCapture,sizeof(sceneCapture));if(e)return e;
++ heartDefine[3]=2;
++ e=os_write(graphicsPath,heartDefine,sizeof(heartDefine));if(e)return e;
++ heartOwned=1;
++ e=preload_heart(0);if(e)return e;
++ heartDefine[3]=3;
++ e=os_write(graphicsPath,heartDefine,sizeof(heartDefine));if(e)return e;
++ heartOwned=3;
++ e=preload_heart(1);if(e)return e;
++ return os_write(graphicsPath,selectWindow,sizeof(selectWindow));
++}
+@@
+- e=os_write(2,putHeart,sizeof(putHeart));if(e)return e;e=os_clock(&done,0);if(e)return e;
++ e=os_write(graphicsPath,putHeart,sizeof(putHeart));if(e)return e;e=os_clock(&done,0);if(e)return e;
+@@
+- e=os_write(2,sideLeft,sizeof(sideLeft));if(e)return e;
++ e=os_write(graphicsPath,sideLeft,sizeof(sideLeft));if(e)return e;
+@@
+- e=os_write(2,sideRight,sizeof(sideRight));if(e)return e;
++ e=os_write(graphicsPath,sideRight,sizeof(sideRight));if(e)return e;
+@@
+- e=os_write(2,bottomPut,sizeof(bottomPut));if(e)return e;
++ e=os_write(graphicsPath,bottomPut,sizeof(bottomPut));if(e)return e;
+@@
+ int main(void)
+-{Byte request[DAG_BROKER_FRAME],pending,waitResult,e=0,r,pid,done=0,status=0;
++{Byte request[DAG_BROKER_FRAME],pending,waitResult,e=0,r,pid,done=0,status=0,lastSequence=0;
+  unsigned long requested,age;
++ Word i;
+  memset(&state,0,sizeof(state));r=ipc_self_pid(&pid);if(!e)e=r;
+  if(!e)e=ipc_priority(pid,DAG_BROKER_PRIORITY);
++ if(!e)e=open_graphics();
+  if(!e)e=native_heartbeat_open(&heartbeat);
+  if(!e)e=snapshot();shownGenerat<truncated omitted_approx_tokens=

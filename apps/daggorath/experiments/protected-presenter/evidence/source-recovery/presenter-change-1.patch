@@ -1,0 +1,44 @@
+*** Begin Patch
+*** Update File: /private/tmp/c6-stage3e16b-protected/src/presenter.c
+@@
+ Byte os_map_buffer(Byte,Word,Byte,Byte **,Word *);
++Byte window_open(Byte *);
++Byte window_close(Byte);
++
++/* Private presenter owns the CoWin path from I$Open(/w) through I$Close. */
++static Byte graphicsPath=255,sceneOwned,heartOwned;
++static const Byte setup[]={27,0x20,5,0,0,80,25,1,0,0,27,0x35,0,
++    27,0x31,0,0,27,0x31,1,63,5,32};
++static const Byte sceneDefine[]={27,0x29,196,1,2,0};
++static const Byte sceneCapture[]={27,0x2c,196,1,0,0,0,0,2,0,0,8};
++static const Byte sceneKill[]={27,0x2a,196,1};
++static Byte heartDefine[]={27,0x29,196,2,0,32};
++static const Byte heartKill2[]={27,0x2a,196,2};
++static const Byte heartKill3[]={27,0x2a,196,3};
++static const Byte selectWindow[]={27,0x21};
++static Byte heartLoad[]={27,0x2b,196,2,5,0,32,0,7,0,28,
++    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
++static const Byte doubled[]={0,3,12,15,48,51,60,63,192,195,204,207,240,243,252,255};
++static const Byte heartPatterns[28]={
++    0,0,0,0x3c,0,0,0, 0,0,0,0x3c,0,0,0,
++    0,0,0,0x7e,0,0,0, 0,0,0,0x7e,0,0,0};
++static Byte preload_heart(Byte phase)
++{Byte row,*p,e;const Byte *h=heartPatterns+(Word)phase*14;
++ heartLoad[3]=(Byte)(2+phase);
++ for(row=0;row<7;row++){
++  p=heartLoad+11+(Word)row*4;
++  *p++=doubled[h[row]>>4];*p++=doubled[h[row]&15];
++  *p++=doubled[h[7+row]>>4];*p=doubled[h[7+row]&15];
++ }
++ e=os_write(graphicsPath,heartLoad,sizeof(heartLoad));return e;
++}
+@@
+- mapStage=1;e=os_map_buffer(2,0xc401,1,&sceneMap,&sceneMapLength);
++ mapStage=1;e=os_map_buffer(graphicsPath,0xc401,1,&sceneMap,&sceneMapLength);
+@@
+-  e=os_map_buffer(2,0xc404,1,&sideMap,&sideMapLength);
++  e=os_map_buffer(graphicsPath,0xc404,1,&sideMap,&sideMapLength);
+@@
+-  e=os_map_buffer(2,0xc405,1,&p,&n);
++  e=os_map_buffer(graphicsPath,0xc405,1,&p,&n);
+*** End Patch

@@ -20,3 +20,9 @@ No new MAME run, heartbeat timing acceptance, or audio/raster measurement was
 performed while preparing this archive. The exact presenter/client artifacts,
 process IDs, window ownership, raw Select status, and live display handoff
 remain unverified.
+
+## Stage 3E.16B.4 — source recovery update
+
+The accessible Codex session yielded the exact original `protcl` source and the original build script text, plus a verified pre-experiment presenter source and incomplete presenter patch history. The client source SHA-256 is `a9be9cce523524644ac8bdc2d4465fec3de5efee7b49be64a78ab58600177b7b`, matching the session’s post-write hash. The final presenter patch transcript is truncated, so the final `protpr` source is still missing. Neither original binary is available for fresh ToolShed verification. The session’s two-build/CRC results remain historical transcript evidence only.
+
+No build or MAME run was performed: the exact final presenter and historical dependency snapshots are missing. The archive classification is now **PARTIALLY RECOVERED**, while overall reproduction remains **NOT REPRODUCIBLE**. The earlier Stage 3E.16B and 3E.16B.2 findings above are unchanged.

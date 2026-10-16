@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Refuse speculative protected-presenter builds until original inputs return.
+"""Refuse builds until the exact protected-presenter inputs are recovered.
 
-The original CMOC/lwasm commands and source bytes were not preserved. This
-guard is intentional: another experiment's flags are not evidence of this one.
+The original client source and build script were recovered from session history,
+but the final presenter source, historical linked-source identities, and exact
+compiler/assembler versions are missing. This guard intentionally performs no
+build and never substitutes current production sources.
 """
 
 import argparse
@@ -15,15 +17,14 @@ def main() -> int:
     parser.add_argument("--out", required=True, type=Path)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    required = [root / "src/presenter.c", root / "src/client.c",
-                root / "build/original-build.json"]
-    missing = [str(p.relative_to(root)) for p in required if not p.is_file()]
-    if missing:
-        print("NOT REPRODUCIBLE: original build inputs missing: " +
-              ", ".join(missing), file=sys.stderr)
+    presenter = root / "source/protpr/presenter.c"
+    if not presenter.is_file():
+        print("NOT REPRODUCIBLE: exact original source/protpr/presenter.c is missing; "
+              "the recovered Stage 3E.10 predecessor and truncated patch are not substitutes",
+              file=sys.stderr)
         return 2
-    print("NOT REPRODUCIBLE: original commands have not been audited; "
-          "do not execute a reconstructed build", file=sys.stderr)
+    print("NOT REPRODUCIBLE: historical dependency hashes and tool versions must be verified "
+          "before building", file=sys.stderr)
     return 2
 
 

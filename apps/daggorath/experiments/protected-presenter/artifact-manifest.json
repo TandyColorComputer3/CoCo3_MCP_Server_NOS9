@@ -10,11 +10,14 @@
       "sha256": "dbbcb242197c9be870945e1dfcb497239035dd0a3f642bb56196db242c0b67bd",
       "size": 9059,
       "module_crc": "973E3D",
-      "toolchain": "CMOC/lwasm/ToolShed 2.2; exact versions and commands unknown",
+      "toolchain": "CMOC command line/source ordering recovered from session; exact CMOC/lwasm versions unknown; ToolShed 2.2 reported historical CRC Good",
       "recovery_method": "Expected identity from preservation brief; no bytes recovered",
       "verification_status": "MISSING",
       "original_or_reconstructed": "original expected; absent",
-      "known_dependencies": ["original presenter source", "original build command"]
+      "known_dependencies": [
+        "original presenter source",
+        "original build command"
+      ]
     },
     {
       "name": "protcl",
@@ -24,11 +27,14 @@
       "sha256": "e10f6f8e465264b1223f12738557484ee8cf103343ff4f4d19aadad810b8bfeb",
       "size": 3610,
       "module_crc": "2FD2F3",
-      "toolchain": "CMOC/lwasm/ToolShed 2.2; exact versions and commands unknown",
+      "toolchain": "CMOC command line/source ordering recovered from session; exact CMOC/lwasm versions unknown; ToolShed 2.2 reported historical CRC Good",
       "recovery_method": "Expected identity from preservation brief; no bytes recovered",
       "verification_status": "MISSING",
       "original_or_reconstructed": "original expected; absent",
-      "known_dependencies": ["original client source", "original build command"]
+      "known_dependencies": [
+        "original client source",
+        "original build command"
+      ]
     },
     {
       "name": "presenter.c",
@@ -38,25 +44,40 @@
       "sha256": null,
       "size": null,
       "module_crc": null,
-      "toolchain": "CMOC; exact build command unknown",
-      "recovery_method": "Targeted filesystem, Git, and accessible session search",
+      "toolchain": "CMOC flags/source ordering partially recovered; exact final source and tool versions unavailable",
+      "recovery_method": "Original final source remains unavailable; recovered verified stage-3e10 base source and one complete plus one transcript-truncated patch fragment",
       "verification_status": "MISSING",
       "original_or_reconstructed": "original expected; absent",
-      "known_dependencies": []
+      "known_dependencies": [
+        "missing remainder of second presenter patch",
+        "native_heartbeat.c",
+        "native-heartbeat-wait.asm",
+        "audio/ipc.c",
+        "window-path.c",
+        "os9.c",
+        "CMOC build invocation"
+      ]
     },
     {
       "name": "client.c",
-      "relative_archive_path": null,
-      "original_source_path": "/private/tmp/c6-stage3e16b-protected (exact file path not recovered)",
+      "relative_archive_path": "source/protcl/client.c",
+      "original_source_path": "/private/tmp/c6-stage3e16b-protected/src/client.c",
       "stage": "3E.16B",
-      "sha256": null,
-      "size": null,
+      "sha256": "a9be9cce523524644ac8bdc2d4465fec3de5efee7b49be64a78ab58600177b7b",
+      "size": 1957,
       "module_crc": null,
       "toolchain": "CMOC; exact build command unknown",
-      "recovery_method": "Targeted filesystem, Git, and accessible session search",
-      "verification_status": "MISSING",
-      "original_or_reconstructed": "original expected; absent",
-      "known_dependencies": []
+      "recovery_method": "Extracted complete Add File patch from accessible Codex session; independently matched the session\u2019s immediate post-write SHA-256 record",
+      "verification_status": "ORIGINAL_VERIFIED",
+      "original_or_reconstructed": "original source bytes recovered from recorded patch; not reconstructed",
+      "known_dependencies": [
+        "opening-heartbeat.h and opening-heartbeat.c",
+        "heartbeat-broker.h and heartbeat-broker-client.asm",
+        "audio/ipc.h and audio/ipc.c",
+        "os9.c",
+        "CMOC build invocation",
+        "historical 16-byte framing header revision is not archived or hash-pinned"
+      ]
     },
     {
       "name": "cowin_beta6.asm",
@@ -70,7 +91,9 @@
       "recovery_method": "Read-only ToolShed copy from local EOU VHD",
       "verification_status": "SOURCE_ONLY",
       "original_or_reconstructed": "original EOU reference copy",
-      "known_dependencies": ["EOU assembler includes not archived here"]
+      "known_dependencies": [
+        "EOU assembler includes not archived here"
+      ]
     },
     {
       "name": "cowin_beta6.listing",
@@ -90,7 +113,7 @@
       "name": "protected-presenter observers and launcher",
       "relative_archive_path": null,
       "original_source_path": "/private/tmp/c6-stage3e16b-protected and c6-stage3e16b1-display",
-      "stage": "3E.16B–3E.16B.2",
+      "stage": "3E.16B\u20133E.16B.2",
       "sha256": null,
       "size": null,
       "module_crc": null,
@@ -98,7 +121,99 @@
       "recovery_method": "Targeted filesystem, Git, and accessible session search",
       "verification_status": "MISSING",
       "original_or_reconstructed": "original expected; absent",
-      "known_dependencies": ["private bridge", "original observer revisions", "private media staging"]
+      "known_dependencies": [
+        "private bridge",
+        "original observer revisions",
+        "private media staging"
+      ]
+    },
+    {
+      "name": "original-build.py",
+      "relative_archive_path": "build/original-build.py",
+      "original_source_path": "/private/tmp/c6-stage3e16b-protected/build.py",
+      "stage": "3E.16B",
+      "sha256": "6f06b39e745c2feeed3c99c576b3e74cedd503cd741f71b779f5fd3efa326dd0",
+      "size": 2340,
+      "module_crc": null,
+      "toolchain": "CMOC/lwasm/ToolShed 2.2 where applicable; original compiler and assembler versions are unverified",
+      "recovery_method": "Recovered complete Add File patch from the session and verified its source hash locally; session records it being invoked for both builds",
+      "verification_status": "ORIGINAL_VERIFIED",
+      "original_or_reconstructed": "original build script source recovered from the session Add File patch; not portable and not safe to invoke until exact dependency revisions are recovered",
+      "known_dependencies": [
+        "protpr presenter.c (missing)",
+        "protcl client.c",
+        "listed Daggorath source dependencies at original revisions (hashes unavailable)",
+        "CMOC",
+        "lwasm",
+        "ToolShed"
+      ]
+    },
+    {
+      "name": "presenter-base-stage3e10.c",
+      "relative_archive_path": "source/protpr/presenter-base-stage3e10.c",
+      "original_source_path": "apps/daggorath/experiments/c6-stage3e-weekend-preservation/stage-3e10/src/broker-segmented.c",
+      "stage": "3E.16B",
+      "sha256": "cb1ac3a812a2784e19598d1eddf2dde2da49e090ecaf4382558f780775c6eed0",
+      "size": 13338,
+      "module_crc": null,
+      "toolchain": "CMOC/lwasm/ToolShed 2.2 where applicable; original compiler and assembler versions are unverified",
+      "recovery_method": "Copied from preserved repository source; SHA matches the source identity recorded for the Stage 3E.16B initial copy",
+      "verification_status": "SOURCE_ONLY",
+      "original_or_reconstructed": "recovered source or transcript evidence; see recovery notes",
+      "known_dependencies": [
+        "Stage 3E.16B presenter patches"
+      ]
+    },
+    {
+      "name": "presenter-change-1.patch",
+      "relative_archive_path": "evidence/source-recovery/presenter-change-1.patch",
+      "original_source_path": "Codex session tool patch for /private/tmp/c6-stage3e16b-protected/src/presenter.c",
+      "stage": "3E.16B",
+      "sha256": "260e6e65436f116a85fddd4661c0046f08fb1317431e0b178354df19edd8d89c",
+      "size": 1863,
+      "module_crc": null,
+      "toolchain": "CMOC/lwasm/ToolShed 2.2 where applicable; original compiler and assembler versions are unverified",
+      "recovery_method": "Verbatim recovered complete patch argument from session",
+      "verification_status": "SOURCE_ONLY",
+      "original_or_reconstructed": "recovered source or transcript evidence; see recovery notes",
+      "known_dependencies": [
+        "presenter-base-stage3e10.c"
+      ]
+    },
+    {
+      "name": "presenter-change-2-truncated.txt",
+      "relative_archive_path": "evidence/source-recovery/presenter-change-2-truncated.txt",
+      "original_source_path": "Codex session tool patch for /private/tmp/c6-stage3e16b-protected/src/presenter.c",
+      "stage": "3E.16B",
+      "sha256": "86089693dab4f770a98c11e228725969f6e53631161de172b3dd437262157844",
+      "size": 1951,
+      "module_crc": null,
+      "toolchain": "CMOC/lwasm/ToolShed 2.2 where applicable; original compiler and assembler versions are unverified",
+      "recovery_method": "Recovered patch text includes transcript truncation marker; retained as evidence only and must not be applied",
+      "verification_status": "UNVERIFIED",
+      "original_or_reconstructed": "recovered source or transcript evidence; see recovery notes",
+      "known_dependencies": [
+        "presenter-base-stage3e10.c",
+        "missing patch remainder"
+      ]
+    },
+    {
+      "name": "historical-build-results",
+      "relative_archive_path": "evidence/source-recovery/build-record.md",
+      "original_source_path": "Accessible Codex session 2026-10-15 Stage 3E.16B build output",
+      "stage": "3E.16B",
+      "sha256": "dd6c24805c880c86e186d8902d08f233c239654c8e6f4e91fb9a2ed496d8d710",
+      "size": 1546,
+      "module_crc": null,
+      "toolchain": "Historical session used CMOC, lwasm, ToolShed 2.2; exact CMOC/lwasm versions not recorded",
+      "recovery_method": "Transcribed tool output and comparison command from accessible Codex session; no original log file recovered",
+      "verification_status": "SOURCE_ONLY",
+      "original_or_reconstructed": "secondary transcript record, not raw build logs",
+      "known_dependencies": [
+        "original complete presenter source",
+        "original project dependency revisions",
+        "original binaries/maps/logs"
+      ]
     }
   ]
 }

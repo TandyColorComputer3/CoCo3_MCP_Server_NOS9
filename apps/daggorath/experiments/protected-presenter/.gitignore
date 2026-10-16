@@ -6,8 +6,8 @@
 *.sna
 *.wav
 *.png
-protpr
-protcl
+/protpr
+/protcl
 __pycache__/
 *.pyc
 out/
