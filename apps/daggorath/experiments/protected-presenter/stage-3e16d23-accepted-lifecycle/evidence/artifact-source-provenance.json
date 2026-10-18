@@ -1,0 +1,20 @@
+{
+  "ppown20": {
+    "source": "/private/tmp/dag-3e16d20/src/ppown3.c",
+    "source_sha256": "dd17fc7b3844f60fbdf236c173790272596423214b8d66722ce30014f6589d09",
+    "build_outputs": [
+      "/private/tmp/dag-3e16d20/build-a/ppown20",
+      "/private/tmp/dag-3e16d20/build-b/ppown20",
+      "/private/tmp/dag-3e16d20/build-c/ppown20"
+    ],
+    "build_output_sha256": "896a47b794a8b5c4e50dc9b21af50ac1b57924f8cd2870094ddd2ab8caee97de",
+    "all_three_byte_identical": true,
+    "build_log": "/private/tmp/dag-3e16d20/build-c/build.log"
+  },
+  "ppclient3": {
+    "source": "/private/tmp/dag-3e16d20/src/ppclient3.c",
+    "source_sha256": "582cd685a97b5e32d8f30a79f59a4eb5cacc82e14d0c3bb70db3421a4e7264fa",
+    "accepted_host_binary_sha256": "eba7a09379b15ef4a3c09bd07e48107d90720ddd3e97b736acb57363685701e7"
+  },
+  "D23_extracted_modules_match_D20_host_staging": true
+}

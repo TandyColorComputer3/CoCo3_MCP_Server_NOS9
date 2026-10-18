@@ -1,0 +1,122 @@
+[
+  {
+    "event": "PRE_WAIT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 0,
+    "file": "p121.log",
+    "length": 9,
+    "raw_hex": "D1010003FFFF0400D7"
+  },
+  {
+    "event": "POST_WAIT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": 4,
+    "wait_status": 0,
+    "child_pid": 4,
+    "flags": 27,
+    "file": "p122.log",
+    "length": 9,
+    "raw_hex": "D10200030400041BCB"
+  },
+  {
+    "event": "WAIT_VALIDATED",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": 4,
+    "wait_status": 0,
+    "child_pid": 4,
+    "flags": 27,
+    "file": "p123.log",
+    "length": 9,
+    "raw_hex": "D10300030400041BCA"
+  },
+  {
+    "event": "CLEANUP_ENTER",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p124.log",
+    "length": 9,
+    "raw_hex": "D1040003FFFF0401D3"
+  },
+  {
+    "event": "GRAPHICS_CLOSE_RESULT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p125.log",
+    "length": 9,
+    "raw_hex": "D1050003FFFF0401D2"
+  },
+  {
+    "event": "COMMAND_PIPE_CLOSE_RESULT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p126.log",
+    "length": 9,
+    "raw_hex": "D1060003FFFF0401D1"
+  },
+  {
+    "event": "REPLY_PIPE_CLOSE_RESULT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p127.log",
+    "length": 9,
+    "raw_hex": "D1070003FFFF0401D0"
+  },
+  {
+    "event": "PARENT_LOG_CLOSE_RESULT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p128.log",
+    "length": 9,
+    "raw_hex": "D1080003FFFF0401DF"
+  },
+  {
+    "event": "CLEANUP_COMPLETE",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p129.log",
+    "length": 9,
+    "raw_hex": "D1090003FFFF0401DE"
+  },
+  {
+    "event": "PARENT_RETURN_INTENT",
+    "result": 0,
+    "parent": 3,
+    "wait_pid": null,
+    "wait_status": null,
+    "child_pid": 4,
+    "flags": 1,
+    "file": "p12A.log",
+    "length": 9,
+    "raw_hex": "D10A0003FFFF0401DD"
+  }
+]

@@ -1,0 +1,9 @@
+Volume - 'CoCo Disk' in file: /private/tmp/dag-3e16d23/evidence/phaseB-postrun-d1.dsk
+$00B4 bytes in allocation map
+1 sector per cluster
+$0005A0 total sectors on media
+Sector $000002 is start of root directory file descriptor
+Building secondary allocation map...
+Comparing primary and secondary allocation maps...
+1 directory
+25 files

@@ -1,0 +1,11 @@
+                      (../src/sleep0.asm):00001          section code
+                      (../src/sleep0.asm):00002         _sleep_signal export
+0000                  (../src/sleep0.asm):00003         _sleep_signal
+0000 3460             (../src/sleep0.asm):00004          pshs y,u
+0002 8E0002           (../src/sleep0.asm):00005          ldx #2
+0005 103F0A           (../src/sleep0.asm):00006          os9 $0a
+0008 2501             (../src/sleep0.asm):00007          bcs done
+000A 5F               (../src/sleep0.asm):00008          clrb
+000B                  (../src/sleep0.asm):00009         done
+000B 35E0             (../src/sleep0.asm):00010          puls u,y,pc
+                      (../src/sleep0.asm):00011          endsection

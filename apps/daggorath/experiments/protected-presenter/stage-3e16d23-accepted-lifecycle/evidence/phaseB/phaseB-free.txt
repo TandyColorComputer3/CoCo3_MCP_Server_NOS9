@@ -1,0 +1,6 @@
+
+"CoCo Disk" created on 10/17/2026
+Capacity: 360KB (1440 sectors) 1-sector clusters
+1308 Free sectors, largest block 1306 sectors
+Free space: 327KB (334848 bytes)
+

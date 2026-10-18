@@ -1,0 +1,52 @@
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+/private/tmp/dag-3e16d3-ack-read/src/fileio.c:46: warning: true and false expressions of conditional are not of the same type (int vs unsigned int); result is of type int
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+/private/tmp/dag-3e16d3-ack-read/src/fileio.c:46: warning: true and false expressions of conditional are not of the same type (int vs unsigned int); result is of type int

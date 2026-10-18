@@ -1,0 +1,71 @@
+Target platform: OS-9
+Preprocessing: ../src/ppown3.c
+Preprocessor command: cpp -xc++ -U__cplusplus -I'../src' -I'/usr/local/share/cmoc/include' -D_CMOC_VERSION_=1090 -DOS9=1 -U__GNUC__ -nostdinc -undef ../src/ppown3.c
+Compiling...
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+Assembly language filename: ppown3.s
+0 error(s), 0 warning(s).
+Assembler command: lwasm -fobj --pragma=forwardrefmax -DOS9 --output='ppown3.o' --list='ppown3.lst' 'ppown3.s'
+Exit code from assembler command: 0
+Target platform: OS-9
+Preprocessing: ../src/ppgraphics.c
+Preprocessor command: cpp -xc++ -U__cplusplus -I'../src' -I'/usr/local/share/cmoc/include' -D_CMOC_VERSION_=1090 -DOS9=1 -U__GNUC__ -nostdinc -undef ../src/ppgraphics.c
+Compiling...
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+Assembly language filename: ppgraphics.s
+0 error(s), 0 warning(s).
+Assembler command: lwasm -fobj --pragma=forwardrefmax -DOS9 --output='ppgraphics.o' --list='ppgraphics.lst' 'ppgraphics.s'
+Exit code from assembler command: 0
+Target platform: OS-9
+Preprocessing: ../src/ipc.c
+Preprocessor command: cpp -xc++ -U__cplusplus -I'../src' -I'/usr/local/share/cmoc/include' -D_CMOC_VERSION_=1090 -DOS9=1 -U__GNUC__ -nostdinc -undef ../src/ipc.c
+Compiling...
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+Assembly language filename: ipc.s
+0 error(s), 0 warning(s).
+Assembler command: lwasm -fobj --pragma=forwardrefmax -DOS9 --output='ipc.o' --list='ipc.lst' 'ipc.s'
+Exit code from assembler command: 0
+Target platform: OS-9
+Preprocessing: ../src/os9.c
+Preprocessor command: cpp -xc++ -U__cplusplus -I'../src' -I'/usr/local/share/cmoc/include' -D_CMOC_VERSION_=1090 -DOS9=1 -U__GNUC__ -nostdinc -undef ../src/os9.c
+Compiling...
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+Assembly language filename: os9.s
+0 error(s), 0 warning(s).
+Assembler command: lwasm -fobj --pragma=forwardrefmax -DOS9 --output='os9.o' --list='os9.lst' 'os9.s'
+Exit code from assembler command: 0
+Target platform: OS-9
+Preprocessing: ../src/fileio.c
+Preprocessor command: cpp -xc++ -U__cplusplus -I'../src' -I'/usr/local/share/cmoc/include' -D_CMOC_VERSION_=1090 -DOS9=1 -U__GNUC__ -nostdinc -undef ../src/fileio.c
+Compiling...
+In file included from <built-in>:10:
+<command line>:1:8: warning: undefining builtin macro [-Wbuiltin-macro-redefined]
+    1 | #undef __cplusplus
+      |        ^
+1 warning generated.
+../src/fileio.c:46: warning: true and false expressions of conditional are not of the same type (int vs unsigned int); result is of type int
+Assembly language filename: fileio.s
+0 error(s), 1 warning(s).
+Assembler command: lwasm -fobj --pragma=forwardrefmax -DOS9 --output='fileio.o' --list='fileio.lst' 'fileio.s'
+Exit code from assembler command: 0
+Assembler command: lwasm -fobj --pragma=forwardrefmax -DOS9 --output='sleep0.o' --list='sleep0.lst' '../src/sleep0.asm'
+Exit code from assembler command: 0
+Linker command: lwlink --format=os9 --output='ppown20' --script='ppown20.link' --map='ppown20.map' -L/usr/local/share/cmoc/lib -lcmoc-crt-os9 -lcmoc-std-os9 'ppown3.o' 'ppgraphics.o' 'ipc.o' 'os9.o' 'fileio.o' 'sleep0.o'
+Exit code from linker command: 0
+Number of error messages from linker: 0

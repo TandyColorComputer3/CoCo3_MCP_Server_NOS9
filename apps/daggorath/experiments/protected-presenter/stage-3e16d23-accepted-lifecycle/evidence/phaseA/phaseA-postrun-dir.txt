@@ -1,0 +1,7 @@
+
+                           Directory of /private/tmp/dag-3e16d23/evidence/phaseA-postrun-d1.dsk,
+ Owner    Last modified    Attributes Sector Bytecount Name
+-------   ---------------  ---------- ------ --------- ----
+  0.0     2026/10/17 2008   --e-re-r       B      7282 ppown20
+  0.0     2026/10/17 2008   --e-re-r      29      7637 ppclient3
+  0.0     2026/10/17 2045   ----r-wr      48      2663 mdfull

@@ -1,0 +1,80 @@
+{
+  "stage": "3E.16D.23",
+  "status": "accepted lifecycle baseline; type-5 graphics only",
+  "modules": {
+    "ppown20": {
+      "size": 7282,
+      "data_request": 53,
+      "entry": "000D",
+      "crc": "FC2F47",
+      "sha256": "896a47b794a8b5c4e50dc9b21af50ac1b57924f8cd2870094ddd2ab8caee97de",
+      "source": "source/ppown3.c",
+      "source_sha256": "dd17fc7b3844f60fbdf236c173790272596423214b8d66722ce30014f6589d09",
+      "historical_build_outputs_identical": 3
+    },
+    "ppclient3": {
+      "size": 7637,
+      "data_request": 217,
+      "entry": "000D",
+      "crc": "E9C525",
+      "sha256": "eba7a09379b15ef4a3c09bd07e48107d90720ddd3e97b736acb57363685701e7",
+      "source": "source/ppclient3.c",
+      "source_sha256": "582cd685a97b5e32d8f30a79f59a4eb5cacc82e14d0c3bb70db3421a4e7264fa",
+      "ackread_source_sha256": "da24dbc0ab56945505e0f0a9ec2e6bd182c3a2b3e07a585ac548a71cd4d9ab90",
+      "ackread_header_sha256": "fb4ad452fada887d00534d27580aad9d5a12a79db29fb421d813572e621d9f84",
+      "historical_build_outputs_identical": 2
+    }
+  },
+  "tools": {
+    "cmoc": {
+      "version": "0.1.90",
+      "sha256": "76cf6c59de150c3ced93fe39a349223ef600fc3e3d0e7fa76aa9d637c35d4"
+    },
+    "lwasm": {
+      "version": "4.22",
+      "sha256": "174d0ef03732647cdb7f5c2b3d75762ed1190902601879961ab3be14635c865c"
+    },
+    "lwlink": {
+      "version": "4.22",
+      "sha256": "0f834f21dc237b3fd8b9426b0aa23f5a6cfb4d090fb00b45396d2945835c1253"
+    },
+    "toolshed_os9": {
+      "version": "2.2",
+      "sha256": "ee9c3e3585640dfd28f4e3def75a09d14eddeaff464241f7ad94d5b6d51bb569"
+    }
+  },
+  "source_sha256": {
+    "ackread.c": "da24dbc0ab56945505e0f0a9ec2e6bd182c3a2b3e07a585ac548a71cd4d9ab90",
+    "ackread.h": "fb4ad452fada887d00534d27580aad9d5a12a79db29fb421d813572e621d9f84",
+    "fileio.c": "40cd7f1bd570ca0c3569fbaaa07d1be9c910322d45d4a765a164483828d157e9",
+    "fileio.h": "0e04cef140267ccc12cf0e3cf19d4969fe7317b5e9a0d57a1540bf92323e41ee",
+    "ipc.c": "157b726a73b7f8d23ea4af1cbdc67b43660e722940c18667f8f37215e9585549",
+    "ipc.h": "62bf1c4e69a4ffbd4873d5f33135bb46915060ced13de14416ff5ccdfdcec908",
+    "os9.c": "3187e46b1af41403a939d5ee8ad3c0e74cb6639315bc97c5cb77b7eac54d83a6",
+    "platform.h": "4223134864e56599d9921915fbf5e90fcddd18427fd78189743da1477ecad8eb",
+    "ppclient3.c": "582cd685a97b5e32d8f30a79f59a4eb5cacc82e14d0c3bb70db3421a4e7264fa",
+    "ppgraphics.c": "82e2d02b272f29a49ce0df19d776fcd471bd5ffff71067dba3aea557fc5b1558",
+    "ppgraphics.h": "cbe9fc7ee206b12a872e37cff9f0f85c15164d558945226a788f93928282e056",
+    "ppown3.c": "dd17fc7b3844f60fbdf236c173790272596423214b8d66722ce30014f6589d09",
+    "ppown3.s": "4bc1d5dc73227369db4d2ba85f2e897a79f80e71d45b3a7136ae2f1b263d1dc8",
+    "sleep0.asm": "1d415ff9aeb6351b92af68e2a3f3f0a679e1495478fe848eb37bd7f409fd064d"
+  },
+  "evidence": {
+    "historical_root": "/private/tmp/dag-3e16d23/evidence",
+    "historical_manifest_sha256": "d0a65d6f5d61112f1bfb1acb4c8f531bc118ae7cd7af6640c5fb23f88fb4c22c",
+    "module_ident_sha256": "5f4c46daa38d96eefe33e42081450550579d186f259a5e3bb3ee2cb99e173d28",
+    "parent_log_sha256": "852c8e4a425cf577a735e77cc64749ffe73f266b1172ddb459f5424ae6b8e132",
+    "child_log_sha256": "e2c35113e2e367667ed9ca8fa958ac799ff1e8c0c7b8efb92a98b72762148f2d",
+    "ppc3exit_log_sha256": "8c13de29003549e69e20a24198d710f318a3b9411b50e71059452481822db5ba",
+    "d1_pristine_sha256": "7a6cd706305af35fc641b2626aedc6839229ea6750c1e7f26e4a9bcc1cc62382",
+    "d1_phase_a_sha256": "810e82ebbaa1964fe0bcc3d73392d8e837bfe46331bc6fb834148bc70f3699b8",
+    "d1_phase_b_sha256": "e70491517505538f438ebced2c3de5a87b64216a37236eda95c5d25fbf0ba148",
+    "media_saved_in_git": false,
+    "omitted_large_trace": {
+      "historical_path": "/private/tmp/dag-3e16d23/evidence/phaseB-console-read-trace.jsonl",
+      "sha256": "ab67783b57040265f4070578670da53e3e32014e0fbce3309cc40f1a1885195f",
+      "reason": "3.1 MiB raw repetitive console-read trace; retained outside Git. Curated host command completion, observer lifecycle events, and parent checkpoints preserve the relevant acceptance facts."
+    }
+  },
+  "scope_note": "No module was rebuilt for this archive. Values are preserved D.23 evidence; type-8 findings are literature-based and not runtime-tested."
+}

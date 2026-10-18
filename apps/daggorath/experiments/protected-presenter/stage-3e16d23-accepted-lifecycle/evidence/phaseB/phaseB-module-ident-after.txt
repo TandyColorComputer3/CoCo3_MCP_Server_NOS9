@@ -1,0 +1,20 @@
+Header for : ppown20
+Module size: $1C72  #7282
+Module CRC : $FC2F47 (Good)
+Hdr parity : $3E
+Exec. off  : $000D  #13
+Data size  : $0035  #53
+Edition    : $FC  #252
+Ty/La At/Rv: $11 $80
+Prog mod, 6809 Obj, re-ent, R/O
+
+Header for : ppclient3
+Module size: $1DD5  #7637
+Module CRC : $E9C525 (Good)
+Hdr parity : $38
+Exec. off  : $000D  #13
+Data size  : $00D9  #217
+Edition    : $E9  #233
+Ty/La At/Rv: $11 $80
+Prog mod, 6809 Obj, re-ent, R/O
+
