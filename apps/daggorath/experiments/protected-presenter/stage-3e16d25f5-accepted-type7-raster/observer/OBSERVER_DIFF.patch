@@ -1,0 +1,261 @@
+--- /private/tmp/dag-3e16d25f4-raster-20261017/observer/observer.lua	2026-10-17 23:54:15
++++ /private/tmp/dag-3e16d25f5-phase-20261018/observer/observer.lua	2026-10-18 00:03:34
+@@ -11,7 +11,9 @@
+ local ram_bytes = emu.item(ram_size_name):read(0)
+ 
+ local MAX_EVENTS = 256
+-local MAX_SNAPSHOT_ATTEMPTS = 32
++local MAX_SNAPSHOT_ATTEMPTS = 512
++local COARSE_CADENCE = 8 -- 512 attempts cover 4096 active callbacks, versus 3760 in D.25F.3.
++local LATER_SECONDS = 3.0 -- Provisional evidence label; not proof that F$Sleep returned.
+ local REQUIRED_STABLE = 3
+ local PALETTE = { 0x000000, 0x555555, 0xAAAAAA, 0xFFFFFF }
+ local state = {
+@@ -21,6 +23,9 @@
+     transform = nil, lastSignature = nil, controls = 0, ramBytes = ram_bytes,
+     matches = 0, rejects = 0, omittedDiagnosticRecords = 0,
+     reasonCounts = {}, firstCandidate = nil, firstMatch = nil,
++    firstActive = nil, firstLater = nil, firstRejected = nil, finalMismatch = nil,
++    stableSequence = {}, attemptTimes = {}, activationSeen = false,
++    activeStart = nil, activeEnd = nil, burst = 0, acquisitionCount = 0,
+ }
+ local events, drained = {}, 0
+ 
+@@ -193,6 +198,27 @@
+     end
+     return table.concat(rows)
+ end
++local function crop_evidence(pixels, width, height, sequence, timestamp, activeSequence)
++    local crop = capture_crop(pixels, width, height)
++    local sum = 1
++    if crop then
++        local a, b = 1, 0
++        for i = 1, #crop do
++            a = (a + crop:byte(i)) % 65521
++            b = (b + a) % 65521
++        end
++        sum = b * 65536 + a
++    end
++    return { sequence = sequence, activeSequence = activeSequence,
++        emulatedTime = timestamp, snapshotWidth = width, snapshotHeight = height,
++        snapshotBytes = type(pixels) == 'string' and #pixels or -1,
++        cropHex = crop and hex(crop) or nil, cropBytes = crop and #crop or 0,
++        cropAdler32 = string.format('%08X', sum) }
++end
++local function should_sample(activeSequence, burst, attempts)
++    return attempts < MAX_SNAPSHOT_ATTEMPTS
++       and (activeSequence == 1 or burst > 0 or activeSequence % COARSE_CADENCE == 0)
++end
+ local function retain_first_candidate(pixels, width, height, sequence, timestamp)
+     if not state.firstCandidate and type(pixels) == 'string' and #pixels > 0 then
+         state.firstCandidate = { pixels = pixels, crop = capture_crop(pixels, width, height),
+@@ -290,9 +316,41 @@
+     assert(state.firstCandidate.pixels == wrong and #state.firstCandidate.crop == 1024
+            and state.firstCandidate.sequence == 17, 'first rejected raw candidate not retained')
+     state.firstCandidate = nil
+-    assert(MAX_EVENTS >= MAX_SNAPSHOT_ATTEMPTS + 8,
+-        'bounded summary capacity cannot retain all attempted snapshots')
+-    return 29
++    local attempts, sampled, stable, burst = 0, {}, 0, 0
++    for frame = 1, 360 do
++        if should_sample(frame, burst, attempts) then
++            attempts = attempts + 1
++            sampled[#sampled + 1] = frame
++            local complete = frame >= 304
++            if complete then stable = stable + 1; burst = math.max(0, REQUIRED_STABLE - stable)
++            else stable = 0; burst = 0 end
++            if stable == REQUIRED_STABLE then break end
++        end
++    end
++    assert(sampled[1] == 1 and sampled[#sampled-2] == 304
++           and sampled[#sampled-1] == 305 and sampled[#sampled] == 306,
++           'delayed presentation or consecutive burst failed')
++    assert(attempts < MAX_SNAPSHOT_ATTEMPTS and attempts > 32,
++           'activation exhausted the snapshot budget')
++    assert(not should_sample(2,0,1) and should_sample(8,0,1),
++           'coarse cadence failed')
++    assert(not should_sample(1,0,MAX_SNAPSHOT_ATTEMPTS), 'budget bound failed')
++    local interrupted = { count = 0, last = nil }
++    assert(not stability_step(pg,interrupted) and not stability_step(pg,interrupted),
++        'interrupted sequence did not start')
++    assert(not stability_step({complete=false},interrupted)
++        and not stability_step(pg,interrupted) and not stability_step(pg,interrupted)
++        and stability_step(pg,interrupted), 'interrupted sequence failed to restart')
++    local activation = synthetic_frame(640,239,1,1,0,-10,nil,false,nil,nil,nil,nil,nil,false)
++    -- The early activation pattern is at logical Y=32, hence snapshot Y=54.
++    assert(collect_raw_band(activation,640,239,{sx=1,sy=1,ox=0,oy=-10}).complete,
++        'activation source-pattern control failed')
++    local crop = crop_evidence(presenter,640,239,304,3.2,304)
++    assert(crop.cropBytes == 1024 and #crop.cropHex == 2048,
++        'raw crop retention failed')
++    assert(MAX_EVENTS == 256 and MAX_EVENTS < MAX_SNAPSHOT_ATTEMPTS,
++        'event ledger must be capped separately from sampling')
++    return 39
+ end
+ state.controls = self_tests()
+ state.initialized = true
+@@ -302,15 +360,17 @@
+     if nextState == state.lifecycle then return { state = state.lifecycle, unchanged = true } end
+     if state.lifecycle == 'WAITING_FOR_GRAPHICS' and nextState == 'GRAPHICS_ACTIVE' then
+         state.lifecycle = nextState
++        state.activeStart = now()
+         record('graphics_entry', { source = 'session-owned read_text_console unsupported-display' })
+     elseif state.lifecycle == 'GRAPHICS_ACTIVE' and nextState == 'GRAPHICS_DEPARTED' then
+         state.lifecycle = nextState
++        state.activeEnd = now()
+         record('graphics_departure', { source = 'session-owned read_text_console text-mode return' })
+     else return { state = state.lifecycle, error = 'invalid lifecycle transition' } end
+     return { state = state.lifecycle }
+ end
+ commands.msh_observer_ready = function()
+-    return { ready = state.initialized and state.controls == 29,
++    return { ready = state.initialized and state.controls == 39,
+         classifierSelfTests = state.controls, notifierInstalled = state.notifierInstalled == true,
+         ramBytes = state.ramBytes,
+         frameCallbacks = state.frames, activeCallbacks = state.activeCallbacks,
+@@ -319,6 +379,14 @@
+         matches = state.matches, rejects = state.rejects,
+         reasonCounts = state.reasonCounts,
+         omittedDiagnosticRecords = state.omittedDiagnosticRecords,
++        snapshotBudget = MAX_SNAPSHOT_ATTEMPTS, coarseCadence = COARSE_CADENCE,
++        acquisitionCount = state.acquisitionCount,
++        firstActive = state.firstActive, firstLater = state.firstLater,
++        firstRejected = state.firstRejected, finalMismatch = state.finalMismatch,
++        firstMatch = state.firstMatch, stableSequence = mark_array(state.stableSequence),
++        attemptTimes = mark_array(state.attemptTimes),
++        activeStart = state.activeStart, activeEnd = state.activeEnd,
++        activationSeen = state.activationSeen,
+         firstCandidatePresent = state.firstCandidate ~= nil,
+         firstMatchPresent = state.firstMatch ~= nil,
+         failure = state.failure, overflow = state.overflow }
+@@ -373,65 +441,91 @@
+     state.frames = state.frames + 1
+     if state.lifecycle ~= 'GRAPHICS_ACTIVE' then return end
+     state.activeCallbacks = state.activeCallbacks + 1
+-    if state.complete or state.failure or state.snapshotAttempts >= MAX_SNAPSHOT_ATTEMPTS then return end
++    local activeSeq = state.activeCallbacks
++    if state.complete or state.failure then return end
++    if state.snapshotAttempts >= MAX_SNAPSHOT_ATTEMPTS then
++        state.failure = 'snapshot_budget_exhausted'
++        record('observer_failure', { reason = state.failure, activeSequence = activeSeq })
++        return
++    end
++    if not should_sample(activeSeq, state.burst, state.snapshotAttempts) then return end
+     state.snapshotAttempts = state.snapshotAttempts + 1
+-    local ok, classified = pcall(function()
++    state.attemptTimes[#state.attemptTimes + 1] = { sequence = state.frames,
++        activeSequence = activeSeq, emulatedTime = now() }
++    local ok, result = pcall(function()
+         local pixels = m.video:snapshot_pixels()
+         local width, height = m.video:snapshot_size()
+-        retain_first_candidate(pixels, width, height, state.frames, now())
+-        if type(pixels) ~= 'string' or type(width) ~= 'number' or type(height) ~= 'number'
+-           or #pixels ~= width * height * 4 then
+-            return { complete = false, reason = 'pixel_length_mismatch', width = width, height = height,
+-                actualBytes = type(pixels) == 'string' and #pixels or -1,
+-                expectedBytes = type(width) == 'number' and type(height) == 'number' and width * height * 4 or -1 }
++        local evidence = crop_evidence(pixels, width, height, state.frames, now(), activeSeq)
++        retain_first_candidate(pixels, width, height, state.frames, evidence.emulatedTime)
++        local classified = classify_pixels(pixels, width, height, 'presenter')
++        if type(pixels) == 'string' and width == 640 and height == 239
++           and #pixels == width * height * 4 then
++            local activation = collect_raw_band(pixels,width,height,{sx=1,sy=1,ox=0,oy=-10})
++            if activation.complete then state.activationSeen = true end
+         end
+-        return classify_pixels(pixels, width, height, 'presenter')
++        return { evidence = evidence, classified = classified }
+     end)
+     if not ok then
+-        state.failure = 'snapshot_or_classifier_exception: ' .. tostring(classified)
++        state.failure = 'snapshot_or_classifier_exception: ' .. tostring(result)
+         record('observer_failure', { reason = state.failure })
+         return
+     end
+-    local width, height = classified.snapshotWidth or classified.width, classified.snapshotHeight or classified.height
+-    classified.sequence = state.frames
+-    classified.emulatedTime = now()
+-    classified.byteLength = classified.snapshotBytes or classified.actualBytes
+-    classified.snapshotTarget = tostring(m.video.snapshot_target)
+-    classified.snapNative = m.video.snap_native
+-    if state.firstCandidate and state.firstCandidate.sequence == state.frames then
+-        state.firstCandidate.reason = classified.reason
+-        state.firstCandidate.classification = classified.complete and 'complete_match' or 'rejected'
++    state.acquisitionCount = state.acquisitionCount + 1
++    local evidence, classified = result.evidence, result.classified
++    evidence.complete = classified.complete
++    evidence.reason = classified.reason
++    evidence.mismatchX = classified.x
++    evidence.mismatchY = classified.y
++    evidence.actualRGB = classified.actualRGB
++    evidence.expectedRGB = classified.expectedRGB
++    if not state.firstActive then
++        state.firstActive = evidence
++        record('first_graphics_active', { sequence = evidence.sequence,
++            activeSequence = activeSeq, emulatedTime = evidence.emulatedTime,
++            activationSeen = state.activationSeen })
+     end
++    if not state.firstLater and state.activeStart
++       and evidence.emulatedTime - state.activeStart >= LATER_SECONDS then
++        evidence.provisionalWindow = 'elapsed 3.0 emulated seconds; guest F$Sleep return unobserved'
++        state.firstLater = evidence
++        record('first_provisional_later', { sequence = evidence.sequence,
++            activeSequence = activeSeq, emulatedTime = evidence.emulatedTime })
++    end
+     if classified.complete then
+         state.matches = state.matches + 1
+-        if not state.firstMatch then state.firstMatch = { sequence = state.frames,
+-            emulatedTime = classified.emulatedTime, rawCropHex = classified.rawBandHostEndianHex } end
+-        state.transform = classified.coordinateTransform
+-        local history = { count = state.stable, last = state.lastSignature }
+         local sig = signature(classified)
+         if sig == state.lastSignature then state.stable = state.stable + 1
+-        else state.lastSignature = sig; state.stable = 1 end
+-        classified.stableSequence = state.stable
+-        classified.stableComplete = state.stable >= REQUIRED_STABLE
+-        if state.stable >= REQUIRED_STABLE then state.complete = true end
+-        record('snapshot_classified', classified)
++        else state.lastSignature = sig; state.stable = 1; state.stableSequence = {} end
++        evidence.stableOrdinal = state.stable
++        state.stableSequence[#state.stableSequence + 1] = evidence
++        if not state.firstMatch then
++            state.firstMatch = evidence
++            record('first_exact_match', { sequence = evidence.sequence,
++                activeSequence = activeSeq, emulatedTime = evidence.emulatedTime })
++        end
++        state.burst = math.max(0, REQUIRED_STABLE - state.stable)
++        if state.stable >= REQUIRED_STABLE then
++            state.complete = true
++            state.burst = 0
++            record('stable_three_frames', { first = state.stableSequence[1].sequence,
++                last = evidence.sequence, emulatedTime = evidence.emulatedTime })
++        end
+     else
+         state.rejects = state.rejects + 1
+         local reason = classified.reason or 'unknown'
+         state.reasonCounts[reason] = (state.reasonCounts[reason] or 0) + 1
+-        if reason == 'unexpected_presenter_geometry' or reason == 'pixel_length_mismatch'
+-           or reason == 'invalid_dimensions' then state.failure = reason end
++        if not state.firstRejected then state.firstRejected = evidence end
++        state.finalMismatch = evidence
+         state.stable = 0
+         state.lastSignature = nil
+-        record('snapshot_rejected', { sequence = state.frames, width = width, height = height,
+-            byteLength = classified.snapshotBytes or classified.actualBytes or -1,
+-            pixelFormat = '32-bit host-endian RGB words',
+-            snapshotTarget = classified.snapshotTarget or tostring(m.video.snapshot_target),
+-            snapNative = classified.snapNative or m.video.snap_native,
+-            reason = classified.reason, band = classified.band,
+-            x = classified.x, y = classified.y,
+-            expectedRGB = classified.expectedRGB, actualRGB = classified.actualRGB,
+-            expectedBytes = classified.expectedBytes, actualBytes = classified.actualBytes })
++        state.stableSequence = {}
++        state.burst = 0
++        if reason == 'unexpected_presenter_geometry' or reason == 'pixel_length_mismatch'
++           or reason == 'invalid_dimensions' then
++            state.failure = reason
++            record('observer_failure', { reason = reason,
++                sequence = evidence.sequence, emulatedTime = evidence.emulatedTime })
++        end
+     end
+ end)
+ state.notifierInstalled = true

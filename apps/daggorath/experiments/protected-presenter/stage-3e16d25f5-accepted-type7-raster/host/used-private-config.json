@@ -1,0 +1,19 @@
+{
+  "runRoot": "/private/tmp/dag-3e16d25f5-phase-20261018/session-r1",
+  "mamePath": "/Applications/Emulators/Ample.app/Contents/MacOS/mame64",
+  "romPath": "/Users/magneto-optimus/Library/Application Support/Ample/roms",
+  "machine": "coco3h",
+  "cpu": "HD6309E",
+  "monitor": "rgb",
+  "screenConfig": 1,
+  "ram": "2M",
+  "mameBuild": "ample-289-u2",
+  "readyState": "gfx7cal_25e_ready",
+  "bootFloppySource": "/private/tmp/dag-3e16d25f5-phase-20261018/inputs/boot-flop1.dsk",
+  "vhdSource": "/private/tmp/dag-3e16d25f5-phase-20261018/inputs/system.vhd",
+  "testFloppySource": "/private/tmp/dag-3e16d25f5-phase-20261018/inputs/state-paired-d1.dsk",
+  "presenterD1Source": "/private/tmp/dag-3e16d25f5-phase-20261018/staging/presenter-d1.dsk",
+  "presenterD1Sha256": "727e5b56ee905fbfb6fdccedaa44c38f9f6584246d73daa1283fe00317987985",
+  "readyStateSource": "/private/tmp/dag-3e16d25f5-phase-20261018/inputs/gfx7cal_25e_ready.sta",
+  "readyStateSha256": "f57eb8de7899adb62c2f5a436bd172ca50caaa167b70695ea7cd02afd06fc486"
+}

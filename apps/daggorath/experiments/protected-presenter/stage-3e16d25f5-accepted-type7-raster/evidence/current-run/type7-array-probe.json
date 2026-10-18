@@ -1,0 +1,81 @@
+{
+  "ping": {
+    "id": "3",
+    "ok": true,
+    "result": {
+      "t": 0.065287622778154
+    }
+  },
+  "status": {
+    "id": "4",
+    "ok": true,
+    "result": {
+      "posting": false,
+      "empty": true,
+      "driver": "coco3h",
+      "flop1": "/private/tmp/dag-3e16d25f5-phase-20261018/session-r1/media/boot-flop1.dsk",
+      "ram": "2M"
+    }
+  },
+  "requestId": "5",
+  "rawLuaToHostResponse": "{\"result\":{\"bandRGB\":[\"000000\",\"555555\",\"AAAAAA\",\"FFFFFF\"],\"paletteValues\":[0,7,56,63]},\"ok\":true,\"id\":\"5\"}",
+  "parsedByProductionParseResponseLine": {
+    "id": "5",
+    "ok": true,
+    "result": {
+      "bandRGB": [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      "paletteValues": [
+        0,
+        7,
+        56,
+        63
+      ]
+    }
+  },
+  "observerReady": {
+    "snapshotAttempts": 0,
+    "matches": 0,
+    "activeCallbacks": 0,
+    "stableSamples": 0,
+    "acquisitionCount": 0,
+    "attemptTimes": [],
+    "stableSequence": [],
+    "rejects": 0,
+    "notifierInstalled": true,
+    "firstMatchPresent": false,
+    "firstCandidatePresent": false,
+    "ready": true,
+    "classifierSelfTests": 39,
+    "activationSeen": false,
+    "overflow": false,
+    "coarseCadence": 8,
+    "snapshotBudget": 512,
+    "ramBytes": 2097152,
+    "frameCallbacks": 6,
+    "omittedDiagnosticRecords": 0,
+    "complete": false,
+    "lifecycle": "WAITING_FOR_GRAPHICS",
+    "reasonCounts": {}
+  },
+  "assertions": {
+    "bandRGBArrayLength": 4,
+    "bandRGB": [
+      "000000",
+      "555555",
+      "AAAAAA",
+      "FFFFFF"
+    ],
+    "paletteValuesArrayLength": 4,
+    "paletteValues": [
+      0,
+      7,
+      56,
+      63
+    ]
+  }
+}

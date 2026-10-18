@@ -1,0 +1,8 @@
+{"source":"D.25D-retained-notifier-pattern","ramBytes":2097152,"kind":"observer_ready","classifierSelfTests":39,"pixelFormat":"MAME snapshot_pixels 32-bit host-endian RGB integer","emulatedTime":0}
+{"kind":"observer_notifier_installed","lifetime":"whole observer session; D.25D confirmed correction","globalHandle":"userdata","emulatedTime":0}
+{"kind":"graphics_entry","source":"session-owned read_text_console unsupported-display","emulatedTime":194.74928442321}
+{"activationSeen":true,"sequence":7399,"kind":"first_graphics_active","activeSequence":1,"emulatedTime":194.74928442321}
+{"kind":"first_provisional_later","sequence":7582,"activeSequence":184,"emulatedTime":197.80321648343}
+{"kind":"first_exact_match","sequence":7846,"activeSequence":448,"emulatedTime":202.20888896374}
+{"kind":"stable_three_frames","first":7846,"last":7848,"emulatedTime":202.24226527041}
+{"kind":"graphics_departure","source":"session-owned read_text_console text-mode return","emulatedTime":257.53011726765}

@@ -1,0 +1,287 @@
+{
+  "ready": true,
+  "lifecycle": "GRAPHICS_DEPARTED",
+  "activeCallbacks": 3762,
+  "snapshotAttempts": 59,
+  "acquisitionCount": 59,
+  "matches": 3,
+  "rejects": 56,
+  "complete": true,
+  "stableSamples": 3,
+  "firstCandidatePresent": true,
+  "activationSeen": true,
+  "reasonCounts": {
+    "band_color_or_uniformity_mismatch": 56
+  },
+  "overflow": false,
+  "omittedDiagnosticRecords": 0,
+  "failure": null,
+  "activeStart": 194.74928442321,
+  "activeEnd": 257.53011726765,
+  "attemptFirst": {
+    "sequence": 7399,
+    "activeSequence": 1,
+    "emulatedTime": 194.74928442321
+  },
+  "attemptLast": {
+    "sequence": 7848,
+    "activeSequence": 450,
+    "emulatedTime": 202.24226527041
+  },
+  "firstActive": {
+    "sequence": 7399,
+    "activeSequence": 1,
+    "emulatedTime": 194.74928442321,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": "band_color_or_uniformity_mismatch",
+    "complete": false,
+    "stableOrdinal": null,
+    "cropAdler32": "04000001",
+    "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+    "pixelMatches": 64,
+    "firstMismatch": [
+      8,
+      0,
+      5592405
+    ],
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ]
+    ]
+  },
+  "firstLater": {
+    "sequence": 7582,
+    "activeSequence": 184,
+    "emulatedTime": 197.80321648343,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": "band_color_or_uniformity_mismatch",
+    "complete": false,
+    "stableOrdinal": null,
+    "cropAdler32": "04000001",
+    "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+    "pixelMatches": 64,
+    "firstMismatch": [
+      8,
+      0,
+      5592405
+    ],
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ]
+    ]
+  },
+  "firstRejected": {
+    "sequence": 7399,
+    "activeSequence": 1,
+    "emulatedTime": 194.74928442321,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": "band_color_or_uniformity_mismatch",
+    "complete": false,
+    "stableOrdinal": null,
+    "cropAdler32": "04000001",
+    "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+    "pixelMatches": 64,
+    "firstMismatch": [
+      8,
+      0,
+      5592405
+    ],
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ]
+    ]
+  },
+  "finalMismatch": {
+    "sequence": 7838,
+    "activeSequence": 440,
+    "emulatedTime": 202.07538373706,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": "band_color_or_uniformity_mismatch",
+    "complete": false,
+    "stableOrdinal": null,
+    "cropAdler32": "04000001",
+    "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+    "pixelMatches": 64,
+    "firstMismatch": [
+      8,
+      0,
+      5592405
+    ],
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ],
+      [
+        "000000"
+      ]
+    ]
+  },
+  "firstMatch": {
+    "sequence": 7846,
+    "activeSequence": 448,
+    "emulatedTime": 202.20888896374,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": null,
+    "complete": true,
+    "stableOrdinal": 1,
+    "cropAdler32": "D50A7E90",
+    "sha256": "a312dd3f7965c39c62bc737d0abf9e9020484bd7ad3597504bf940c2141f41a4",
+    "pixelMatches": 256,
+    "firstMismatch": null,
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "555555"
+      ],
+      [
+        "AAAAAA"
+      ],
+      [
+        "FFFFFF"
+      ]
+    ]
+  },
+  "stable1": {
+    "sequence": 7846,
+    "activeSequence": 448,
+    "emulatedTime": 202.20888896374,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": null,
+    "complete": true,
+    "stableOrdinal": 1,
+    "cropAdler32": "D50A7E90",
+    "sha256": "a312dd3f7965c39c62bc737d0abf9e9020484bd7ad3597504bf940c2141f41a4",
+    "pixelMatches": 256,
+    "firstMismatch": null,
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "555555"
+      ],
+      [
+        "AAAAAA"
+      ],
+      [
+        "FFFFFF"
+      ]
+    ]
+  },
+  "stable2": {
+    "sequence": 7847,
+    "activeSequence": 449,
+    "emulatedTime": 202.22557711707,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": null,
+    "complete": true,
+    "stableOrdinal": 2,
+    "cropAdler32": "D50A7E90",
+    "sha256": "a312dd3f7965c39c62bc737d0abf9e9020484bd7ad3597504bf940c2141f41a4",
+    "pixelMatches": 256,
+    "firstMismatch": null,
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "555555"
+      ],
+      [
+        "AAAAAA"
+      ],
+      [
+        "FFFFFF"
+      ]
+    ]
+  },
+  "stable3": {
+    "sequence": 7848,
+    "activeSequence": 450,
+    "emulatedTime": 202.24226527041,
+    "snapshotWidth": 640,
+    "snapshotHeight": 239,
+    "snapshotBytes": 611840,
+    "cropBytes": 1024,
+    "reason": null,
+    "complete": true,
+    "stableOrdinal": 3,
+    "cropAdler32": "D50A7E90",
+    "sha256": "a312dd3f7965c39c62bc737d0abf9e9020484bd7ad3597504bf940c2141f41a4",
+    "pixelMatches": 256,
+    "firstMismatch": null,
+    "bands": [
+      [
+        "000000"
+      ],
+      [
+        "555555"
+      ],
+      [
+        "AAAAAA"
+      ],
+      [
+        "FFFFFF"
+      ]
+    ]
+  }
+}

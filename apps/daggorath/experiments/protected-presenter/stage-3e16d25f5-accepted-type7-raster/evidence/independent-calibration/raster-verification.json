@@ -1,0 +1,132 @@
+{
+  "offlineVerification": "Decoded captured raw observer crops; no guest interaction or MAME run",
+  "eventCounts": {
+    "frame_callback": 600,
+    "graphics_departure": 1,
+    "graphics_entry": 1,
+    "observer_notifier_installed": 1,
+    "observer_ready": 1,
+    "snapshot_classified": 3
+  },
+  "frameCallbacks": {
+    "count": 600,
+    "frameSequence": [
+      10289,
+      10888
+    ],
+    "activeSequence": [
+      1,
+      600
+    ],
+    "contiguous": true
+  },
+  "snapshot": {
+    "count": 3,
+    "dimensions": [
+      640,
+      239
+    ],
+    "bytes": 611840,
+    "expectedBytes": 611840,
+    "times": [
+      144.05067459296,
+      144.06736274629,
+      144.08405089963
+    ],
+    "frameSequence": [
+      10289,
+      10290,
+      10291
+    ],
+    "snapshotTargetHandles": [
+      "sol.render_target *: 0x15871bf78",
+      "sol.render_target *: 0x118e40128",
+      "sol.render_target *: 0x138792b28"
+    ],
+    "snapNative": false,
+    "allRawCropsIdentical": true
+  },
+  "coordinateTransform": {
+    "sy": 1,
+    "formulaY": "snapshotY = sy * logicalY + oy",
+    "ox": 0,
+    "oy": 22,
+    "formulaX": "snapshotX = sx * logicalX + ox",
+    "sx": 1
+  },
+  "logicalPattern": {
+    "origin": [
+      64,
+      64
+    ],
+    "size": [
+      32,
+      8
+    ],
+    "mappedSnapshotOrigin": [
+      64,
+      86
+    ],
+    "rowBandRGB": [
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ],
+      [
+        "000000",
+        "555555",
+        "AAAAAA",
+        "FFFFFF"
+      ]
+    ],
+    "pixelCounts": {
+      "000000": 64,
+      "555555": 64,
+      "AAAAAA": 64,
+      "FFFFFF": 64
+    },
+    "rawBandEncoding": "band-major; each 8x8 band row-major",
+    "rawBandBytes": 1024,
+    "rawBandSha256": "f68afc20687a360fd2f70415f15bb915d7d116f8bb43d8b30eb7071c143bde01"
+  },
+  "paletteBasis": "Tandy CoCo 3 Service Manual: RGB bits D5..D0 are R1,G1,B1,R0,G0,B0; 00,07,38,3F yield the captured 00,55,AA,FF grayscale levels.",
+  "observerSummarySerialization": "Numeric-key bandRGB and paletteValues fields serialized as empty objects. The preserved raw band bytes were independently decoded above; fix serialization in a disposable observer before using those summary arrays in later automation."
+}
